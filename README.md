@@ -1,2 +1,3 @@
 # TowerDefense
-ECSE 321 Tower Defense Group Project (Group 12)
+ECSE 321: Introduction to Software Engineering\n
+Tower Defense Group Project (Group 12)
