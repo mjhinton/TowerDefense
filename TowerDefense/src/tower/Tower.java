@@ -8,6 +8,7 @@ package tower;
 * This is the main Tower class
 */
 import java.util.*;
+import critter.*;
 
 public class Tower {
 
@@ -100,10 +101,10 @@ public class Tower {
 		
 		for (Critter j : enemies){
 			if (this.special == false){
-				j.hp -= this.power;
+				j.setHealth((int) (j.getHealth() - this.power));
 			}
 			else {
-				j.speed *=  specialmod;
+				j.setSpeed(j.getSpeed() * specialmod);
 			}
 		}
 		return true;	

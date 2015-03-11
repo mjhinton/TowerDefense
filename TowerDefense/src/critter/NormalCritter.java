@@ -1,4 +1,4 @@
-package critters;
+package critter;
 
 //The normal critter is the default critter, smallest reward, easiest to kill.
 public class NormalCritter extends Critter{

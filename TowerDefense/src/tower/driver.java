@@ -7,6 +7,7 @@ package tower;
 * 260590119
 */
 import java.util.LinkedList;
+import critter.*;
 
 public class driver {
 	public static void main(String[] args) {
@@ -24,14 +25,14 @@ public class driver {
 
 		// add a list of critters on the map
 		LinkedList<Critter> critters = new LinkedList<Critter>();
-		Critter crit1 = new Critter(0, 0);
-		Critter crit2 = new Critter(6, 8);
+		NormalCritter crit1 = new NormalCritter();
+		NormalCritter crit2 = new NormalCritter();
 		critters.add(crit1);
 		critters.add(crit2);
 
 		// declare initial status
 		System.out.println("Two critters have been deployed. Critter 1 has "
-				+ crit1.hp + " health and critter 2 has " + crit2.hp + ".");
+				+ crit1.getHealth() + " health and critter 2 has " + crit2.getHealth() + ".");
 
 		/*
 		 * all towers scan through and shoot for (Tower i : towerlist){
@@ -41,28 +42,28 @@ public class driver {
 		testBasic.inRange(critters);
 
 		System.out.println("The basic tower attacked the critters.");
-		System.out.println("critter 1 " + crit1.HealthStatus() + ".");
-		System.out.println("critter 2 " + crit2.HealthStatus() + ".\n");
+		System.out.println("critter 1 " + crit1.getHealth() + ".");
+		System.out.println("critter 2 " + crit2.getHealth() + ".\n");
 
 		testFreezing.inRange(critters);
 
 		System.out.println("The freezing tower attacked the critters.");
-		System.out.println("critter 1 now has a speed value of " + crit1.speed
-				+ ".");
-		System.out.println("critter 2 now has a speed value of " + crit2.speed
-				+ ".\n");
+		System.out.println("critter 1 now has a speed value of " + crit1.getSpeed() + ".");
+		System.out.println("critter 2 now has a speed value of " + crit2.getSpeed() + ".\n");
 
 		testMonster.inRange(critters);
 
 		System.out.println("The heavy tower attacked the critters.");
-		System.out.println("critter 1 " + crit1.HealthStatus() + ".");
-		System.out.println("critter 2 " + crit2.HealthStatus() + ".\n");
+		System.out.println("critter 1 " + crit1.getHealth() + ".");
+		System.out.println("critter 2 " + crit2.getHealth() + ".\n");
 
 		System.out.println("The basic tower will now be sold for "
 				+ testBasic.value + ".");
+		Player.coins += testBasic.value;
 		testBasic.sellTower(testBasic);
 
 		testFreezing.increaseLevel();
+		Player.coins -= testFreezing.cost;
 		System.out.println("Freezing tower was upgraded, new level is "
 				+ testFreezing.level + " and new cost to upgrade further is "
 				+ testFreezing.cost + ".");

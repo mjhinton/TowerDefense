@@ -1,4 +1,4 @@
-package critters;
+package critter;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,12 +12,13 @@ abstract public class Critter {
 		static final int ENDPOINT = PATHLENGTH;
 		static final long DEFAULT_DELAY = 1000;//(subject to change)
 		
-		private int speed; 
+		private double speed; 
 		private int health; 
 		private int reward;
 		private int damage;
 		private boolean shield;
-		public int critterPosition;
+		public int pos_X;
+		public int pos_Y;
 		public boolean reachedGoal;
 		
 		public Critter(int a, int b, int c, int d, boolean e){
@@ -26,11 +27,12 @@ abstract public class Critter {
 			this.reward = c;
 			this.damage = d;
 			this.shield = e;
-			this.critterPosition = STARTPOINT; //change back to startpoint
+			this.pos_X = STARTPOINT; //change back to startpoint
+			this.pos_Y = STARTPOINT;
 			this.reachedGoal = false;
 		}
 		
-		public int getSpeed(){
+		public double getSpeed(){
 			return speed;
 		}
 		public int getHealth(){
@@ -56,15 +58,24 @@ abstract public class Critter {
 		public boolean getShield(){
 			return shield;
 		}
+		
+		public void setHealth(int h){
+			this.health = h;
+		}
+		
+		public void setSpeed(double s){
+			this.speed = s;
+		}
 
 		public void setDown() throws InterruptedException{
 			while (health>0)
 			{
 				TimeUnit.MILLISECONDS.sleep(DEFAULT_DELAY);
-				critterPosition += speed;
+				pos_X += speed;
+				pos_Y += speed;
 				System.out.println(this.toString() + " is moving");
 				
-				if (critterPosition >= ENDPOINT)
+				if (pos_X >= ENDPOINT && pos_Y >= ENDPOINT)
 					{
 					reachedGoal = true;
 					System.out.println(this.toString() +" has reached the endpoint");
