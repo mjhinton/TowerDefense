@@ -1,11 +1,11 @@
 package tower;
 
 /*
-ECSE 321 Programming Assignment 1
-Winter 2015
-Jenna Mar
-260590119
- */
+* ECSE 321 Programming Assignment 1
+* Winter 2015
+* Jenna Mar
+* 260590119
+*/
 import java.util.LinkedList;
 
 public class driver {
