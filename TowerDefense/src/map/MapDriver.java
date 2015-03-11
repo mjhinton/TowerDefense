@@ -18,7 +18,7 @@ public class MapDriver {
 				.println("Also, verify that different constructors can construct same map.");
 		Map testMap1 = new Map("testMap1");
 		String[] testArrayBlankMap = ReadWriteTxtFile
-				.readTxtFileAsStringArray("testMaps/blankMap.txt");
+				.readTxtFileAsStringArray("lib/testMaps/blankMap.txt");
 		Map testMap2 = new Map("testMap2", 40, testArrayBlankMap);
 		Map testMap3 = new Map("testMap3", 40, 40);
 		Map testMap4 = new Map();
@@ -116,7 +116,7 @@ public class MapDriver {
 		System.out.println();
 		System.out.println("Validate a more complex map.");
 		String[] testArrayComplexMap = ReadWriteTxtFile
-				.readTxtFileAsStringArray("testMaps/complexMap.txt");
+				.readTxtFileAsStringArray("lib/testMaps/complexMap.txt");
 		Map testMap5 = new Map("testMap5", 40, testArrayComplexMap);
 		System.out.println(testMap5.print());
 		if (testMap5.initPath())
