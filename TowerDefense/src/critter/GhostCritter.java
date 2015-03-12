@@ -1,4 +1,4 @@
-package critters;
+package critter;
 
 //Ghost critters blink in and out of visibility; the towers will bee able to see them only half of the time.
 public class GhostCritter extends Critter{

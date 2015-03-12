@@ -1,12 +1,12 @@
 package tower;
 
 /*
-*ECSE 321 Programming Assignment 1
-*Winter 2015
-*Jenna Mar
-*260590119
+* ECSE 321 Programming Assignment 1
+* Winter 2015
+* Jenna Mar
+* 260590119
 *
-*This class creates a Tower which inflicts a slowing effect.
+* This class creates a Tower which inflicts a slowing effect.
 */
 
 public class FreezingTower extends Tower{

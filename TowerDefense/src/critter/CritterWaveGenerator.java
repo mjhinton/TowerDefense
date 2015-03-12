@@ -1,4 +1,4 @@
-package critters;
+package critter;
 
 /*The CritterWaveGenerator will keep track of how many waves have been played (using the counter i),
  *  so that we can incrementally increase the difficulty of the waves.

@@ -1,4 +1,4 @@
-package critters;
+package critter;
 
 //The smart critter will reverse directions to avoid attacks from towers (if there are "bullets" nearby)
 //(this isn't entirely complete yet)

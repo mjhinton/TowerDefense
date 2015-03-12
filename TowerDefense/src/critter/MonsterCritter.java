@@ -1,4 +1,4 @@
-package critters;
+package critter;
 
 //Monster critter is just a super fast, super strong critter.
 public class MonsterCritter extends Critter{

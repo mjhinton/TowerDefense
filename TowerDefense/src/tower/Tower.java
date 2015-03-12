@@ -1,14 +1,15 @@
 package tower;
 
 /*
-*ECSE 321 Programming Assignment 1
-*Winter 2015
-*Jenna Mar
-*260590119
+* ECSE 321 Programming Assignment 1
+* Winter 2015
+* Jenna Mar
+* 260590119
 * This is the main Tower class
 */
 import java.util.*;
 import critter.*;
+import player.Player;
 
 public class Tower {
 
@@ -35,6 +36,7 @@ public class Tower {
 
 	//sell a specified tower
 	public void sellTower(Tower input){
+		Player.coins += input.value;
 		towers.remove(input);
 	}
 
@@ -54,11 +56,23 @@ public class Tower {
 
 	//increase the level of the tower
 	public void increaseLevel(){
-		cost += 100*1.2; //cost for next level
-		value = (int) (cost * level * 0.6); //recalculate selling value
-		power *= 1.5; //increase power, etc.
-		fireRate *= 1.2;
-		level++;
+		if (Player.coins >= this.cost){
+			
+			cost += 100*1.2; //cost for next level
+			value = (int) (cost * level * 0.6); //recalculate selling value
+			fireRate *= 1.2;
+			if (this.special == true){
+				range++;
+			}
+			else {
+				power *= 1.5; //increase power, etc.
+			}
+			level++;
+			Player.coins -= this.cost;
+		}
+		else {
+			System.out.println("Insufficient funds. Upgrade failed.");
+		}
 	}
 
 	//check to see if critter is in range

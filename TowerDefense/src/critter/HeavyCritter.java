@@ -1,4 +1,4 @@
-package critters;
+package critter;
 
 //The heavy critter is stronger and harder to kill than the normal ones.
 public class HeavyCritter extends Critter {

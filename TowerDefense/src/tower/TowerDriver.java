@@ -9,7 +9,7 @@ package tower;
 import java.util.LinkedList;
 import critter.*;
 
-public class driver {
+public class TowerDriver {
 	public static void main(String[] args) {
 
 		Tower testBasic = new NormalTower(2, 3);
@@ -59,11 +59,9 @@ public class driver {
 
 		System.out.println("The basic tower will now be sold for "
 				+ testBasic.value + ".");
-		Player.coins += testBasic.value;
 		testBasic.sellTower(testBasic);
 
 		testFreezing.increaseLevel();
-		Player.coins -= testFreezing.cost;
 		System.out.println("Freezing tower was upgraded, new level is "
 				+ testFreezing.level + " and new cost to upgrade further is "
 				+ testFreezing.cost + ".");

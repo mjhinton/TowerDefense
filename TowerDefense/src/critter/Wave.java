@@ -1,4 +1,4 @@
-package critters;
+package critter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,7 +20,7 @@ public class Wave{
 	private boolean waveInProgress;
 	
 	public Wave(int n){
-		this.critterBank = new ArrayList<>();
+		this.critterBank = new ArrayList<Critter>();
 		this.iterator = critterBank.iterator();
 		this.difficulty = (double) n;
 		this.waveInProgress = false;

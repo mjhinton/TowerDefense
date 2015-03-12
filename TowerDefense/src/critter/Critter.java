@@ -1,6 +1,7 @@
 package critter;
 
 import java.util.concurrent.TimeUnit;
+import player.Player;
 
 /*There are six kinds of critters so far; normal, shielded, smart, heavy, ghost, and monster.
  * We will later add more kinds of critters. All the values are subject to change.
@@ -80,7 +81,7 @@ abstract public class Critter {
 					reachedGoal = true;
 					System.out.println(this.toString() +" has reached the endpoint");
 					Player.coins -= damage;
-					System.out.println("Player lost "+ damage+ " coins");
+					System.out.println("Player lost "+ damage + " coins");
 					break;
 					}
 			}

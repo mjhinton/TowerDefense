@@ -1,4 +1,4 @@
-package critters;
+package critter;
 
 //The shielded critter is slightly slower than the normal critter, and more difficult to kill. Towers must have stronger attacks to damage 
 //these critters.

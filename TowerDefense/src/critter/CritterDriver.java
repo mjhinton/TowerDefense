@@ -1,4 +1,4 @@
-package Critters;
+package critter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
