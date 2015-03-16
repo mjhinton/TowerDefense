@@ -12,7 +12,7 @@ package tower;
 public class MonsterTower extends Tower{
 	
 
-	public MonsterTower(double x, double y){
+	public MonsterTower(int x, int y){
 		super(x,y);
 		initAttr();
 		addTower();

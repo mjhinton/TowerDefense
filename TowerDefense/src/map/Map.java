@@ -116,6 +116,14 @@ public class Map {
 	public int getHeight() {
 		return this.height;
 	}
+	
+	public Coord getStart() {
+		return pathStartCoord;
+	}
+	
+	public Coord getEnd() {
+		return pathEndCoord;
+	}
 
 	public String print() {
 		String s = "";

@@ -1,7 +1,7 @@
 package player;
 
 /*
- * (Temporary) player package class
+ * (Temporary) player package & class
  */
 
 public class Player {
@@ -19,8 +19,8 @@ public class Player {
 	}
 	
 	//rename user
-	public void setUsername(String newuser){
-		username = newuser;
+	public void setUsername(String newname){
+		username = newname;
 	}
 
 }

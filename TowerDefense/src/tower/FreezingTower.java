@@ -12,7 +12,7 @@ package tower;
 public class FreezingTower extends Tower{
 	
 
-	public FreezingTower(double x, double y){
+	public FreezingTower(int x, int y){
 		super(x,y);
 		initAttr();
 		addTower();

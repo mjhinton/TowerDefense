@@ -1,6 +1,7 @@
 package critter;
 
 import java.util.concurrent.TimeUnit;
+import map.*;
 import player.Player;
 
 /*There are six kinds of critters so far; normal, shielded, smart, heavy, ghost, and monster.
@@ -8,9 +9,13 @@ import player.Player;
  */
 abstract public class Critter {
 
-		static final int STARTPOINT = 0;
-		static final int PATHLENGTH = 100; //path length will depend upon the difficulty of the map. (the shorter the easier)
-		static final int ENDPOINT = PATHLENGTH;
+		//import map to be used
+		private static Map playermap;
+	
+		//changed some of these to non-static for ease of use, please change them as you like.
+		final Coord STARTPOINT = new Coord(playermap.getStart().row(), playermap.getStart().col());
+		static final int PATHLENGTH = Path.length(); //path length will depend upon the difficulty of the map. (the shorter the easier)
+		final Coord ENDPOINT = new Coord(playermap.getEnd().row(), playermap.getEnd().col());
 		static final long DEFAULT_DELAY = 1000;//(subject to change)
 		
 		private double speed; 
@@ -18,8 +23,7 @@ abstract public class Critter {
 		private int reward;
 		private int damage;
 		private boolean shield;
-		public int pos_X;
-		public int pos_Y;
+		public Coord position = new Coord(0,0); //default init
 		public boolean reachedGoal;
 		
 		public Critter(int a, int b, int c, int d, boolean e){
@@ -28,8 +32,7 @@ abstract public class Critter {
 			this.reward = c;
 			this.damage = d;
 			this.shield = e;
-			this.pos_X = STARTPOINT; //change back to startpoint
-			this.pos_Y = STARTPOINT;
+			this.position = STARTPOINT; //change back to startpoint
 			this.reachedGoal = false;
 		}
 		
@@ -72,11 +75,11 @@ abstract public class Critter {
 			while (health>0)
 			{
 				TimeUnit.MILLISECONDS.sleep(DEFAULT_DELAY);
-				pos_X += speed;
-				pos_Y += speed;
+				this.position += speed;
+				
 				System.out.println(this.toString() + " is moving");
 				
-				if (pos_X >= ENDPOINT && pos_Y >= ENDPOINT)
+				if (this.position.row() >= ENDPOINT.row() && this.position.col() >= ENDPOINT.col())
 					{
 					reachedGoal = true;
 					System.out.println(this.toString() +" has reached the endpoint");

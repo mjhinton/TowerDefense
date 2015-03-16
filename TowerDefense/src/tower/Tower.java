@@ -9,13 +9,13 @@ package tower;
 */
 import java.util.*;
 import critter.*;
+import map.*;
 import player.Player;
 
 public class Tower {
 
 	protected LinkedList<Tower> towers;
-	protected double pos_X;
-	protected double pos_Y;
+	protected Coord position;
 	protected double size;
 	protected int cost;
 	protected int level;
@@ -27,9 +27,8 @@ public class Tower {
 	protected boolean special;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
 
-	public Tower(double x, double y){
-		pos_X = x;
-		pos_Y = y;
+	public Tower(int x, int y){
+		position = new Coord(x,y);
 		this.initAttr();
 		towers = new LinkedList<Tower>();
 	}
@@ -85,19 +84,20 @@ public class Tower {
 		for (Critter i : critters){
 			//find out which critter is the closest out of the critters in range
 			//using the distance formula			
-			if (closest != null && Math.sqrt(Math.pow((i.pos_X - this.pos_X),2) + Math.pow((i.pos_Y - this.pos_Y),2)) <= 
-				Math.sqrt(Math.pow((closest.pos_X - this.pos_X),2) + Math.pow((closest.pos_Y - this.pos_Y),2))) { 				
+			if (closest != null && Math.sqrt(Math.pow((i.position.col() - this.position.col()),2) + 
+					Math.pow((i.position.row() - this.position.row()),2)) <= Math.sqrt(Math.pow((closest.position.col() - 
+					this.position.col()),2) + Math.pow((closest.position.row() - this.position.row()),2))) { 				
 				closest = i;
 			}
 
-			else if (i.pos_X <= this.pos_X + this.range && i.pos_Y <= this.pos_Y + this.range){
+			else if (i.position.col() <= this.position.col() + this.range && i.position.row() <= this.position.row() + this.range){
 				closest = i;
 			}
 		}
 		//check critters in the bullet's range and add to a new linked list
 		for (Critter k : critters){
-			if (closest != null && (k.pos_X <= (closest.pos_X + this.bulletRange) && 
-				k.pos_Y <= (closest.pos_Y + this.bulletRange))){
+			if (closest != null && (k.position.col() <= (closest.position.col() + this.bulletRange) && 
+				k.position.row() <= (closest.position.row() + this.bulletRange))){
 				
 				nearbyCritters.add(k);
 			}

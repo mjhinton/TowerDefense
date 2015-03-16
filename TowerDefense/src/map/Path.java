@@ -10,7 +10,7 @@ public class Path {
 	private Coord[] path;
 	private int currInd;
 	private int endInd;
-	private int length;
+	private static int length;
 
 	public Path() {
 		path = new Coord[1000];
@@ -37,7 +37,7 @@ public class Path {
 		return path[endInd];
 	}
 
-	public int length() {
+	public static int length() {
 		return length;
 	}
 

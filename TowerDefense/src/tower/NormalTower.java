@@ -12,7 +12,7 @@ package tower;
 public class NormalTower extends Tower{
 	
 
-	public NormalTower(double x, double y){
+	public NormalTower(int x, int y){
 		super(x,y);
 		addTower();
 	}
