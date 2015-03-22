@@ -32,7 +32,7 @@ public class MonsterTower extends Tower{
 		bulletRange = 5; //range of bullet explosion
 		power = 5; //power of bullets
 		fireRate = 3; //rate of fire
-		special = false; //if tower has special effects
+		isSpecial = false; //if tower has special effects
 		specialmod = 1;	
 	}
 }

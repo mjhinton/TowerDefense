@@ -32,7 +32,7 @@ public class FreezingTower extends Tower{
 		bulletRange = 5; //range of bullet explosion
 		power = 1; //power of bullets
 		fireRate = 1; //rate of fire
-		special = true; //if tower has special effects
+		isSpecial = true; //if tower has special effects
 		specialmod = 0.8;	
 	}
 }

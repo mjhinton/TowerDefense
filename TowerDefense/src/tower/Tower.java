@@ -9,14 +9,14 @@ package tower;
 */
 import java.util.*;
 import critter.*;
-import map.*;
+import java.awt.Point;
 import player.Player;
 
 public class Tower {
 
 	protected LinkedList<Tower> towers;
-	protected Coord position;
-	protected double size;
+	protected Point position;
+	protected int size;
 	protected int cost;
 	protected int level;
 	protected int value;
@@ -24,11 +24,11 @@ public class Tower {
 	protected int bulletRange;
 	protected double power;
 	protected double fireRate;
-	protected boolean special;
+	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
 
 	public Tower(int x, int y){
-		position = new Coord(x,y);
+		position = new Point(x,y);
 		this.initAttr();
 		towers = new LinkedList<Tower>();
 	}
@@ -41,7 +41,7 @@ public class Tower {
 
 	//initialize default attributes
 	public void initAttr(){
-		size = 1; //size of tower
+		size = 1; //number of coord blocks tower takes up
 		cost = 100; //buying cost
 		level = 1; //upgrade level
 		value = (int) (cost * level * 0.6); //selling value
@@ -49,7 +49,7 @@ public class Tower {
 		bulletRange = 1; //range of bullet explosion
 		power = 1; //power of bullets
 		fireRate = 1; //rate of fire
-		special = false; //if tower has special effects
+		isSpecial = false; //if tower has special effects
 		specialmod = 1;	 //special effect value	
 	}
 
@@ -60,7 +60,7 @@ public class Tower {
 			cost += 100*1.2; //cost for next level
 			value = (int) (cost * level * 0.6); //recalculate selling value
 			fireRate *= 1.2;
-			if (this.special == true){
+			if (this.isSpecial == true){
 				range++;
 			}
 			else {
@@ -76,6 +76,7 @@ public class Tower {
 
 	//check to see if critter is in range
 	//Shoot at the closest critter in range
+	//otherwise print message no critters found
 	public void inRange(LinkedList<Critter> critters){
 		LinkedList<Critter> nearbyCritters = new LinkedList<Critter>();
 		Critter closest = null;
@@ -84,20 +85,20 @@ public class Tower {
 		for (Critter i : critters){
 			//find out which critter is the closest out of the critters in range
 			//using the distance formula			
-			if (closest != null && Math.sqrt(Math.pow((i.position.col() - this.position.col()),2) + 
-					Math.pow((i.position.row() - this.position.row()),2)) <= Math.sqrt(Math.pow((closest.position.col() - 
-					this.position.col()),2) + Math.pow((closest.position.row() - this.position.row()),2))) { 				
+			if (closest != null && Math.sqrt(Math.pow((i.position.getX() - this.position.getX()),2) + 
+					Math.pow((i.position.getY() - this.position.getY()),2)) <= Math.sqrt(Math.pow((closest.position.getX() - 
+					this.position.getX()),2) + Math.pow((closest.position.getY() - this.position.getY()),2))) { 				
 				closest = i;
 			}
 
-			else if (i.position.col() <= this.position.col() + this.range && i.position.row() <= this.position.row() + this.range){
+			else if (i.position.getX() <= this.position.getX() + this.range && i.position.getY() <= this.position.getY() + this.range){
 				closest = i;
 			}
 		}
 		//check critters in the bullet's range and add to a new linked list
 		for (Critter k : critters){
-			if (closest != null && (k.position.col() <= (closest.position.col() + this.bulletRange) && 
-				k.position.row() <= (closest.position.row() + this.bulletRange))){
+			if (closest != null && (k.position.getX() <= (closest.position.getX() + this.bulletRange) && 
+				k.position.getY() <= (closest.position.getY() + this.bulletRange))){
 				
 				nearbyCritters.add(k);
 			}
@@ -105,6 +106,9 @@ public class Tower {
 		//inflict bullet effect on the critters in bullet range		
 		if (nearbyCritters != null){
 			fire(nearbyCritters);
+		}
+		else {
+			System.out.println("There were no Critters in range...");
 		}
 	}
 
@@ -114,7 +118,7 @@ public class Tower {
 	public boolean fire(LinkedList<Critter> enemies){
 		
 		for (Critter j : enemies){
-			if (this.special == false){
+			if (this.isSpecial == false){
 				j.setHealth((int) (j.getHealth() - this.power));
 			}
 			else {
@@ -123,5 +127,4 @@ public class Tower {
 		}
 		return true;	
 	}
-
 }

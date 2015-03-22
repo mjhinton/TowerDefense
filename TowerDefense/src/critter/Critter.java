@@ -1,6 +1,7 @@
 package critter;
 
 import java.util.concurrent.TimeUnit;
+import java.awt.Point;
 import map.*;
 import player.Player;
 
@@ -13,16 +14,16 @@ abstract public class Critter {
 		private static Map playermap;
 	
 		//changed some of these to non-static for ease of use, please change them as you like.
-		static final Coord STARTPOINT = new Coord(playermap.getStart().row(), playermap.getStart().col());
+		static final Point STARTPOINT = new Point(playermap.getStart().getY(), playermap.getStart().getX());
 		static final int PATHLENGTH = Path.length(); //path length will depend upon the difficulty of the map. (the shorter the easier)
-		static final Coord ENDPOINT = new Coord(playermap.getEnd().row(), playermap.getEnd().col());
+		static final Point ENDPOINT = new Point(playermap.getEnd().getY(), playermap.getEnd().getX());
 		static final long DEFAULT_DELAY = 1000;//(subject to change)
 		
 		private double speed; 
 		private int health; 
 		private int reward;
 		private int damage;
-		public Coord position = new Coord(0,0); //default init
+		public Point position = new Point(); //default init
 		public boolean reachedGoal;
 		
 		public Critter(int a, int b, int c, int d){
@@ -75,7 +76,7 @@ abstract public class Critter {
 				
 				System.out.println(this.toString() + " is moving");
 				
-				if (this.position.row() >= ENDPOINT.row() && this.position.col() >= ENDPOINT.col())
+				if (this.position.getY() >= ENDPOINT.getY() && this.position.getX() >= ENDPOINT.getX())
 					{
 					reachedGoal = true;
 					System.out.println(this.toString() +" has reached the endpoint");
