@@ -2,14 +2,19 @@ package critter;
 
 //Ghost critters blink in and out of visibility; the towers will bee able to see them only half of the time.
 public class GhostCritter extends Critter{
-	private boolean visible = true;
+	private boolean visible;
 	
 	public GhostCritter(){
-		super(5,5,25,10, false);
+		super(5,5,25,10);
+		visible = true;
 	}
 	
 	public boolean getDirection(){
 		return true;
+	}
+	
+	public boolean getShield(){
+		return false;
 	}
 	//every time visibility is called, it switches between being visible and not. Again, subject to change
 	public boolean getVisibility(){

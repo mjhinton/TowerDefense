@@ -13,25 +13,23 @@ abstract public class Critter {
 		private static Map playermap;
 	
 		//changed some of these to non-static for ease of use, please change them as you like.
-		final Coord STARTPOINT = new Coord(playermap.getStart().row(), playermap.getStart().col());
+		static final Coord STARTPOINT = new Coord(playermap.getStart().row(), playermap.getStart().col());
 		static final int PATHLENGTH = Path.length(); //path length will depend upon the difficulty of the map. (the shorter the easier)
-		final Coord ENDPOINT = new Coord(playermap.getEnd().row(), playermap.getEnd().col());
+		static final Coord ENDPOINT = new Coord(playermap.getEnd().row(), playermap.getEnd().col());
 		static final long DEFAULT_DELAY = 1000;//(subject to change)
 		
 		private double speed; 
 		private int health; 
 		private int reward;
 		private int damage;
-		private boolean shield;
 		public Coord position = new Coord(0,0); //default init
 		public boolean reachedGoal;
 		
-		public Critter(int a, int b, int c, int d, boolean e){
+		public Critter(int a, int b, int c, int d){
 			this.speed = a;
 			this.health = b;
 			this.reward = c;
 			this.damage = d;
-			this.shield = e;
 			this.position = STARTPOINT; //change back to startpoint
 			this.reachedGoal = false;
 		}
@@ -45,9 +43,7 @@ abstract public class Critter {
 		public int getWorth(){
 			return reward;
 		}
-		public int getDifficulty(){
-			return reward/5;
-		}
+		
 		public int getDamage(){
 			return damage;
 		}
@@ -59,9 +55,7 @@ abstract public class Critter {
 			else
 				health--;		
 		}
-		public boolean getShield(){
-			return shield;
-		}
+		
 		
 		public void setHealth(int h){
 			this.health = h;
@@ -75,7 +69,9 @@ abstract public class Critter {
 			while (health>0)
 			{
 				TimeUnit.MILLISECONDS.sleep(DEFAULT_DELAY);
-				this.position += speed;
+				//moves position
+				//
+				//1 block *speed.  (or something else)
 				
 				System.out.println(this.toString() + " is moving");
 				
@@ -89,6 +85,7 @@ abstract public class Critter {
 					}
 			}
 		}
+		public abstract boolean getShield();
 		public abstract boolean getDirection();
 		public abstract boolean getVisibility();
 		public abstract String toString();

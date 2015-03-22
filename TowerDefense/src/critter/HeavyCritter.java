@@ -4,9 +4,11 @@ package critter;
 public class HeavyCritter extends Critter {
 
 		public HeavyCritter(){
-			super(3,10,20,20, false);
+			super(3,10,20,20);
 		}
-		
+		public boolean getShield(){
+			return false;
+		}
 		public boolean getDirection(){
 			return true;
 		}

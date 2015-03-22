@@ -4,9 +4,11 @@ package critter;
 public class NormalCritter extends Critter{
 		
 		public NormalCritter(){
-			super(5,5,5,5,false);
+			super(5,5,5,5);
 		}
-		
+		public boolean getShield(){
+			return false;
+		}
 		public boolean getDirection(){
 			return true;
 		}
