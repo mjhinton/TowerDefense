@@ -372,4 +372,13 @@ public class Map extends Subject  {
 	public Path getPath() {
 		return path;
 	}
+	
+	public MapCell getCell(Coord c){
+		try{
+			return cells[c.row()][c.col()];
+		}catch (IndexOutOfBoundsException e){
+			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+			return null;
+		}
+	}
 }
