@@ -1,11 +1,13 @@
 package map;
 
+import common.Subject;
+
 /**
  * This class allows the creation and manipulation of a Map object.
  * 
  * @author Michael Hinton
  */
-public class Map {
+public class Map extends Subject  {
 
 	private int width;
 	private int height;
@@ -116,14 +118,6 @@ public class Map {
 	public int getHeight() {
 		return this.height;
 	}
-	
-	public Coord getStart() {
-		return pathStartCoord;
-	}
-	
-	public Coord getEnd() {
-		return pathEndCoord;
-	}
 
 	public String print() {
 		String s = "";
@@ -158,6 +152,7 @@ public class Map {
 				pathEndCoord = null;
 			}
 			path = null;
+			this.notifyObservers();
 			return true;
 		} catch (IndexOutOfBoundsException e) {
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
@@ -194,6 +189,7 @@ public class Map {
 				this.cells[row][col] = new PathStartCell();
 				this.pathStartCoord = c;
 				path = null;
+				this.notifyObservers();
 				return true;
 			} else {
 				System.err
@@ -237,6 +233,7 @@ public class Map {
 				this.cells[row][col] = new PathEndCell();
 				this.pathEndCoord = c;
 				path = null;
+				this.notifyObservers();
 				return true;
 			} else {
 				System.err
@@ -270,6 +267,7 @@ public class Map {
 				pathEndCoord = null;
 			}
 			path = null;
+			this.notifyObservers();
 			return true;
 		} catch (IndexOutOfBoundsException e) {
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
@@ -352,6 +350,13 @@ public class Map {
 		return false;
 	}
 
+	/**
+	 * Verifies that the cell at the coordinate is a path cell.
+	 * 
+	 * @param c
+	 *            coordinate of the cell to be checked
+	 * @return true if cell is a Path
+	 */
 	public boolean checkPath(Coord c) {
 
 		try {
