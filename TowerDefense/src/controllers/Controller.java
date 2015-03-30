@@ -7,8 +7,7 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
-import common.Model;
-
+import model.Model;
 import presentation.View;
 
 public class Controller implements ActionListener {

@@ -2,7 +2,7 @@ package presentation;
 
 import javax.swing.JFrame;
 
-import common.Model;
+import model.Model;
 import controllers.Controller;
 
 import java.awt.BorderLayout;
