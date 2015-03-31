@@ -9,12 +9,14 @@ public class Board {
 	private Tower[][] towers;
 	private int width;
 	private int height;
+	private Path path;
 	
 	public Board(Map mapInput){
 		this.map=mapInput;
 		width=map.getWidth();
 		height=map.getHeight();
 		towers= new Tower[height][width];
+		path=map.getPath();
 	}
 	
 	public boolean addTower(Tower tower, Coord c){
@@ -50,6 +52,10 @@ public class Board {
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
 			return false;
 		}
+	}
+	
+	public Path getPath(){
+		return path;
 	}
 	
 }
