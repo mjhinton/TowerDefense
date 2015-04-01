@@ -20,7 +20,7 @@ public class PanelGame extends JPanel {
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH, View.SCREEN_HEIGHT);
 		
-		this.setBackground(Color.GREEN);
+		this.setBackground(Color.BLACK);
 		this.setPreferredSize(dim);
 		this.setMinimumSize(dim);
 		this.setMaximumSize(dim);

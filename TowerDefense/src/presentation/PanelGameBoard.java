@@ -32,11 +32,11 @@ public class PanelGameBoard extends JPanel{
 		
 		//the following code is temporary for testing
 		String[] testArrayMap = ReadWriteTxtFile
-						.readTxtFileAsStringArray("lib/testMaps/3030Map.txt");
-		Map testMap = new Map("testMap", 30, testArrayMap);
+						.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
+		Map testMap = new Map("testMap", 15, testArrayMap);
 		testBoard=new Board(testMap);
 		testBoard.addTower(new FreezingTower(4,4),new Point(4,4) );
-		testBoard.addTower(new FreezingTower(20,20),new Point(20,20) );
+		testBoard.addTower(new FreezingTower(14,14),new Point(14,14) );
 		
 		///////
 	}

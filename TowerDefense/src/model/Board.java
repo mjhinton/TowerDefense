@@ -37,7 +37,7 @@ public class Board {
 				return false;
 			}
 		}catch (IndexOutOfBoundsException e){
-			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(BOARD): " + e.getMessage());
 			return false;
 		}
 	}
@@ -52,7 +52,7 @@ public class Board {
 				return false;
 			}
 		}catch (IndexOutOfBoundsException e){
-			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(BOARD): " + e.getMessage());
 			return false;
 		}
 	}

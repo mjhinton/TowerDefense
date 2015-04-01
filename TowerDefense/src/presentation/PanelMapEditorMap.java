@@ -33,8 +33,8 @@ public class PanelMapEditorMap extends JPanel {
 		
 		//the following code is temporary for testing
 		testArrayMap = ReadWriteTxtFile
-				.readTxtFileAsStringArray("lib/testMaps/3030Map.txt");
-		testMap = new Map("testMap", 30, testArrayMap);
+				.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
+		testMap = new Map("testMap", 15, testArrayMap);
 		///////
 		
 	}

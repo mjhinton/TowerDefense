@@ -20,9 +20,9 @@ public class Map extends Subject {
 	private Point pathEndCoord;
 	private Path path;
 
-	final static private int MAX_WIDTH = 40;
-	final static private int MAX_HEIGHT = 40;
-	final public static int CELL_PIXEL_SIZE = 20;
+	final static private int MAX_WIDTH = 15;
+	final static private int MAX_HEIGHT = 15;
+	final public static int CELL_PIXEL_SIZE = 40;
 
 	public Map(String inpMapName, int inpWidth, int inpHeight) {
 		if (inpWidth > MAX_WIDTH || inpHeight > MAX_HEIGHT) {
@@ -75,16 +75,16 @@ public class Map extends Subject {
 	}
 
 	public Map(String inpMapName) {
-		this.width = 40;
-		this.height = 40;
+		this.width = MAX_WIDTH;
+		this.height = MAX_HEIGHT;
 		this.mapName = inpMapName;
 
 		this.init();
 	}
 
 	public Map() {
-		this.width = 40;
-		this.height = 40;
+		this.width = MAX_WIDTH;
+		this.height = MAX_HEIGHT;
 		int randNum = 1000 + (int) (Math.random() * 999);
 		this.mapName = "map" + randNum;
 
@@ -159,7 +159,7 @@ public class Map extends Subject {
 			this.notifyObservers();
 			return true;
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
 			return false;
 		}
 	}
@@ -201,7 +201,7 @@ public class Map extends Subject {
 				return false;
 			}
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
 			return false;
 		}
 
@@ -245,7 +245,7 @@ public class Map extends Subject {
 				return false;
 			}
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
 			return false;
 		}
 
@@ -274,7 +274,7 @@ public class Map extends Subject {
 			this.notifyObservers();
 			return true;
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
 			return false;
 		}
 	}
@@ -381,7 +381,7 @@ public class Map extends Subject {
 		try {
 			return cells[c.x][c.y];
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
 			return null;
 		}
 	}

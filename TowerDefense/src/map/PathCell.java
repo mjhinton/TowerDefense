@@ -25,7 +25,7 @@ public class PathCell extends MapCell {
 	}
 
 	public Image getImage() {
-		ImageIcon i = new ImageIcon("lib/images/map/testPath.png");
+		ImageIcon i = new ImageIcon("lib/images/map/test_path.png");
 		image = i.getImage();
 		return image;
 	}
