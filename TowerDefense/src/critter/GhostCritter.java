@@ -10,7 +10,7 @@ public class GhostCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("placeholderCritter.png");
 	
 	public GhostCritter(){
-		super(3,5,25,10,ii);
+		super(4,5,25,10,ii);
 		visible = true;
 	}
 	
