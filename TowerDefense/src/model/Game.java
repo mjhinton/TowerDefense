@@ -18,5 +18,13 @@ public class Game {
 		this.waveGenerator = new CritterWaveGenerator();
 	}
 	
+	public Board getBoard(){
+		return board;
+	}
+	
+	public CritterWaveGenerator getGenerator(){
+		return waveGenerator;
+	}
+	
 	
 }

@@ -45,7 +45,7 @@ abstract public class Critter {
 		
 		//(each critter should look different)
 		public void drawCritter(Graphics g){
-			//g.drawImage(appearance, (int)position.getX(), (int)position.getY(), SomeSortofImageObserver);
+			g.drawImage(appearance, (int)position.getX(), (int)position.getY(), null);
 		}
 		
 		public double getSpeed(){

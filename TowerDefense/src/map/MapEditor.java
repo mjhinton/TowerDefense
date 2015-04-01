@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MapEditor extends Map implements MouseListener{
-	
+
 	int size = Map.CELL_PIXEL_SIZE;
 	Point cell;
 	int cellX;
