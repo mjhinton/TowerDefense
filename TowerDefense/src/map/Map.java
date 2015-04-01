@@ -394,6 +394,23 @@ public class Map extends Subject {
 						* CELL_PIXEL_SIZE, null);
 			}
 		}
-
+	}
+	
+	public void toggle(int x, int y){
+		Point c = new Point();
+		c.setLocation(x, y);
+		
+		if(getCell(c) instanceof SceneryCell){
+			makePathCell(x,y);
+		}
+		if(getCell(c) instanceof PathCell){
+			makePathStartCell(x,y);
+		}
+		if(getCell(c) instanceof PathStartCell){
+			makePathEndCell(x,y);
+		}
+		if(getCell(c) instanceof PathEndCell){
+			makeSceneryCell(x,y);
+		}
 	}
 }
