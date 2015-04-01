@@ -1,7 +1,7 @@
 package tower;
 
 /*
-* ECSE 321 Programming Assignment 1
+* ECSE 321
 * Winter 2015
 * Jenna Mar
 * 260590119
@@ -9,19 +9,23 @@ package tower;
 * This class creates a Tower which inflicts a slowing effect.
 */
 
+import java.util.LinkedList;
+
 public class FreezingTower extends Tower{
 	
 
-	public FreezingTower(int x, int y){
-		super(x,y);
+	public FreezingTower(int x, int y, LinkedList<Tower> towers){
+		super(x,y, towers);
 		initAttr();
-		addTower();
+		//addTower();
 	}
 
+	/*
 	//buy a tower
 	public void addTower(){
 		towers.add(this);
 	}
+	*/
 
 	public void initAttr(){
 		size = 1; //size of tower

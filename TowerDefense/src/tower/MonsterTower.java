@@ -9,19 +9,23 @@ package tower;
 * This class creates a large, heavy area of effect Tower.
 */
 
+import java.util.LinkedList;
+
 public class MonsterTower extends Tower{
 	
 
-	public MonsterTower(int x, int y){
-		super(x,y);
+	public MonsterTower(int x, int y, LinkedList<Tower> towers){
+		super(x,y, towers);
 		initAttr();
-		addTower();
+		//addTower();
 	}
 
+	/*
 	//buy a tower
 	public void addTower(){
 		towers.add(this);
 	}
+	*/
 
 	public void initAttr(){
 		size = 4; //size of tower

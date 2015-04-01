@@ -11,10 +11,11 @@ import java.util.*;
 import critter.*;
 import java.awt.Point;
 import player.Player;
+import common.*;
 
-public class Tower {
+public class Tower extends Subject{
 
-	protected LinkedList<Tower> towers;
+	protected LinkedList<Tower> towers = new LinkedList<Tower>();
 	protected Point position;
 	protected int size;
 	protected int cost;
@@ -27,10 +28,11 @@ public class Tower {
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
 
-	public Tower(int x, int y){
+	public Tower(int x, int y, LinkedList<Tower> towerlist){
 		position = new Point(x,y);
 		this.initAttr();
-		towers = new LinkedList<Tower>();
+		towerlist.add(this);
+		towers = towerlist;
 	}
 
 	//sell a specified tower
@@ -59,18 +61,20 @@ public class Tower {
 			
 			cost += 100*1.2; //cost for next level
 			value = (int) (cost * level * 0.6); //recalculate selling value
-			fireRate *= 1.2;
+			fireRate *= 1.1;
 			if (this.isSpecial == true){
 				range++;
+				specialmod += 0.1;
 			}
 			else {
 				power *= 1.5; //increase power, etc.
 			}
 			level++;
 			Player.coins -= this.cost;
+			notifyObservers();
 		}
 		else {
-			System.out.println("Insufficient funds. Upgrade failed.");
+			System.out.println("Insufficient funds. Upgrade of " + this.toString() + " failed.");
 		}
 	}
 
@@ -102,20 +106,19 @@ public class Tower {
 				
 				nearbyCritters.add(k);
 			}
+			else {
+				System.out.println("The " + k.toString() + " was out of range.");
+			}
 		}
 		//inflict bullet effect on the critters in bullet range		
 		if (nearbyCritters != null){
 			fire(nearbyCritters);
 		}
-		else {
-			System.out.println("There were no Critters in range...");
-		}
 	}
 
 	//point tower bullet towards critter coordinate, inflict damage
 	//if tower is special (slowing) type, change enemy speed
-	//return true if the function was successful
-	public boolean fire(LinkedList<Critter> enemies){
+	public void fire(LinkedList<Critter> enemies){
 		
 		for (Critter j : enemies){
 			if (this.isSpecial == false){
@@ -124,7 +127,41 @@ public class Tower {
 			else {
 				j.setSpeed(j.getSpeed() * specialmod);
 			}
-		}
-		return true;	
+		}	
+	}
+	public String toString(){
+		return("Tower at (" + position.getX() + ", " + position.getY() + ")");
+	}
+	
+	public int getCost(){
+		return this.cost;
+	}
+	
+	public int getValue(){
+		return this.value;
+	}
+	
+	public int getLevel(){
+		return this.level;
+	}
+	
+	public int getRange(){
+		return this.range;
+	}
+	
+	public double getPower(){
+		return this.power;
+	}
+	
+	public double getFireRate(){
+		return this.fireRate;
+	}
+	
+	public boolean getIsSpecial(){
+		return this.isSpecial;
+	}
+	
+	public double getSpecialmod(){
+		return this.specialmod;
 	}
 }
