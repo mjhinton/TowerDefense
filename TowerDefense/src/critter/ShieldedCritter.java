@@ -1,11 +1,15 @@
 package critter;
 
+import javax.swing.ImageIcon;
+
 //The shielded critter is slightly slower than the normal critter, and more difficult to kill. Towers must have stronger attacks to damage 
 //these critters.
 public class ShieldedCritter extends Critter{
-private boolean shield;
+	private boolean shield;
+	private static ImageIcon ii = new ImageIcon("placeholderCritter.png");
+	
 		public ShieldedCritter(){
-			super(4,5,10,7);
+			super(2,5,10,7, ii);
 			shield = true;
 		}
 		public boolean getShield(){
@@ -21,5 +25,9 @@ private boolean shield;
 		public String toString(){
 			return "ShieldedCritter";
 		}
-		
+
+		public void knockOffShield(){
+			//once the shield gets knocked off, the critter is faster.
+			setSpeed(4);
+		}
 }
