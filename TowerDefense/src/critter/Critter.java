@@ -2,7 +2,9 @@ package critter;
 
 import java.util.concurrent.TimeUnit;
 import java.awt.Point;
+
 import map.*;
+import model.Board;
 import player.Player;
 
 /*There are six kinds of critters so far; normal, shielded, smart, heavy, ghost, and monster.
@@ -11,12 +13,13 @@ import player.Player;
 abstract public class Critter {
 
 		//import map to be used
-		private static Map playermap;
+		//private static Map playermap;
+		private static Board gameBoard;
 	
 		//changed some of these to non-static for ease of use, please change them as you like.
-		static final Point STARTPOINT = new Point(playermap.getStart().getY(), playermap.getStart().getX());
+		static final Point STARTPOINT = new Point(gameBoard.getPath().getCoord(0).col(), gameBoard.getPath().getCoord(0).row());
 		static final int PATHLENGTH = Path.length(); //path length will depend upon the difficulty of the map. (the shorter the easier)
-		static final Point ENDPOINT = new Point(playermap.getEnd().getY(), playermap.getEnd().getX());
+		static final Point ENDPOINT = new Point(gameBoard.getPath().getEndCoord().col(), gameBoard.getPath().getEndCoord().row());
 		static final long DEFAULT_DELAY = 1000;//(subject to change)
 		
 		private double speed; 

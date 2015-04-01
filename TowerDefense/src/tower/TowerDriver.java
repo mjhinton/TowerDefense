@@ -12,14 +12,11 @@ import critter.*;
 public class TowerDriver {
 	public static void main(String[] args) {
 
-		Tower testBasic = new NormalTower(2, 3);
-		Tower testFreezing = new FreezingTower(1, 1);
-		Tower testMonster = new MonsterTower(5, 5);
-		/*
-		 * LinkedList<Tower> towerlist = new LinkedList<Tower>();
-		 * towerlist.add(testBasic); towerlist.add(testFreezing);
-		 * towerlist.add(testMonster);
-		 */
+		LinkedList<Tower> towerlist = new LinkedList<Tower>();
+		
+		Tower testBasic = new NormalTower(2, 3, towerlist);
+		Tower testFreezing = new FreezingTower(1, 1, towerlist);
+		Tower testMonster = new MonsterTower(5, 5, towerlist);
 
 		System.out.println("Placed 3 towers.\n");
 
