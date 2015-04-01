@@ -89,7 +89,11 @@ abstract public class Critter {
 		public void setSpeed(double s){
 			this.speed = s;
 		}
-		
+
+		public void increaseDifficulty(double multiplier){ //health and reward increase whenever multiplier is applied
+			this.health*=multiplier;
+			this.reward*=multiplier;
+		}
 		
 		//WE NEED TO DECIDE ON COORDINATES; COORD, or POINT?
 		public void setDown() throws InterruptedException{
