@@ -1,5 +1,7 @@
 package map;
 
+import java.awt.Point;
+
 /**
  * This class tests the functionality in the map package, specifically the Map
  * class.
@@ -85,9 +87,9 @@ public class MapDriver {
 		// path
 		testMap1.makePathStartCell(0, 0);
 		for (int i = 1; i < 39; i++) {
-			testMap1.makePathCell(i, 0);
+			testMap1.makePathCell(0, i);
 		}
-		testMap1.makePathEndCell(39, 0);
+		testMap1.makePathEndCell(0, 39);
 		System.out.println(testMap1.print());
 		if (testMap1.initPath())
 			System.out.println("Case 13: pass");
@@ -98,11 +100,11 @@ public class MapDriver {
 		System.out.println(testMap1.getPath().print());
 		// Use checkPath() to verify that one of the cells on the path is a path
 		// cell
-		if (testMap1.checkPath(new Coord(5, 0)))
+		if (testMap1.checkPath(new Point(0, 5)))
 			System.out.println("Case 15: pass");
 		// Now replace that path cell with scenery and retry
-		testMap1.makeSceneryCell(5, 0);
-		if (!(testMap1.checkPath(new Coord(5, 0))))
+		testMap1.makeSceneryCell(0, 5);
+		if (!(testMap1.checkPath(new Point(0, 5))))
 			System.out.println("Case 16: pass");
 		// Check that path has been set back to null
 		if (testMap1.getPath() == null)
@@ -126,9 +128,9 @@ public class MapDriver {
 		System.out.println();
 		System.out.println("Validate a map of a different size.");
 		Map testMap6 = new Map("testMap6", 15, 3);
-		testMap6.makePathStartCell(0, 5);
-		testMap6.makePathCell(1, 5);
-		testMap6.makePathEndCell(2, 5);
+		testMap6.makePathStartCell(5, 0);
+		testMap6.makePathCell(5, 1);
+		testMap6.makePathEndCell(5, 2);
 		System.out.println(testMap6.print());
 		if (testMap6.initPath())
 			System.out.println("Case 20: pass");

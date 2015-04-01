@@ -1,5 +1,7 @@
 package map;
 
+import java.awt.Point;
+
 /**
  * This class allows the creation and manipulation of a Path object.
  * 
@@ -7,33 +9,33 @@ package map;
  */
 public class Path {
 
-	private Coord[] path;
+	private Point[] path;
 	private int currInd;
 	private int endInd;
 	private static int length;
 
 	public Path() {
-		path = new Coord[1000];
+		path = new Point[1000];
 		currInd = 0;
 		length = 0;
 	}
 
-	public void addCoord(Coord c) {
+	public void addCoord(Point c) {
 		path[currInd] = c;
 		currInd = currInd + 1;
 	}
 
-	public Coord getCoord(int i) {
+	public Point getCoord(int i) {
 		return path[i];
 	}
 
-	public void setEndCoord(Coord c) {
+	public void setEndCoord(Point c) {
 		path[currInd] = c;
 		endInd = currInd;
 		length = currInd + 1;
 	}
 
-	public Coord getEndCoord() {
+	public Point getEndCoord() {
 		return path[endInd];
 	}
 
@@ -44,7 +46,7 @@ public class Path {
 	public String print() {
 		String s = "";
 		for (int i = 0; i < length; i++) {
-			s = s + "Path Cell " + i + ": " + "\t" + path[i].print();
+			s = s + "Path Cell " + i + ": " + "\t" + path[i].toString();
 			if (i < length - 1) {
 				s = s + "\n";
 			}

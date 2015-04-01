@@ -1,6 +1,7 @@
 package map;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 import common.Subject;
 
@@ -15,12 +16,12 @@ public class Map extends Subject {
 	private int height;
 	private MapCell[][] cells;
 	private String mapName;
-	private Coord pathStartCoord;
-	private Coord pathEndCoord;
+	private Point pathStartCoord;
+	private Point pathEndCoord;
 	private Path path;
 
-	final static private int MAX_WIDTH = 30;
-	final static private int MAX_HEIGHT = 30;
+	final static private int MAX_WIDTH = 40;
+	final static private int MAX_HEIGHT = 40;
 	final public static int CELL_PIXEL_SIZE = 20;
 
 	public Map(String inpMapName, int inpWidth, int inpHeight) {
@@ -57,16 +58,16 @@ public class Map extends Subject {
 			for (int j = 0; j < this.width; j++) {
 				c = line.charAt(j);
 				if (c == PathCell.CHAR_ID) {
-					this.makePathCell(i, j);
+					this.makePathCell(j, i);
 				} else if (c == PathStartCell.CHAR_ID) {
-					this.makePathStartCell(i, j);
+					this.makePathStartCell(j, i);
 				} else if (c == PathEndCell.CHAR_ID) {
-					this.makePathEndCell(i, j);
+					this.makePathEndCell(j, i);
 				} else if (c == SceneryCell.CHAR_ID) {
 					// Do nothing. Default is scenery cell
 				} else {
 					throw new IllegalArgumentException(
-							"Invalid map cell element at (" + i + "," + j
+							"Invalid map cell element at (" + j + "," + i
 									+ ").");
 				}
 			}
@@ -98,9 +99,9 @@ public class Map extends Subject {
 		this.pathEndCoord = null;
 		this.path = null;
 
-		this.cells = new MapCell[height][width];
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
+		this.cells = new MapCell[width][height];
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
 				cells[i][j] = new SceneryCell();
 			}
 		}
@@ -126,7 +127,7 @@ public class Map extends Subject {
 		String s = "";
 		for (int i = 0; i < this.height; i++) {
 			for (int j = 0; j < this.width; j++) {
-				s = s + cells[i][j].print();
+				s = s + cells[j][i].print();
 			}
 			if (i < this.height - 1) {
 				s = s + "\n";
@@ -138,16 +139,16 @@ public class Map extends Subject {
 	/**
 	 * Changes the given cell to a path cell.
 	 * 
-	 * @param row
-	 *            row of the map being changed
-	 * @param col
+	 * @param x
 	 *            column of the map being changed
+	 * @param y
+	 *            row of the map being changed
 	 * @return true if valid change and change was made
 	 */
-	public boolean makePathCell(int row, int col) {
+	public boolean makePathCell(int x, int y) {
 		try {
-			Coord c = new Coord(row, col);
-			this.cells[row][col] = new PathCell();
+			Point c = new Point(x, y);
+			this.cells[x][y] = new PathCell();
 			if (c.equals(pathStartCoord)) {
 				pathStartCoord = null;
 			}
@@ -167,20 +168,20 @@ public class Map extends Subject {
 	 * Changes the given cell to a start path cell. Also erases any previous
 	 * start path cells.
 	 * 
-	 * @param row
-	 *            row of the map being changed
-	 * @param col
+	 * @param x
 	 *            column of the map being changed
+	 * @param y
+	 *            row of the map being changed
 	 * @return true if valid change and change was made
 	 */
-	public boolean makePathStartCell(int row, int col) {
+	public boolean makePathStartCell(int x, int y) {
 		// Check that coordinates are on the edge of the map and remove any
 		// previous start path
 		try {
-			Coord c = new Coord(row, col);
-			if (row == 0 || row == height - 1 || col == 0 || col == width - 1) {
-				for (int i = 0; i < height; i++) {
-					for (int j = 0; j < width; j++) {
+			Point c = new Point(x, y);
+			if (y == 0 || y == height - 1 || x == 0 || x == width - 1) {
+				for (int i = 0; i < width; i++) {
+					for (int j = 0; j < height; j++) {
 						if (cells[i][j] instanceof PathStartCell) {
 							cells[i][j] = new SceneryCell();
 						}
@@ -189,7 +190,7 @@ public class Map extends Subject {
 				if (c.equals(pathEndCoord)) {
 					pathEndCoord = null;
 				}
-				this.cells[row][col] = new PathStartCell();
+				this.cells[x][y] = new PathStartCell();
 				this.pathStartCoord = c;
 				path = null;
 				this.notifyObservers();
@@ -210,21 +211,21 @@ public class Map extends Subject {
 	 * Changes the given cell to a end path cell. Also erases any previous end
 	 * path cells.
 	 * 
-	 * @param row
-	 *            row of the map being changed
-	 * @param col
+	 * @param x
 	 *            column of the map being changed
+	 * @param y
+	 *            row of the map being changed
 	 * @return true if valid change and change was made
 	 */
-	public boolean makePathEndCell(int row, int col) {
+	public boolean makePathEndCell(int x, int y) {
 		// Check that coordinates are on the edge of the map and remove any
 		// previous end path
 		try {
-			Coord c = new Coord(row, col);
-			if ((row == 0 || row == height - 1 || col == 0 || col == width - 1)
-					&& row >= 0 && row < height && col >= 0 && col < width) {
-				for (int i = 0; i < height; i++) {
-					for (int j = 0; j < width; j++) {
+			Point c = new Point(x, y);
+			if ((y == 0 || y == height - 1 || x == 0 || x == width - 1)
+					&& y >= 0 && y < height && x >= 0 && x < width) {
+				for (int i = 0; i < width; i++) {
+					for (int j = 0; j < height; j++) {
 						if (cells[i][j] instanceof PathEndCell) {
 							cells[i][j] = new SceneryCell();
 						}
@@ -233,7 +234,7 @@ public class Map extends Subject {
 				if (c.equals(pathStartCoord)) {
 					pathStartCoord = null;
 				}
-				this.cells[row][col] = new PathEndCell();
+				this.cells[x][y] = new PathEndCell();
 				this.pathEndCoord = c;
 				path = null;
 				this.notifyObservers();
@@ -253,16 +254,16 @@ public class Map extends Subject {
 	/**
 	 * Changes the given cell to a scenery cell.
 	 * 
-	 * @param row
-	 *            row of the map being changed
-	 * @param col
+	 * @param x
 	 *            column of the map being changed
+	 * @param y
+	 *            row of the map being changed
 	 * @return true if valid change and change was made
 	 */
-	public boolean makeSceneryCell(int row, int col) {
+	public boolean makeSceneryCell(int x, int y) {
 		try {
-			Coord c = new Coord(row, col);
-			this.cells[row][col] = new SceneryCell();
+			Point c = new Point(x, y);
+			this.cells[x][y] = new SceneryCell();
 			if (c.equals(pathStartCoord)) {
 				pathStartCoord = null;
 			}
@@ -295,10 +296,10 @@ public class Map extends Subject {
 			return false;
 		}
 		path = new Path();
-		Coord prev = null;
-		Coord curr = pathStartCoord;
-		Coord next = null;
-		Coord[] check = new Coord[4];
+		Point prev = null;
+		Point curr = pathStartCoord;
+		Point next = null;
+		Point[] check = new Point[4];
 		Boolean flag = true;
 		int numNewPathTouching;
 		// Attempt to follow path one element at a time and add the path
@@ -308,10 +309,10 @@ public class Map extends Subject {
 			next = null;
 			// Path connections can only be up, down, left or right, not
 			// diagonally.
-			check[0] = new Coord(curr.row() - 1, curr.col());
-			check[1] = new Coord(curr.row(), curr.col() - 1);
-			check[2] = new Coord(curr.row() + 1, curr.col());
-			check[3] = new Coord(curr.row(), curr.col() + 1);
+			check[0] = new Point(curr.x - 1, curr.y);
+			check[1] = new Point(curr.x, curr.y - 1);
+			check[2] = new Point(curr.x + 1, curr.y);
+			check[3] = new Point(curr.x, curr.y + 1);
 			for (int i = 0; i < 4; i++) {
 				if (checkPath(check[i]) && !(check[i].equals(prev))) {
 					numNewPathTouching = numNewPathTouching + 1;
@@ -319,13 +320,13 @@ public class Map extends Subject {
 				}
 			}
 			if (next == null && !(curr.equals(pathEndCoord))) {
-				System.err.println("Path broken at " + curr.print());
+				System.err.println("Path broken at " + curr.toString());
 				path = null;
 				flag = false;
 				return false;
 			} else if (numNewPathTouching > 1) {
 				System.err.println("Path has too many connections at "
-						+ curr.print());
+						+ curr.toString());
 				path = null;
 				flag = false;
 				return false;
@@ -338,7 +339,7 @@ public class Map extends Subject {
 					} else {
 						System.err
 								.println("Path end has too many connections at "
-										+ curr.print());
+										+ curr.toString());
 						path = null;
 						flag = false;
 						return false;
@@ -360,10 +361,10 @@ public class Map extends Subject {
 	 *            coordinate of the cell to be checked
 	 * @return true if cell is a Path
 	 */
-	public boolean checkPath(Coord c) {
+	public boolean checkPath(Point c) {
 
 		try {
-			if (this.cells[c.row()][c.col()] instanceof PathCell) {
+			if (this.cells[c.x][c.y] instanceof PathCell) {
 				return true;
 			}
 		} catch (IndexOutOfBoundsException e) {
@@ -376,9 +377,9 @@ public class Map extends Subject {
 		return path;
 	}
 
-	public MapCell getCell(Coord c) {
+	public MapCell getCell(Point c) {
 		try {
-			return cells[c.row()][c.col()];
+			return cells[c.x][c.y];
 		} catch (IndexOutOfBoundsException e) {
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
 			return null;
@@ -387,8 +388,8 @@ public class Map extends Subject {
 
 	public void paintMap(Graphics g) {
 
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
 				g.drawImage(cells[i][j].getImage(), j * CELL_PIXEL_SIZE, i
 						* CELL_PIXEL_SIZE, null);
 			}
