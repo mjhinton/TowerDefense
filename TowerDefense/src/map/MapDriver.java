@@ -2,6 +2,8 @@ package map;
 
 import java.awt.Point;
 
+import common.ReadWriteTxtFile;
+
 /**
  * This class tests the functionality in the map package, specifically the Map
  * class.

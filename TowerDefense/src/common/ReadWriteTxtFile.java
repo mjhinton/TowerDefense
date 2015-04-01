@@ -1,4 +1,4 @@
-package map;
+package common;
 
 import java.io.*;
 
