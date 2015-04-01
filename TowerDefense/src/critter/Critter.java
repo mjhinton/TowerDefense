@@ -14,9 +14,9 @@ abstract public class Critter {
 		private static Map playermap;
 	
 		//changed some of these to non-static for ease of use, please change them as you like.
-		static final Point STARTPOINT = new Point(playermap.getStart().getY(), playermap.getStart().getX());
+		static final Point STARTPOINT = new Point(playermap.getPath().getCoord(0).col(), playermap.getPath().getCoord(0).row());
 		static final int PATHLENGTH = Path.length(); //path length will depend upon the difficulty of the map. (the shorter the easier)
-		static final Point ENDPOINT = new Point(playermap.getEnd().getY(), playermap.getEnd().getX());
+		static final Point ENDPOINT = new Point(playermap.getPath().getEndCoord().col(), playermap.getPath().getEndCoord().row());
 		static final long DEFAULT_DELAY = 1000;//(subject to change)
 		
 		private double speed; 
