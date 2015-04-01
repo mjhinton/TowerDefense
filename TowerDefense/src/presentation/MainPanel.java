@@ -12,9 +12,7 @@ public class MainPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-//	public static final int PANEL_ID_MENU = 0;
-//	public static final int PANEL_ID_GAME = 1;
-//	public static final int PANEL_ID_MAP_EDITOR = 2;
+
 
 	private CardLayout cards;
 	private PanelGame pnlGame;
@@ -45,8 +43,6 @@ public class MainPanel extends JPanel {
 		this.add(pnlMenu, "PanelMenu");
 		this.add(pnlGame, "PanelGame");
 		this.add(pnlMapEd, "PanelMapEditor");
-		
-		pnlMenu.setVisible(true);
 
 	}
 	
