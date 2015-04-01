@@ -28,46 +28,31 @@ public class Wave{
 	}
 
 	public void setUpBank(){
-		int i;
-		for (i=0; i<(3*x+5); i++){			
-			critterBank.add(new NormalCritter());
-			System.out.println(1+" Normal Critters added to critterbank");
-			}
+		generateCritters("normal", (3*x+5));
 		
 		if (x>EASY){
-			i = 0;
-			for (i=0; i<(x/2); i++){
-				critterBank.add(new HeavyCritter());
-				System.out.println(1+" Heavy Critters added to critterbank");
-			}
-			i = 0;
-			for (i=0; i<(x/3); i++){
-				critterBank.add(new SmartCritter());
-				System.out.println(1+ " Normal Critters added to critterbank");
-			}
+			generateCritters("heavy", x/2);
+			generateCritters("smart", x/3);
 		}
 		if (x>MEDIUM){
-			i = 0;
-			for (i=0; i<(x/3); i++){
-				critterBank.add(new GhostCritter());
-				System.out.println(1+" Ghost Critters added to critterbank");
-				critterBank.add(new ShieldedCritter());
-				System.out.println(1+" Shielded Critters added to critterbank");
-			}
-			i = 0;
-			for (i=0; i<(x/3); i++){
-				critterBank.add(new SmartCritter());
-				System.out.println(1+" Smart Critters added to critterbank");
-			}
+			generateCritters("ghost", x/3);
+			generateCritters("shielded", x/3);
+			generateCritters("smart", x/3);
 		}
 		if (x>HARD){
-			i = 0;
-			for (i = 0; i<(x/2); i++){
-				critterBank.add(new MonsterCritter());
-				System.out.println(1+" Monster Critters added to critterbank");
-			}
+			generateCritters("monster", x/2);
 		}
+		
+		for(int j = 0; j < critterBank.size(); j++) critterBank.get(j).increaseDifficulty(1+difficulty/15); //can be modified to change difficulty of waves
+		
 		iterator = critterBank.iterator();
+	}
+	
+	public void generateCritters(String type, int quantity){
+		for(int i = 0; i < quantity; i++){
+			critterBank.add(CritterFactory.spawn(type));
+			System.out.println(1 + " " + type + "critter added to the critterbank");
+		}
 	}
 	
 	public void releaseCritters() throws InterruptedException{
