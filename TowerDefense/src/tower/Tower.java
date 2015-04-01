@@ -8,8 +8,12 @@ package tower;
 * This is the main Tower class
 */
 import java.util.*;
+
 import critter.*;
+
+import java.awt.Image;
 import java.awt.Point;
+
 import player.Player;
 import common.*;
 
@@ -33,6 +37,10 @@ public class Tower extends Subject{
 		this.initAttr();
 		towerlist.add(this);
 		towers = towerlist;
+	}
+	public Tower(int x, int y){
+		position = new Point(x,y);
+		this.initAttr();
 	}
 
 	//sell a specified tower
@@ -163,5 +171,10 @@ public class Tower extends Subject{
 	
 	public double getSpecialmod(){
 		return this.specialmod;
+	}
+
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

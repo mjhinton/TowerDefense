@@ -9,13 +9,22 @@ package tower;
 * This class creates a large, heavy area of effect Tower.
 */
 
+import java.awt.Image;
 import java.util.LinkedList;
+
+import javax.swing.ImageIcon;
 
 public class MonsterTower extends Tower{
 	
+	Image image;
 
 	public MonsterTower(int x, int y, LinkedList<Tower> towers){
 		super(x,y, towers);
+		initAttr();
+		//addTower();
+	}
+	public MonsterTower(int x, int y){
+		super(x,y);
 		initAttr();
 		//addTower();
 	}
@@ -38,5 +47,11 @@ public class MonsterTower extends Tower{
 		fireRate = 3; //rate of fire
 		isSpecial = false; //if tower has special effects
 		specialmod = 1;	
+	}
+	
+	public Image getImage() {
+		ImageIcon i = new ImageIcon("lib/images/tower/test_tower.png");
+		image = i.getImage();
+		return image;
 	}
 }

@@ -9,16 +9,26 @@ package tower;
 * This class creates a Tower which inflicts a slowing effect.
 */
 
+import java.awt.Image;
 import java.util.LinkedList;
+
+import javax.swing.ImageIcon;
 
 public class FreezingTower extends Tower{
 	
+	Image image;
 
 	public FreezingTower(int x, int y, LinkedList<Tower> towers){
 		super(x,y, towers);
 		initAttr();
 		//addTower();
 	}
+	public FreezingTower(int x, int y){
+		super(x,y);
+		initAttr();
+		//addTower();
+	}
+	
 
 	/*
 	//buy a tower
@@ -38,5 +48,11 @@ public class FreezingTower extends Tower{
 		fireRate = 1; //rate of fire
 		isSpecial = true; //if tower has special effects
 		specialmod = 0.8;	
+	}
+	
+	public Image getImage() {
+		ImageIcon i = new ImageIcon("lib/images/tower/test_tower.png");
+		image = i.getImage();
+		return image;
 	}
 }

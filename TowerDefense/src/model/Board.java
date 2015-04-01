@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Graphics;
 import java.awt.Point;
 
 import tower.Tower;
@@ -58,6 +59,20 @@ public class Board {
 	
 	public Path getPath(){
 		return path;
+	}
+
+	public void paintBoard(Graphics g) {
+		map.paintMap(g);
+		for (int i=0;i<width;i++){
+			for (int j=0; j<height; j++){
+				if (towers[i][j]!= null){
+					g.drawImage(towers[i][j].getImage(), i * Map.CELL_PIXEL_SIZE, j
+							* Map.CELL_PIXEL_SIZE, null);
+					;
+				}
+			}
+		}
+		
 	}
 	
 }
