@@ -25,7 +25,7 @@ public class PathEndCell extends PathCell {
 	}
 
 	public Image getImage() {
-		ImageIcon i = new ImageIcon("lib/images/map/grass_scenery.png");
+		ImageIcon i = new ImageIcon("lib/images/map/testPath.png");
 		image = i.getImage();
 		return image;
 	}

@@ -390,7 +390,7 @@ public class Map extends Subject {
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				g.drawImage(cells[i][j].getImage(), j * CELL_PIXEL_SIZE, i
+				g.drawImage(cells[i][j].getImage(), i * CELL_PIXEL_SIZE, j
 						* CELL_PIXEL_SIZE, null);
 			}
 		}
