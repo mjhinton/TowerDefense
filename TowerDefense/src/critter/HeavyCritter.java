@@ -1,10 +1,13 @@
 package critter;
 
+import javax.swing.ImageIcon;
+
 //The heavy critter is stronger and harder to kill than the normal ones.
 public class HeavyCritter extends Critter {
-
+	
+	private static ImageIcon ii = new ImageIcon("placeholderCritter.png");
 		public HeavyCritter(){
-			super(3,10,20,20);
+			super(2,10,20,20, ii);
 		}
 		public boolean getShield(){
 			return false;

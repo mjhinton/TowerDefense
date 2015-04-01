@@ -1,9 +1,12 @@
 package critter;
 
+import javax.swing.ImageIcon;
+
 //Monster critter is just a super fast, super strong critter.
 public class MonsterCritter extends Critter{
+	private static ImageIcon ii = new ImageIcon("placeholderCritter.png");
 	public MonsterCritter(){
-		super(7,30,30,30);
+		super(3,30,30,30, ii);
 	}
 	public boolean getShield(){
 		return false;
