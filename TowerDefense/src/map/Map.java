@@ -395,7 +395,7 @@ public class Map extends Subject {
 			}
 		}
 	}
-	
+
 	public void toggle(int x, int y){
 		Point c = new Point();
 		c.setLocation(x, y);
