@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 //Monster critter is just a super fast, super strong critter.
 public class MonsterCritter extends Critter{
-	private static ImageIcon ii = new ImageIcon("placeholderCritter.png");
+	private static ImageIcon ii = new ImageIcon("test_critter.png");
 	public MonsterCritter(){
 		super(4,30,30,30, ii);
 	}

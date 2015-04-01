@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 //(this isn't entirely complete yet)
 public class SmartCritter extends Critter{
 	private boolean direction;
-	private static ImageIcon ii = new ImageIcon("placeholderCritter.png");
+	private static ImageIcon ii = new ImageIcon("test_critter.png");
 		public SmartCritter(){
 			super(5,5,15,10, ii);
 			direction = true;

@@ -1,11 +1,13 @@
 package model;
 
+import map.Map;
+
 public class Model {
 		private Game game;
 		private MapEditor mapeditor;
 		
 		public Model(){
-			this.game = new Game();
+			this.game = new Game(new Map());
 			this.mapeditor = new MapEditor();
 		}
 		

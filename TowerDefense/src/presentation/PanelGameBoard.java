@@ -42,12 +42,14 @@ public class PanelGameBoard extends JPanel{
 		
 		testBoard.addTower(new FreezingTower(4,4),new Point(4,4) );
 		testBoard.addTower(new FreezingTower(14,14),new Point(14,14));
+		
+		testGame.startWave();
 		///////
 	}
 	
 	public void paint(Graphics g){
 		//Model.getMap().paint(g);
-		testBoard.paintBoard(g);
+		testGame.paintGame(g);
 		
 
 	}

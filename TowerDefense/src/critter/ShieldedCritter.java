@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 //these critters.
 public class ShieldedCritter extends Critter{
 	private boolean shield;
-	private static ImageIcon ii = new ImageIcon("placeholderCritter.png");
+	private static ImageIcon ii = new ImageIcon("test_critter.png");
 	
 		public ShieldedCritter(){
 			super(2,5,10,7, ii);

@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Graphics;
+
 import map.Map;
 import critter.CritterWaveGenerator;
 
@@ -18,9 +20,6 @@ public class Game {
 		this.waveGenerator = new CritterWaveGenerator();
 	}
 
-	public Board getBoard() {
-		return board;
-	}
 	
 	
 	public Board getBoard(){
@@ -29,6 +28,24 @@ public class Game {
 	
 	public CritterWaveGenerator getGenerator(){
 		return waveGenerator;
+	}
+
+
+
+	public void paintGame(Graphics g) {
+		// TODO Auto-generated method stub
+		board.paintBoard(g);
+		waveGenerator.getWave().paintCritters(g);
+	}
+	
+	public void startWave(){
+		try {
+			waveGenerator.generateWave();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	
