@@ -20,9 +20,9 @@ abstract public class Critter {
 		private static Board gameBoard;
 		private static Path gamePath = gameBoard.getPath();
 		//changed some of these to non-static for ease of use, please change them as you like.
-		static final Point STARTPOINT = new Point(gamePath.getCoord(0).col(), gamePath.getCoord(0).row());
+		static final Point STARTPOINT = new Point((int) gamePath.getCoord(0).getX(), (int)gamePath.getCoord(0).getY());
 		static final int PATHLENGTH = Path.length(); //path length will depend upon the difficulty of the map. (the shorter the easier)
-		static final Point ENDPOINT = new Point(gamePath.getEndCoord().col(), gamePath.getEndCoord().row());
+		static final Point ENDPOINT = new Point((int) gamePath.getEndCoord().getX(), (int) gamePath.getEndCoord().getY());
 		static final long DEFAULT_DELAY = 1000;//(subject to change)
 		
 		private Image appearance;
@@ -95,16 +95,16 @@ abstract public class Critter {
 			this.reward*=multiplier;
 		}
 		
-		//WE NEED TO DECIDE ON COORDINATES; COORD, or POINT?
+		//centercoordinate 
 		public void setDown() throws InterruptedException{
 			while (health>0)
 			{
 				for (int j= 0; j< Path.length(); j++)
 				{	
-					int x1 = (int) gamePath.getCoord(j).col();
-					int y1 = (int) gamePath.getCoord(j).row();
-					int x2 = (int) gamePath.getCoord(j+1).col();
-					int y2 = (int) gamePath.getCoord(j+1).row();
+					int x1 = (int) gamePath.getCoord(j).getX();
+					int y1 = (int) gamePath.getCoord(j).getY();
+					int x2 = (int) gamePath.getCoord(j+1).getX();
+					int y2 = (int) gamePath.getCoord(j+1).getY();
 					
 					for (int k = 0; k<((double)abs(x2-x1)/speed)+1; k++){
 						if (x2>x1){

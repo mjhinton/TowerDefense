@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 public class NormalCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("placeholderCritter.png");
 		public NormalCritter(){
-			super(3,5,5,5, ii);
+			super(2,5,5,5, ii);
 		}
 		public boolean getShield(){
 			return false;

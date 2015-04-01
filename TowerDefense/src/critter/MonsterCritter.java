@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 public class MonsterCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("placeholderCritter.png");
 	public MonsterCritter(){
-		super(3,30,30,30, ii);
+		super(4,30,30,30, ii);
 	}
 	public boolean getShield(){
 		return false;
