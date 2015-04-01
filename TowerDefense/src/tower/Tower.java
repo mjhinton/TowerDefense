@@ -27,7 +27,8 @@ public class Tower extends Subject{
 	protected double fireRate;
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
-
+	protected boolean bulletHasReached = false;
+	
 	public Tower(int x, int y, LinkedList<Tower> towerlist){
 		position = new Point(x,y);
 		this.initAttr();
@@ -118,17 +119,15 @@ public class Tower extends Subject{
 
 	//point tower bullet towards critter coordinate, inflict damage
 	//if tower is special (slowing) type, change enemy speed
-	public void fire(LinkedList<Critter> enemies){
-		
-		for (Critter j : enemies){
-			if (this.isSpecial == false){
-				j.setHealth((int) (j.getHealth() - this.power));
-			}
-			else {
-				j.setSpeed(j.getSpeed() * specialmod);
-			}
-		}	
+	public boolean fire(LinkedList<Critter> enemies){
+		bulletHasReached = false;
+		Bullet bullet = new Bullet(this.position.getX(), this.position.getY(), towers);
+		while(!bulletHasReached){
+			bullet.moveBullet(enemies);
+		}
+		return true;	
 	}
+	
 	public String toString(){
 		return("Tower at (" + position.getX() + ", " + position.getY() + ")");
 	}
