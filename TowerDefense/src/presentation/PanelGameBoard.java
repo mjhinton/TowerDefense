@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import tower.FreezingTower;
 import map.Map;
 import model.Board;
+import model.Game;
 import common.ReadWriteTxtFile;
 
 public class PanelGameBoard extends JPanel{
@@ -18,6 +19,7 @@ public class PanelGameBoard extends JPanel{
 	
 	//for testing
 	private Board testBoard;
+	private Game testGame;
 
 	public PanelGameBoard(){
 
@@ -34,16 +36,20 @@ public class PanelGameBoard extends JPanel{
 		String[] testArrayMap = ReadWriteTxtFile
 						.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
 		Map testMap = new Map("testMap", 15, testArrayMap);
-		testBoard=new Board(testMap);
-		testBoard.addTower(new FreezingTower(4,4),new Point(4,4) );
-		testBoard.addTower(new FreezingTower(14,14),new Point(14,14) );
 		
+		testGame=new Game(testMap);
+		testBoard=testGame.getBoard();
+		
+		testBoard.addTower(new FreezingTower(4,4),new Point(4,4) );
+		testBoard.addTower(new FreezingTower(14,14),new Point(14,14));
 		///////
 	}
 	
 	public void paint(Graphics g){
 		//Model.getMap().paint(g);
 		testBoard.paintBoard(g);
+		
 
 	}
+	
 }

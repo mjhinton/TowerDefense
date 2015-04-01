@@ -13,10 +13,15 @@ public class Game {
 	
 	//as of now, the game constructor just opens a new, randomly generated map on a new board. 
 	//later, we should have another constructor or something in order to initialize a new game with a map that the player made. 
-	public Game(){
-		this.board = new Board(new Map());
+	public Game(Map map){
+		this.board = new Board(map);
 		this.waveGenerator = new CritterWaveGenerator();
 	}
+
+	public Board getBoard() {
+		return board;
+	}
+	
 	
 	
 }
