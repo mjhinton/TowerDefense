@@ -1,5 +1,7 @@
 package map;
 
+import java.awt.Graphics;
+
 import common.Subject;
 
 /**
@@ -7,7 +9,7 @@ import common.Subject;
  * 
  * @author Michael Hinton
  */
-public class Map extends Subject  {
+public class Map extends Subject {
 
 	private int width;
 	private int height;
@@ -17,11 +19,12 @@ public class Map extends Subject  {
 	private Coord pathEndCoord;
 	private Path path;
 
-	final static private int maxWidth = 40;
-	final static private int maxHeight = 40;
+	final static private int MAX_WIDTH = 30;
+	final static private int MAX_HEIGHT = 30;
+	final public static int CELL_PIXEL_SIZE = 20;
 
 	public Map(String inpMapName, int inpWidth, int inpHeight) {
-		if (inpWidth > maxWidth || inpHeight > maxHeight) {
+		if (inpWidth > MAX_WIDTH || inpHeight > MAX_HEIGHT) {
 			throw new IllegalArgumentException("Size too big.");
 		}
 		this.width = inpWidth;
@@ -34,7 +37,7 @@ public class Map extends Subject  {
 	public Map(String inpMapName, int inpWidth, String[] inpMap) {
 		// Gives ability to create map from String array
 		// If start and / or end path given, assumes only one of each is given
-		if (inpWidth > maxWidth) {
+		if (inpWidth > MAX_WIDTH) {
 			throw new IllegalArgumentException("Size too big.");
 		}
 		this.width = inpWidth;
@@ -53,13 +56,13 @@ public class Map extends Subject  {
 			}
 			for (int j = 0; j < this.width; j++) {
 				c = line.charAt(j);
-				if (c == PathCell.charID) {
+				if (c == PathCell.CHAR_ID) {
 					this.makePathCell(i, j);
-				} else if (c == PathStartCell.charID) {
+				} else if (c == PathStartCell.CHAR_ID) {
 					this.makePathStartCell(i, j);
-				} else if (c == PathEndCell.charID) {
+				} else if (c == PathEndCell.CHAR_ID) {
 					this.makePathEndCell(i, j);
-				} else if (c == SceneryCell.charID) {
+				} else if (c == SceneryCell.CHAR_ID) {
 					// Do nothing. Default is scenery cell
 				} else {
 					throw new IllegalArgumentException(
@@ -372,13 +375,24 @@ public class Map extends Subject  {
 	public Path getPath() {
 		return path;
 	}
-	
-	public MapCell getCell(Coord c){
-		try{
+
+	public MapCell getCell(Coord c) {
+		try {
 			return cells[c.row()][c.col()];
-		}catch (IndexOutOfBoundsException e){
+		} catch (IndexOutOfBoundsException e) {
 			System.err.println("IndexOutOfBoundsException: " + e.getMessage());
 			return null;
 		}
+	}
+
+	public void paintMap(Graphics g) {
+
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				g.drawImage(cells[i][j].getImage(), j * CELL_PIXEL_SIZE, i
+						* CELL_PIXEL_SIZE, null);
+			}
+		}
+
 	}
 }

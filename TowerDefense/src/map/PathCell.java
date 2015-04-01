@@ -1,5 +1,9 @@
 package map;
 
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+
 /**
  * This class allows the creation of path cell objects for a map. It extends the
  * abstract MapCell class.
@@ -8,13 +12,21 @@ package map;
  */
 public class PathCell extends MapCell {
 
-	final public static char charID = '+';
+	final public static char CHAR_ID = '+';
+
+	Image image;
 
 	public PathCell() {
 
 	}
 
 	public String print() {
-		return String.valueOf(charID);
+		return String.valueOf(CHAR_ID);
+	}
+
+	public Image getImage() {
+		ImageIcon i = new ImageIcon("lib/images/map/grass_scenery.png");
+		image = i.getImage();
+		return image;
 	}
 }
