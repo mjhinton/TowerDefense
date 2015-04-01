@@ -9,11 +9,14 @@ import javax.swing.JPanel;
 public class PanelGameTowerManager extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	
+	private View view;
 
-	public PanelGameTowerManager(){
+	public PanelGameTowerManager(View view){
 
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
+		this.view=view;
 		
 		this.setBackground(Color.RED);
 		this.setPreferredSize(dim);

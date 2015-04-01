@@ -9,6 +9,8 @@ import javax.swing.Timer;
 
 import critter.CritterWaveGenerator;
 import critter.Wave;
+import map.Map;
+import model.Game;
 import model.Model;
 import presentation.View;
 
@@ -20,7 +22,7 @@ public class Controller implements ActionListener {
 	protected CritterWaveGenerator waveGenerator;
 	protected Wave currentWave;
 	
-	
+	protected Game currGame;
 	
 	private Timer timer;
 	Random rand = new Random();
@@ -38,13 +40,12 @@ public class Controller implements ActionListener {
 	}
 	
 	public void paintComponent(Graphics g){
-		view.paintComponents(g);
-		currentWave.paintCritters(g);
+		currGame.paintGame(g);
 	}
 	
 	
 	public void draw(){
-		
+		view.getMainPanel().repaint();
 	}
 	
 	public void update(){
@@ -56,6 +57,16 @@ public class Controller implements ActionListener {
 		update();
 		draw();
 		
+	}
+	
+	//starts a game with the input map
+	public void startGame(Map map){
+		currGame=new Game(map);
+	}
+	
+	//returns the currently running game
+	public Game getGame(){
+		return currGame;
 	}
 	
 

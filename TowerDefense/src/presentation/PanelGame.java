@@ -15,10 +15,13 @@ public class PanelGame extends JPanel {
 	private PanelGameBoard pnBoard;
 	private PanelGameTowerManager pnTM;
 	private PanelGameOptions pnOptions;
+	
+	private View view;
 
-	public PanelGame() {
+	public PanelGame(View view) {
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH, View.SCREEN_HEIGHT);
+		this.view=view;
 		
 		this.setBackground(Color.BLACK);
 		this.setPreferredSize(dim);
@@ -29,9 +32,9 @@ public class PanelGame extends JPanel {
 		this.setLayout(new BorderLayout());
 		
 		pnSide= new JPanel(new BorderLayout());
-		pnBoard=new PanelGameBoard();
-		pnTM=new PanelGameTowerManager();
-		pnOptions=new PanelGameOptions();
+		pnBoard=new PanelGameBoard(view);
+		pnTM=new PanelGameTowerManager(view);
+		pnOptions=new PanelGameOptions(view);
 		
 		//add tower manager and options panels to a side container
 		pnSide.add(pnTM, BorderLayout.NORTH);

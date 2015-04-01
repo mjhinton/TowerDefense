@@ -19,10 +19,13 @@ public class MainPanel extends JPanel {
 	private PanelMenu pnlMenu;
 	private PanelMapEditor pnlMapEd;
 	
+	private View view;
+	
 
-	public MainPanel() {
+	public MainPanel(View view) {
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH, View.SCREEN_HEIGHT);
+		this.view=view;
 		
 		this.setBackground(Color.BLACK);
 		this.setPreferredSize(dim);
@@ -37,9 +40,9 @@ public class MainPanel extends JPanel {
 		cards=new CardLayout();
 		this.setLayout(cards);
 
-		pnlMenu = new PanelMenu();
-		pnlGame = new PanelGame();
-		pnlMapEd = new PanelMapEditor();
+		pnlMenu = new PanelMenu(view);
+		pnlGame = new PanelGame(view);
+		pnlMapEd = new PanelMapEditor(view);
 		this.add(pnlMenu, "PanelMenu");
 		this.add(pnlGame, "PanelGame");
 		this.add(pnlMapEd, "PanelMapEditor");

@@ -19,10 +19,13 @@ public class PanelMapEditorMap extends JPanel {
 	//for testing
 	private Map testMap;
 	private String[] testArrayMap;
+	
+	private View view;
 
-	public PanelMapEditorMap(){
+	public PanelMapEditorMap(View view){
 
 		Dimension dim=new Dimension(View.SCREEN_HEIGHT, View.SCREEN_HEIGHT);
+		this.view=view;
 		
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(dim);
