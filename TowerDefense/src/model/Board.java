@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Point;
+
 import tower.Tower;
 import map.*;
 
@@ -15,15 +17,15 @@ public class Board {
 		this.map=mapInput;
 		width=map.getWidth();
 		height=map.getHeight();
-		towers= new Tower[height][width];
+		towers= new Tower[width][height];
 		path=map.getPath();
 	}
 	
-	public boolean addTower(Tower tower, Coord c){
+	public boolean addTower(Tower tower, Point c){
 		try {
-			if(towers[c.row()][c.col()]==null){
+			if(towers[c.x][c.y]==null){
 				if (map.getCell(c) instanceof SceneryCell){
-					towers[c.row()][c.col()]=tower;
+					towers[c.x][c.y]=tower;
 					return true;
 				}else{
 					System.err.println("Tower already exists at this location.");
@@ -39,10 +41,10 @@ public class Board {
 		}
 	}
 	
-	public boolean removeTower(Coord c){
+	public boolean removeTower(Point c){
 		try {
-			if(towers[c.row()][c.col()]!=null){
-				towers[c.row()][c.col()]=null;
+			if(towers[c.x][c.y]!=null){
+				towers[c.x][c.y]=null;
 				return true;
 			}else{
 				System.err.println("No tower exists at this location.");
