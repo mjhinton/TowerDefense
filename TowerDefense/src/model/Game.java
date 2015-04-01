@@ -23,5 +23,13 @@ public class Game {
 	}
 	
 	
+	public Board getBoard(){
+		return board;
+	}
+	
+	public CritterWaveGenerator getGenerator(){
+		return waveGenerator;
+	}
+	
 	
 }

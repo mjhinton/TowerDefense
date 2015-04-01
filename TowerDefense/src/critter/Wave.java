@@ -1,5 +1,6 @@
 package critter;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
@@ -65,6 +66,13 @@ public class Wave{
 			TimeUnit.MILLISECONDS.sleep((long)(DEFAULT_DELAY/(0.5*difficulty)));
 			// the general idea is that the delay will get smaller and smaller as the player progresses through the waves.
 		}	
+	}
+	
+	public void paintCritters(Graphics g){
+		while(iterator.hasNext()){
+			Critter c = iterator.next();
+			c.drawCritter(g);
+		}
 	}
 	
 	public boolean waveInProgress(){

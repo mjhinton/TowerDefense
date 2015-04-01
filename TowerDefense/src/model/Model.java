@@ -8,4 +8,11 @@ public class Model {
 			this.game = new Game();
 			this.mapeditor = new MapEditor();
 		}
+		
+		public Game getGame(){
+			return game;
+		}
+		public MapEditor getEditor(){
+			return mapeditor;
+		}
 }
