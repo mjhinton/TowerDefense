@@ -18,6 +18,7 @@ public class Game {
 	public Game(Map map){
 		this.board = new Board(map);
 		this.waveGenerator = new CritterWaveGenerator();
+		//
 	}
 
 	
