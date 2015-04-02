@@ -32,9 +32,11 @@ public class PanelGame extends JPanel {
 		this.setLayout(new BorderLayout());
 		
 		pnSide= new JPanel(new BorderLayout());
+
 		pnBoard=new PanelGameBoard(view);
-		pnTM=new PanelGameTowerManager(view);
+		pnTM=new PanelGameTowerManager(view, pnBoard);
 		pnOptions=new PanelGameOptions(view);
+
 		
 		//add tower manager and options panels to a side container
 		pnSide.add(pnTM, BorderLayout.NORTH);

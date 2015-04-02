@@ -35,7 +35,7 @@ public class NormalTower extends Tower{
 	*/
 	
 	public Image getImage() {
-		ImageIcon i = new ImageIcon("lib/images/tower/test_tower.png");
+		ImageIcon i = new ImageIcon("lib/images/tower/BasicTowerx40.png");
 		image = i.getImage();
 		return image;
 	}

@@ -30,7 +30,7 @@ public class Board {
 					towers[c.x][c.y]=tower;
 					return true;
 				}else{
-					System.err.println("Tower already exists at this location.");
+					System.err.println("Towers can't be put here.");
 					return false;
 				}
 			}else{
@@ -38,7 +38,9 @@ public class Board {
 				return false;
 			}
 		}catch (IndexOutOfBoundsException e){
-			System.err.println("IndexOutOfBoundsException(BOARD): " + e.getMessage());
+
+			System.err.println("You can't put that there.");
+
 			return false;
 		}
 	}
