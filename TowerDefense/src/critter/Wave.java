@@ -2,7 +2,6 @@ package critter;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import model.Board;
@@ -17,7 +16,6 @@ public class Wave{
 	static final long DEFAULT_DELAY = 10;
 	
 	private ArrayList<Critter> critterBank;
-	private Iterator<Critter> iterator;
 	private int x;
 	private double difficulty;
 	private boolean waveInProgress;
@@ -25,7 +23,6 @@ public class Wave{
 	
 	public Wave(int n, Board cBoard){
 		this.critterBank = new ArrayList<Critter>();
-		this.iterator = critterBank.iterator();
 		this.difficulty = (double) n;
 		this.waveInProgress = false;
 		this.board = cBoard;
@@ -52,7 +49,6 @@ public class Wave{
 		
 		for(int j = 0; j < critterBank.size(); j++) critterBank.get(j).increaseDifficulty(1+difficulty/15); //can be modified to change difficulty of waves
 		
-		iterator = critterBank.iterator();
 	}
 	
 	public void generateCritters(String type, int quantity, Board board){
@@ -66,34 +62,37 @@ public class Wave{
 	
 	public void releaseCritters() throws InterruptedException{
 		this.setUpBank();
-		while (iterator.hasNext()){
-			Critter c = iterator.next();
-			Thread x = new CritterThread(c);
+		Critter c;
+		Thread x;
+		for (int i =0; i<critterBank.size(); i++){
+			c=critterBank.get(i);
+			x = new CritterThread(c);
 			x.start();
 			System.out.println(c.toString()+ " has been set down");
 			TimeUnit.MILLISECONDS.sleep((long)(DEFAULT_DELAY/(0.5*difficulty)));
-			// the general idea is that the delay will get smaller and smaller as the player progresses through the waves.
-		}	
+		}
 	}
 	
 	public void paintCritters(Graphics g){
-		while(iterator.hasNext()){
-			Critter c = iterator.next();
+		Critter c;
+		for (int i =0; i<critterBank.size(); i++){
+			c=critterBank.get(i);
 			c.drawCritter(g);
 		}
+		
 	}
 	
 	public boolean waveInProgress(){
-		while (iterator.hasNext()){
-			for (int i=0; i<critterBank.size(); i++){
-					Critter c = iterator.next();
-					if ((c.getHealth()>0)||(c.reachedGoal != true)){
-						waveInProgress = true;
-						return waveInProgress;
-					}	
+		Critter c;
+		for (int i =0; i<critterBank.size(); i++){
+			c=critterBank.get(i);
+			if (c.getHealth()>0){
+				waveInProgress = true;
+				return waveInProgress;
 			}
 		}
-			return waveInProgress;
+		waveInProgress=false;
+		return waveInProgress;
 	}
 	
 	public void updateCritterPositions(){

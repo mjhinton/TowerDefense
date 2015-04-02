@@ -8,7 +8,7 @@ import model.Board;
 public class MonsterCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("test_critter.png");
 	public MonsterCritter(Board board){
-		super(4,30,30,30, ii, board);
+		super(0.8,30,30,30, ii, board);
 	}
 	public boolean getShield(){
 		return false;

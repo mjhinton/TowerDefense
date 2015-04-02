@@ -97,20 +97,20 @@ public class Tower extends Subject{
 		for (Critter i : critters){
 			//find out which critter is the closest out of the critters in range
 			//using the distance formula			
-			if (closest != null && Math.sqrt(Math.pow((i.position.getX() - this.position.getX()),2) + 
-					Math.pow((i.position.getY() - this.position.getY()),2)) <= Math.sqrt(Math.pow((closest.position.getX() - 
-					this.position.getX()),2) + Math.pow((closest.position.getY() - this.position.getY()),2))) { 				
+			if (closest != null && Math.sqrt(Math.pow((i.getX() - this.position.getX()),2) + 
+					Math.pow((i.getY() - this.position.getY()),2)) <= Math.sqrt(Math.pow((closest.getX() - 
+					this.position.getX()),2) + Math.pow((closest.getY() - this.position.getY()),2))) { 				
 				closest = i;
 			}
 
-			else if (i.position.getX() <= this.position.getX() + this.range && i.position.getY() <= this.position.getY() + this.range){
+			else if (i.getX() <= this.position.getX() + this.range && i.getY() <= this.position.getY() + this.range){
 				closest = i;
 			}
 		}
 		//check critters in the bullet's range and add to a new linked list
 		for (Critter k : critters){
-			if (closest != null && (k.position.getX() <= (closest.position.getX() + this.bulletRange) && 
-				k.position.getY() <= (closest.position.getY() + this.bulletRange))){
+			if (closest != null && (k.getX() <= (closest.getX() + this.bulletRange) && 
+				k.getY() <= (closest.getY() + this.bulletRange))){
 				
 				nearbyCritters.add(k);
 			}

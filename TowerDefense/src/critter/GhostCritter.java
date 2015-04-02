@@ -12,7 +12,7 @@ public class GhostCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("test_critter.png");
 	
 	public GhostCritter(Board board){
-		super(4,5,25,10,ii, board);
+		super(1,5,25,10,ii, board);
 		visible = true;
 	}
 	

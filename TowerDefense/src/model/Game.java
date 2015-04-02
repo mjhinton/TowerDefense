@@ -20,6 +20,7 @@ public class Game {
 		this.board = new Board(map);
 		this.currentWaveNumber=1;
 
+		this.wave=null;
 	}
 	
 	public Board getBoard(){
@@ -28,14 +29,23 @@ public class Game {
 
 	public void paintGame(Graphics g) {
 		board.paintBoard(g);
-		wave.paintCritters(g);
+		if(wave!=null){
+			wave.paintCritters(g);
+		}
+		
 	}
 	
 	//The player will only be able to call this method if a wave is not already in progress.
 	//(A wave is in progress while there are still critters alive and on the map)
 	public void generateWave() throws InterruptedException{
 		
-		if (wave.waveInProgress() == false){
+		boolean flag;
+		try{
+			flag=(wave.waveInProgress() == false);
+		}catch(NullPointerException e){
+			flag=true;
+		}
+		if (flag){
 			wave = new Wave(currentWaveNumber, board);
 			System.out.println("Aww yeah, wave generated");
 			wave.releaseCritters();
@@ -46,7 +56,7 @@ public class Game {
 			System.out.println("Wave in progress, can't play.");
 	}
 
-	public Wave getWave() {
+	public Wave getWave() throws NullPointerException {
 		return wave;
 	}
 	

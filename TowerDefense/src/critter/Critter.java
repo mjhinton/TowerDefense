@@ -3,19 +3,20 @@ package critter;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.util.concurrent.TimeUnit;
-import static java.lang.Math.abs;
 
 import javax.swing.ImageIcon;
 
 import map.*;
 import model.Board;
 import player.Player;
+import presentation.View;
 
 /*There are six kinds of critters so far; normal, shielded, smart, heavy, ghost, and monster.
  * We will later add more kinds of critters. All the values are subject to change.
  */
 abstract public class Critter {
+	
+	final static double STANDARD_SPEED=0.2*(1000/View.TIMEOUT);
 
 	// private Board gameBoard;
 	private Path gamePath;
@@ -27,7 +28,6 @@ abstract public class Critter {
 	private int pathLength; // path length will depend upon
 												// the difficulty of the map.
 												// (the shorter the easier)
-	private long DEFAULT_DELAY = 1000;// (subject to change)
 
 	private Image appearance;
 	private double speed;
@@ -39,10 +39,10 @@ abstract public class Critter {
 	public double x;
 	public double y;
 
-	public Critter(int speed, int health, int reward, int damage,
+	public Critter(double speedMultiplier, int health, int reward, int damage,
 			ImageIcon appearance, Board gameBoard) {
 		this.gameBoard = gameBoard;
-		this.speed = speed;
+		this.speed = speedMultiplier*STANDARD_SPEED;
 		this.health = health;
 		this.reward = reward;
 		this.damage = damage;
@@ -143,6 +143,7 @@ abstract public class Critter {
 					&& (int) (Math.floor(y)) == nextPathCoord.y) {
 				if (currPathIndex == pathLength - 1) {
 					reachedGoal = true;
+					health=0;
 					onPath=false;
 					System.out.println(this.toString()
 							+ " has reached the endpoint");

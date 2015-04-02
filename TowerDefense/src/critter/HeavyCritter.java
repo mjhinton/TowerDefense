@@ -9,7 +9,7 @@ public class HeavyCritter extends Critter {
 	
 	private static ImageIcon ii = new ImageIcon("test_critter.png");
 		public HeavyCritter(Board board){
-			super(2,10,20,20, ii, board);
+			super(0.5,10,20,20, ii, board);
 		}
 		public boolean getShield(){
 			return false;

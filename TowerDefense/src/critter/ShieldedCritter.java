@@ -11,7 +11,7 @@ public class ShieldedCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("test_critter.png");
 	
 		public ShieldedCritter(Board board){
-			super(2,5,10,7, ii, board);
+			super(0.7,5,10,7, ii, board);
 			shield = true;
 		}
 		public boolean getShield(){

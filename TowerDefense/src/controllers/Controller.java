@@ -44,8 +44,13 @@ public class Controller implements ActionListener {
 	}
 	
 	public void update(){
-		currWave=currGame.getWave();
-		if (currWave.waveInProgress()) currWave.updateCritterPositions();
+		try{
+			currWave=currGame.getWave();
+			if (currWave.waveInProgress()) currWave.updateCritterPositions();
+		}catch (NullPointerException e){
+			
+		}
+		
 	}
 	
 	@Override

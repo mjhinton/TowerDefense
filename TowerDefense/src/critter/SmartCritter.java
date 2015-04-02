@@ -10,7 +10,7 @@ public class SmartCritter extends Critter{
 	private boolean direction;
 	private static ImageIcon ii = new ImageIcon("test_critter.png");
 		public SmartCritter(Board board){
-			super(5,5,15,10, ii, board);
+			super(2,5,15,10, ii, board);
 			direction = true;
 		}
 		public boolean getShield(){

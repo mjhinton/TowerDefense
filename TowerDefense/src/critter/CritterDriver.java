@@ -22,9 +22,9 @@ public class CritterDriver{
 		
 		System.out.println("Let the game begin.");
 
-		CritterWaveGenerator a = new CritterWaveGenerator();
+		//CritterWaveGenerator a = new CritterWaveGenerator();
 		
-		a.generateWave();
+		//a.generateWave();
 		
 		}
 }
