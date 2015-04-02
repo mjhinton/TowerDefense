@@ -22,6 +22,10 @@ public class MainPanel extends JPanel {
 	private View view;
 	
 
+	public View getView() {
+		return view;
+	}
+
 	public MainPanel(View view) {
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH, View.SCREEN_HEIGHT);

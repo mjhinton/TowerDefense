@@ -49,4 +49,8 @@ public class PanelMapEditorMap extends JPanel {
 			System.out.println(testArrayMap[i]);
 		}
 	}
+
+	public View getView() {
+		return view;
+	}
 }

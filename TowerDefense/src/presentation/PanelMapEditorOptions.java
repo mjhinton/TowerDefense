@@ -23,4 +23,8 @@ public class PanelMapEditorOptions extends JPanel {
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
 	}
+
+	public View getView() {
+		return view;
+	}
 }

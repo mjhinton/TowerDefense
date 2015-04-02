@@ -47,4 +47,8 @@ public class PanelGame extends JPanel {
 		this.add(pnSide,BorderLayout.EAST);
 
 	}
+
+	public View getView() {
+		return view;
+	}
 }

@@ -35,4 +35,8 @@ public class PanelMapEditor extends JPanel {
 		
 
 	}
+
+	public View getView() {
+		return view;
+	}
 }

@@ -81,5 +81,9 @@ public class Board {
 		}
 		
 	}
+
+	public Map getMap() {
+		return map;
+	}
 	
 }

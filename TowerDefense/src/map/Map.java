@@ -38,6 +38,7 @@ public class Map extends Subject {
 	public Map(String inpMapName, int inpWidth, String[] inpMap) {
 		// Gives ability to create map from String array
 		// If start and / or end path given, assumes only one of each is given
+		//Note: this constructor automatically tries initiate the path
 		if (inpWidth > MAX_WIDTH) {
 			throw new IllegalArgumentException("Size too big.");
 		}
@@ -72,6 +73,7 @@ public class Map extends Subject {
 				}
 			}
 		}
+		this.initPath();
 	}
 
 	public Map(String inpMapName) {
@@ -412,5 +414,27 @@ public class Map extends Subject {
 		if(getCell(c) instanceof PathEndCell){
 			makeSceneryCell(x,y);
 		}
+	}
+	public Point getOffMapExit(){
+		Point p;
+		Point e;
+		if (path!=null){
+			e=pathEndCoord;
+			if (e.x==0){
+				p=new Point(e.x-1,e.y);
+			}else if(e.x==width-1){
+				p=new Point(e.x+1,e.y);
+			}else if(e.y==0){
+				p=new Point(e.x,e.y-1);
+			}else if (e.y==height-1){
+				p= new Point(e.x,e.y+1);
+			}else{
+				p=null;
+			}
+		}else{
+			p=null;
+		}
+		
+		return p;
 	}
 }

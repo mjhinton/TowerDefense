@@ -69,4 +69,8 @@ public class PanelGameOptions extends JPanel{
 		
 
 	}
+
+	public View getView() {
+		return view;
+	}
 }

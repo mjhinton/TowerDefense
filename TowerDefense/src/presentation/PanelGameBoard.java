@@ -1,6 +1,5 @@
 package presentation;
 
-import java.util.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,22 +11,22 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 import tower.*;
-import map.Map;
-import map.Path;
-import model.Board;
-import model.Game;
-import common.ReadWriteTxtFile;
+//import map.Map;
+//import map.Path;
+//import model.Board;
+//import model.Game;
+//import common.ReadWriteTxtFile;
 
 public class PanelGameBoard extends JPanel implements MouseListener{
 
 	private static final long serialVersionUID = 1L;
 	
 	//for testing
-	private Board testBoard;
-
-	private Game testGame;
-
-	private Path testPath;
+//	private Board testBoard;
+//
+//	private Game testGame;
+//
+//	private Path testPath;
 	
 	private View view;
 	
@@ -51,25 +50,25 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 		this.setFocusable(true);
 		
 		//the following code is temporary for testing
-		String[] testArrayMap = ReadWriteTxtFile
-						.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
-		Map testMap = new Map("testMap", 15, testArrayMap);
-		
-		testGame=new Game(testMap);
-		testBoard=testGame.getBoard();
-		testPath = new Path();
-		
-		testPath.addCoord(new Point(1,1));
-		testPath.addCoord(new Point(1,2));
-		testPath.addCoord(new Point(1,3));
-		testPath.addCoord(new Point(1,4));
-		
-		testBoard.setPath(testPath);
-		
-		testBoard.addTower(new FreezingTower(4,4),new Point(4,4) );
-		testBoard.addTower(new FreezingTower(14,14),new Point(14,14));
-		
-		System.out.println(testBoard.getPath());
+//		String[] testArrayMap = ReadWriteTxtFile
+//						.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
+//		Map testMap = new Map("testMap", 15, testArrayMap);
+//		
+//		testGame=new Game(testMap);
+//		testBoard=testGame.getBoard();
+//		testPath = new Path();
+//		
+//		testPath.addCoord(new Point(1,1));
+//		testPath.addCoord(new Point(1,2));
+//		testPath.addCoord(new Point(1,3));
+//		testPath.addCoord(new Point(1,4));
+//		
+//		testBoard.setPath(testPath);
+//		
+//		testBoard.addTower(new FreezingTower(4,4),new Point(4,4) );
+//		testBoard.addTower(new FreezingTower(14,14),new Point(14,14));
+//		
+//		System.out.println(testBoard.getPath());
 		
 		//testGame.startWave();
 
@@ -86,21 +85,21 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 	    //System.out.println("(" + coordX + ", " + coordY + ")");
 	
 		if (sellMode){
-	    	testBoard.removeTower(new Point(coordX, coordY));
+			view.getController().getGame().getBoard().removeTower(new Point(coordX, coordY));
 	    }
 	    else if (upgradeMode){
 	    	
 	    }
 	    else if (buyB){
-	    	testBoard.addTower(new NormalTower(coordX, coordY), new Point(coordX, coordY));
+	    	view.getController().getGame().getBoard().addTower(new NormalTower(coordX, coordY), new Point(coordX, coordY));
 	    	repaint();
 	    }
 	    if (buyF){
-	    	testBoard.addTower(new FreezingTower(coordX, coordY), new Point(coordX, coordY));
+	    	view.getController().getGame().getBoard().addTower(new FreezingTower(coordX, coordY), new Point(coordX, coordY));
 	    	repaint();
 	    }
 	    if(buyM){
-	    	testBoard.addTower(new MonsterTower(coordX, coordY), new Point(coordX, coordY));
+	    	view.getController().getGame().getBoard().addTower(new MonsterTower(coordX, coordY), new Point(coordX, coordY));
 	    	repaint();
 	    }
 	    else {

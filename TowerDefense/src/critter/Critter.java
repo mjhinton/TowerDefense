@@ -19,6 +19,7 @@ abstract public class Critter {
 
 		//private Board gameBoard;
 		private Path gamePath;
+		private Board gameBoard;
 		private Point endPoint;
 		private int pathLength, x, y, x1, y1; //path length will depend upon the difficulty of the map. (the shorter the easier)
 		private long DEFAULT_DELAY = 1000;//(subject to change)
@@ -32,6 +33,7 @@ abstract public class Critter {
 		public boolean reachedGoal;
 		
 		public Critter(int speed, int health, int reward, int damage, ImageIcon appearance, Board gameBoard){
+			this.gameBoard=gameBoard;
 			this.speed = speed;
 			this.health = health;
 			this.reward = reward;
@@ -107,14 +109,26 @@ abstract public class Critter {
 		
 		//centercoordinate 
 		public void setDown() throws InterruptedException{
+			int x1;
+			int x2;
+			int y1;
+			int y2;
+			
 			while (health>0)
 			{
 				for (int j= 0; j< pathLength; j++)
 				{	
-					int x1 = (int) gamePath.getCoord(j).getX();
-					int y1 = (int) gamePath.getCoord(j).getY();
-					int x2 = (int) gamePath.getCoord(j+1).getX();
-					int y2 = (int) gamePath.getCoord(j+1).getY();
+					x1 = (int) gamePath.getCoord(j).getX();
+					y1 = (int) gamePath.getCoord(j).getY();
+					//Cannot access gamePath.getCoord(j+1) when at end of path
+					if  (j==pathLength-1){
+						Point p=gameBoard.getMap().getOffMapExit();
+						x2=p.x;
+						y2=p.y;
+					}else{
+						x2 = (int) gamePath.getCoord(j+1).getX();
+						y2 = (int) gamePath.getCoord(j+1).getY();
+					}
 					
 					for (int k = 0; k<((double)abs(x2-x1)/speed)+1; k++){
 						if (x2>x1){

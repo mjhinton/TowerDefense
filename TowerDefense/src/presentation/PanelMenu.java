@@ -32,4 +32,8 @@ public class PanelMenu extends JPanel {
 		imageBackground=i.getImage();
 		g.drawImage(imageBackground, 0, 0, null);
 	}
+
+	public View getView() {
+		return view;
+	}
 }
