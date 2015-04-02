@@ -25,7 +25,7 @@ public class View extends JFrame {
 	
 	private void init(){
 		
-		mp=new MainPanel();
+		mp=new MainPanel(this);
 		model=new Model();
 		controller = new Controller(this, model);
 		this.setSize(SCREEN_WIDTH,SCREEN_HEIGHT+25);
@@ -41,5 +41,15 @@ public class View extends JFrame {
 	
 	public void switchPanel(String cardName){
 		mp.switchPanel(cardName);
+	}
+
+	public MainPanel getMainPanel() {
+		// TODO Auto-generated method stub
+		return mp;
+	}
+
+	public Controller getController() {
+		return controller;
+		
 	}
 }

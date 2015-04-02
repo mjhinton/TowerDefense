@@ -13,8 +13,11 @@ public class PanelMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private Image imageBackground;
+	private View view;
 
-	public PanelMenu() {
+	public PanelMenu(View view) {
+		
+		this.view=view;
 
 		this.setBackground(Color.ORANGE);
 		this.setPreferredSize(new Dimension(View.SCREEN_WIDTH,

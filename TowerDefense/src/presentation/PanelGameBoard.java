@@ -21,11 +21,16 @@ public class PanelGameBoard extends JPanel{
 	//for testing
 	private Board testBoard;
 	private Game testGame;
+//<<<<<<< HEAD
 	private Path testPath;
+//=======
+	private View view;
+//>>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense.git
 
-	public PanelGameBoard(){
+	public PanelGameBoard(View view){
 
 		Dimension dim=new Dimension(View.SCREEN_HEIGHT, View.SCREEN_HEIGHT);
+		this.view=view;
 		
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(dim);
@@ -61,8 +66,8 @@ public class PanelGameBoard extends JPanel{
 	
 	public void paint(Graphics g){
 		//Model.getMap().paint(g);
-		testGame.paintGame(g);
-		
+		//testGame.paintGame(g);
+		view.getController().paintComponent(g);
 
 	}
 	

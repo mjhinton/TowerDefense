@@ -17,7 +17,12 @@ public class Game {
 	//later, we should have another constructor or something in order to initialize a new game with a map that the player made. 
 	public Game(Map map){
 		this.board = new Board(map);
+//<<<<<<< HEAD
 		this.waveGenerator = new CritterWaveGenerator(board);
+//=======
+//		this.waveGenerator = new CritterWaveGenerator();
+		//
+//>>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense.git
 	}
 
 	

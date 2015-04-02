@@ -24,11 +24,15 @@ public class PanelGameOptions extends JPanel{
 	
 	private JPanel pnButtonsContainer;
 	private JPanel pnSound;
+	
+	private View view;
 
-	public PanelGameOptions(){
+	public PanelGameOptions(View view){
 
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT-PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
+		
+		this.view=view;
 		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(dim);

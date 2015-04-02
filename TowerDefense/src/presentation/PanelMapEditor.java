@@ -12,9 +12,13 @@ public class PanelMapEditor extends JPanel {
 	
 	private PanelMapEditorMap pnMap;
 	private PanelMapEditorOptions pnOptions;
+	
+	private View view;
 
-	public PanelMapEditor() {
+	public PanelMapEditor(View view) {
 
+		this.view=view;
+		
 		this.setBackground(Color.BLUE);
 		this.setPreferredSize(new Dimension(View.SCREEN_WIDTH,
 				View.SCREEN_HEIGHT));
@@ -22,8 +26,8 @@ public class PanelMapEditor extends JPanel {
 		this.setFocusable(true);
 		this.setLayout(new BorderLayout());
 		
-		pnMap=new PanelMapEditorMap();
-		pnOptions=new PanelMapEditorOptions();
+		pnMap=new PanelMapEditorMap(view);
+		pnOptions=new PanelMapEditorOptions(view);
 		
 		//add panels to container
 		this.add(pnMap, BorderLayout.WEST);
