@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import tower.FreezingTower;
 import map.Map;
+import map.Path;
 import model.Board;
 import model.Game;
 import common.ReadWriteTxtFile;
@@ -20,6 +21,7 @@ public class PanelGameBoard extends JPanel{
 	//for testing
 	private Board testBoard;
 	private Game testGame;
+	private Path testPath;
 
 	public PanelGameBoard(){
 
@@ -39,11 +41,21 @@ public class PanelGameBoard extends JPanel{
 		
 		testGame=new Game(testMap);
 		testBoard=testGame.getBoard();
+		testPath = new Path();
+		
+		testPath.addCoord(new Point(1,1));
+		testPath.addCoord(new Point(1,2));
+		testPath.addCoord(new Point(1,3));
+		testPath.addCoord(new Point(1,4));
+		
+		testBoard.setPath(testPath);
 		
 		testBoard.addTower(new FreezingTower(4,4),new Point(4,4) );
 		testBoard.addTower(new FreezingTower(14,14),new Point(14,14));
 		
-		testGame.startWave();
+		System.out.println(testBoard.getPath());
+		
+		//testGame.startWave();
 		///////
 	}
 	

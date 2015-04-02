@@ -2,12 +2,14 @@ package critter;
 
 import javax.swing.ImageIcon;
 
+import model.Board;
+
 //The heavy critter is stronger and harder to kill than the normal ones.
 public class HeavyCritter extends Critter {
 	
 	private static ImageIcon ii = new ImageIcon("test_critter.png");
-		public HeavyCritter(){
-			super(2,10,20,20, ii);
+		public HeavyCritter(Board board){
+			super(2,10,20,20, ii, board);
 		}
 		public boolean getShield(){
 			return false;

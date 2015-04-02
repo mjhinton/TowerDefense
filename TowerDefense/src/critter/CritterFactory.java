@@ -1,25 +1,27 @@
 package critter;
 
+import model.Board;
+
 public class CritterFactory {
-	public static Critter spawn(String id){
+	public static Critter spawn(String id, Board board){
 		id = id.toLowerCase();
 		if(id.equals("ghost")){
-			return new GhostCritter();
+			return new GhostCritter(board);
 		}
 		else if(id.equals("heavy")){
-			return new HeavyCritter();
+			return new HeavyCritter(board);
 		}
 		else if(id.equals("monster")){
-			return new MonsterCritter();
+			return new MonsterCritter(board);
 		}
 		else if(id.equals("normal")){
-			return new NormalCritter();
+			return new NormalCritter(board);
 		}
 		else if(id.equals("shielded")){
-			return new ShieldedCritter();
+			return new ShieldedCritter(board);
 		}
 		else if(id.equals("smart")){
-			return new SmartCritter();
+			return new SmartCritter(board);
 		}
 		return null;
 	}

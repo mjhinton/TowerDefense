@@ -20,6 +20,7 @@ public class Board {
 		height=map.getHeight();
 		towers= new Tower[width][height];
 		path=map.getPath();
+		
 	}
 	
 	public boolean addTower(Tower tower, Point c){
@@ -59,6 +60,10 @@ public class Board {
 	
 	public Path getPath(){
 		return path;
+	}
+	
+	public void setPath(Path newpath){
+		path = newpath;
 	}
 
 	public void paintBoard(Graphics g) {

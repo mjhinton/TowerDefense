@@ -17,7 +17,7 @@ public class Game {
 	//later, we should have another constructor or something in order to initialize a new game with a map that the player made. 
 	public Game(Map map){
 		this.board = new Board(map);
-		this.waveGenerator = new CritterWaveGenerator();
+		this.waveGenerator = new CritterWaveGenerator(board);
 	}
 
 	

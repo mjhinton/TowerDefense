@@ -17,30 +17,40 @@ import player.Player;
  */
 abstract public class Critter {
 
-		private static Board gameBoard;
-		private static Path gamePath = gameBoard.getPath();
-		//changed some of these to non-static for ease of use, please change them as you like.
-		static final Point STARTPOINT = new Point((int) gamePath.getCoord(0).getX(), (int)gamePath.getCoord(0).getY());
-		static final int PATHLENGTH = Path.length(); //path length will depend upon the difficulty of the map. (the shorter the easier)
-		static final Point ENDPOINT = new Point((int) gamePath.getEndCoord().getX(), (int) gamePath.getEndCoord().getY());
-		static final long DEFAULT_DELAY = 1000;//(subject to change)
+		//private Board gameBoard;
+		private Path gamePath;
+		private Point endPoint;
+		private int pathLength, x, y, x1, y1; //path length will depend upon the difficulty of the map. (the shorter the easier)
+		private long DEFAULT_DELAY = 1000;//(subject to change)
 		
 		private Image appearance;
 		private double speed; 
 		private int health; 
 		private int reward;
 		private int damage;
-		public Point position = new Point(); //default init
+		public Point position; //default init
 		public boolean reachedGoal;
 		
-		public Critter(int speed, int health, int reward, int damage, ImageIcon appearance){
+		public Critter(int speed, int health, int reward, int damage, ImageIcon appearance, Board gameBoard){
 			this.speed = speed;
 			this.health = health;
 			this.reward = reward;
 			this.damage = damage;
 			this.appearance = appearance.getImage();
-			this.position = STARTPOINT; //change back to start point
+			//this.gameBoard = gameBoard;
+			//System.out.println(gameBoard.toString());
+			this.gamePath = gameBoard.getPath();
+			//System.out.println("umm"+gamePath.print());
 			this.reachedGoal = false;
+			this.x = (int) gameBoard.getPath().getCoord(0).getX();
+			System.out.println("somethinge");
+			this.y = (int) gameBoard.getPath().getCoord(0).getY();
+			this.position =new Point(x,y);
+			this.pathLength = Path.length();
+			x1 = (int) gameBoard.getPath().getEndCoord().getX();
+			y1 = (int) gameBoard.getPath().getEndCoord().getY();
+			this.endPoint = new Point(x1, y1);
+			//this.position = startPoint; //change back to start point
 		}
 		
 		//(each critter should look different)
@@ -99,7 +109,7 @@ abstract public class Critter {
 		public void setDown() throws InterruptedException{
 			while (health>0)
 			{
-				for (int j= 0; j< Path.length(); j++)
+				for (int j= 0; j< pathLength; j++)
 				{	
 					int x1 = (int) gamePath.getCoord(j).getX();
 					int y1 = (int) gamePath.getCoord(j).getY();
@@ -132,7 +142,7 @@ abstract public class Critter {
 
 					System.out.println(this.toString() + " is moving");
 				
-					if (this.position.getY() >= ENDPOINT.getY() && this.position.getX() >= ENDPOINT.getX())	{
+					if (this.position.getY() >= endPoint.getY() && this.position.getX() >= endPoint.getX())	{
 						reachedGoal = true;
 						System.out.println(this.toString() +" has reached the endpoint");
 						Player.coins -= damage;
