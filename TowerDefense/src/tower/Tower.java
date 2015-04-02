@@ -51,7 +51,7 @@ public class Tower extends Subject{
 
 	//initialize default attributes
 	public void initAttr(){
-		size = 1; //number of coord blocks tower takes up
+		size = 4; //number of coord blocks tower takes up
 		cost = 100; //buying cost
 		level = 1; //upgrade level
 		value = (int) (cost * level * 0.6); //selling value
@@ -171,6 +171,10 @@ public class Tower extends Subject{
 	
 	public double getSpecialmod(){
 		return this.specialmod;
+	}
+	
+	public int getSize(){
+		return this.size;
 	}
 
 	public Image getImage() {

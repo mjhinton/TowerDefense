@@ -35,7 +35,13 @@ public class NormalTower extends Tower{
 	*/
 	
 	public Image getImage() {
-		ImageIcon i = new ImageIcon("lib/images/tower/test_tower.png");
+		ImageIcon i;
+		if (this.level == 2){
+			i = new ImageIcon("lib/images/tower/BasicTower_lv2x40.png");
+		}
+		else{
+			i = new ImageIcon("lib/images/tower/BasicTowerx40.png");
+		}
 		image = i.getImage();
 		return image;
 	}

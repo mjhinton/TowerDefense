@@ -38,7 +38,7 @@ public class FreezingTower extends Tower{
 	*/
 
 	public void initAttr(){
-		size = 1; //size of tower
+		size = 4; //size of tower
 		cost = 150; //buying cost
 		level = 1; //upgrade level
 		value = (int) (cost * level * 0.6); //selling value
@@ -51,7 +51,13 @@ public class FreezingTower extends Tower{
 	}
 	
 	public Image getImage() {
-		ImageIcon i = new ImageIcon("lib/images/tower/test_tower.png");
+		ImageIcon i;
+		if (this.level == 2){
+			i = new ImageIcon("lib/images/tower/FreezingTower_lv2x40.png");
+		}
+		else{
+			i = new ImageIcon("lib/images/tower/FreezingTowerx40.png");
+		}
 		image = i.getImage();
 		return image;
 	}
