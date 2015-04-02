@@ -7,7 +7,6 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
-import critter.CritterWaveGenerator;
 import critter.Wave;
 import map.Map;
 import model.Game;
@@ -19,8 +18,7 @@ public class Controller implements ActionListener {
 	protected View view;
 	protected Model model;
 	
-	protected CritterWaveGenerator waveGenerator;
-	protected Wave currentWave;
+	protected Wave currWave;
 	
 	protected Game currGame;
 	
@@ -30,9 +28,7 @@ public class Controller implements ActionListener {
 	public Controller(View view, Model model){
 		this.view=view;
 		this.model=model;
-		
-		waveGenerator = model.getGame().getGenerator();
-		currentWave = waveGenerator.getWave();
+		currWave = currGame.getWave();
 		
 		//Start timer
 		timer = new Timer(View.TIMEOUT,this);

@@ -2,7 +2,6 @@
 import java.awt.Point;
 
 import common.ReadWriteTxtFile;
-
 import map.Map;
 import model.Board;
 import model.Game;
@@ -31,7 +30,12 @@ public class TestGame {
 		testBoard.addTower(new FreezingTower(4,4),new Point(4,4) );
 		testBoard.addTower(new FreezingTower(14,14),new Point(14,14));
 
-		testGame.startWave();
+		try {
+			testGame.generateWave();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }
