@@ -95,4 +95,10 @@ public class Wave{
 		}
 			return waveInProgress;
 	}
+	
+	public void updateCritterPositions(){
+		for (int i =0; i<critterBank.size(); i++){
+			critterBank.get(i).updatePosition();
+		}
+	}
 }

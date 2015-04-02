@@ -28,7 +28,6 @@ public class Controller implements ActionListener {
 	public Controller(View view, Model model){
 		this.view=view;
 		this.model=model;
-		currWave = currGame.getWave();
 		
 		//Start timer
 		timer = new Timer(View.TIMEOUT,this);
@@ -45,7 +44,8 @@ public class Controller implements ActionListener {
 	}
 	
 	public void update(){
-		
+		currWave=currGame.getWave();
+		if (currWave.waveInProgress()) currWave.updateCritterPositions();
 	}
 	
 	@Override
@@ -58,6 +58,7 @@ public class Controller implements ActionListener {
 	//starts a game with the input map
 	public void startGame(Map map){
 		currGame=new Game(map);
+		currWave = currGame.getWave();
 	}
 	
 	//returns the currently running game

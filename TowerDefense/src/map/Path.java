@@ -39,7 +39,7 @@ public class Path {
 		return path[endInd];
 	}
 
-	public static int length() {
+	public int length() {
 		return length;
 	}
 

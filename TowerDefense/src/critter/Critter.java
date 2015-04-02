@@ -21,7 +21,10 @@ abstract public class Critter {
 		private Path gamePath;
 		private Board gameBoard;
 		private Point endPoint;
-		private int pathLength, x, y, x1, y1; //path length will depend upon the difficulty of the map. (the shorter the easier)
+		private int currPathIndex;
+		private Point currPathCoord;
+		private Point nextPathCoord;
+		private int pathLength, xInt, yInt, x1, y1; //path length will depend upon the difficulty of the map. (the shorter the easier)
 		private long DEFAULT_DELAY = 1000;//(subject to change)
 		
 		private Image appearance;
@@ -31,6 +34,10 @@ abstract public class Critter {
 		private int damage;
 		public Point position; //default init
 		public boolean reachedGoal;
+		
+		public double x;
+		public double y;
+		
 		
 		public Critter(int speed, int health, int reward, int damage, ImageIcon appearance, Board gameBoard){
 			this.gameBoard=gameBoard;
@@ -44,11 +51,11 @@ abstract public class Critter {
 			this.gamePath = gameBoard.getPath();
 			//System.out.println("umm"+gamePath.print());
 			this.reachedGoal = false;
-			this.x = (int) gameBoard.getPath().getCoord(0).getX();
+			this.xInt = (int) gameBoard.getPath().getCoord(0).getX();
 			System.out.println("somethinge");
-			this.y = (int) gameBoard.getPath().getCoord(0).getY();
-			this.position =new Point(x,y);
-			this.pathLength = Path.length();
+			this.yInt = (int) gameBoard.getPath().getCoord(0).getY();
+			this.position =new Point(xInt,yInt);
+			this.pathLength = gamePath.length();
 			x1 = (int) gameBoard.getPath().getEndCoord().getX();
 			y1 = (int) gameBoard.getPath().getEndCoord().getY();
 			this.endPoint = new Point(x1, y1);
@@ -57,7 +64,7 @@ abstract public class Critter {
 		
 		//(each critter should look different)
 		public void drawCritter(Graphics g){
-			g.drawImage(appearance, (int)position.getX(), (int)position.getY(), null);
+			g.drawImage(appearance, (int)(this.x*Map.CELL_PIXEL_SIZE), (int)(this.y*Map.CELL_PIXEL_SIZE), null);
 		}
 		
 		public double getSpeed(){
@@ -165,6 +172,33 @@ abstract public class Critter {
 						}
 				}
 			}
+		public void updatePosition(){
+			if (currPathIndex==gamePath.length()-1){
+				nextPathCoord=gameBoard.getMap().getOffMapExit();
+			}else{
+				nextPathCoord=gamePath.getCoord(currPathIndex+1);
+			}
+			double dx=(double)(nextPathCoord.x-currPathCoord.x);
+			double dy=(double)(nextPathCoord.y-currPathCoord.y);
+			
+			//get new board position (double,double)
+			x=x+(dx/Math.abs(dx))*speed;
+			y=y+(dy/Math.abs(dy))*speed;
+			
+			if((int)(Math.floor(x))==nextPathCoord.x && (int)(Math.floor(y))==nextPathCoord.y){
+				if(currPathIndex==gamePath.length()-1){
+					reachedGoal = true;
+					System.out.println(this.toString() +" has reached the endpoint");
+					Player.coins -= damage;
+					System.out.println("Player lost "+ damage + " coins");
+				}else{
+					currPathCoord=nextPathCoord;
+					currPathIndex=currPathIndex+1;
+				}
+				
+			}
+			
+		}
 		
 
 		public abstract boolean getShield();
