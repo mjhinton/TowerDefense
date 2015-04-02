@@ -65,7 +65,7 @@ public class Tower extends Subject{
 
 	//increase the level of the tower
 	public void increaseLevel(){
-		if (Player.coins >= this.cost){
+		if (Player.coins >= this.cost && this.level < 5){
 			
 			cost += 100*1.2; //cost for next level
 			value = (int) (cost * level * 0.6); //recalculate selling value
@@ -81,7 +81,10 @@ public class Tower extends Subject{
 			Player.coins -= this.cost;
 			notifyObservers();
 		}
-		else {
+		else if (this.level == 5){
+			System.out.println("Maximum level reached. Furthur upgrade not possible.");
+		}
+		else{
 			System.out.println("Insufficient funds. Upgrade of " + this.toString() + " failed.");
 		}
 	}

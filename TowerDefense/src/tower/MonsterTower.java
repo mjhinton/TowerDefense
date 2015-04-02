@@ -54,6 +54,15 @@ public class MonsterTower extends Tower{
 		if (this.level == 2){
 			i = new ImageIcon("lib/images/tower/MonsterTower_lv2x40.png");
 		}
+		else if (this.level == 3){
+			i = new ImageIcon("lib/images/tower/MonsterTower_lv3x40.png");
+		}
+		else if (this.level == 4){
+			i = new ImageIcon("lib/images/tower/MonsterTower_lv4x40.png");
+		}
+		else if (this.level == 5){
+			i = new ImageIcon("lib/images/tower/MonsterTower_lv5x40.png");
+		}
 		else{
 			i = new ImageIcon("lib/images/tower/MonsterTowerx40.png");
 		}

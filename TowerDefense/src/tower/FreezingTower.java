@@ -55,6 +55,15 @@ public class FreezingTower extends Tower{
 		if (this.level == 2){
 			i = new ImageIcon("lib/images/tower/FreezingTower_lv2x40.png");
 		}
+		else if (this.level == 3){
+			i = new ImageIcon("lib/images/tower/FreezingTower_lv3x40.png");
+		}
+		else if (this.level == 4){
+			i = new ImageIcon("lib/images/tower/FreezingTower_lv4x40.png");
+		}
+		else if (this.level == 5){
+			i = new ImageIcon("lib/images/tower/FreezingTower_lv5x40.png");
+		}
 		else{
 			i = new ImageIcon("lib/images/tower/FreezingTowerx40.png");
 		}

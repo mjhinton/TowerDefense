@@ -8,6 +8,7 @@ import java.awt.event.*;
 //import javax.swing.JLabel;
 //import javax.swing.JPanel;
 import javax.swing.*;
+import player.Player;
 
 public class PanelGameTowerManager extends JPanel implements ActionListener{
 
@@ -27,6 +28,11 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		this.setFocusable(true);
 	
 		this.add(new JLabel("Tower Manager"));
+		
+		JPanel Playerfunds = new JPanel();
+		JLabel fundsString = new JLabel("Current Funds: " + Player.coins);
+		Playerfunds.add(fundsString);
+		this.add(Playerfunds);
 		
 		//add a tabbed pane
         JTabbedPane tabs = new JTabbedPane();
@@ -51,9 +57,9 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		tabs.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		
 		//buying panel buttons
-		JRadioButton basictower = new JRadioButton("Basic Tower");
+		JRadioButton basictower = new JRadioButton("Fire Tower");
         JRadioButton freezingtower = new JRadioButton("Freezing Tower");
-        JRadioButton monstertower = new JRadioButton("Monster Tower");
+        JRadioButton monstertower = new JRadioButton("Magic Tower");
         
         JLabel basetower = new JLabel(new ImageIcon("lib/images/tower/BasicTowerx40.png"));
         JLabel freezetower = new JLabel(new ImageIcon("lib/images/tower/FreezingTowerx40.png"));
@@ -104,7 +110,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 			mainboard.buyF = false;
 			mainboard.buyM = false;
 		}
-		if(e.getActionCommand().equals("Basic Tower")){
+		if(e.getActionCommand().equals("Fire Tower")){
 			mainboard.buyB = true;
 			mainboard.sellMode = false;
 			mainboard.upgradeMode = false;
@@ -118,7 +124,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 			mainboard.buyB = false;
 			mainboard.buyM = false;
 		}
-		if(e.getActionCommand().equals("Monster Tower")){
+		if(e.getActionCommand().equals("Magic Tower")){
 			mainboard.buyM = true;
 			mainboard.sellMode = false;
 			mainboard.upgradeMode = false;
