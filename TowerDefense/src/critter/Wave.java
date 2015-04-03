@@ -79,6 +79,7 @@ public class Wave{
 		for (int i =0; i<critterBank.size(); i++){
 			c=critterBank.get(i);
 			c.drawCritter(g);
+			//System.out.println("test print critters");
 		}
 		
 	}

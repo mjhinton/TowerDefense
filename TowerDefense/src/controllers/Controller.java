@@ -71,11 +71,7 @@ public class Controller implements ActionListener {
 			if (currGame.gameOver()){
 				//TODO: do something if game is over
 			}else{
-				try{
-					currWave=currGame.getWave();
-					if (currWave.waveInProgress()) currWave.updateCritterPositions();
-				}catch (NullPointerException e){
-				}
+				currGame.updateGame();
 			}
 			
 				

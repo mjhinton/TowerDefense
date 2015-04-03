@@ -72,6 +72,7 @@ public class Game {
 			if (worked){
 				this.changeCoins(-1*tower.getCost());
 				towers.add(tower);
+				System.out.println("New tower bought.");
 				return true;
 			}else{
 				return false;
@@ -87,6 +88,7 @@ public class Game {
 		if (worked){
 			this.changeCoins(tower.getValue());
 			towers.remove(tower);
+			System.out.println("Tower sold.");
 			return true;
 		}else{
 			return false;
@@ -94,11 +96,17 @@ public class Game {
 		
 	}
 
+	public void updateGame(){
+		
+		if(wave!=null){
+			wave.updateCritterPositions();
+		}
+	}
 	public void paintGame(Graphics g) {
 		board.paintBoard(g);
-	/*	if(wave!=null){
+		if(wave!=null){
 			wave.paintCritters(g);
-		}*/
+		}
 		
 	}
 	

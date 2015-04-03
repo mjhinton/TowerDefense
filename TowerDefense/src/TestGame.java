@@ -24,9 +24,11 @@ public class TestGame {
 		app.getController().startGame(testMap);
 		testGame=app.getController().getGame();
 
-		testGame.addTower(new FreezingTower(new Point (4,4),testGame));
-		testGame.addTower(new FreezingTower(new Point (14,14),testGame));
+		//testGame.addTower(new FreezingTower(new Point (4,4),testGame));
+		//testGame.addTower(new FreezingTower(new Point (14,14),testGame));
 
+		
+		
 		try {
 			testGame.generateWave();
 		} catch (InterruptedException e) {
