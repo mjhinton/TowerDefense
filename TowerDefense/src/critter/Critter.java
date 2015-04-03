@@ -9,7 +9,6 @@ import javax.swing.ImageIcon;
 import map.*;
 import model.Board;
 import model.Game;
-import player.Player;
 import presentation.View;
 
 /*There are six kinds of critters so far; normal, shielded, smart, heavy, ghost, and monster.
@@ -150,8 +149,8 @@ abstract public class Critter {
 					onPath=false;
 					System.out.println(this.toString()
 							+ " has reached the endpoint");
-					Player.coins -= damage;
-					System.out.println("Player lost " + damage + " coins");
+					game.changeHealth(damage);
+					System.out.println("Player lost " + damage + " health.");
 				} else {
 					currPathCoord = nextPathCoord;
 					currPathIndex = currPathIndex + 1;

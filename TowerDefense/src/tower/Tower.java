@@ -14,12 +14,13 @@ import critter.*;
 import java.awt.Image;
 import java.awt.Point;
 
-import player.Player;
+import model.Game;
 import common.*;
 
 public class Tower extends Subject{
 
-	protected LinkedList<Tower> towers = new LinkedList<Tower>();
+	protected LinkedList<Tower> towers;
+	protected Game game;
 	protected Point position;
 	protected int size;
 	protected int cost;
@@ -32,11 +33,12 @@ public class Tower extends Subject{
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
 
-	public Tower(int x, int y, LinkedList<Tower> towerlist){
+	public Tower(int x, int y, Game game){
 		position = new Point(x,y);
 		this.initAttr();
-		towerlist.add(this);
-		towers = towerlist;
+		this.game=game;
+		towers=game.getTowers();
+		towers.add(this);
 	}
 	public Tower(int x, int y){
 		position = new Point(x,y);
@@ -45,7 +47,7 @@ public class Tower extends Subject{
 
 	//sell a specified tower
 	public void sellTower(Tower input){
-		Player.coins += input.value;
+		game.changeCoins(input.value);
 		towers.remove(input);
 	}
 
@@ -65,7 +67,8 @@ public class Tower extends Subject{
 
 	//increase the level of the tower
 	public void increaseLevel(){
-		if (Player.coins >= this.cost){
+		boolean flag=game.changeCoins(cost);
+		if (flag){
 			
 			cost += 100*1.2; //cost for next level
 			value = (int) (cost * level * 0.6); //recalculate selling value
@@ -78,7 +81,6 @@ public class Tower extends Subject{
 				power *= 1.5; //increase power, etc.
 			}
 			level++;
-			Player.coins -= this.cost;
 			notifyObservers();
 		}
 		else {

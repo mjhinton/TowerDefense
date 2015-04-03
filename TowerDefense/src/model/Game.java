@@ -1,7 +1,9 @@
 package model;
 
 import java.awt.Graphics;
+import java.util.LinkedList;
 
+import tower.Tower;
 import map.Map;
 import critter.Wave;
 
@@ -11,6 +13,9 @@ public class Game {
 	private int currentWaveNumber;
 	private Wave wave;
 	private int playerCoins;
+	private int playerHealth;
+	private boolean gameOver;
+	private LinkedList<Tower> towers;
 	//private TowerManager (make a towerManager class?)
 	
 	//add tower manager as a parameter too?
@@ -22,6 +27,8 @@ public class Game {
 		this.currentWaveNumber=1;
 		this.wave=null;
 		this.playerCoins=1000;
+		this.gameOver=false;
+		towers=new LinkedList<Tower>();
 	}
 	
 	public Board getBoard(){
@@ -37,6 +44,22 @@ public class Game {
 				return false;
 			}else{
 				playerCoins-=coins;
+				return true;
+			}
+		}
+	}
+	public boolean changeHealth(int health){
+		if (health>=0){
+			playerHealth+=health;
+			return true;
+		}else{
+			if((-1*health)>playerHealth){
+				System.out.println("Game over.");
+				playerHealth=0;
+				gameOver=true;
+				return false;
+			}else{
+				playerHealth-=health;
 				return true;
 			}
 		}
@@ -73,6 +96,14 @@ public class Game {
 
 	public Wave getWave() throws NullPointerException {
 		return wave;
+	}
+
+	public LinkedList<Tower> getTowers() {
+		return towers;
+	}
+
+	public boolean gameOver() {
+		return gameOver;
 	}
 	
 	

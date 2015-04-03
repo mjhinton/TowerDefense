@@ -13,12 +13,14 @@ import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 
+import model.Game;
+
 public class NormalTower extends Tower{
 	
 	Image image;
 
-	public NormalTower(int x, int y, LinkedList<Tower> towers){
-		super(x,y, towers);
+	public NormalTower(int x, int y, Game game){
+		super(x,y, game);
 		//addTower();
 	}
 	

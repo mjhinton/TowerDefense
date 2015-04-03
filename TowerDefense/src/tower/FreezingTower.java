@@ -14,12 +14,14 @@ import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 
+import model.Game;
+
 public class FreezingTower extends Tower{
 	
 	Image image;
 
-	public FreezingTower(int x, int y, LinkedList<Tower> towers){
-		super(x,y, towers);
+	public FreezingTower(int x, int y, Game game){
+		super(x,y, game);
 		initAttr();
 		//addTower();
 	}

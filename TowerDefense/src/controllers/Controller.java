@@ -47,6 +47,7 @@ public class Controller implements ActionListener {
 		if (currentPanel.equals("PanelMain")){
 			
 		}else if (currentPanel.equals("PanelGame")){
+			
 			currGame.paintGame(g);
 		}else if (currentPanel.equalsIgnoreCase("PanelMapEditor")){
 			mapEditor.paintMapEditor(g);
@@ -67,6 +68,10 @@ public class Controller implements ActionListener {
 		if (currentPanel.equals("PanelMain")){
 			
 		}else if (currentPanel.equals("PanelGame")){
+			if (currGame.gameOver()){
+				//TODO: do something if game is over
+			}
+			
 			try{
 				currWave=currGame.getWave();
 				if (currWave.waveInProgress()) currWave.updateCritterPositions();
