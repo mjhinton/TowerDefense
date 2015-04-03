@@ -13,7 +13,7 @@ public class Wave{
 	static final int EASY = 3;
 	static final int MEDIUM = 10;
 	static final int HARD = 20; 
-	static final long DEFAULT_DELAY = 10;
+	static final long DEFAULT_DELAY = 1000;
 	
 	private ArrayList<Critter> critterBank;
 	private int x;
