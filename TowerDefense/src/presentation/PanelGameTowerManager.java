@@ -14,6 +14,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private PanelGameBoard mainboard = new PanelGameBoard();
+	private static JLabel PF = new JLabel("Current funds: " + Player.coins);
 	
 	public PanelGameTowerManager(PanelGameBoard input){
 
@@ -29,10 +30,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 	
 		this.add(new JLabel("Tower Manager"));
 		
-		JPanel Playerfunds = new JPanel();
-		JLabel fundsString = new JLabel("Current Funds: " + Player.coins);
-		Playerfunds.add(fundsString);
-		this.add(Playerfunds);
+		addPFPanel();
 		
 		//add a tabbed pane
         JTabbedPane tabs = new JTabbedPane();
@@ -58,7 +56,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		
 		//buying panel buttons
 		JRadioButton basictower = new JRadioButton("Fire Tower");
-        JRadioButton freezingtower = new JRadioButton("Freezing Tower");
+        JRadioButton freezingtower = new JRadioButton("Ice Tower");
         JRadioButton monstertower = new JRadioButton("Magic Tower");
         
         JLabel basetower = new JLabel(new ImageIcon("lib/images/tower/BasicTowerx40.png"));
@@ -95,7 +93,20 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         upgrade.addActionListener(this);
 	}
 	
+	public void addPFPanel(){
+		JPanel Playerfunds = new JPanel();
+		//JLabel fundsString = new JLabel();
+		//fundsString.setText("Current Funds: " + Player.coins);
+		Playerfunds.add(PF);
+		this.add(Playerfunds);
+	}
+	
+	public static void updatePF(){
+		PF.setText("Current funds: " + Player.coins);
+	}
+	
 	public void actionPerformed(ActionEvent e){
+		
 		if (e.getActionCommand().equals("Sell Tower")){
 			mainboard.sellMode = true;
 			mainboard.upgradeMode = false;
@@ -117,7 +128,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 			mainboard.buyF = false;
 			mainboard.buyM = false;
 		}
-		if(e.getActionCommand().equals("Freezing Tower")){
+		if(e.getActionCommand().equals("Ice Tower")){
 			mainboard.buyF = true;
 			mainboard.sellMode = false;
 			mainboard.upgradeMode = false;

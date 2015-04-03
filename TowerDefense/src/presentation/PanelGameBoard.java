@@ -1,7 +1,6 @@
 package presentation;
 
 import java.util.*;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,6 +8,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import tower.*;
@@ -64,23 +64,28 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 	
 		if (sellMode){
 	    	testBoard.removeTower(new Point(coordX, coordY));
+	    	PanelGameTowerManager.updatePF();
 	    	repaint();
 	    }
 	    else if (upgradeMode){
 	    	testBoard.upgradeTower(new Point(coordX, coordY));
+	    	PanelGameTowerManager.updatePF();
 	    	repaint();
 	    }
 	    else if (buyB){
 	    	testBoard.addTower(new NormalTower(coordX, coordY, towers), new Point(coordX, coordY));
+	    	PanelGameTowerManager.updatePF();
 	    	repaint();
 	    }
 	    if (buyF){
 	    	testBoard.addTower(new FreezingTower(coordX, coordY, towers), new Point(coordX, coordY));
+	    	PanelGameTowerManager.updatePF();
 	    	repaint();
 	    }
 	    if(buyM){
 	    	coordY--;
 	    	testBoard.addTower(new MonsterTower(coordX, coordY, towers), new Point(coordX, coordY));
+	    	PanelGameTowerManager.updatePF();
 	    	repaint();
 	    }
 	    else {

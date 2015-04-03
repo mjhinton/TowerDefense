@@ -47,6 +47,7 @@ public class Tower extends Subject{
 	public void sellTower(Tower input){
 		Player.coins += input.value;
 		towers.remove(input);
+		notifyObservers();
 	}
 
 	//initialize default attributes

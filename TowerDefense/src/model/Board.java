@@ -27,6 +27,7 @@ public class Board {
 			if(towers[c.x][c.y]==null){
 				if (map.getCell(c) instanceof SceneryCell){
 					towers[c.x][c.y]=tower;
+					//tower.getImage().setToolTipText("Next level cost: " + tower.getCost());
 					return true;
 				}else{
 					System.err.println("Towers can't be put on the path.");
