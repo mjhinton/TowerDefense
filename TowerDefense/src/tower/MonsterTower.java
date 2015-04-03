@@ -10,6 +10,7 @@ package tower;
 */
 
 import java.awt.Image;
+import java.awt.Point;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
@@ -20,23 +21,10 @@ public class MonsterTower extends Tower{
 	
 	Image image;
 
-	public MonsterTower(int x, int y, Game game){
-		super(x,y, game);
+	public MonsterTower(Point c, Game game){
+		super(c, game);
 		initAttr();
-		//addTower();
 	}
-	public MonsterTower(int x, int y){
-		super(x,y);
-		initAttr();
-		//addTower();
-	}
-
-	/*
-	//buy a tower
-	public void addTower(){
-		towers.add(this);
-	}
-	*/
 
 	public void initAttr(){
 		size = 6; //size of tower

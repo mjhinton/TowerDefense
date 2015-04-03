@@ -10,6 +10,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import map.Map;
+import model.Game;
 import tower.*;
 //import map.Map;
 //import map.Path;
@@ -49,57 +51,36 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
 		
-		//the following code is temporary for testing
-//		String[] testArrayMap = ReadWriteTxtFile
-//						.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
-//		Map testMap = new Map("testMap", 15, testArrayMap);
-//		
-//		testGame=new Game(testMap);
-//		testBoard=testGame.getBoard();
-//		testPath = new Path();
-//		
-//		testPath.addCoord(new Point(1,1));
-//		testPath.addCoord(new Point(1,2));
-//		testPath.addCoord(new Point(1,3));
-//		testPath.addCoord(new Point(1,4));
-//		
-//		testBoard.setPath(testPath);
-//		
-//		testBoard.addTower(new FreezingTower(4,4),new Point(4,4) );
-//		testBoard.addTower(new FreezingTower(14,14),new Point(14,14));
-//		
-//		System.out.println(testBoard.getPath());
-		
-		//testGame.startWave();
-
-		///////
-		
 		addMouseListener(this);
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-	    int coordX = (e.getX()/20);
+	    int coordX = (e.getX()/Map.CELL_PIXEL_SIZE);
 	    //in order to align a bit..
-	    int coordY = (e.getY()/20 - 1);
+	    int coordY = (e.getY()/Map.CELL_PIXEL_SIZE);
 		//this next line was just for testing
 	    //System.out.println("(" + coordX + ", " + coordY + ")");
+	    Game game=view.getController().getGame();
+	    Point c= new Point(coordX, coordY);
+	    Tower tower=game.getBoard().getTower(c);
 	
 		if (sellMode){
-			view.getController().getGame().getBoard().removeTower(new Point(coordX, coordY));
+			
+			game.removeTower(tower);
 	    }
 	    else if (upgradeMode){
 	    	
 	    }
 	    else if (buyB){
-	    	view.getController().getGame().getBoard().addTower(new NormalTower(coordX, coordY), new Point(coordX, coordY));
+	    	game.addTower(new NormalTower(c, game));
 	    	repaint();
 	    }
 	    if (buyF){
-	    	view.getController().getGame().getBoard().addTower(new FreezingTower(coordX, coordY), new Point(coordX, coordY));
+	    	game.addTower(new FreezingTower(c, game));
 	    	repaint();
 	    }
 	    if(buyM){
-	    	view.getController().getGame().getBoard().addTower(new MonsterTower(coordX, coordY), new Point(coordX, coordY));
+	    	game.addTower(new MonsterTower(c, game));
 	    	repaint();
 	    }
 	    else {

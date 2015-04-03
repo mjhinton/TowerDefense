@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.LinkedList;
 
 import tower.Tower;
@@ -26,7 +27,8 @@ public class Game {
 		this.board = new Board(map);
 		this.currentWaveNumber=1;
 		this.wave=null;
-		this.playerCoins=1000;
+		//Start with many coins just for testing purposes
+		this.playerCoins=1000000;
 		this.gameOver=false;
 		towers=new LinkedList<Tower>();
 	}
@@ -63,6 +65,33 @@ public class Game {
 				return true;
 			}
 		}
+	}
+	public boolean addTower(Tower tower){
+		if (playerCoins>=tower.getCost()){
+			boolean worked= board.addTower(tower);
+			if (worked){
+				this.changeCoins(-1*tower.getCost());
+				towers.add(tower);
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+		
+		
+	}
+	public boolean removeTower(Tower tower){
+		boolean worked= board.removeTower(tower);
+		if (worked){
+			this.changeCoins(tower.getValue());
+			towers.remove(tower);
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 
 	public void paintGame(Graphics g) {

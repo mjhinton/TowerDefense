@@ -19,7 +19,7 @@ import common.*;
 
 public class Tower extends Subject{
 
-	protected LinkedList<Tower> towers;
+	//protected LinkedList<Tower> towers;
 	protected Game game;
 	protected Point position;
 	protected int size;
@@ -33,22 +33,10 @@ public class Tower extends Subject{
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
 
-	public Tower(int x, int y, Game game){
-		position = new Point(x,y);
+	public Tower(Point c, Game game){
+		this.position = c;
 		this.initAttr();
 		this.game=game;
-		towers=game.getTowers();
-		towers.add(this);
-	}
-	public Tower(int x, int y){
-		position = new Point(x,y);
-		this.initAttr();
-	}
-
-	//sell a specified tower
-	public void sellTower(Tower input){
-		game.changeCoins(input.value);
-		towers.remove(input);
 	}
 
 	//initialize default attributes
@@ -178,5 +166,9 @@ public class Tower extends Subject{
 	public Image getImage() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Point getPosition() {
+		return position;
 	}
 }

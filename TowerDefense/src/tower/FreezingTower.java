@@ -10,6 +10,7 @@ package tower;
 */
 
 import java.awt.Image;
+import java.awt.Point;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
@@ -20,13 +21,8 @@ public class FreezingTower extends Tower{
 	
 	Image image;
 
-	public FreezingTower(int x, int y, Game game){
-		super(x,y, game);
-		initAttr();
-		//addTower();
-	}
-	public FreezingTower(int x, int y){
-		super(x,y);
+	public FreezingTower(Point c, Game game){
+		super(c, game);
 		initAttr();
 		//addTower();
 	}

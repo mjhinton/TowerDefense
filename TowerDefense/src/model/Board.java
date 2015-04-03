@@ -23,7 +23,8 @@ public class Board {
 		
 	}
 	
-	public boolean addTower(Tower tower, Point c){
+	public boolean addTower(Tower tower){
+		Point c=tower.getPosition();
 		try {
 			if(towers[c.x][c.y]==null){
 				if (map.getCell(c) instanceof SceneryCell){
@@ -45,7 +46,8 @@ public class Board {
 		}
 	}
 	
-	public boolean removeTower(Point c){
+	public boolean removeTower(Tower tower){
+		Point c=tower.getPosition();
 		try {
 			if(towers[c.x][c.y]!=null){
 				towers[c.x][c.y]=null;
@@ -58,6 +60,10 @@ public class Board {
 			System.err.println("IndexOutOfBoundsException(BOARD): " + e.getMessage());
 			return false;
 		}
+	}
+	
+	public Tower getTower(Point c){
+		return towers[c.x][c.y];
 	}
 	
 	public Path getPath(){

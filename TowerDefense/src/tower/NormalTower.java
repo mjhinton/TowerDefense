@@ -1,6 +1,7 @@
 package tower;
 
 import java.awt.Image;
+import java.awt.Point;
 /*
 * ECSE 321
 * Winter 2015
@@ -19,22 +20,11 @@ public class NormalTower extends Tower{
 	
 	Image image;
 
-	public NormalTower(int x, int y, Game game){
-		super(x,y, game);
-		//addTower();
-	}
-	
-	public NormalTower(int x, int y){
-		super(x,y);
+	public NormalTower(Point c, Game game){
+		super(c, game);
 		//addTower();
 	}
 
-	/*
-	//buy a tower
-	public void addTower(){
-		towers.add(this);
-	}
-	*/
 	
 	public Image getImage() {
 		ImageIcon i = new ImageIcon("lib/images/tower/BasicTowerx40.png");
