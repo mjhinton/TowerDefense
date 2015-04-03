@@ -19,7 +19,6 @@ public class Game {
 	public Game(Map map){
 		this.board = new Board(map);
 		this.currentWaveNumber=1;
-
 		this.wave=null;
 	}
 	
@@ -29,9 +28,9 @@ public class Game {
 
 	public void paintGame(Graphics g) {
 		board.paintBoard(g);
-		if(wave!=null){
+	/*	if(wave!=null){
 			wave.paintCritters(g);
-		}
+		}*/
 		
 	}
 	

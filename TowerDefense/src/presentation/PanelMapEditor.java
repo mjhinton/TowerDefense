@@ -3,6 +3,7 @@ package presentation;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
@@ -32,8 +33,13 @@ public class PanelMapEditor extends JPanel {
 		//add panels to container
 		this.add(pnMap, BorderLayout.WEST);
 		this.add(pnOptions, BorderLayout.EAST);
+		pnOptions.setOpaque(true);
 		
 
+	}
+	
+	public void paint (Graphics g){
+		super.paintComponents(g);
 	}
 
 	public View getView() {

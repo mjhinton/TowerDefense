@@ -8,7 +8,7 @@ public class Model {
 		
 		public Model(){
 			this.game = new Game(new Map());
-			this.mapeditor = new MapEditor();
+			this.mapeditor = new MapEditor(new Map());
 		}
 		
 		public Game getGame(){

@@ -90,6 +90,7 @@ public class Map extends Subject {
 		int randNum = 1000 + (int) (Math.random() * 999);
 		this.mapName = "map" + randNum;
 
+		
 		this.init();
 	}
 
@@ -149,8 +150,12 @@ public class Map extends Subject {
 	 */
 	public boolean makePathCell(int x, int y) {
 		try {
+			
 			Point c = new Point(x, y);
+			
+			
 			this.cells[x][y] = new PathCell();
+			
 			if (c.equals(pathStartCoord)) {
 				pathStartCoord = null;
 			}
@@ -222,6 +227,7 @@ public class Map extends Subject {
 	public boolean makePathEndCell(int x, int y) {
 		// Check that coordinates are on the edge of the map and remove any
 		// previous end path
+		System.out.println("YOOO lets make this an end cell");
 		try {
 			Point c = new Point(x, y);
 			if ((y == 0 || y == height - 1 || x == 0 || x == width - 1)
@@ -400,18 +406,24 @@ public class Map extends Subject {
 	
 	public void toggle(int x, int y){
 		Point c = new Point();
+
 		c.setLocation(x, y);
 		
 		if(getCell(c) instanceof SceneryCell){
 			makePathCell(x,y);
 		}
-		if(getCell(c) instanceof PathCell){
-			makePathStartCell(x,y);
+		
+		else if(getCell(c) instanceof PathCell&&!(getCell(c)instanceof PathStartCell)&&!(getCell(c)instanceof PathEndCell)){
+			if (x==0||y==0||x==width-1|| y==height-1){
+				makePathStartCell(x,y);}
+			else{
+				makeSceneryCell(x,y);}
 		}
-		if(getCell(c) instanceof PathStartCell){
+		
+		else if(getCell(c) instanceof PathStartCell){
 			makePathEndCell(x,y);
 		}
-		if(getCell(c) instanceof PathEndCell){
+		else if(getCell(c) instanceof PathEndCell){
 			makeSceneryCell(x,y);
 		}
 	}
