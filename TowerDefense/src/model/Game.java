@@ -36,6 +36,11 @@ public class Game {
 	public Board getBoard(){
 		return board;
 	}
+	
+	public int getCoins(){
+		return playerCoins;
+	}
+	
 	public boolean changeCoins(int coins){
 		if (coins>=0){
 			playerCoins+=coins;
@@ -87,6 +92,17 @@ public class Game {
 		if (worked){
 			this.changeCoins(tower.getValue());
 			towers.remove(tower);
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+	
+	public boolean upgradeTower(Tower tower){
+		boolean worked= board.upgradeTower(tower);
+		if (worked){
+			this.changeCoins(-1*tower.getCost());
 			return true;
 		}else{
 			return false;
