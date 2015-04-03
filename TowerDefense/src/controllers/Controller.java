@@ -18,6 +18,7 @@ public class Controller implements ActionListener {
 
 	protected View view;
 	protected Model model;
+	protected String currentPanel;
 	
 	protected MapEditor mapEditor;
 	protected Wave currWave;
@@ -29,6 +30,8 @@ public class Controller implements ActionListener {
 	public Controller(View view, Model model){
 		this.view=view;
 		this.model=model;
+		this.currentPanel="PanelMenu";
+		view.getMainPanel().switchPanel(currentPanel);
 		
 		this.currGame = model.getGame();
 		this.currWave = currGame.getWave();
@@ -40,23 +43,38 @@ public class Controller implements ActionListener {
 	}
 	
 	public void paintComponent(Graphics g){
-		currGame.paintGame(g);
-		mapEditor.paintMapEditor(g);
+		
+		if (currentPanel.equals("PanelMain")){
+			
+		}else if (currentPanel.equals("PanelGame")){
+			currGame.paintGame(g);
+		}else if (currentPanel.equalsIgnoreCase("PanelMapEditor")){
+			mapEditor.paintMapEditor(g);
+		}
+		
+		
 	}
 	
 	
 	public void draw(){
+		
 		view.getMainPanel().repaint();
 	}
 	
 	public void update(){
-		try{
-			currWave=currGame.getWave();
-			if (currWave.waveInProgress()) currWave.updateCritterPositions();
-		}catch (NullPointerException e){
-		}	
+		currentPanel=view.getMainPanel().getCurrentPanel();
 		
-		
+		if (currentPanel.equals("PanelMain")){
+			
+		}else if (currentPanel.equals("PanelGame")){
+			try{
+				currWave=currGame.getWave();
+				if (currWave.waveInProgress()) currWave.updateCritterPositions();
+			}catch (NullPointerException e){
+			}	
+		}else if (currentPanel.equalsIgnoreCase("PanelMapEditor")){
+			
+		}
 
 	}
 	

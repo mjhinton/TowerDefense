@@ -16,6 +16,7 @@ public class MainPanel extends JPanel {
 	private PanelGame pnlGame;
 	private PanelMenu pnlMenu;
 	private PanelMapEditor pnlMapEd;
+	private String currentPanel;
 	
 	private View view;
 	
@@ -48,10 +49,17 @@ public class MainPanel extends JPanel {
 		this.add(pnlMenu, "PanelMenu");
 		this.add(pnlGame, "PanelGame");
 		this.add(pnlMapEd, "PanelMapEditor");
+		
+		currentPanel="PanelMenu";
 
 	}
 	
 	public void switchPanel(String cardName){
 		cards.show(this, cardName);
+		currentPanel=cardName;
+	}
+	
+	public String getCurrentPanel(){
+		return currentPanel;
 	}
 }
