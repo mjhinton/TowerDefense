@@ -16,7 +16,7 @@ public class PanelMapEditorOptions extends JPanel {
 	
 	private View view;
 	
-	private JButton bSaveMap, bPlayMap, bMainMenu;
+	private JButton bSaveMap, bSaveMapAs, bPlayMap, bMainMenu, bOpenMap;
 
 	public PanelMapEditorOptions(final View view){
 
@@ -31,14 +31,19 @@ public class PanelMapEditorOptions extends JPanel {
 		this.setFocusable(true);
 		
 		bSaveMap = new JButton ("Save Map");
+		bSaveMapAs = new JButton ("Save Map As");
 		bPlayMap = new JButton("Play Map");
 		bMainMenu = new JButton("Main Menu");
+		bOpenMap = new JButton("Open Saved Map");
 		
-		JPanel pnButtonsContainer = new JPanel(new GridLayout(3,1));
+		JPanel pnButtonsContainer = new JPanel(new GridLayout(5,1));
 		
 		pnButtonsContainer.add(bSaveMap);
+		pnButtonsContainer.add(bSaveMapAs);
+		pnButtonsContainer.add(bOpenMap);
 		pnButtonsContainer.add(bPlayMap);
 		pnButtonsContainer.add(bMainMenu);
+		
 		
         bSaveMap.addActionListener(new ActionListener() {
             @Override
@@ -59,6 +64,12 @@ public class PanelMapEditorOptions extends JPanel {
             @Override
             public void actionPerformed(ActionEvent event) {
                 view.switchPanel("PanelMenu");
+            }
+        });	
+        bOpenMap.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                //open panel of saved maps
             }
         });	
         

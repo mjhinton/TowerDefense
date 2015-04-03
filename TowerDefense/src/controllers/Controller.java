@@ -10,6 +10,7 @@ import javax.swing.Timer;
 import critter.Wave;
 import map.Map;
 import model.Game;
+import model.MapEditor;
 import model.Model;
 import presentation.View;
 
@@ -18,16 +19,20 @@ public class Controller implements ActionListener {
 	protected View view;
 	protected Model model;
 	
+	protected MapEditor mapEditor;
 	protected Wave currWave;
 	protected Game currGame;
 	private Timer timer;
-	
 	
 	Random rand = new Random();
 	
 	public Controller(View view, Model model){
 		this.view=view;
 		this.model=model;
+		
+		this.currGame = model.getGame();
+		this.currWave = currGame.getWave();
+		this.mapEditor = model.getEditor();
 		
 		//Start timer
 		timer = new Timer(View.TIMEOUT,this);
@@ -36,6 +41,7 @@ public class Controller implements ActionListener {
 	
 	public void paintComponent(Graphics g){
 		currGame.paintGame(g);
+		mapEditor.paintMapEditor(g);
 	}
 	
 	
@@ -48,8 +54,10 @@ public class Controller implements ActionListener {
 			currWave=currGame.getWave();
 			if (currWave.waveInProgress()) currWave.updateCritterPositions();
 		}catch (NullPointerException e){
-			
 		}	
+		
+		
+
 	}
 	
 	@Override

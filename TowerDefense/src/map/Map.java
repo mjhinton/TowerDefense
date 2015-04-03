@@ -150,7 +150,8 @@ public class Map extends Subject {
 	 */
 	public boolean makePathCell(int x, int y) {
 		try {
-			Point c = new Point(x, y);
+			
+			Point c = new Point(x, y);			
 			this.cells[x][y] = new PathCell();
 			if (c.equals(pathStartCoord)) {
 				pathStartCoord = null;
@@ -401,14 +402,17 @@ public class Map extends Subject {
 	
 	public void toggle(int x, int y){
 		Point c = new Point();
+
 		c.setLocation(x, y);
 		
 		if(getCell(c) instanceof SceneryCell){
 			makePathCell(x,y);
 		}
+		
 		if(getCell(c) instanceof PathCell){
 			makePathStartCell(x,y);
 		}
+		
 		if(getCell(c) instanceof PathStartCell){
 			makePathEndCell(x,y);
 		}
