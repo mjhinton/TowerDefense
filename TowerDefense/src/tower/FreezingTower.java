@@ -1,17 +1,16 @@
 package tower;
 
 /*
-* ECSE 321
+* ECSE 321 Intro to Software Engineering
 * Winter 2015
-* Jenna Mar
-* 260590119
+* Group 12
 *
 * This class creates a Tower which inflicts a slowing effect.
 */
 
 import java.awt.Image;
 import java.awt.Point;
-import java.util.LinkedList;
+//import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 
@@ -24,16 +23,7 @@ public class FreezingTower extends Tower{
 	public FreezingTower(Point c, Game game){
 		super(c, game);
 		initAttr();
-		//addTower();
 	}
-	
-
-	/*
-	//buy a tower
-	public void addTower(){
-		towers.add(this);
-	}
-	*/
 
 	public void initAttr(){
 		size = 4; //size of tower
@@ -48,7 +38,22 @@ public class FreezingTower extends Tower{
 		specialmod = 0.8;	
 	}
 	public Image getImage() {
-		ImageIcon i = new ImageIcon("lib/images/tower/FreezingTowerx40.png");
+		ImageIcon i;
+		if (this.level == 2){
+			i = new ImageIcon("lib/images/tower/FreezingTower_lv2x40.png");
+		}
+		else if (this.level == 3){
+			i = new ImageIcon("lib/images/tower/FreezingTower_lv3x40.png");
+		}
+		else if (this.level == 4){
+			i = new ImageIcon("lib/images/tower/FreezingTower_lv4x40.png");
+		}
+		else if (this.level == 5){
+			i = new ImageIcon("lib/images/tower/FreezingTower_lv5x40.png");
+		}
+		else{
+			i = new ImageIcon("lib/images/tower/FreezingTowerx40.png");
+		}
 		image = i.getImage();
 		return image;
 	}
