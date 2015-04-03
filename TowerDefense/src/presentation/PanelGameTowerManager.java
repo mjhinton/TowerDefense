@@ -63,7 +63,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         
         JLabel basetower = new JLabel(new ImageIcon("lib/images/tower/BasicTowerx40.png"));
         JLabel freezetower = new JLabel(new ImageIcon("lib/images/tower/FreezingTowerx40.png"));
-        JLabel monstower = new JLabel(new ImageIcon("lib/images/tower/test_tower.png"));
+        JLabel monstower = new JLabel(new ImageIcon("lib/images/tower/MonsterTowerx40.png"));
         ButtonGroup buygroup = new ButtonGroup();
         
         buygroup.add(basictower);
