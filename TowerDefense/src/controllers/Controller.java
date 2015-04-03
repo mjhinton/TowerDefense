@@ -19,10 +19,10 @@ public class Controller implements ActionListener {
 	protected Model model;
 	
 	protected Wave currWave;
-	
 	protected Game currGame;
-	
 	private Timer timer;
+	
+	
 	Random rand = new Random();
 	
 	public Controller(View view, Model model){
@@ -49,8 +49,7 @@ public class Controller implements ActionListener {
 			if (currWave.waveInProgress()) currWave.updateCritterPositions();
 		}catch (NullPointerException e){
 			
-		}
-		
+		}	
 	}
 	
 	@Override

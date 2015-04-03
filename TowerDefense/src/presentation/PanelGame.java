@@ -41,7 +41,6 @@ public class PanelGame extends JPanel {
 		//add tower manager and options panels to a side container
 		pnSide.add(pnTM, BorderLayout.NORTH);
 		pnSide.add(pnOptions, BorderLayout.SOUTH);
-		
 		//add the board and side container to the game panel
 		this.add(pnBoard,BorderLayout.WEST);
 		this.add(pnSide,BorderLayout.EAST);
