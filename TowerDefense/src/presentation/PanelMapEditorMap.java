@@ -7,8 +7,8 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import common.ReadWriteTxtFile;
-
 import map.Map;
+import model.Model;
 
 //import model.*;
 
@@ -43,11 +43,12 @@ public class PanelMapEditorMap extends JPanel {
 	}
 	
 	public void paint(Graphics g){
-		//Model.getMap().paint(g);
-		testMap.paintMap(g);
-		for (int i=0; i<testArrayMap.length; i++){
+		view.model.getEditor().paintMapEditor(g);
+		//testMap.paintMap(g);
+	/*	for (int i=0; i<testArrayMap.length; i++){
 			System.out.println(testArrayMap[i]);
-		}
+		}*/
+		
 	}
 
 	public View getView() {

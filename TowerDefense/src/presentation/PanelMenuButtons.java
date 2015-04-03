@@ -23,7 +23,7 @@ public class PanelMenuButtons extends JPanel {
 	//I'm unsure why the view parameter needs to be final, but eclipse refused to compile without it.
 	public PanelMenuButtons(final View view){
 		
-		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT-PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
+		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT);
 		
 		this.view= view;
 		
@@ -40,7 +40,7 @@ public class PanelMenuButtons extends JPanel {
 		bExit = new JButton("Exit");
 		
 		//Add them to screen
-		pnButtonsContainer = new JPanel(new GridLayout(3,2));
+		pnButtonsContainer = new JPanel(new GridLayout(3,1));
 		//pnButtonsContainer.setPreferredSize(new Dimension((int)(this.getSize().getWidth()*2/3),(int)(this.getSize().getHeight())));
 
 		pnButtonsContainer.add(bNewGame);
