@@ -3,12 +3,13 @@ package critter;
 import javax.swing.ImageIcon;
 
 import model.Board;
+import model.Game;
 
 //The normal critter is the default critter, smallest reward, easiest to kill.
 public class NormalCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("test_critter.png");
-		public NormalCritter(Board board){
-			super(1,5,5,5, ii, board);
+		public NormalCritter(Game game){
+			super(1,5,5,5, ii, game);
 		}
 		public boolean getShield(){
 			return false;

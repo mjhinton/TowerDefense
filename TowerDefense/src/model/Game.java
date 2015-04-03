@@ -10,6 +10,7 @@ public class Game {
 	private Board board;
 	private int currentWaveNumber;
 	private Wave wave;
+	private int playerCoins;
 	//private TowerManager (make a towerManager class?)
 	
 	//add tower manager as a parameter too?
@@ -20,10 +21,25 @@ public class Game {
 		this.board = new Board(map);
 		this.currentWaveNumber=1;
 		this.wave=null;
+		this.playerCoins=1000;
 	}
 	
 	public Board getBoard(){
 		return board;
+	}
+	public boolean changeCoins(int coins){
+		if (coins>=0){
+			playerCoins+=coins;
+			return true;
+		}else{
+			if((-1*coins)>playerCoins){
+				System.out.println("Not enough coins");
+				return false;
+			}else{
+				playerCoins-=coins;
+				return true;
+			}
+		}
 	}
 
 	public void paintGame(Graphics g) {
@@ -45,7 +61,7 @@ public class Game {
 			flag=true;
 		}
 		if (flag){
-			wave = new Wave(currentWaveNumber, board);
+			wave = new Wave(currentWaveNumber, this);
 			System.out.println("Aww yeah, wave generated");
 			wave.releaseCritters();
 			System.out.println("Critters all released");

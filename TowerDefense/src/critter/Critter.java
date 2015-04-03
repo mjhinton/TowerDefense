@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 
 import map.*;
 import model.Board;
+import model.Game;
 import player.Player;
 import presentation.View;
 
@@ -35,13 +36,15 @@ abstract public class Critter {
 	private int reward;
 	private int damage;
 	public boolean reachedGoal;
+	private Game game;
 
 	public double x;
 	public double y;
 
 	public Critter(double speedMultiplier, int health, int reward, int damage,
-			ImageIcon appearance, Board gameBoard) {
-		this.gameBoard = gameBoard;
+			ImageIcon appearance, Game game) {
+		this.game=game;
+		this.gameBoard = game.getBoard();
 		this.speed = speedMultiplier*STANDARD_SPEED;
 		this.health = health;
 		this.reward = reward;
@@ -96,7 +99,7 @@ abstract public class Critter {
 		if (health <= 0) {
 			health=0;
 			onPath=false;
-			Player.coins += reward;
+			game.changeCoins(reward);
 			System.out.println("Critter dead");
 		}	
 	}
