@@ -1,10 +1,10 @@
 package tower;
 
 /*
-* ECSE 321 Programming Assignment 1
+* ECSE 321 Introduction to Software Engineering
 * Winter 2015
-* Jenna Mar
-* 260590119
+* Group 12
+* 
 * This is the main Tower class
 */
 import java.util.*;
