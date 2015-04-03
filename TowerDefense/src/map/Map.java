@@ -227,7 +227,6 @@ public class Map extends Subject {
 	public boolean makePathEndCell(int x, int y) {
 		// Check that coordinates are on the edge of the map and remove any
 		// previous end path
-		System.out.println("YOOO lets make this an end cell");
 		try {
 			Point c = new Point(x, y);
 			if ((y == 0 || y == height - 1 || x == 0 || x == width - 1)
@@ -413,20 +412,23 @@ public class Map extends Subject {
 			makePathCell(x,y);
 		}
 		
-		else if(getCell(c) instanceof PathCell&&!(getCell(c)instanceof PathStartCell)&&!(getCell(c)instanceof PathEndCell)){
-			if (x==0||y==0||x==width-1|| y==height-1){
-				makePathStartCell(x,y);}
-			else{
-				makeSceneryCell(x,y);}
+		else if(getCell(c) instanceof PathCell&&(x==0||y==0||x==width-1||x==height-1)&&!(getCell(c) instanceof PathStartCell)&&!(getCell(c) instanceof PathEndCell)){
+				makePathStartCell(x,y);
 		}
 		
 		else if(getCell(c) instanceof PathStartCell){
 			makePathEndCell(x,y);
 		}
+		
 		else if(getCell(c) instanceof PathEndCell){
 			makeSceneryCell(x,y);
 		}
+		
+		else if(getCell(c) instanceof PathCell&&!(x==0||y==0||x==width-1||x==height-1)){
+			makeSceneryCell(x,y);
+		}
 	}
+	
 	public Point getOffMapExit(){
 		Point p;
 		Point e;
