@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 
 import common.ReadWriteTxtFile;
 import map.Map;
+import map.PathEndCell;
+import map.PathStartCell;
 import map.SceneryCell;
 import model.MapEditor;
 import model.Model;
@@ -73,23 +75,34 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 		cellY = e.getY() / size;
 		Point c = new Point();
 		c.setLocation(cellX, cellY);
+		System.out.println(c.toString());
 		
 		if(e.getX()%size == 0) {
-			System.out.println("size = "+ size);
 			cellX = e.getX()/size - 1;}
 		if(e.getY()%size == 0) {
-			System.out.println("size = "+ size);
 			cellY = (int) e.getY()/size - 1;}
 		
-		if (cellX==0||cellY==0||cellX==14||cellY==14){
+		if (cellX==0||cellY==0||cellX==mapBeingEdited.getWidth()-1||cellY==mapBeingEdited.getHeight()-1){
+			System.out.println("You clicked an edge");
 			if (mapBeingEdited.getCell(c) instanceof SceneryCell){
+				System.out.println("You clicked a scenery cell, will toggle to pathStart");
 				mapBeingEdited.makePathStartCell(cellX, cellY);
 			}
-			else
+			else if (mapBeingEdited.getCell(c) instanceof PathStartCell){
+				System.out.println("you clicked a path start cell, will toggle to end cell");
 				mapBeingEdited.toggle(cellX, cellY);
+				System.out.println("toggled, ya?");
+			}
+			else if (mapBeingEdited.getCell(c) instanceof PathEndCell){
+				System.out.println("You clicked an end cell, will toggle to scneerycell");
+				mapBeingEdited.toggle(cellX, cellY);
+			}
 		}
-		else
+		else{
+			System.out.println("You clicked a middle cell, will toggle.");
+			System.out.println(cellX+" "+cellY);
 			mapBeingEdited.toggle(cellX, cellY);
+		}
 	}
 
 	@Override
