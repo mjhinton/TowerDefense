@@ -1,12 +1,12 @@
 
-import java.awt.Point;
+
 
 import common.ReadWriteTxtFile;
 import critter.Critter;
 import map.Map;
 import model.Game;
 import presentation.View;
-import tower.FreezingTower;
+
 
 
 public class TestGame {
@@ -28,10 +28,6 @@ public class TestGame {
 		System.out.println(testGame.getBoard().getMap().getPath().print());
 		System.out.println(Critter.STANDARD_SPEED);
 
-		//testGame.addTower(new FreezingTower(new Point (4,4),testGame));
-		//testGame.addTower(new FreezingTower(new Point (14,14),testGame));
-
-		//
 		
 		try {
 			testGame.generateWave();

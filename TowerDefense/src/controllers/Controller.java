@@ -3,8 +3,8 @@ package controllers;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import critter.Wave;
@@ -16,6 +16,8 @@ import presentation.View;
 
 public class Controller implements ActionListener {
 
+	protected int gameSpeedMultiplier;
+	
 	protected View view;
 	protected Model model;
 	protected String currentPanel;
@@ -25,9 +27,8 @@ public class Controller implements ActionListener {
 	protected Game currGame;
 	private Timer timer;
 	
-	Random rand = new Random();
-	
 	public Controller(View view, Model model){
+		this.gameSpeedMultiplier=1;
 		this.view=view;
 		this.model=model;
 		this.currentPanel="PanelMenu";
@@ -38,7 +39,7 @@ public class Controller implements ActionListener {
 		this.mapEditor = model.getEditor();
 		
 		//Start timer
-		timer = new Timer(View.TIMEOUT,this);
+		timer = new Timer(View.TIMEOUT/this.gameSpeedMultiplier,this);
 		timer.start();
 	}
 	
@@ -69,7 +70,8 @@ public class Controller implements ActionListener {
 			
 		}else if (currentPanel.equals("PanelGame")){
 			if (currGame.gameOver()){
-				//TODO: do something if game is over
+				JOptionPane.showMessageDialog(view, "Game Over. Restart?");
+				this.startGame(currGame.getBoard().getMap());
 			}else{
 				currGame.updateGame();
 			}

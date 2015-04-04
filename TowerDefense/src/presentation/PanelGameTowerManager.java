@@ -30,9 +30,9 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		//will only work if there is a game
 		//we will temporarily put '0' here.
 		//this.PF = new JLabel("Current funds: " + view.getController().getGame().getCoins());
-		this.PF = new JLabel("Current funds: " + 0);
+		this.PF = new JLabel("Current funds: "+0);
 		
-		this.setBackground(Color.RED);
+		//this.setBackground(Color.RED);
 		this.setPreferredSize(dim);
 		this.setMinimumSize(dim);
 		this.setMaximumSize(dim);

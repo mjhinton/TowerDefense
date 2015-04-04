@@ -3,6 +3,8 @@ package presentation;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,7 +29,7 @@ public class PanelGameOptions extends JPanel{
 	
 	private View view;
 
-	public PanelGameOptions(View view){
+	public PanelGameOptions(final View view){
 
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT-PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
@@ -51,6 +53,7 @@ public class PanelGameOptions extends JPanel{
 		cbSpeed=new JComboBox(speedOptions);
 		sSound=new JSlider();
 		
+		
 		//add them to the panel
 		pnSound=new JPanel();
 		pnSound.add(new JLabel("Sound"));
@@ -67,6 +70,18 @@ public class PanelGameOptions extends JPanel{
 		this.add(pnButtonsContainer, BorderLayout.CENTER);
 		this.add(bPlayWave,BorderLayout.WEST);
 		
+
+		//Add button functionality
+		bPlayWave.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	            try {
+					view.getController().getGame().generateWave();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	         }          
+	      });
 
 	}
 

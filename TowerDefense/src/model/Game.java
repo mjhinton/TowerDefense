@@ -67,7 +67,8 @@ public class Game {
 				gameOver=true;
 				return false;
 			}else{
-				playerHealth-=health;
+				playerHealth+=health;
+				System.out.println(playerHealth);
 				return true;
 			}
 		}

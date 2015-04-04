@@ -158,8 +158,9 @@ abstract public class Critter {
 					onPath=false;
 					System.out.println(this.toString()
 							+ " has reached the endpoint");
-					game.changeHealth(damage);
 					System.out.println("Player lost " + damage + " health.");
+					game.changeHealth(-1*damage);
+					
 				} else {
 					currPathCoord = nextPathCoord;
 					currPathIndex = currPathIndex + 1;
