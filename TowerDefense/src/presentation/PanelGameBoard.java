@@ -55,42 +55,56 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 		addMouseListener(this);
 	}
 	
-	public void mouseClicked(MouseEvent e) {
-	    int coordX = (e.getX()/Map.CELL_PIXEL_SIZE);
-	    int coordY = (e.getY()/Map.CELL_PIXEL_SIZE);
-		//this next line was just for testing
-	    //System.out.println("(" + coordX + ", " + coordY + ")");
-	    Game game=view.getController().getGame();
-	    Point c= new Point(coordX, coordY);
-	    Tower tower=game.getBoard().getTower(c);
-	
-		if (sellMode){
-			game.removeTower(tower);
-			//PanelGameTowerManager.updatePF();
-			repaint();
+	public void mouseClicked(MouseEvent e){
+	    try{	
+			int coordX = (e.getX()/Map.CELL_PIXEL_SIZE);
+		    int coordY = (e.getY()/Map.CELL_PIXEL_SIZE);
+			//this next line was just for testing
+		    //System.out.println("(" + coordX + ", " + coordY + ")");
+		    Game game=view.getController().getGame();
+		    Point c= new Point(coordX, coordY);
+		    Tower tower=game.getBoard().getTower(c);
+		
+			if (sellMode){
+				game.removeTower(tower);
+				//PanelGameTowerManager.updatePF();
+				repaint();
+		    }
+		    else if (upgradeMode){
+		    	game.upgradeTower(tower);
+		    	//PanelGameTowerManager.updatePF();
+		    	repaint();
+		    }
+		    else if (buyB){
+		    	game.addTower(new NormalTower(c, game));
+		    	//PanelGameTowerManager.updatePF();
+		    	repaint();
+		    }
+		    if (buyF){
+		    	game.addTower(new FreezingTower(c, game));
+		    	//PanelGameTowerManager.updatePF();
+		    	repaint();
+		    }
+		    if(buyM){
+		    	game.addTower(new MonsterTower(c, game));
+		    	//PanelGameTowerManager.updatePF();
+		    	repaint();
+		    }
+		    else {
+		    	return;
+		    }
 	    }
-	    else if (upgradeMode){
-	    	game.upgradeTower(tower);
-	    	//PanelGameTowerManager.updatePF();
-	    	repaint();
-	    }
-	    else if (buyB){
-	    	game.addTower(new NormalTower(c, game));
-	    	//PanelGameTowerManager.updatePF();
-	    	repaint();
-	    }
-	    if (buyF){
-	    	game.addTower(new FreezingTower(c, game));
-	    	//PanelGameTowerManager.updatePF();
-	    	repaint();
-	    }
-	    if(buyM){
-	    	game.addTower(new MonsterTower(c, game));
-	    	//PanelGameTowerManager.updatePF();
-	    	repaint();
-	    }
-	    else {
-	    	return;
+	    catch (NullPointerException exc){
+	    	System.err.print("There's nothing here");
+	    	if(sellMode){
+	    		System.err.println(" to sell.");
+	    	}
+	    	else if(upgradeMode){
+	    		System.err.println(" to upgrade.");
+	    	}
+	    	else{
+	    		System.err.println(".");
+	    	}
 	    }
 	}
 	
