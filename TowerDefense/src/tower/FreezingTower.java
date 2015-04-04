@@ -37,7 +37,8 @@ public class FreezingTower extends Tower{
 		isSpecial = true; //if tower has special effects
 		specialmod = 0.8;	
 	}
-	public Image getImage() {
+	
+	public ImageIcon getIcon(){
 		ImageIcon i;
 		if (this.level == 2){
 			i = new ImageIcon("lib/images/tower/FreezingTower_lv2x40.png");
@@ -54,7 +55,11 @@ public class FreezingTower extends Tower{
 		else{
 			i = new ImageIcon("lib/images/tower/FreezingTowerx40.png");
 		}
-		image = i.getImage();
+		return i;
+	}
+	
+	public Image getImage() {
+		image = getIcon().getImage();
 		return image;
 	}
 }

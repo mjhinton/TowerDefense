@@ -59,7 +59,7 @@ public class MainPanel extends JPanel {
 	public void switchPanel(String cardName){
 		cards.show(this, cardName);
 		currentPanel=cardName;
-		//switchMusic();
+		switchMusic();
 	}
 	
 	public String getCurrentPanel(){

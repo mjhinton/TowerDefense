@@ -113,9 +113,8 @@ public class Board {
 		for (int i=0;i<width;i++){
 			for (int j=0; j<height; j++){
 				if (towers[i][j]!= null){
-					g.drawImage(towers[i][j].getImage(), i * Map.CELL_PIXEL_SIZE, j
-							* Map.CELL_PIXEL_SIZE, null);
-					;
+					g.drawImage(towers[i][j].getImage(), (i*Map.CELL_PIXEL_SIZE), (j*Map.CELL_PIXEL_SIZE - 
+							(towers[i][j].getIcon().getIconHeight() - 40)), null);
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 package map;
 
 import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  * This is an abstract class that dictates the properties of a cell object on
@@ -12,7 +13,7 @@ public abstract class MapCell {
 	// TODO: determine how to format an abstract class
 
 	abstract public String print();
-
+	
 	abstract public Image getImage();
 
 }
