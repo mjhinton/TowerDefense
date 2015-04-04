@@ -45,7 +45,7 @@ public class Board {
 		}
 	}
 	
-	//TODO FIX COORDINATES!!!
+	//TODO FIX COORDINATES
 	public boolean removeTower(Tower tower){
 		Point c=tower.getPosition();
 		try {

@@ -67,27 +67,27 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 		
 			if (sellMode){
 				game.removeTower(tower);
-				//PanelGameTowerManager.updatePF();
+				PanelGameTowerManager.updatePF();
 				repaint();
 		    }
 		    else if (upgradeMode){
 		    	game.upgradeTower(tower);
-		    	//PanelGameTowerManager.updatePF();
+		    	PanelGameTowerManager.updatePF();
 		    	repaint();
 		    }
 		    else if (buyB){
 		    	game.addTower(new NormalTower(c, game));
-		    	//PanelGameTowerManager.updatePF();
+		    	PanelGameTowerManager.updatePF();
 		    	repaint();
 		    }
 		    if (buyF){
 		    	game.addTower(new FreezingTower(c, game));
-		    	//PanelGameTowerManager.updatePF();
+		    	PanelGameTowerManager.updatePF();
 		    	repaint();
 		    }
 		    if(buyM){
 		    	game.addTower(new MonsterTower(c, game));
-		    	//PanelGameTowerManager.updatePF();
+		    	PanelGameTowerManager.updatePF();
 		    	repaint();
 		    }
 		    else {
@@ -125,6 +125,10 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 		//testGame.paintGame(g);
 		view.getController().paintComponent(g);
 
+	}
+	
+	public View getView(){
+		return view;
 	}
 	
 }

@@ -13,24 +13,19 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	private View view;
+	private static View view;
 	
 	private PanelGameBoard mainboard = new PanelGameBoard(view);
 	
-	private JLabel PF;
+	private static JLabel PF;
 
-	public PanelGameTowerManager(View view, PanelGameBoard input){
+	public PanelGameTowerManager(View iview, PanelGameBoard input){
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
 		
-		this.view=view;
+		view=iview;
 
 		mainboard = input;
-		
-		//will only work if there is a game
-		//we will temporarily put '0' here.
-		//this.PF = new JLabel("Current funds: " + view.getController().getGame().getCoins());
-		this.PF = new JLabel("Current funds: " + 0);
 		
 		this.setBackground(Color.RED);
 		this.setPreferredSize(dim);
@@ -106,17 +101,20 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         upgrade.addActionListener(this);
 	}
 	
-	public void addPFPanel(){
+	//because of the order things are initialized, this needs to start out as the coins the player starts out with.
+	public static void initPF(){
+		PF = new JLabel("Current funds: " + Character.toString((char) 8353) + 1000);
+	}
+	
+	public void addPFPanel(){	
+		initPF();
 		JPanel Playerfunds = new JPanel();
 		Playerfunds.add(PF);
 		this.add(Playerfunds);
 	}
 	
-	public void updatePF(){
-		//will only work if there is a game.
-		//temporarily put 1.
-		//PF.setText("Current funds: " + view.getController().getGame().getCoins());
-		PF.setText("Current funds: " + "1");
+	public static void updatePF(){
+		PF.setText("Current funds: " + Character.toString((char) 8353) + view.getController().getGame().getCoins());
 	}
 	
 	public void actionPerformed(ActionEvent e){

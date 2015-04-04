@@ -28,7 +28,7 @@ public class Game {
 		this.currentWaveNumber=1;
 		this.wave=null;
 		//Start with many coins just for testing purposes
-		this.playerCoins=1000000;
+		this.playerCoins=1000;
 		this.gameOver=false;
 		towers=new LinkedList<Tower>();
 		this.playerHealth=10;
@@ -39,21 +39,21 @@ public class Game {
 	}
 	
 	public int getCoins(){
-		return playerCoins;
+		return this.playerCoins;
 	}
 	
 	public boolean changeCoins(int coins){
 		if (coins>=0){
 			playerCoins+=coins;
 			return true;
-		}else{
-			if((-1*coins)>playerCoins){
-				System.out.println("Not enough coins");
+		}
+		else if((-1*coins)>playerCoins){
+				System.out.println("Not enough coins.");
 				return false;
-			}else{
-				playerCoins-=coins;
-				return true;
-			}
+		}
+		else{
+			playerCoins+=coins;
+			return true;
 		}
 	}
 	public boolean changeHealth(int health){
@@ -73,44 +73,40 @@ public class Game {
 		}
 	}
 	public boolean addTower(Tower tower){
-		if (playerCoins>=tower.getCost()){
-			boolean worked= board.addTower(tower);
-			if (worked){
-				this.changeCoins(-1*tower.getCost());
-				towers.add(tower);
-				System.out.println("New tower bought.");
-				return true;
-			}else{
+		boolean worked;
+			if (this.changeCoins(-1*tower.getCost())){
+				worked = board.addTower(tower);
+				if (worked){
+					towers.add(tower);
+					System.out.println("New tower bought.");
+					return true;
+				}
 				return false;
 			}
-		}else{
 			return false;
-		}
-		
-		
 	}
+
 	public boolean removeTower(Tower tower){
-		boolean worked= board.removeTower(tower);
-		if (worked){
-			this.changeCoins(tower.getValue());
-			towers.remove(tower);
-			System.out.println("Tower sold.");
-			return true;
-		}else{
+		boolean worked;
+		if (this.changeCoins(tower.getValue())){
+			worked = board.removeTower(tower);
+			if (worked){
+				towers.remove(tower);
+				System.out.println("Tower sold.");
+				return worked;
+			}
 			return false;
 		}
-		
+			return false;		
 	}
 	
 	public boolean upgradeTower(Tower tower){
-		boolean worked= board.upgradeTower(tower);
-		if (worked){
-			this.changeCoins(-1*tower.getCost());
-			return true;
-		}else{
-			return false;
+		boolean worked;
+		if (this.changeCoins(-1*tower.getCost())){
+			worked = board.upgradeTower(tower);
+			return worked;
 		}
-		
+			return false;		
 	}
 
 	public void updateGame(){
