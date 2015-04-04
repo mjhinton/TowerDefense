@@ -11,11 +11,12 @@ public class MainPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-
+	
 	private CardLayout cards;
 	private PanelGame pnlGame;
 	private PanelMenu pnlMenu;
-	private PanelMapEditor pnlMapEd;
+	//protected for now
+	protected PanelMapEditor pnlMapEd;
 	private String currentPanel;
 	
 	private View view;

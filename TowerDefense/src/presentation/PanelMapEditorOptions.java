@@ -56,7 +56,16 @@ public class PanelMapEditorOptions extends JPanel {
             @Override
             public void actionPerformed(ActionEvent event) {
                 //create a new game with the map that was just created.
-            	//go to the game panel
+            	
+            	PanelMapEditorMap currentMapEditor = view.mp.pnlMapEd.pnMap;
+            	
+            	if (currentMapEditor.tryInitiatingPath()==true)
+            	{
+            	view.model.getGame().setUpBoardFromEditor(currentMapEditor.getMapEdited());
+            	view.switchPanel("PanelGame");
+            	}
+            	else
+            		System.out.println("Cannot play this map, invalid path");
             }
         });
         

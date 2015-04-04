@@ -37,6 +37,12 @@ public class Game {
 	public Board getBoard(){
 		return board;
 	}
+	// this method will replace the board with whatever board the user created
+	//from the map editor. 
+	public void setUpBoardFromEditor(Map map){
+		board.setMap(map);
+	}
+	
 	
 	public int getCoins(){
 		return this.playerCoins;

@@ -47,7 +47,6 @@ public class Controller implements ActionListener {
 		if (currentPanel.equals("PanelMain")){
 			
 		}else if (currentPanel.equals("PanelGame")){
-			
 			currGame.paintGame(g);
 		}else if (currentPanel.equals("PanelMapEditor")){
 			mapEditor.paintMapEditor(g);

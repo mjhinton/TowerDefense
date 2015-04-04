@@ -11,8 +11,9 @@ public class PanelMapEditor extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private PanelMapEditorMap pnMap;
-	private PanelMapEditorOptions pnOptions;
+	//protected for now
+	protected PanelMapEditorMap pnMap;
+	protected PanelMapEditorOptions pnOptions;
 	
 	private View view;
 
