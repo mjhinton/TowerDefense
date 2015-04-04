@@ -16,14 +16,21 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 	private View view;
 	
 	private PanelGameBoard mainboard = new PanelGameBoard(view);
+	
+	private JLabel PF;
 
 	public PanelGameTowerManager(View view, PanelGameBoard input){
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
 		
 		this.view=view;
-		
+
 		mainboard = input;
+		
+		//will only work if there is a game
+		//we will temporarily put '0' here.
+		//this.PF = new JLabel("Current funds: " + view.getController().getGame().getCoins());
+		this.PF = new JLabel("Current funds: " + 0);
 		
 		this.setBackground(Color.RED);
 		this.setPreferredSize(dim);
@@ -33,6 +40,9 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		this.setFocusable(true);
 	
 		this.add(new JLabel("Tower Manager"));
+		
+		//add the player funds panel
+		addPFPanel();
 		
 		//add a tabbed pane
         JTabbedPane tabs = new JTabbedPane();
@@ -57,18 +67,19 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		tabs.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		
 		//buying panel buttons
-		JRadioButton basictower = new JRadioButton("Basic Tower");
-        JRadioButton freezingtower = new JRadioButton("Freezing Tower");
-        JRadioButton monstertower = new JRadioButton("Monster Tower");
+		JRadioButton basictower = new JRadioButton("Fire Tower");
+        JRadioButton freezingtower = new JRadioButton("Ice Tower");
+        JRadioButton monstertower = new JRadioButton("Magic Tower");
         
         JLabel basetower = new JLabel(new ImageIcon("lib/images/tower/BasicTowerx40.png"));
         JLabel freezetower = new JLabel(new ImageIcon("lib/images/tower/FreezingTowerx40.png"));
         JLabel monstower = new JLabel(new ImageIcon("lib/images/tower/MonsterTowerx40.png"));
-        ButtonGroup buygroup = new ButtonGroup();
         
-        buygroup.add(basictower);
-        buygroup.add(freezingtower);
-        buygroup.add(monstertower);
+        ButtonGroup group = new ButtonGroup();
+        
+        group.add(basictower);
+        group.add(freezingtower);
+        group.add(monstertower);
                 
         buytower.add(basictower);
         buytower.add(basetower);
@@ -84,9 +95,9 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         //selling panel        
         JToggleButton sell = new JToggleButton("Sell Tower");
         JToggleButton upgrade = new JToggleButton("Upgrade Tower");
-        ButtonGroup upgroup = new ButtonGroup();
-        upgroup.add(sell);
-        upgroup.add(upgrade);
+        
+        group.add(sell);
+        group.add(upgrade);
                 
         selltower.add(sell);
         selltower.add(upgrade);
@@ -95,9 +106,21 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         upgrade.addActionListener(this);
 	}
 	
+	public void addPFPanel(){
+		JPanel Playerfunds = new JPanel();
+		Playerfunds.add(PF);
+		this.add(Playerfunds);
+	}
+	
+	public void updatePF(){
+		//will only work if there is a game.
+		//temporarily put 1.
+		//PF.setText("Current funds: " + view.getController().getGame().getCoins());
+		PF.setText("Current funds: " + "1");
+	}
+	
 	public void actionPerformed(ActionEvent e){
 		if (e.getActionCommand().equals("Sell Tower")){
-			System.out.println("test");
 			mainboard.sellMode = true;
 			mainboard.upgradeMode = false;
 			mainboard.buyB = false;
@@ -105,28 +128,27 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 			mainboard.buyM = false;
 		}
 		if (e.getActionCommand().equals("Upgrade Tower")){
-			System.out.println("test2");
 			mainboard.upgradeMode = true;
 			mainboard.sellMode = false;
 			mainboard.buyB = false;
 			mainboard.buyF = false;
 			mainboard.buyM = false;
 		}
-		if(e.getActionCommand().equals("Basic Tower")){
+		if(e.getActionCommand().equals("Fire Tower")){
 			mainboard.buyB = true;
 			mainboard.sellMode = false;
 			mainboard.upgradeMode = false;
 			mainboard.buyF = false;
 			mainboard.buyM = false;
 		}
-		if(e.getActionCommand().equals("Freezing Tower")){
+		if(e.getActionCommand().equals("Ice Tower")){
 			mainboard.buyF = true;
 			mainboard.sellMode = false;
 			mainboard.upgradeMode = false;
 			mainboard.buyB = false;
 			mainboard.buyM = false;
 		}
-		if(e.getActionCommand().equals("Monster Tower")){
+		if(e.getActionCommand().equals("Magic Tower")){
 			mainboard.buyM = true;
 			mainboard.sellMode = false;
 			mainboard.upgradeMode = false;
