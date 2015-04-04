@@ -11,14 +11,17 @@ public class MainPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-
+	
 	private CardLayout cards;
 	private PanelGame pnlGame;
 	private PanelMenu pnlMenu;
-	private PanelMapEditor pnlMapEd;
+	//protected for now
+	protected PanelMapEditor pnlMapEd;
 	private String currentPanel;
 	
 	private View view;
+	
+	private SoundPlayer bgsound = new SoundPlayer();
 	
 
 	public View getView() {
@@ -57,9 +60,37 @@ public class MainPanel extends JPanel {
 	public void switchPanel(String cardName){
 		cards.show(this, cardName);
 		currentPanel=cardName;
+	//	switchMusic();
 	}
 	
 	public String getCurrentPanel(){
 		return currentPanel;
 	}
+	
+/*	public void switchMusic(){
+		if (currentPanel.equals("PanelMenu")){
+			if (bgsound.isPlaying){
+				bgsound.stop();
+			}
+			bgsound = new SoundPlayer("nc83854.wav");
+			bgsound.play();
+			bgsound.loop();
+		}
+		if (currentPanel.equals("PanelMapEditor")){
+			if (bgsound.isPlaying){
+				bgsound.stop();
+			}
+			bgsound = new SoundPlayer("nc83853.wav");
+			bgsound.play();
+			bgsound.loop();
+		}
+		if (currentPanel.equals("PanelGame")){
+			if (bgsound.isPlaying){
+				bgsound.stop();
+			}
+			bgsound = new SoundPlayer("nc83843.wav");
+			bgsound.play();
+			bgsound.loop();
+		}	
+	}*/
 }

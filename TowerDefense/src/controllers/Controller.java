@@ -26,6 +26,8 @@ public class Controller implements ActionListener {
 	protected Wave currWave;
 	protected Game currGame;
 	private Timer timer;
+	//temp
+	private boolean gameAlreadyStarted;
 	
 	public Controller(View view, Model model){
 		this.gameSpeedMultiplier=1;
@@ -33,6 +35,9 @@ public class Controller implements ActionListener {
 		this.model=model;
 		this.currentPanel="PanelMenu";
 		view.getMainPanel().switchPanel(currentPanel);
+		
+		//temp
+		this.gameAlreadyStarted = false;
 		
 		this.currGame = model.getGame();
 		this.currWave = currGame.getWave();
@@ -48,7 +53,6 @@ public class Controller implements ActionListener {
 		if (currentPanel.equals("PanelMain")){
 			
 		}else if (currentPanel.equals("PanelGame")){
-			
 			currGame.paintGame(g);
 		}else if (currentPanel.equals("PanelMapEditor")){
 			mapEditor.paintMapEditor(g);
@@ -94,6 +98,7 @@ public class Controller implements ActionListener {
 	public void startGame(Map map){
 		currGame=new Game(map);
 		currWave = currGame.getWave();
+		gameAlreadyStarted = true;
 	}
 	
 	//returns the currently running game
@@ -101,5 +106,26 @@ public class Controller implements ActionListener {
 		return currGame;
 	}
 	
+	//temporary testing method
+	public void playGame(Map map){
+		if (gameAlreadyStarted==true){
+			try {
+				currGame.generateWave();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			this.startGame(map);
+			currGame = view.getController().getGame();
+			try {
+				currGame.generateWave();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 }

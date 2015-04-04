@@ -45,7 +45,7 @@ public class Board {
 		}
 	}
 	
-	//TODO FIX COORDINATES!!!
+	//TODO FIX COORDINATES
 	public boolean removeTower(Tower tower){
 		Point c=tower.getPosition();
 		try {
@@ -54,12 +54,10 @@ public class Board {
 				for (int j = c.y; j >= (c.y - 2); j--){
 					//for the monster tower
 					if (towers[i][j] != null && (towers[i][j].getSize() == 6)){
-						//towers[i][j].sellTower(towers[i][j]);
 						towers[i][j]=null;
 						return true;
 					}
-					if(towers[i][j]!=null && (j >= c.y-1)){
-						//towers[i][j].sellTower(towers[i][j]);
+					if (towers[i][j]!=null && (j >= c.y-1)){
 						towers[i][j]=null;
 						return true;
 					}
@@ -126,6 +124,10 @@ public class Board {
 
 	public Map getMap() {
 		return map;
+	}
+	
+	public void setMap(Map newMap){
+		this.map = newMap;
 	}
 	
 }

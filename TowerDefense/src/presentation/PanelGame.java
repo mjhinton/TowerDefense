@@ -3,6 +3,7 @@ package presentation;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
@@ -44,6 +45,10 @@ public class PanelGame extends JPanel {
 		this.add(pnBoard,BorderLayout.WEST);
 		this.add(pnSide,BorderLayout.EAST);
 
+	}
+	
+	public void paint (Graphics g){
+		super.paintComponents(g);
 	}
 
 	public View getView() {

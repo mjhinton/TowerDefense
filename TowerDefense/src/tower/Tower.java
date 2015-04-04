@@ -18,7 +18,6 @@ import model.Game;
 import common.*;
 
 public class Tower extends Subject{
-
 	//protected LinkedList<Tower> towers;
 	protected Game game;
 	protected Point position;
@@ -55,10 +54,9 @@ public class Tower extends Subject{
 
 	//increase the level of the tower
 	public void increaseLevel(){
-		boolean flag=game.changeCoins(cost);
-		if (flag && this.level < 5){
+		if (this.level < 5){
 			
-			cost += 100*1.2; //cost for next level
+			cost += 120; //cost for next level
 			value = (int) (cost * level * 0.6); //recalculate selling value
 			fireRate *= 1.1;
 			if (this.isSpecial == true){
@@ -74,9 +72,12 @@ public class Tower extends Subject{
 		else if (this.level == 5){
 			System.out.println("Maximum level reached. Furthur upgrade not possible.");
 		}
+		//this will no longer execute and is unnecessary.
+		/*
 		else{
 			System.out.println("Insufficient funds. Upgrade of " + this.toString() + " failed.");
 		}
+		*/
 	}
 
 	//check to see if critter is in range

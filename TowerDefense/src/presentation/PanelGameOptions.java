@@ -11,8 +11,13 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
-public class PanelGameOptions extends JPanel{
+import map.Map;
+import model.Game;
+
+public class PanelGameOptions extends JPanel implements ChangeListener{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -26,15 +31,15 @@ public class PanelGameOptions extends JPanel{
 	
 	private JPanel pnButtonsContainer;
 	private JPanel pnSound;
-	
-	private View view;
+	//edited temporarily
+	private View goView;
 
 	public PanelGameOptions(final View view){
 
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT-PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
 		
-		this.view=view;
+		this.goView=view;
 		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(dim);
@@ -70,22 +75,33 @@ public class PanelGameOptions extends JPanel{
 		this.add(pnButtonsContainer, BorderLayout.CENTER);
 		this.add(bPlayWave,BorderLayout.WEST);
 		
+		bExit.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                System.exit(0);
+            }
+        });	
+		
+		bPlayWave.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event){
+				// generate a wave.
+				Game agame = goView.getController().getGame();
+				Map amap = agame.getBoard().getMap();		
+				goView.getController().playGame(amap);
 
-		//Add button functionality
-		bPlayWave.addActionListener(new ActionListener() {
-	         public void actionPerformed(ActionEvent e) {
-	            try {
-					view.getController().getGame().generateWave();
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-	         }          
-	      });
 
+			}
+		});
+		
+		sSound.addChangeListener(this);
 	}
 
 	public View getView() {
-		return view;
+		return goView;
 	}
+	
+	public void stateChanged(ChangeEvent e) {
+        JSlider source = (JSlider)e.getSource();
+    }
 }
