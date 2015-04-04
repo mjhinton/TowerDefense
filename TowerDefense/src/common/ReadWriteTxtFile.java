@@ -38,7 +38,7 @@ public class ReadWriteTxtFile {
 		return r;
 	}
 
-	public static void writeTxtFileFromStringArray(String txtFileName,
+	public static boolean writeTxtFileFromStringArray(
 			String s) throws IOException{
 		
 		
@@ -47,14 +47,18 @@ public class ReadWriteTxtFile {
 	    int retrival = chooser.showSaveDialog(null);
 	    if (retrival == JFileChooser.APPROVE_OPTION) {
 	        try {
-	        	FileWriter writer=new FileWriter(txtFileName,false);
+	        	FileWriter writer=new FileWriter(chooser.getSelectedFile()+".txt",false);
 	    		PrintWriter line=new PrintWriter(writer);
 	    		line.printf("%s"+"%n",s);
 	    		
 	    		line.close();
+	    		return true;
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
+	            return false;
 	        }
+	    }else{
+	    	return false;
 	    }
 		
 		

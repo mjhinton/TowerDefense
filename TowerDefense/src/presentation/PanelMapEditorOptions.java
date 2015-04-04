@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import map.Map;
-
+import model.MapEditor;
 import common.ReadWriteTxtFile;
 
 public class PanelMapEditorOptions extends JPanel {
@@ -20,9 +20,9 @@ public class PanelMapEditorOptions extends JPanel {
 	
 	private View meView;
 	
-	private JButton bSaveMap, bSaveMapAs, bPlayMap, bMainMenu, bOpenMap;
+	private JButton bSaveMap, bPlayMap, bMainMenu, bOpenMap;
 
-	public PanelMapEditorOptions(View view){
+	public PanelMapEditorOptions(final View view){
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT);
 		this.meView=view;
@@ -35,7 +35,6 @@ public class PanelMapEditorOptions extends JPanel {
 		this.setFocusable(true);
 		
 		bSaveMap = new JButton ("Save Map");
-		bSaveMapAs = new JButton ("Save Map As");
 		bPlayMap = new JButton("Play Map");
 		bMainMenu = new JButton("Main Menu");
 		bOpenMap = new JButton("Open Saved Map");
@@ -43,7 +42,6 @@ public class PanelMapEditorOptions extends JPanel {
 		JPanel pnButtonsContainer = new JPanel(new GridLayout(5,1));
 		
 		pnButtonsContainer.add(bSaveMap);
-		pnButtonsContainer.add(bSaveMapAs);
 		pnButtonsContainer.add(bOpenMap);
 		pnButtonsContainer.add(bPlayMap);
 		pnButtonsContainer.add(bMainMenu);
@@ -52,7 +50,13 @@ public class PanelMapEditorOptions extends JPanel {
         bSaveMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-               //save the map
+               MapEditor me=meView.getModel().getEditor();
+               Map map=me.getMap();
+               boolean flag=map.initPath(); 
+               if(flag){
+            	   Map.saveMap(map);
+               }
+               
             }
         });
         

@@ -52,4 +52,8 @@ public class View extends JFrame {
 		return controller;
 		
 	}
+
+	public Model getModel() {
+		return this.model;
+	}
 }

@@ -18,8 +18,8 @@ public class TestGame {
 		
 		Game testGame;
 		
-		Map testMap=Map.getMapFromFile("15x15map");
-		//Map.saveMap(testMap);
+		Map testMap=Map.getPackagedMap("15x15map");
+		Map.saveMap(testMap);
 
 		app.getController().startGame(testMap);
 		testGame=app.getController().getGame();

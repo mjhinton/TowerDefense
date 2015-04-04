@@ -415,14 +415,14 @@ public class Map extends Subject {
 		}
 		
 		else if(getCell(c) instanceof PathCell&&(x==0||y==0||x==width-1||x==height-1)&&!(getCell(c) instanceof PathStartCell)&&!(getCell(c) instanceof PathEndCell)){
-				makePathStartCell(x,y);
-		}
-		
-		else if(getCell(c) instanceof PathStartCell){
-			makePathEndCell(x,y);
+				makePathEndCell(x,y);
 		}
 		
 		else if(getCell(c) instanceof PathEndCell){
+			makePathStartCell(x,y);
+		}
+		
+		else if(getCell(c) instanceof PathStartCell){
 			makeSceneryCell(x,y);
 		}
 		
@@ -453,19 +453,20 @@ public class Map extends Subject {
 		
 		return p;
 	}
-	public static Map getMapFromFile(String mapName){
+	public static Map getPackagedMap(String mapName){
 		String path="lib/maps/"+mapName+".txt";
 		String[] mapString = ReadWriteTxtFile
 				.readTxtFileAsStringArray(path);
-		
 		return new Map(mapName, 15, mapString);
 	}
 	public static void saveMap(Map map){
-		String mapStringArray=map.print();
-		String path="lib/maps/"+map.getName()+".txt";
+		String mapString=map.print();
+		//String path="lib/maps/"+map.getName()+".txt";
 		try {
-			ReadWriteTxtFile.writeTxtFileFromStringArray(path, mapStringArray);
-			System.out.println("Map saved.");
+			if (ReadWriteTxtFile.writeTxtFileFromStringArray(mapString)){
+				System.out.println("Map saved.");
+			}
+			
 		} catch (IOException e) {
 			System.out.println("Unable to save map. Check map name.");
 			e.printStackTrace();
