@@ -2,8 +2,9 @@ package map;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Image;
+import java.io.IOException;
 
+import common.ReadWriteTxtFile;
 import common.Subject;
 
 /**
@@ -451,5 +452,23 @@ public class Map extends Subject {
 		}
 		
 		return p;
+	}
+	public static Map getMapFromFile(String mapName){
+		String path="lib/maps/"+mapName+".txt";
+		String[] mapString = ReadWriteTxtFile
+				.readTxtFileAsStringArray(path);
+		
+		return new Map(mapName, 15, mapString);
+	}
+	public static void saveMap(Map map){
+		String mapStringArray=map.print();
+		String path="lib/maps/"+map.getName()+".txt";
+		try {
+			ReadWriteTxtFile.writeTxtFileFromStringArray(path, mapStringArray);
+			System.out.println("Map saved.");
+		} catch (IOException e) {
+			System.out.println("Unable to save map. Check map name.");
+			e.printStackTrace();
+		}
 	}
 }

@@ -18,15 +18,14 @@ public class TestGame {
 		
 		Game testGame;
 		
-		String[] testArrayMap = ReadWriteTxtFile
-				.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
-		Map testMap = new Map("testMap", 15, testArrayMap);
+		Map testMap=Map.getMapFromFile("15x15map");
+		//Map.saveMap(testMap);
 
 		app.getController().startGame(testMap);
 		testGame=app.getController().getGame();
 		
-		System.out.println(testGame.getBoard().getMap().getPath().print());
-		System.out.println(Critter.STANDARD_SPEED);
+		
+		
 
 		
 		try {

@@ -2,6 +2,8 @@ package common;
 
 import java.io.*;
 
+import javax.swing.JFileChooser;
+
 /**
  * This class groups together methods that are useful for manipulating txt
  * files.
@@ -37,7 +39,25 @@ public class ReadWriteTxtFile {
 	}
 
 	public static void writeTxtFileFromStringArray(String txtFileName,
-			String[] s) {
-		// TODO: not immediately necessary
+			String s) throws IOException{
+		
+		
+		JFileChooser chooser = new JFileChooser();
+	    chooser.setCurrentDirectory(new File("/home/me/Documents"));
+	    int retrival = chooser.showSaveDialog(null);
+	    if (retrival == JFileChooser.APPROVE_OPTION) {
+	        try {
+	        	FileWriter writer=new FileWriter(txtFileName,false);
+	    		PrintWriter line=new PrintWriter(writer);
+	    		line.printf("%s"+"%n",s);
+	    		
+	    		line.close();
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	        }
+	    }
+		
+		
+		
 	}
 }
