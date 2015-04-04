@@ -2,7 +2,9 @@ package map;
 
 import java.awt.Graphics;
 import java.awt.Point;
+
 import java.io.IOException;
+
 
 import common.ReadWriteTxtFile;
 import common.Subject;
