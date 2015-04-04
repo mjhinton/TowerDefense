@@ -28,7 +28,7 @@ public class Game {
 		this.currentWaveNumber=1;
 		this.wave=null;
 		//Start with many coins just for testing purposes
-		this.playerCoins=1000;
+		this.playerCoins=1000000;
 		this.gameOver=false;
 		towers=new LinkedList<Tower>();
 		this.playerHealth=10;

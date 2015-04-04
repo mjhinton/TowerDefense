@@ -3,14 +3,18 @@ package presentation;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
-public class PanelGameOptions extends JPanel{
+public class PanelGameOptions extends JPanel implements ChangeListener{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -67,10 +71,21 @@ public class PanelGameOptions extends JPanel{
 		this.add(pnButtonsContainer, BorderLayout.CENTER);
 		this.add(bPlayWave,BorderLayout.WEST);
 		
-
+		bExit.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                System.exit(0);
+            }
+        });		
+		
+		sSound.addChangeListener(this);
 	}
 
 	public View getView() {
 		return view;
 	}
+	
+	public void stateChanged(ChangeEvent e) {
+        JSlider source = (JSlider)e.getSource();
+    }
 }
