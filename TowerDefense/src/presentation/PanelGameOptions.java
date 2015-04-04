@@ -5,8 +5,8 @@ import java.util.Hashtable;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -36,7 +36,7 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 	//edited temporarily
 	private View goView;
 
-	public PanelGameOptions(View view){
+	public PanelGameOptions(final View view){
 
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT-PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
@@ -91,6 +91,7 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 				Game agame = goView.getController().getGame();
 				Map amap = agame.getBoard().getMap();		
 				goView.getController().playGame(amap);
+
 
 			}
 		});
