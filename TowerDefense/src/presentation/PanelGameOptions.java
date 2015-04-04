@@ -56,7 +56,7 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		bSave=new JButton("Save");
 		bRestart=new JButton("Restart");
 		bExit=new JButton("Exit");
-		String [] speedOptions={"Speed X1","Speed X2","Speed X4"};
+		String [] speedOptions={"Speed X1","Speed X2","Speed X4","Speed X6","Speed X10"};
 		cbSpeed=new JComboBox(speedOptions);
 		sSound=new JSlider(-20, 6);
 		sSound.setValue(0);
@@ -92,7 +92,26 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 				Map amap = agame.getBoard().getMap();		
 				goView.getController().playGame(amap);
 
+			}
+		});
+		
+		cbSpeed.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event){
 
+				JComboBox cb = (JComboBox)event.getSource();
+		        String speed = (String)cb.getSelectedItem();
+		        if (speed.equals("Speed X1")){
+		        	goView.getController().setGameSpeed(1);
+		        } else if (speed.equals("Speed X2")){
+		        	goView.getController().setGameSpeed(2);
+		        }else if (speed.equals("Speed X4")){
+		        	goView.getController().setGameSpeed(4);
+		        }else if (speed.equals("Speed X6")){
+		        	goView.getController().setGameSpeed(6);
+		        }else if (speed.equals("Speed X10")){
+		        	goView.getController().setGameSpeed(10);
+		        }
 			}
 		});
 		

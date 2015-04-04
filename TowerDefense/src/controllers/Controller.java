@@ -44,7 +44,7 @@ public class Controller implements ActionListener {
 		this.mapEditor = model.getEditor();
 		
 		//Start timer
-		timer = new Timer(View.TIMEOUT/this.gameSpeedMultiplier,this);
+		timer = new Timer(View.TIMEOUT,this);
 		timer.start();
 	}
 	
@@ -89,9 +89,11 @@ public class Controller implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		update();
-		draw();
+		for (int i=0;i<this.gameSpeedMultiplier;i++){
+			update();
+		}
 		
+		draw();		
 	}
 	
 	//starts a game with the input map
@@ -126,6 +128,14 @@ public class Controller implements ActionListener {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void setGameSpeed(int i) {
+		this.gameSpeedMultiplier=i;
+		currGame.setGameSpeed(i);
+	}
+	public int getGameSpeed(){
+		return this.gameSpeedMultiplier;
 	}
 
 }

@@ -73,7 +73,7 @@ public class Wave{
 			x = new CritterThread(c);
 			x.start();
 			System.out.println(c.toString()+ " has been set down");
-			TimeUnit.MILLISECONDS.sleep((long)(DEFAULT_DELAY/(0.5*difficulty)));
+			TimeUnit.MILLISECONDS.sleep((long)(DEFAULT_DELAY/(0.5*difficulty*game.getGameSpeed())));
 		}
 	}
 	

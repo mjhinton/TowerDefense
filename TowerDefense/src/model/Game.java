@@ -17,6 +17,7 @@ public class Game {
 	private int playerHealth;
 	private boolean gameOver;
 	private LinkedList<Tower> towers;
+	private int gameSpeedMultiplier;
 	//private TowerManager (make a towerManager class?)
 	
 	//add tower manager as a parameter too?
@@ -32,6 +33,7 @@ public class Game {
 		this.gameOver=false;
 		towers=new LinkedList<Tower>();
 		this.playerHealth=10;
+		this.gameSpeedMultiplier=1;
 	}
 	
 	public Board getBoard(){
@@ -162,6 +164,14 @@ public class Game {
 
 	public boolean gameOver() {
 		return gameOver;
+	}
+
+	public void setGameSpeed(int i) {
+		this.gameSpeedMultiplier=i;
+		
+	}
+	public int getGameSpeed(){
+		return this.gameSpeedMultiplier;
 	}
 	
 	
