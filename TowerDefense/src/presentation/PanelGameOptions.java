@@ -84,19 +84,12 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		bPlayWave.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event){
-				// generate a wave. 
-				
+				// generate a wave.
 				Game agame = goView.getController().getGame();
 				Map amap = agame.getBoard().getMap();
-				goView.getController().startGame(amap);
-				agame = goView.getController().getGame();
-						
-				try {
-					agame.generateWave();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
+				goView.getController().playGame(amap);
+
 			}
 		});
 		
