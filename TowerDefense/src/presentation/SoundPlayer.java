@@ -9,10 +9,10 @@ import javax.sound.sampled.FloatControl;
 
 public class SoundPlayer {
 	
-	private Clip clip;
-	public boolean isPlaying = false;
+	private static Clip clip;
+	public static boolean isPlaying = false;
 	private String name;
-	private FloatControl volume;
+	private static FloatControl volume;
 	
 	public SoundPlayer(){
 		//empty constructor
@@ -57,8 +57,10 @@ public class SoundPlayer {
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 	
-	public void setVolume(float gainAmount){
-		volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		volume.setValue(gainAmount);
+	public static void setVolume(float gainAmount){
+		if (isPlaying){
+			volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			volume.setValue(gainAmount);
+		}
 	}
 }

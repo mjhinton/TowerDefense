@@ -1,5 +1,7 @@
 package presentation;
 
+import java.util.Hashtable;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -53,7 +55,8 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		bExit=new JButton("Exit");
 		String [] speedOptions={"Speed X1","Speed X2","Speed X4"};
 		cbSpeed=new JComboBox(speedOptions);
-		sSound=new JSlider();
+		sSound=new JSlider(-20, 6);
+		sSound.setValue(0);
 		
 		//add them to the panel
 		pnSound=new JPanel();
@@ -78,7 +81,17 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
             }
         });		
 		
+		//the slider is too long. adjust dimension
+		sSound.setPreferredSize(new Dimension(160, 30));
+		//make labels
+		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
+		labelTable.put( new Integer(-19), new JLabel("-") );
+		labelTable.put( new Integer(5), new JLabel("+") );
+		sSound.setLabelTable( labelTable );
+		sSound.setPaintLabels(true);
+		
 		sSound.addChangeListener(this);
+		
 	}
 
 	public View getView() {
@@ -87,5 +100,10 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 	
 	public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider)e.getSource();
+        if (!source.getValueIsAdjusting()) {
+            int vol = (int)source.getValue();
+            float z = (float) vol;
+            SoundPlayer.setVolume(z);
+        }
     }
 }

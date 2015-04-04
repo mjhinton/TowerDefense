@@ -20,8 +20,7 @@ public class MainPanel extends JPanel {
 	
 	private View view;
 	
-	private SoundPlayer bgsound = new SoundPlayer();
-	
+	private SoundPlayer bgsound = new SoundPlayer("nc83843.wav");
 
 	public View getView() {
 		return view;
@@ -67,29 +66,19 @@ public class MainPanel extends JPanel {
 	}
 	
 	public void switchMusic(){
+		if (bgsound.isPlaying){
+			bgsound.stop();
+		}
 		if (currentPanel.equals("PanelMenu")){
-			if (bgsound.isPlaying){
-				bgsound.stop();
-			}
 			bgsound = new SoundPlayer("nc83854.wav");
-			bgsound.play();
-			bgsound.loop();
 		}
 		if (currentPanel.equals("PanelMapEditor")){
-			if (bgsound.isPlaying){
-				bgsound.stop();
-			}
 			bgsound = new SoundPlayer("nc83853.wav");
-			bgsound.play();
-			bgsound.loop();
 		}
 		if (currentPanel.equals("PanelGame")){
-			if (bgsound.isPlaying){
-				bgsound.stop();
-			}
 			bgsound = new SoundPlayer("nc83843.wav");
-			bgsound.play();
-			bgsound.loop();
-		}	
+		}
+		bgsound.play();
+		bgsound.loop();
 	}
 }
