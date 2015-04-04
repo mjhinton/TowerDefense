@@ -1,14 +1,16 @@
 package critter;
 
-import javax.swing.ImageIcon;
+import java.awt.Point;
 
-import model.Board;
+import javax.swing.ImageIcon;
 import model.Game;
 
 //The heavy critter is stronger and harder to kill than the normal ones.
 public class HeavyCritter extends Critter {
 	
-	private static ImageIcon ii = new ImageIcon("lib/images/critter/test_critter.png");
+	private static ImageIcon ii = new ImageIcon("lib/images/critter/squid.png");
+	private final static Point PIXEL_OFFSET=new Point (5,5);
+	
 		public HeavyCritter(Game game){
 			super(0.5,10,20,20, ii, game);
 		}
@@ -23,6 +25,10 @@ public class HeavyCritter extends Critter {
 		}
 		public String toString(){
 			return "HeavyCritter";
+		}
+		@Override
+		public Point getPixelOffset() {
+			return PIXEL_OFFSET;
 		}
 
 }

@@ -1,15 +1,17 @@
 package critter;
 
+import java.awt.Point;
+
 import javax.swing.ImageIcon;
 
-import model.Board;
 import model.Game;
 
 //The shielded critter is slightly slower than the normal critter, and more difficult to kill. Towers must have stronger attacks to damage 
 //these critters.
 public class ShieldedCritter extends Critter{
 	private boolean shield;
-	private static ImageIcon ii = new ImageIcon("lib/images/critter/test_critter.png");
+	private static ImageIcon ii = new ImageIcon("lib/images/critter/crab.png");
+	private final static Point PIXEL_OFFSET=new Point (5,5);
 	
 		public ShieldedCritter(Game game){
 			super(0.7,5,10,7, ii, game);
@@ -32,5 +34,9 @@ public class ShieldedCritter extends Critter{
 		public void knockOffShield(){
 			//once the shield gets knocked off, the critter is faster.
 			setSpeed(4);
+		}
+		@Override
+		public Point getPixelOffset() {
+			return PIXEL_OFFSET;
 		}
 }

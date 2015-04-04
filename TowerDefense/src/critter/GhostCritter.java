@@ -1,16 +1,17 @@
 package critter;
 
-import java.awt.Graphics;
+
+import java.awt.Point;
 
 import javax.swing.ImageIcon;
 
-import model.Board;
 import model.Game;
 
 //Ghost critters blink in and out of visibility; the towers will bee able to see them only half of the time.
 public class GhostCritter extends Critter{
 	private boolean visible;
-	private static ImageIcon ii = new ImageIcon("lib/images/critter/test_critter.png");
+	private static ImageIcon ii = new ImageIcon("lib/images/critter/jellyfish.png");
+	private final static Point PIXEL_OFFSET=new Point (5,5);
 	
 	public GhostCritter(Game game){
 		super(1,5,25,10,ii, game);
@@ -31,6 +32,11 @@ public class GhostCritter extends Critter{
 	}
 	public String toString(){
 		return "GhostCritter";
+	}
+
+	@Override
+	public Point getPixelOffset() {
+		return PIXEL_OFFSET;
 	}
 
 }

@@ -60,8 +60,8 @@ abstract public class Critter {
 		if (this.onPath==true && this.health > 0 && this.reachedGoal == false) {
 			int xScreen=(int) (this.x * Map.CELL_PIXEL_SIZE);
 			int yScreen=(int) (this.y * Map.CELL_PIXEL_SIZE);
-			g.drawImage(appearance, xScreen,
-				yScreen, null);
+			g.drawImage(appearance, xScreen+this.getPixelOffset().x,
+				yScreen+this.getPixelOffset().y, null);
 			//System.out.println(""+xScreen+","+yScreen);
 		}
 	}
@@ -178,5 +178,7 @@ abstract public class Critter {
 	public abstract boolean getVisibility();
 
 	public abstract String toString();
+	
+	public abstract Point getPixelOffset();
 
 }

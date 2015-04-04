@@ -1,15 +1,18 @@
 package critter;
 
+import java.awt.Point;
+
 import javax.swing.ImageIcon;
 
-import model.Board;
 import model.Game;
 
 //The smart critter will reverse directions to avoid attacks from towers (if there are "bullets" nearby)
 //(this isn't entirely complete yet)
 public class SmartCritter extends Critter{
 	private boolean direction;
-	private static ImageIcon ii = new ImageIcon("lib/images/critter/test_critter.png");
+	private static ImageIcon ii = new ImageIcon("lib/images/critter/alien4.png");
+	private final static Point PIXEL_OFFSET=new Point (5,5);
+	
 		public SmartCritter(Game game){
 			super(2,5,15,10, ii, game);
 			direction = true;
@@ -27,5 +30,9 @@ public class SmartCritter extends Critter{
 		}
 		public String toString(){
 			return "SmartCritter";
+		}
+		@Override
+		public Point getPixelOffset() {
+			return PIXEL_OFFSET;
 		}
 }
