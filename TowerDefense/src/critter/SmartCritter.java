@@ -9,7 +9,7 @@ import model.Game;
 //(this isn't entirely complete yet)
 public class SmartCritter extends Critter{
 	private boolean direction;
-	private static ImageIcon ii = new ImageIcon("test_critter.png");
+	private static ImageIcon ii = new ImageIcon("lib/images/critter/test_critter.png");
 		public SmartCritter(Game game){
 			super(2,5,15,10, ii, game);
 			direction = true;

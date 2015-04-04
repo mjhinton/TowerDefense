@@ -16,7 +16,7 @@ import presentation.View;
  */
 abstract public class Critter {
 	
-	final static double STANDARD_SPEED=0.2*(1000/View.TIMEOUT);
+	public final static double STANDARD_SPEED=1.0*((double)View.TIMEOUT)/1000.0;
 
 	// private Board gameBoard;
 	private Path gamePath;
@@ -58,8 +58,11 @@ abstract public class Critter {
 	// (each critter should look different)
 	public void drawCritter(Graphics g) {
 		if (this.onPath==true && this.health > 0 && this.reachedGoal == false) {
-			g.drawImage(appearance, (int) (this.x * Map.CELL_PIXEL_SIZE),
-				(int) (this.y * Map.CELL_PIXEL_SIZE), null);
+			int xScreen=(int) (this.x * Map.CELL_PIXEL_SIZE);
+			int yScreen=(int) (this.y * Map.CELL_PIXEL_SIZE);
+			g.drawImage(appearance, xScreen,
+				yScreen, null);
+			//System.out.println(""+xScreen+","+yScreen);
 		}
 	}
 
@@ -125,6 +128,7 @@ abstract public class Critter {
 		x=(double)currPathCoord.x;
 		y=(double)currPathCoord.y;
 		onPath=true;
+		//System.out.println(currPathCoord);
 	}
 
 	public void updatePosition() {
@@ -138,11 +142,16 @@ abstract public class Critter {
 			double dy = (double) (nextPathCoord.y - currPathCoord.y);
 
 			// get new board position (double,double)
-			x = x + (dx / Math.abs(dx)) * speed;
-			y = y + (dy / Math.abs(dy)) * speed;
+			if (dx!=0){
+				x = x + (dx / Math.abs(dx)) * speed;
+			}
+			if (dy!=0){
+				y = y + (dy / Math.abs(dy)) * speed;
 
-			if ((int) (Math.floor(x)) == nextPathCoord.x
-					&& (int) (Math.floor(y)) == nextPathCoord.y) {
+			}
+
+			if (Math.abs(x-nextPathCoord.x)<=speed
+					&& Math.abs(y-nextPathCoord.y)<=speed) {
 				if (currPathIndex == pathLength - 1) {
 					reachedGoal = true;
 					health=0;

@@ -9,7 +9,7 @@ import model.Game;
 //these critters.
 public class ShieldedCritter extends Critter{
 	private boolean shield;
-	private static ImageIcon ii = new ImageIcon("test_critter.png");
+	private static ImageIcon ii = new ImageIcon("lib/images/critter/test_critter.png");
 	
 		public ShieldedCritter(Game game){
 			super(0.7,5,10,7, ii, game);

@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-
 import model.Game;
 
 /*A Wave is a Group of critters. Depending on how many waves the player has played, the waves will consist of more and more difficult critters
@@ -64,11 +63,16 @@ public class Wave{
 	public void releaseCritters() throws InterruptedException{
 		this.setUpBank();
 		Critter c;
-		Thread x;
+		//Thread x;
 		for (int i =0; i<critterBank.size(); i++){
 			c=critterBank.get(i);
-			x = new CritterThread(c);
-			x.start();
+			try {
+				c.setDown();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			//x = new CritterThread(c);
+			//x.start();
 			System.out.println(c.toString()+ " has been set down");
 			TimeUnit.MILLISECONDS.sleep((long)(DEFAULT_DELAY/(0.5*difficulty)));
 		}

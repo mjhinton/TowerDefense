@@ -31,6 +31,7 @@ public class Game {
 		this.playerCoins=1000000;
 		this.gameOver=false;
 		towers=new LinkedList<Tower>();
+		this.playerHealth=10;
 	}
 	
 	public Board getBoard(){
