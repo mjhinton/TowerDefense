@@ -61,7 +61,11 @@ public class PanelMapEditorOptions extends JPanel {
             
             	if (currentMapEditor.tryInitiatingPath()==true)
             	{ 
+            	//set up board from the editor
             	meView.model.getGame().setUpBoardFromEditor(currentMapEditor.getMapEdited());
+            	//initiate the path
+            	meView.model.getGame().getBoard().getMap().initPath();
+            	//switch panel
             	meView.switchPanel("PanelGame");
             	}
             	else

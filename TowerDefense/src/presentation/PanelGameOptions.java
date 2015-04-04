@@ -14,6 +14,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+import map.Map;
 import model.Game;
 
 public class PanelGameOptions extends JPanel implements ChangeListener{
@@ -85,9 +86,13 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 			public void actionPerformed(ActionEvent event){
 				// generate a wave. 
 				
-				Game game = goView.getController().getGame();
+				Game agame = goView.getController().getGame();
+				Map amap = agame.getBoard().getMap();
+				goView.getController().startGame(amap);
+				agame = goView.getController().getGame();
+						
 				try {
-					game.generateWave();
+					agame.generateWave();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

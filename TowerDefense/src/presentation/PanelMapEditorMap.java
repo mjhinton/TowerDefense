@@ -60,6 +60,7 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 	public void paint(Graphics g){
 		//view.model.getEditor().paintMapEditor(g);
 		view.getController().paintComponent(g);
+
 		//testMap.paintMap(g);
 	/*	for (int i=0; i<testArrayMap.length; i++){
 			System.out.println(testArrayMap[i]);
