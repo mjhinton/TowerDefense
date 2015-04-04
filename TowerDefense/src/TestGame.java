@@ -31,7 +31,7 @@ public class TestGame {
 		//testGame.addTower(new FreezingTower(new Point (4,4),testGame));
 		//testGame.addTower(new FreezingTower(new Point (14,14),testGame));
 
-		
+		//
 		
 		try {
 			testGame.generateWave();
