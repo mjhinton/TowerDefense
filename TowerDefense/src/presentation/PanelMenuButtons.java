@@ -19,13 +19,13 @@ public class PanelMenuButtons extends JPanel {
 	
 	private JPanel pnButtonsContainer;
 	
-	private View view;
+	private View mbView;
 	//I'm unsure why the view parameter needs to be final, but eclipse refused to compile without it.
-	public PanelMenuButtons(final View view){
+	public PanelMenuButtons(View view){
 		
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT);
 		
-		this.view= view;
+		this.mbView= view;
 		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(dim);
@@ -51,14 +51,14 @@ public class PanelMenuButtons extends JPanel {
         bNewGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                view.switchPanel("PanelMapEditor");
+                mbView.switchPanel("PanelMapEditor");
             }
         });
         
         bLoadGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                view.switchPanel("PanelGame");
+               mbView.switchPanel("PanelGame");
             }
         });
         
@@ -74,7 +74,7 @@ public class PanelMenuButtons extends JPanel {
 	}
 	
 	public View getView(){
-		return view;
+		return mbView;
 	}
 	
 }

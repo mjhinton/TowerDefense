@@ -60,14 +60,14 @@ public class MainPanel extends JPanel {
 	public void switchPanel(String cardName){
 		cards.show(this, cardName);
 		currentPanel=cardName;
-		switchMusic();
+	//	switchMusic();
 	}
 	
 	public String getCurrentPanel(){
 		return currentPanel;
 	}
 	
-	public void switchMusic(){
+/*	public void switchMusic(){
 		if (currentPanel.equals("PanelMenu")){
 			if (bgsound.isPlaying){
 				bgsound.stop();
@@ -92,5 +92,5 @@ public class MainPanel extends JPanel {
 			bgsound.play();
 			bgsound.loop();
 		}	
-	}
+	}*/
 }
