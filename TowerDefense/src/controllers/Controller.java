@@ -116,6 +116,7 @@ public class Controller implements ActionListener {
 		}
 		else{
 			this.startGame(map);
+			currGame = view.getController().getGame();
 			try {
 				currGame.generateWave();
 			} catch (InterruptedException e) {

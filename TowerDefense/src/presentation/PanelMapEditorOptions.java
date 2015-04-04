@@ -10,6 +10,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import map.Map;
+
+import common.ReadWriteTxtFile;
+
 public class PanelMapEditorOptions extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -83,6 +87,12 @@ public class PanelMapEditorOptions extends JPanel {
             @Override
             public void actionPerformed(ActionEvent event) {
                 //open panel of saved maps
+            	//for now, it just opens the test map 
+            	String[] testArrayMap = ReadWriteTxtFile
+            			.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
+            	Map testMap = new Map("testMap", 15, testArrayMap);
+
+            	
             }
         });	
         

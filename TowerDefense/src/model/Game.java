@@ -154,11 +154,6 @@ public class Game {
 		return wave;
 	}
 	//temporary class
-	public void playGame(){
-		if (currentWaveNumber ==1){
-			
-		}
-	}
 
 	public LinkedList<Tower> getTowers() {
 		return towers;

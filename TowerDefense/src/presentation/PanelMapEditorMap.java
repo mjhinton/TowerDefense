@@ -75,6 +75,11 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 	public Map getMapEdited(){
 		return mapBeingEdited;
 	}
+	//possibly temp
+	public Map setMapEdited(Map map){
+		mapBeingEdited = map;
+		return mapBeingEdited;
+	}
 	
 	public boolean tryInitiatingPath(){
 		if (mapBeingEdited.initPath())
@@ -85,19 +90,10 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
 		mapBeingEdited = view.model.getEditor().getMap();
-		cellX = e.getX() / size;
-		cellY = e.getY() / size;
-		Point c = new Point();
-		c.setLocation(cellX, cellY);
-		
-		if(e.getX()%size == 0) {
-			cellX = e.getX()/size - 1;}
-		if(e.getY()%size == 0) {
-			cellY = (int) e.getY()/size - 1;}
-		
-		mapBeingEdited.toggle(cellX, cellY);
+		int x = e.getX();
+		int y = e.getY(); 
+		view.model.getEditor().editMap(x, y);
 	}
 
 	@Override
