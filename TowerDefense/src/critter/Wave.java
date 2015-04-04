@@ -54,7 +54,6 @@ public class Wave{
 	public void generateCritters(String type, int quantity, Game game){
 		for(int i = 0; i < quantity; i++){
 			Critter critter = CritterFactory.spawn(type, game);
-			System.out.println("spawned");
 			critterBank.add(critter);
 			System.out.println(1 + " " + type + "critter added to the critterbank");
 		}
@@ -63,7 +62,7 @@ public class Wave{
 	public void releaseCritters() throws InterruptedException{
 		this.setUpBank();
 		Critter c;
-		//Thread x;
+		Thread x;
 		for (int i =0; i<critterBank.size(); i++){
 			c=critterBank.get(i);
 			try {
@@ -71,8 +70,8 @@ public class Wave{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//x = new CritterThread(c);
-			//x.start();
+			x = new CritterThread(c);
+			x.start();
 			System.out.println(c.toString()+ " has been set down");
 			TimeUnit.MILLISECONDS.sleep((long)(DEFAULT_DELAY/(0.5*difficulty)));
 		}

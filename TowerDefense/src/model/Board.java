@@ -126,4 +126,8 @@ public class Board {
 		return map;
 	}
 	
+	public void setMap(Map newMap){
+		this.map = newMap;
+	}
+	
 }

@@ -24,7 +24,7 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	
 	//for testing
-	private Map testMap;
+	private Map testMap, mapBeingEdited;
 	private MapEditor mapEditor;
 	private String[] testArrayMap;
 	private int cellX, cellY;
@@ -36,7 +36,10 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 
 		Dimension dim=new Dimension(View.SCREEN_HEIGHT, View.SCREEN_HEIGHT);
 		this.view=view;
-	//	this.mapEditor = view.model.getEditor();
+		//testing
+		//this.mapEditor = view.model.getEditor();
+		this.testMap = null;
+		
 		
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(dim);
@@ -46,16 +49,18 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 		this.setFocusable(true);
 		
 		//the following code is temporary for testing
-		testArrayMap = ReadWriteTxtFile
+		/*testArrayMap = ReadWriteTxtFile
 				.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
 		testMap = new Map("testMap", 15, testArrayMap);
-		///////
+		///////*/
 		addMouseListener(this);
 		
 	}
 	
 	public void paint(Graphics g){
-		view.model.getEditor().paintMapEditor(g);
+		//view.model.getEditor().paintMapEditor(g);
+		view.getController().paintComponent(g);
+
 		//testMap.paintMap(g);
 	/*	for (int i=0; i<testArrayMap.length; i++){
 			System.out.println(testArrayMap[i]);
@@ -66,22 +71,29 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 	public View getView() {
 		return view;
 	}
+	
+	public Map getMapEdited(){
+		return mapBeingEdited;
+	}
+	//possibly temp
+	public Map setMapEdited(Map map){
+		mapBeingEdited = map;
+		return mapBeingEdited;
+	}
+	
+	public boolean tryInitiatingPath(){
+		if (mapBeingEdited.initPath())
+			return true;
+		else
+			return false;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
-		Map mapBeingEdited = view.model.getEditor().getMap();
-		cellX = e.getX() / size;
-		cellY = e.getY() / size;
-		Point c = new Point();
-		c.setLocation(cellX, cellY);
-		
-		if(e.getX()%size == 0) {
-			cellX = e.getX()/size - 1;}
-		if(e.getY()%size == 0) {
-			cellY = (int) e.getY()/size - 1;}
-		
-		mapBeingEdited.toggle(cellX, cellY);
+		mapBeingEdited = view.model.getEditor().getMap();
+		int x = e.getX();
+		int y = e.getY(); 
+		view.model.getEditor().editMap(x, y);
 	}
 
 	@Override

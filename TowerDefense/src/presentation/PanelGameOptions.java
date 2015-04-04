@@ -16,6 +16,9 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+import map.Map;
+import model.Game;
+
 public class PanelGameOptions extends JPanel implements ChangeListener{
 
 	private static final long serialVersionUID = 1L;
@@ -30,15 +33,15 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 	
 	private JPanel pnButtonsContainer;
 	private JPanel pnSound;
-	
-	private View view;
+	//edited temporarily
+	private View goView;
 
 	public PanelGameOptions(View view){
 
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT-PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
 		
-		this.view=view;
+		this.goView=view;
 		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(dim);
@@ -79,7 +82,18 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
             public void actionPerformed(ActionEvent event) {
                 System.exit(0);
             }
-        });		
+        });	
+		
+		bPlayWave.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event){
+				// generate a wave.
+				Game agame = goView.getController().getGame();
+				Map amap = agame.getBoard().getMap();		
+				goView.getController().playGame(amap);
+
+			}
+		});
 		
 		//the slider is too long. adjust dimension
 		sSound.setPreferredSize(new Dimension(160, 30));
@@ -95,7 +109,7 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 	}
 
 	public View getView() {
-		return view;
+		return goView;
 	}
 	
 	public void stateChanged(ChangeEvent e) {

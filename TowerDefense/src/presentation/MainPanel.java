@@ -11,11 +11,12 @@ public class MainPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-
+	
 	private CardLayout cards;
 	private PanelGame pnlGame;
 	private PanelMenu pnlMenu;
-	private PanelMapEditor pnlMapEd;
+	//protected for now
+	protected PanelMapEditor pnlMapEd;
 	private String currentPanel;
 	
 	private View view;
@@ -58,13 +59,13 @@ public class MainPanel extends JPanel {
 	public void switchPanel(String cardName){
 		cards.show(this, cardName);
 		currentPanel=cardName;
-		switchMusic();
+		//switchMusic();
 	}
 	
 	public String getCurrentPanel(){
 		return currentPanel;
 	}
-	
+
 	public void switchMusic(){
 		if (bgsound.isPlaying){
 			bgsound.stop();

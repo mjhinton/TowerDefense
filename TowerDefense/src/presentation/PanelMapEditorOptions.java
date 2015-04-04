@@ -10,18 +10,22 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import map.Map;
+
+import common.ReadWriteTxtFile;
+
 public class PanelMapEditorOptions extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private View view;
+	private View meView;
 	
 	private JButton bSaveMap, bSaveMapAs, bPlayMap, bMainMenu, bOpenMap;
 
-	public PanelMapEditorOptions(final View view){
+	public PanelMapEditorOptions(View view){
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT);
-		this.view=view;
+		this.meView=view;
 		
 		this.setBackground(Color.GRAY);
 		this.setPreferredSize(dim);
@@ -55,21 +59,40 @@ public class PanelMapEditorOptions extends JPanel {
         bPlayMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                //create a new game with the map that was just created.
-            	//go to the game panel
+                //open the Game panel with the map that was just created.
+            	
+            	PanelMapEditorMap currentMapEditor = meView.mp.pnlMapEd.pnMap;
+            
+            	if (currentMapEditor.tryInitiatingPath()==true)
+            	{ 
+            	//set up board from the editor
+            	meView.model.getGame().setUpBoardFromEditor(currentMapEditor.getMapEdited());
+            	//initiate the path
+            	meView.model.getGame().getBoard().getMap().initPath();
+            	//switch panel
+            	meView.switchPanel("PanelGame");
+            	}
+            	else
+            		System.out.println("Cannot play this map, invalid path");
             }
         });
         
         bMainMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                view.switchPanel("PanelMenu");
+                meView.switchPanel("PanelMenu");
             }
         });	
         bOpenMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 //open panel of saved maps
+            	//for now, it just opens the test map 
+            	String[] testArrayMap = ReadWriteTxtFile
+            			.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
+            	Map testMap = new Map("testMap", 15, testArrayMap);
+
+            	
             }
         });	
         
@@ -78,6 +101,6 @@ public class PanelMapEditorOptions extends JPanel {
 	}
 
 	public View getView() {
-		return view;
+		return meView;
 	}
 }
