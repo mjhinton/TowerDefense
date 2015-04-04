@@ -14,6 +14,8 @@ import critter.*;
 import java.awt.Image;
 import java.awt.Point;
 
+import javax.swing.ImageIcon;
+
 import model.Game;
 import common.*;
 
@@ -171,6 +173,11 @@ public class Tower extends Subject{
 		return this.size;
 	}
 
+	public ImageIcon getIcon(){
+		//empty!
+		return null;
+	}
+	
 	public Image getImage() {
 		// TODO Auto-generated method stub
 		return null;

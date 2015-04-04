@@ -39,7 +39,7 @@ public class MonsterTower extends Tower{
 		specialmod = 1;	
 	}
 	
-	public Image getImage() {
+	public ImageIcon getIcon() {
 		ImageIcon i;
 		if (this.level == 2){
 			i = new ImageIcon("lib/images/tower/MonsterTower_lv2x40.png");
@@ -56,7 +56,11 @@ public class MonsterTower extends Tower{
 		else{
 			i = new ImageIcon("lib/images/tower/MonsterTowerx40.png");
 		}
-		image = i.getImage();
+		return i;
+	}
+	
+	public Image getImage() {
+		image = getIcon().getImage();
 		return image;
 	}
 }

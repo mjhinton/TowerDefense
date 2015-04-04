@@ -23,7 +23,7 @@ public class PathCell extends MapCell {
 	public String print() {
 		return String.valueOf(CHAR_ID);
 	}
-
+	
 	public Image getImage() {
 		ImageIcon i = new ImageIcon("lib/images/map/test_path.png");
 		image = i.getImage();

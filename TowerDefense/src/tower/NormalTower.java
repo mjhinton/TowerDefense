@@ -23,7 +23,7 @@ public class NormalTower extends Tower{
 	}
 
 	
-	public Image getImage() {
+	public ImageIcon getIcon() {
 		ImageIcon i;
 		if (this.level == 2){
 			i = new ImageIcon("lib/images/tower/BasicTower_lv2x40.png");
@@ -40,7 +40,11 @@ public class NormalTower extends Tower{
 		else{
 			i = new ImageIcon("lib/images/tower/BasicTowerx40.png");
 		}
-		image = i.getImage();
+		return i;
+	}
+	
+	public Image getImage() {
+		image = getIcon().getImage();
 		return image;
 	}
 }
