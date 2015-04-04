@@ -1,7 +1,6 @@
 package map;
 
 import java.awt.Image;
-import javax.swing.ImageIcon;
 
 /**
  * This is an abstract class that dictates the properties of a cell object on

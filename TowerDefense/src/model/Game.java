@@ -111,9 +111,12 @@ public class Game {
 	
 	public boolean upgradeTower(Tower tower){
 		boolean worked;
-		if (this.changeCoins(-1*tower.getCost())){
+		if (tower.getLevel() < 5 && this.changeCoins(-1*tower.getCost())){
 			worked = board.upgradeTower(tower);
 			return worked;
+		}
+		else{
+			System.out.println("Maximum level reached. Further upgrade not possible.");
 		}
 			return false;		
 	}

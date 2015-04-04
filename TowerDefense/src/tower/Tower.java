@@ -57,7 +57,6 @@ public class Tower extends Subject{
 	//increase the level of the tower
 	public void increaseLevel(){
 		if (this.level < 5){
-			
 			cost += 120; //cost for next level
 			value = (int) (cost * level * 0.6); //recalculate selling value
 			fireRate *= 1.1;
@@ -71,11 +70,11 @@ public class Tower extends Subject{
 			level++;
 			notifyObservers();
 		}
+		//these will no longer execute and are unnecessary.
+				/*
 		else if (this.level == 5){
-			System.out.println("Maximum level reached. Furthur upgrade not possible.");
+			System.out.println("Maximum level reached. Further upgrade not possible.");
 		}
-		//this will no longer execute and is unnecessary.
-		/*
 		else{
 			System.out.println("Insufficient funds. Upgrade of " + this.toString() + " failed.");
 		}

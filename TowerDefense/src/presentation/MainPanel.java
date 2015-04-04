@@ -65,21 +65,21 @@ public class MainPanel extends JPanel {
 	public String getCurrentPanel(){
 		return currentPanel;
 	}
-
-//	public void switchMusic(){
-//		if (bgsound.isPlaying){
-//			bgsound.stop();
-//		}
-//		if (currentPanel.equals("PanelMenu")){
-//			bgsound = new SoundPlayer("nc83854.wav");
-//		}
-//		if (currentPanel.equals("PanelMapEditor")){
-//			bgsound = new SoundPlayer("nc83853.wav");
-//		}
-//		if (currentPanel.equals("PanelGame")){
-//			bgsound = new SoundPlayer("nc83843.wav");
-//		}
-//		bgsound.play();
-//		bgsound.loop();
-//	}
+	/*
+	public void switchMusic(){
+		if (bgsound.isPlaying){
+			bgsound.stop();
+		}
+		if (currentPanel.equals("PanelMenu")){
+			bgsound = new SoundPlayer("nc83854.wav");
+		}
+		if (currentPanel.equals("PanelMapEditor")){
+			bgsound = new SoundPlayer("nc83853.wav");
+		}
+		if (currentPanel.equals("PanelGame")){
+			bgsound = new SoundPlayer("nc83843.wav");
+		}
+		bgsound.play();
+		bgsound.loop();
+	}*/
 }

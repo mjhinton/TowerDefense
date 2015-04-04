@@ -6,6 +6,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.BooleanControl;
 
 public class SoundPlayer {
 	
@@ -60,7 +61,14 @@ public class SoundPlayer {
 	public static void setVolume(float gainAmount){
 		if (isPlaying){
 			volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			volume.setValue(gainAmount);
+			BooleanControl muteControl = (BooleanControl) clip.getControl(BooleanControl.Type.MUTE);
+			if (gainAmount == -20){
+				muteControl.setValue(true);
+			}
+			else{
+				muteControl.setValue(false);
+				volume.setValue(gainAmount);
+			}
 		}
 	}
 }
