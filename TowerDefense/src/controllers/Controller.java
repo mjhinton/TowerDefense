@@ -111,6 +111,7 @@ public class Controller implements ActionListener {
 	//temporary testing method
 	public void playGame(Map map){
 		if (gameAlreadyStarted==true){
+			currGame = view.getController().getGame();
 			try {
 				currGame.generateWave();
 			} catch (InterruptedException e) {

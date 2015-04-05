@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import map.Map;
+
 public class PanelMenuButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -58,7 +60,13 @@ public class PanelMenuButtons extends JPanel {
         bLoadGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-               mbView.switchPanel("PanelGame");
+            	//for temporary testing purposes, load the test map. 
+            	Map testMap = Map.getPackagedMap("15x15map");
+            	
+            	//update the model so that it has this map instead, and then switch panel
+            	mbView.model.getGame().setBoardMap(testMap);
+            	
+            	mbView.switchPanel("PanelGame");
             }
         });
         

@@ -47,4 +47,8 @@ public class MapEditor{
 		}
 		map.toggle(cellX, cellY);	
 	}
+	
+	public void setMap(Map map){
+		this.map = map;
+	}
 }
