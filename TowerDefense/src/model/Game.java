@@ -10,6 +10,7 @@ import tower.Tower;
 import map.Map;
 import critter.Critter;
 import critter.Wave;
+import critter.WaveThread;
 
 public class Game {
 	
@@ -136,6 +137,14 @@ public class Game {
 			}else{
 				wave.updateCritterPositions();
 			}
+			if (wave.finishedRelease()==false){
+				try {
+					wave.releaseCritters();
+					System.out.println("release is good");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			
 			for(int i = 0; i < towers.size(); i++) towers.get(i).fire();
 			for(int j=0;j<bullets.size();j++) bullets.get(j).updateBullet();
@@ -164,9 +173,9 @@ public class Game {
 		}
 		if (flag){
 			wave = new Wave(currentWaveNumber, this);
-			System.out.println("Aww yeah, wave generated");
-			wave.releaseCritters();
-			System.out.println("Critters all released");
+			System.out.println("Aww y, wave generated");
+			wave.setUpBank();
+			//System.out.println("Critters all released");
 			currentWaveNumber++;
 		}
 		else

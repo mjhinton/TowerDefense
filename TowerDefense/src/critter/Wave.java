@@ -16,11 +16,15 @@ public class Wave{
 	static final long DEFAULT_DELAY = 1000;
 	
 	private ArrayList<Critter> critterBank;
+	private ArrayList<Critter> releaseBank;
 	private int x;
 	private double difficulty;
 	private boolean waveInProgress;
 	private Game game;
 	private boolean paused;
+	private boolean finishedRelease;
+	private int releasingTimingIndex;
+	private int releasingIndex;
 	
 	public Wave(int n, Game game){
 		this.game=game;
@@ -28,6 +32,9 @@ public class Wave{
 		this.difficulty = (double) n;
 		this.waveInProgress = false;
 		this.x = n;
+		this.finishedRelease=false;
+		this.releasingTimingIndex=0;
+		this.releasingIndex=0;
 	}
 
 	public void setUpBank(){
@@ -48,7 +55,12 @@ public class Wave{
 			generateCritters("monster", x/2, game);
 		}
 		
-		for(int j = 0; j < critterBank.size(); j++) critterBank.get(j).increaseDifficulty(1+difficulty/15); //can be modified to change difficulty of waves
+		releaseBank=new ArrayList<Critter>();
+		for(int j = 0; j < critterBank.size(); j++){
+			critterBank.get(j).increaseDifficulty(1+difficulty/15); //can be modified to change difficulty of waves
+		
+			releaseBank.add(critterBank.get(j));
+		}
 		
 	}
 	
@@ -61,22 +73,38 @@ public class Wave{
 	}
 	
 	public void releaseCritters() throws InterruptedException{
-		this.setUpBank();
+		//this.setUpBank();
 		Critter c;
-		Thread x;
-		for (int i =0; i<critterBank.size(); i++){
-			c=critterBank.get(i);
-			c.setRef(i);
-			try {
-				c.setDown();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			x = new CritterThread(c);
-			x.start();
+		//Thread x;
+		c=releaseBank.get(releasingIndex);
+		if(releasingTimingIndex>=DEFAULT_DELAY/(0.5*difficulty*game.getGameSpeed())){
+			c.setDown();
 			System.out.println(c.toString()+ " has been set down");
-			TimeUnit.MILLISECONDS.sleep((long)(DEFAULT_DELAY/(0.5*difficulty*game.getGameSpeed())));
+			System.out.println("releaseBank size: "+releaseBank.size());
+			if (releasingIndex>=releaseBank.size()-1){
+				this.finishedRelease=true;
+				System.out.println("Finished releasing critters.");
+			}else{
+				releasingIndex+=1;
+			}
+			
+		}else{
+			releasingTimingIndex+=1;
 		}
+		
+//		for (int i =0; i<critterBank.size(); i++){
+//			c=critterBank.get(i);
+//			c.setRef(i);
+//			try {
+//				c.setDown();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//			x = new CritterThread(c);
+//			x.start();
+//			System.out.println(c.toString()+ " has been set down");
+//			TimeUnit.MILLISECONDS.sleep((long)(DEFAULT_DELAY/(0.5*difficulty*game.getGameSpeed())));
+//		}
 	}
 	
 	public void paintCritters(Graphics g){
@@ -124,6 +152,18 @@ public class Wave{
 	
 	public boolean getPaused(){
 		return paused;
+	}
+
+	public Game getGame() {
+		return this.game;
+	}
+
+	public double getDifficulty() {
+		// TODO Auto-generated method stub
+		return difficulty;
+	}
+	public boolean finishedRelease(){
+		return finishedRelease;
 	}
 	
 }
