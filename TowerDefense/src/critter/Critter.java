@@ -87,7 +87,15 @@ abstract public class Critter {
 	public int getDamage() {
 		return damage;
 	}
-
+	//getter method for testing
+	public Point getCurrPathCoord(){
+		return currPathCoord;
+	}
+	//getter method for testing purposes.
+	public boolean getWhetherOnPath(){
+		return onPath;
+	}
+	
 	public double getX() {
 		return nextPathCoord.getX();
 	}
@@ -116,8 +124,7 @@ abstract public class Critter {
 	}
 
 	public void increaseDifficulty(double multiplier) { // health and reward
-														// increase whenever
-														// multiplier is applied
+														// increase whenever												// multiplier is applied
 		this.health *= multiplier;
 		this.reward *= multiplier;
 	}
@@ -130,6 +137,11 @@ abstract public class Critter {
 		y=(double)currPathCoord.y;
 		onPath=true;
 		//System.out.println(currPathCoord);
+	}
+	
+	//added for testing purposes
+	public void setCurrPathIndex(int newIndex){
+		currPathIndex = newIndex;
 	}
 
 	public void updatePosition() {
