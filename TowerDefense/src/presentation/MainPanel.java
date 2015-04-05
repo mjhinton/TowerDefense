@@ -65,7 +65,7 @@ public class MainPanel extends JPanel {
 	public String getCurrentPanel(){
 		return currentPanel;
 	}
-	/*
+/*
 	public void switchMusic(){
 		if (bgsound.isPlaying){
 			bgsound.stop();
