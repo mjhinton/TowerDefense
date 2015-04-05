@@ -1,4 +1,4 @@
-package tower;
+package test.tower;
 
 import static org.junit.Assert.*;
 
