@@ -48,7 +48,7 @@ public class Bullet extends Tower{
 			velocity_Y = velocity * Math.sin(theta);
 			
 			if(bullet_X + velocity_X > closest_X && bullet_Y + velocity_Y > closest_Y) {
-				System.out.println("dealt damage: " + super.toString());
+				//System.out.println("dealt damage: " + super.toString());
 				damageEnemies(enemies);
 				bullet_X = super.position.getX()*tileSize;
 				bullet_Y = super.position.getY()*tileSize;
