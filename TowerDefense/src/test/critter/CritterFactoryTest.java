@@ -1,4 +1,4 @@
-package critter;
+package test.critter;
 
 import static org.junit.Assert.*;
 
