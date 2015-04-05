@@ -1,7 +1,6 @@
 package presentation;
 
 import java.util.Hashtable;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -87,14 +86,26 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		bPlayWave.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event){
-				// generate a wave.
+				
 				Game agame = goView.getController().getGame();
-				Map amap = agame.getBoard().getMap();		
+				final Map amap = agame.getBoard().getMap();
+				Thread athread = new Thread(){
+					public void run(){
+						//do something
+						goView.getController().playGame(amap);
+					}
+				};
+				athread.start();
+			
+			/*		
 				//playGame is a method in Controller that starts a game and generates a wave
 				//if the game hasn't already been started, and if the game has already been started
-				//it generates a wave. 
-				goView.getController().playGame(amap);
+				//it generates a wave.
+	
+				//goView.getController().playGame(amap);
 
+			 */
+				
 			}
 		});
 		

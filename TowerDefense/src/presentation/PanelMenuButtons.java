@@ -61,11 +61,9 @@ public class PanelMenuButtons extends JPanel {
             @Override
             public void actionPerformed(ActionEvent event) {
             	//for temporary testing purposes, load the test map. 
-            	Map testMap = Map.getPackagedMap("15x15map");
-            	
+            	Map testMap = Map.getPackagedMap("15x15map"); 	
             	//update the model so that it has this map instead, and then switch panel
-            	mbView.model.getGame().setBoardMap(testMap);
-            	
+            	mbView.getController().getGame().setBoardMap(testMap);
             	mbView.switchPanel("PanelGame");
             }
         });
