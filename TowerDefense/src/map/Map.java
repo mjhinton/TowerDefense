@@ -23,6 +23,9 @@ public class Map extends Subject {
 	private Point pathStartCoord;
 	private Point pathEndCoord;
 	private Path path;
+	//for testing purposes
+	private boolean getOffMapExitWasCalled;
+	////
 
 	final static private int MAX_WIDTH = 15;
 	final static private int MAX_HEIGHT = 15;
@@ -112,6 +115,8 @@ public class Map extends Subject {
 				cells[i][j] = new SceneryCell();
 			}
 		}
+		//for testing purposes
+		getOffMapExitWasCalled = false;
 	}
 
 	public String getName() {
@@ -434,6 +439,9 @@ public class Map extends Subject {
 	}
 	
 	public Point getOffMapExit(){
+		//flag to test whether the method was called
+		getOffMapExitWasCalled = true;
+		
 		Point p;
 		Point e;
 		if (path!=null){
@@ -455,6 +463,11 @@ public class Map extends Subject {
 		
 		return p;
 	}
+	//for testing purposes
+	public boolean getWhetherGetOffMapExitWasCalled(){
+		return getOffMapExitWasCalled;
+	}
+	
 	public static Map getPackagedMap(String mapName){
 		String path="lib/maps/"+mapName+".txt";
 		String[] mapString = ReadWriteTxtFile
