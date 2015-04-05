@@ -17,6 +17,7 @@ import model.Game;
 public class NormalTower extends Tower{
 	
 	Image image;
+	Image bulletImage;
 
 	public NormalTower(Point c, Game game){
 		super(c, game);
@@ -46,5 +47,16 @@ public class NormalTower extends Tower{
 	public Image getImage() {
 		image = getIcon().getImage();
 		return image;
+	}
+	
+	public ImageIcon getBulletIcon(){
+		ImageIcon i;
+		i = new ImageIcon("lib/images/projectile/obj_fireball_16x17.png");
+		return i;
+	}
+	
+	public Image getBulletImage(){
+		bulletImage = getBulletIcon().getImage();
+		return bulletImage;
 	}
 }

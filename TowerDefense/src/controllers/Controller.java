@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import critter.Wave;
@@ -92,7 +93,6 @@ public class Controller implements ActionListener {
 		for (int i=0;i<this.gameSpeedMultiplier;i++){
 			update();
 		}
-		
 		draw();		
 	}
 	
@@ -110,19 +110,20 @@ public class Controller implements ActionListener {
 	
 	//temporary testing method
 	public void playGame(Map map){
-		if (gameAlreadyStarted==true){
+		if (gameAlreadyStarted==true){			
+			System.out.println("Game already started, so lets just generate a wave");
 			try {
-				currGame.generateWave();
+				view.getController().getGame().generateWave();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		else{
-			this.startGame(map);
-			currGame = view.getController().getGame();
+			view.getController().startGame(map);
+			System.out.println("Game had not begun yet so let's start it and then generate a wave");
 			try {
-				currGame.generateWave();
+				view.getController().getGame().generateWave();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -138,4 +139,7 @@ public class Controller implements ActionListener {
 		return this.gameSpeedMultiplier;
 	}
 
+	//testing
+
+	
 }

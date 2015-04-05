@@ -20,6 +20,8 @@ import model.Game;
 public class MonsterTower extends Tower{
 	
 	Image image;
+	Image bulletImage;
+	protected char type = 'm';
 
 	public MonsterTower(Point c, Game game){
 		super(c, game);
@@ -62,5 +64,16 @@ public class MonsterTower extends Tower{
 	public Image getImage() {
 		image = getIcon().getImage();
 		return image;
+	}
+	
+	public ImageIcon getBulletIcon(){
+		ImageIcon i;
+		i = new ImageIcon("lib/images/projectile/obj_poisonball_16x15.png");
+		return i;
+	}
+	
+	public Image getBulletImage(){
+		bulletImage = getBulletIcon().getImage();
+		return bulletImage;
 	}
 }

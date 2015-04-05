@@ -17,7 +17,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 	
 	private PanelGameBoard mainboard = new PanelGameBoard(view);
 	
-	private static JLabel PF;
+	private static JLabel PF = new JLabel("Current funds: " + 0);
 
 	public PanelGameTowerManager(View iview, PanelGameBoard input){
 
@@ -26,11 +26,6 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		view=iview;
 
 		mainboard = input;
-
-		//will only work if there is a game
-		//we will temporarily put '0' here.
-		//this.PF = new JLabel("Current funds: " + view.getController().getGame().getCoins());
-		this.PF = new JLabel("Current funds: "+0);
 		
 		//this.setBackground(Color.RED);
 		this.setPreferredSize(dim);
@@ -71,10 +66,12 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         JRadioButton freezingtower = new JRadioButton("Ice Tower");
         JRadioButton monstertower = new JRadioButton("Magic Tower");
         
+        //towers images
         JLabel basetower = new JLabel(new ImageIcon("lib/images/tower/BasicTowerx40.png"));
         JLabel freezetower = new JLabel(new ImageIcon("lib/images/tower/FreezingTowerx40.png"));
         JLabel monstower = new JLabel(new ImageIcon("lib/images/tower/MonsterTowerx40.png"));
         
+        //group will allow only one button to be active at a time.
         ButtonGroup group = new ButtonGroup();
         
         group.add(basictower);
@@ -111,6 +108,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		PF = new JLabel("Current funds: " + Character.toString((char) 8353) + 1000);
 	}
 	
+	//initializes the funds panel
 	public void addPFPanel(){	
 		initPF();
 		JPanel Playerfunds = new JPanel();

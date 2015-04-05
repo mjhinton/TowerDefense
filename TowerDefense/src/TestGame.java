@@ -14,19 +14,19 @@ public class TestGame {
 		View app=new View();
 		app.switchPanel("PanelGame");
 		
-		Game testGame;
+		//Game testGame;
 		
 		Map testMap=Map.getPackagedMap("15x15map");
 
+		
+		
+		
 		app.getController().startGame(testMap);
-		testGame=app.getController().getGame();
+		//testGame=app.getController().getGame();
 		
-		
-		
-
 		
 		try {
-			testGame.generateWave();
+			app.getController().getGame().generateWave();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

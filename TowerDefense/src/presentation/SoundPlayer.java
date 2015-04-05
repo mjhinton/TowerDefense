@@ -7,6 +7,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.BooleanControl;
+import javax.sound.sampled.LineUnavailableException;
+
+import common.BigClip;
 
 public class SoundPlayer {
 	
@@ -19,16 +22,30 @@ public class SoundPlayer {
 		//empty constructor
 	}
 	
-	public SoundPlayer(String input){
+	public SoundPlayer(String input){		
 		try {
-	        name = input;
+			//clip = new BigClip();
+			name = input;
 			clip = AudioSystem.getClip();
 	        File file = new File("lib/music/" + name);
 	        AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
 	        clip.open(inputStream);
-	      } catch (Exception e) {
-	        e.printStackTrace();
+	        //if the buffer size is too large, catch and try the BigClip solution...
+	        //but it works pretty strangely...
+	      } catch (LineUnavailableException e){
+				try{
+					BigClip clip = new BigClip();
+					File file = new File("lib/music/" + name);
+					AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
+			        clip.open(inputStream);
+				}
+				catch (Exception e2){
+					e2.printStackTrace();
+				}
 	      }
+			catch (Exception e) {
+	        e.printStackTrace();
+	      } 
 	}
 	
 	public void play(){

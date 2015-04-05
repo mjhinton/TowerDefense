@@ -19,6 +19,7 @@ import model.Game;
 public class FreezingTower extends Tower{
 	
 	Image image;
+	Image bulletImage;
 
 	public FreezingTower(Point c, Game game){
 		super(c, game);
@@ -62,4 +63,17 @@ public class FreezingTower extends Tower{
 		image = getIcon().getImage();
 		return image;
 	}
+	
+	public ImageIcon getBulletIcon(){
+		ImageIcon i;
+		i = new ImageIcon("lib/images/projectile/obj_snowball_15x15.png");
+		return i;
+	}
+	
+	public Image getBulletImage(){
+		bulletImage = getBulletIcon().getImage();
+		return bulletImage;
+	}
+	
+	
 }

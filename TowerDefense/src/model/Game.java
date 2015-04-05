@@ -123,6 +123,8 @@ public class Game {
 
 	public void updateGame(){
 		
+		for(int i = 0; i < towers.size(); i++) towers.get(i).fire();
+		
 		if(wave!=null){
 			wave.updateCritterPositions();
 		}
@@ -175,6 +177,11 @@ public class Game {
 	}
 	public int getGameSpeed(){
 		return this.gameSpeedMultiplier;
+	}
+	
+	public void setBoardMap(Map newmap){
+		this.board.setMap(newmap);
+		this.board.getMap().initPath();
 	}
 	
 	
