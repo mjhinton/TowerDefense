@@ -113,5 +113,8 @@ public class Wave{
 	public ArrayList<Critter> getCritterBank(){
 		return critterBank;
 	}
+	public void removeCritter(Critter c){
+		critterBank.remove(c);
+	}
 	
 }

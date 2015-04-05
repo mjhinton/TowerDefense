@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 
 import model.Game;
 import common.*;
+import map.Map;
 
 public class Tower extends Subject{
 	
@@ -35,15 +36,15 @@ public class Tower extends Subject{
 	protected double fireRate;
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
-	protected Bullet bullet;
-	protected boolean activeBullet;
-	protected boolean bulletReached;
-	protected ArrayList<Critter> inRange = new ArrayList<Critter>();
+	//protected Bullet bullet;
+	//protected boolean activeBullet;
+	//protected boolean bulletReached;
 	protected boolean lowestHealth;
 	protected boolean highestHealth;
 	protected boolean closest;
 	protected boolean farthest;
 	protected int currFireIndex;
+	protected double bulletSpeedMultiplier;
 	
 	public Tower(Point c, Game game){
 		this.position = c;
@@ -60,11 +61,12 @@ public class Tower extends Subject{
 		value = (int) (cost * level * 0.6); //selling value
 		range = 3; //range of tower
 		bulletRange = 1; //range of bullet explosion
-		power = 1; //power of bullets
+		power = 5; //power of bullets
 		fireRate = 1; //rate of fire
 		isSpecial = false; //if tower has special effects
 		specialmod = 1;	 //special effect value	
 		currFireIndex=0;
+		bulletSpeedMultiplier=1;
 	}
 
 	//increase the level of the tower
@@ -95,37 +97,102 @@ public class Tower extends Subject{
 	}
 	
 	public void fire(){
-		if(inRange==null && !activeBullet) bullet = null;
+		//if(inRange==null && !activeBullet) bullet = null;
 		
+		ArrayList<Critter> inRange;
+		Critter target;
 		if (currFireIndex>=MAX_FIRE_INDEX){
-			targetsInRange(game.getWave().getCritterBank());
+			inRange=targetsInRange(game.getWave().getCritterBank());
 		
-			if(inRange!=null){
-				if(activeBullet&&inRange.size()!=0) bullet.moveBullet(inRange);
-				else{ 
-					bullet = new Bullet(this.position, game);
-					bulletReached = false;
-					activeBullet = true;
-				}
-		}
 			
+			if(inRange.size()!=0){
+					target=getTarget(inRange);
+					
+					shootBullet(target);
+					
+					//bullet.moveBullet(inRange);
+			}else{ 
+//					bullet = new Bullet(this.position, game);
+//					bulletReached = false;
+//					activeBullet = true;
+			}
 			currFireIndex=0;
 		}else{
 			currFireIndex=(int)(currFireIndex+fireRate*5);
-		}
-		
+		}	
+	}
+	public void shootBullet(Critter critter){
+		Bullet bullet=new  Bullet(game, this, Map.getCenterX(critter.getX()), Map.getCenterY(critter.getY()), bulletSpeedMultiplier);
 		
 	}
 
-	public void targetsInRange(ArrayList<Critter> critters){
-		OUTER: for(int i = 0; i < critters.size(); i++){
-				if(distance(position.getX(), position.getY(), critters.get(i).getX(), critters.get(i).getY())<range){
-					if(inRange!=null){
-						for(int j = 0; j <inRange.size(); j++) if(critters.get(i).getRef()==inRange.get(j).getRef()) continue OUTER;
-					}
-					inRange.add(critters.get(i));
-				}
+	public ArrayList<Critter> targetsInRange(ArrayList<Critter> critters){
+		ArrayList<Critter> inRange=new ArrayList<Critter>();
+		for(int i = 0; i < critters.size(); i++){
+			if(distanceSquared(Map.getCenterX(position.x), Map.getCenterY(position.y), Map.getCenterX(critters.get(i).getX()), Map.getCenterY(critters.get(i).getY()))<range*range){
+				inRange.add(critters.get(i));
+				
+			}
 		}
+	return inRange;
+	}
+	public Critter getTarget(ArrayList<Critter> critters){
+		if(lowestHealth) return lowestHealth(critters);
+		else if(highestHealth) return highestHealth(critters);
+		else if(closest) return closest(critters);
+		else if(farthest) return lowestHealth(critters);
+		else return null;
+	}
+	public Critter lowestHealth(ArrayList<Critter> input){
+		int pointer = 0;
+		int lowestHealth = 100000;
+		for(int i = 0; i < input.size(); i++){
+			if(input.get(i).getHealth()<lowestHealth){
+				lowestHealth = input.get(i).getHealth();
+				pointer = i;
+			}
+		}
+		return input.get(pointer);
+	}
+	
+	public Critter highestHealth(ArrayList<Critter> input){
+		int pointer = 0;
+		int highestHealth = 0;
+		for(int i = 0; i < input.size(); i++){
+			if(input.get(i).getHealth()>highestHealth){
+				highestHealth = input.get(i).getHealth();
+				pointer = i;
+			}
+		}
+		return input.get(pointer);
+	}
+	
+	public Critter closest(ArrayList<Critter> input){
+		int pointer = 0;
+		double closestDistanceSquared = 1000000;
+		double currDistanceSquared;
+		for(int i = 0; i < input.size(); i++){
+			currDistanceSquared=distanceSquared(position.getX(), position.getY(), input.get(i).getX(), input.get(i).getY());
+			if(currDistanceSquared<closestDistanceSquared){
+				closestDistanceSquared = currDistanceSquared;
+				pointer = i;
+			}
+		}
+		return input.get(pointer);
+	}
+	
+	public Critter farthest(ArrayList<Critter> input){
+		int pointer = 0;
+		double farthestDistanceSquared = 0;
+		double currDistanceSquared;
+		for(int i = 0; i < input.size(); i++){
+			currDistanceSquared=distanceSquared(position.getX(), position.getY(), input.get(i).getX(), input.get(i).getY());
+			if(currDistanceSquared>farthestDistanceSquared){
+				farthestDistanceSquared = currDistanceSquared;
+				pointer = i;
+			}
+		}
+		return input.get(pointer);
 	}
 	
 	public void targetLowestHealth(){
@@ -150,7 +217,7 @@ public class Tower extends Subject{
 	}
 	
 	public void targetFarthest(){
-		this.lowestHealth = true;
+		this.lowestHealth = false;
 		this.highestHealth = false;
 		this.closest = false;
 		this.farthest = true;
@@ -221,22 +288,22 @@ public class Tower extends Subject{
 		return i2;
 	}
 	
-	public Bullet getBullet(){
-		return bullet;
-	}
+//	public Bullet getBullet(){
+//		return bullet;
+//	}
 	
-	public boolean hasActiveBullet(){
-		return activeBullet;
-	}
+//	public boolean hasActiveBullet(){
+//		return activeBullet;
+//	}
 	
 	public Game getGame(){
 		return game;
 	}
 	
-	public double distance(double x1, double y1, double x2, double y2){
+	public static double distance(double x1, double y1, double x2, double y2){
 		return Math.sqrt(Math.pow((y2-y1), 2)+Math.pow((x2-x1), 2));
 	}
-	public double distanceSquared(double x1, double y1, double x2, double y2){
+	public static double distanceSquared(double x1, double y1, double x2, double y2){
 		return Math.pow((y2-y1), 2)+Math.pow((x2-x1), 2);
 	}
 }

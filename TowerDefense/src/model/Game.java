@@ -2,10 +2,13 @@ package model;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
+import tower.Bullet;
 import tower.Tower;
 import map.Map;
+import critter.Critter;
 import critter.Wave;
 
 public class Game {
@@ -18,6 +21,7 @@ public class Game {
 	private boolean gameOver;
 	private LinkedList<Tower> towers;
 	private int gameSpeedMultiplier;
+	private ArrayList<Bullet> bullets;
 	//private TowerManager (make a towerManager class?)
 	
 	//add tower manager as a parameter too?
@@ -34,6 +38,7 @@ public class Game {
 		towers=new LinkedList<Tower>();
 		this.playerHealth=10;
 		this.gameSpeedMultiplier=1;
+		bullets=new ArrayList<Bullet>();
 	}
 	
 	public Board getBoard(){
@@ -122,21 +127,27 @@ public class Game {
 	}
 
 	public void updateGame(){
-		
-		
-		
-		
+
 		if(wave!=null){
 			this.getWave().removeDead();
-			wave.updateCritterPositions();
+			//System.out.println(this.getWave().getCritterBank().size());
+			if (this.getWave().getCritterBank().size()==0){
+				wave=null;
+			}else{
+				wave.updateCritterPositions();
+			}
+			
+			for(int i = 0; i < towers.size(); i++) towers.get(i).fire();
+			for(int j=0;j<bullets.size();j++) bullets.get(j).updateBullet();
 		}
 		
-		for(int i = 0; i < towers.size(); i++) towers.get(i).fire();
+		
 	}
 	public void paintGame(Graphics g) {
 		board.paintBoard(g);
 		if(wave!=null){
 			wave.paintCritters(g);
+			for(int j=0;j<bullets.size();j++) bullets.get(j).drawBullet(g);
 		}
 		
 	}
@@ -188,5 +199,17 @@ public class Game {
 		this.board.getMap().initPath();
 	}
 	
+	public void addBullet(Bullet bullet){
+		bullets.add(bullet);
+	}
+	
+	public void removeBullet(Bullet bullet){
+		bullets.remove(bullet);
+	}
+
+	public void removeCritter(Critter critter) {
+		this.wave.removeCritter( critter);
+		
+	}
 	
 }

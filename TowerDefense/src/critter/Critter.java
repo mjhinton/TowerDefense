@@ -104,6 +104,7 @@ abstract public class Critter {
 			health=0;
 			onPath=false;
 			game.changeCoins(reward);
+			game.removeCritter(this);
 		}	
 	}
 
@@ -161,6 +162,7 @@ abstract public class Critter {
 							+ " has reached the endpoint");
 					System.out.println("Player lost " + damage + " health.");
 					game.changeHealth(-1*damage);
+					game.removeCritter(this);
 					
 				} else {
 					currPathCoord = nextPathCoord;

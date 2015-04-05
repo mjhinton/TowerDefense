@@ -115,10 +115,6 @@ public class Board {
 				if (towers[i][j]!= null){
 					g.drawImage(towers[i][j].getImage(), (i*Map.CELL_PIXEL_SIZE), (j*Map.CELL_PIXEL_SIZE - 
 							(towers[i][j].getIcon().getIconHeight() - 40)), null);
-					
-					if(towers[i][j].getBullet()!=null){
-						towers[i][j].getBullet().drawBullet(g);
-					}
 				}
 			}
 		}

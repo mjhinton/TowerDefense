@@ -480,4 +480,10 @@ public class Map extends Subject {
 	public static double getCenterY(int y){
 		return y+0.5;
 	}
+	public static double getCenterX(double x){
+		return x+0.5;
+	}
+	public static double getCenterY(double y){
+		return y+0.5;
+	}
 }
