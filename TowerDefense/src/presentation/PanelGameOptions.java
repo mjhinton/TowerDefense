@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
@@ -126,6 +127,17 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		        }else if (speed.equals("Speed X10")){
 		        	goView.getController().setGameSpeed(10);
 		        }
+			}
+		});
+		
+		bRestart.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event){
+				int dialogChosen = JOptionPane.showConfirmDialog(null, "Confirm game restart?");
+				if(dialogChosen==JOptionPane.YES_OPTION){
+					Map map = goView.getController().getGame().getBoard().getMap();
+					goView.getController().startGame(map);
+				}
 			}
 		});
 		
