@@ -416,7 +416,7 @@ public class Map extends Subject {
 			makePathCell(x,y);
 		}
 		
-		else if(getCell(c) instanceof PathCell&&(x==0||y==0||x==width-1||x==height-1)&&!(getCell(c) instanceof PathStartCell)&&!(getCell(c) instanceof PathEndCell)){
+		else if(getCell(c) instanceof PathCell&&(x==0||y==0||x==width-1||y==height-1)&&!(getCell(c) instanceof PathStartCell)&&!(getCell(c) instanceof PathEndCell)){
 				makePathEndCell(x,y);
 		}
 		
@@ -428,7 +428,7 @@ public class Map extends Subject {
 			makeSceneryCell(x,y);
 		}
 		
-		else if(getCell(c) instanceof PathCell&&!(x==0||y==0||x==width-1||x==height-1)){
+		else if(getCell(c) instanceof PathCell&&!(x==0||y==0||x==width-1||y==height-1)){
 			makeSceneryCell(x,y);
 		}
 	}
