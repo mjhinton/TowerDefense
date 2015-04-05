@@ -35,6 +35,7 @@ public class Tower extends Subject{
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
 	protected Bullet bullet;
 	protected boolean activeBullet;
+	protected boolean bulletReached;
 	protected ArrayList<Critter> inRange = new ArrayList<Critter>();
 	protected boolean lowestHealth;
 	protected boolean highestHealth;
@@ -93,25 +94,27 @@ public class Tower extends Subject{
 		if(inRange==null && !activeBullet) bullet = null;
 		
 		game.getWave().removeDead();
-		targetsInRange();
+		
+		targetsInRange(game.getWave().getCritterBank());
+		
 		if(inRange!=null){
 			if(activeBullet&&inRange.size()!=0) bullet.moveBullet(inRange);
 			else{ 
-				bullet = new Bullet(position, game);
+				bullet = new Bullet(this.position, game);
+				bulletReached = false;
 				activeBullet = true;
 			}
 		}
 	}
 
-	public void targetsInRange(){
-		ArrayList<Critter> crittersWave = game.getWave().getCritterBank();
-		OUTER: for(int i = 0; i < crittersWave.size(); i++){
-			if(distance(position.getX(), position.getY(), crittersWave.get(i).getX(), crittersWave.get(i).getY())<range){
-				if(inRange!=null){
-					for(int j = 0; j <inRange.size(); j++) if(crittersWave.get(i).getRef()==inRange.get(j).getRef()) continue OUTER;
+	public void targetsInRange(ArrayList<Critter> critters){
+		OUTER: for(int i = 0; i < critters.size(); i++){
+				if(distance(position.getX(), position.getY(), critters.get(i).getX(), critters.get(i).getY())<range){
+					if(inRange!=null){
+						for(int j = 0; j <inRange.size(); j++) if(critters.get(i).getRef()==inRange.get(j).getRef()) continue OUTER;
+					}
+					inRange.add(critters.get(i));
 				}
-				inRange.add(crittersWave.get(i));
-			}
 		}
 	}
 	

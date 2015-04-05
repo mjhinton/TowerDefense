@@ -19,6 +19,10 @@ public class Bullet extends Tower{
 	private double velocity_X;
 	private double velocity_Y;
 	private double theta;
+	private double closest_X;
+	private double closest_Y;
+	
+	
 	protected Image image;
 	protected int pointer;
 	protected int tileSize = game.getBoard().getMap().CELL_PIXEL_SIZE;
@@ -27,36 +31,44 @@ public class Bullet extends Tower{
 		super(c, game);
 		this.bullet_X = super.position.getX()*tileSize;
 		this.bullet_Y = super.position.getY()*tileSize;
-		velocity = 2.5; //TODO: decide on an appropriate velocity
+		velocity = 0.5; //TODO: decide on an appropriate velocity
 		//TODO: implement making sprite display
 	}
+	
 	//TODO: make move bullet refresh the position of the critter between every call
 	public void moveBullet(ArrayList<Critter> enemies){ //defines potential movement directions of bullet
 		implementTargetPattern(enemies);
+		activeBullet = true;
 		
 		if(enemies.get(pointer)==null){
 			bullet_X = super.position.getX()*tileSize;
 			bullet_Y = super.position.getY()*tileSize;
-		}
+			bulletReached = true;
+			activeBullet = false;
+		}// TODO: attempt to reset if creep dies on the way; incomplete
 		
-		else{
-			double closest_X = enemies.get(pointer).getX()*tileSize;
-			double closest_Y = enemies.get(pointer).getY()*tileSize;
-			
+			closest_X = enemies.get(pointer).getX()*tileSize;
+			closest_Y = enemies.get(pointer).getY()*tileSize;
 			theta = Math.atan2(closest_Y-bullet_Y, closest_X-bullet_X);
 			velocity_X = velocity * Math.cos(theta);
 			velocity_Y = velocity * Math.sin(theta);
-			
-			if(bullet_X + velocity_X > closest_X && bullet_Y + velocity_Y > closest_Y) {
-				//System.out.println("dealt damage: " + super.toString());
-				damageEnemies(enemies);
-				bullet_X = super.position.getX()*tileSize;
-				bullet_Y = super.position.getY()*tileSize;
-				activeBullet = false;
-			}
-			
+		
+		if(!bulletReached&&activeBullet){
 			bullet_X += velocity_X;
 			bullet_Y += velocity_Y;
+			if(bullet_X + velocity_X > closest_X || bullet_Y + velocity_Y > closest_Y) bulletReached = true;
+		}
+		
+		if(bulletReached){
+				System.out.println("dealt damage: " + super.toString());
+				damageEnemies(enemies);
+				
+				inRange.clear();
+				
+				bullet_X = super.position.getX()*tileSize;
+				bullet_Y = super.position.getY()*tileSize;
+				
+				activeBullet = bulletReached = false;
 		}
 	}
 	
@@ -72,12 +84,16 @@ public class Bullet extends Tower{
 			Critter j = enemies.get(i);
 			if(j == null) break;
 			
-			if (!super.isSpecial){
-				j.getsHit((int) super.power);
+			if(i==0){
+				if(super.isSpecial) j.setSpeed(j.getSpeed() * super.specialmod);
+				else j.getsHit((int) super.power);
 			}
 			
-			else {
-				j.setSpeed(j.getSpeed() * super.specialmod);
+			if(i>0){
+				if(distance(enemies.get(0).getX(), enemies.get(0).getY(), j.getX(), j.getY())<range){
+					if(super.isSpecial) j.setSpeed(j.getSpeed() * super.specialmod);
+					else j.getsHit((int) super.power);
+				}
 			}
 		}
 	}
