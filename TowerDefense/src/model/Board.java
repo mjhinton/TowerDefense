@@ -115,10 +115,13 @@ public class Board {
 				if (towers[i][j]!= null){
 					g.drawImage(towers[i][j].getImage(), (i*Map.CELL_PIXEL_SIZE), (j*Map.CELL_PIXEL_SIZE - 
 							(towers[i][j].getIcon().getIconHeight() - 40)), null);
+					
+					if(towers[i][j].getBullet()!=null){
+						g.drawImage(towers[i][j].getBulletImage(), towers[i][j].getBullet().getX(), towers[i][j].getBullet().getY(), null);
+					}
 				}
 			}
 		}
-		
 	}
 
 	public Map getMap() {

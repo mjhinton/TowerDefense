@@ -33,11 +33,20 @@ public class Tower extends Subject{
 	protected double fireRate;
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
-
+	protected Bullet bullet;
+	protected boolean activeBullet;
+	protected boolean bulletReached;
+	protected ArrayList<Critter> inRange = new ArrayList<Critter>();
+	protected boolean lowestHealth;
+	protected boolean highestHealth;
+	protected boolean closest;
+	protected boolean farthest;
+	
 	public Tower(Point c, Game game){
 		this.position = c;
 		this.initAttr();
 		this.game=game;
+		this.targetLowestHealth();
 	}
 
 	//initialize default attributes
@@ -80,58 +89,63 @@ public class Tower extends Subject{
 		}
 		*/
 	}
-
-	//check to see if critter is in range
-	//Shoot at the closest critter in range
-	//otherwise print message no critters found
-	public void inRange(LinkedList<Critter> critters){
-		LinkedList<Critter> nearbyCritters = new LinkedList<Critter>();
-		Critter closest = null;
-
-		//check list of critters
-		for (Critter i : critters){
-			//find out which critter is the closest out of the critters in range
-			//using the distance formula			
-			if (closest != null && Math.sqrt(Math.pow((i.getX() - this.position.getX()),2) + 
-					Math.pow((i.getY() - this.position.getY()),2)) <= Math.sqrt(Math.pow((closest.getX() - 
-					this.position.getX()),2) + Math.pow((closest.getY() - this.position.getY()),2))) { 				
-				closest = i;
-			}
-
-			else if (i.getX() <= this.position.getX() + this.range && i.getY() <= this.position.getY() + this.range){
-				closest = i;
-			}
-		}
-		//check critters in the bullet's range and add to a new linked list
-		for (Critter k : critters){
-			if (closest != null && (k.getX() <= (closest.getX() + this.bulletRange) && 
-				k.getY() <= (closest.getY() + this.bulletRange))){
-				
-				nearbyCritters.add(k);
-			}
-			else {
-				System.out.println("The " + k.toString() + " was out of range.");
-			}
-		}
-		//inflict bullet effect on the critters in bullet range		
-		if (nearbyCritters != null){
-			fire(nearbyCritters);
-		}
-	}
-
-	//point tower bullet towards critter coordinate, inflict damage
-	//if tower is special (slowing) type, change enemy speed
-	public void fire(LinkedList<Critter> enemies){
+	
+	public void fire(){
+		if(inRange==null && !activeBullet) bullet = null;
 		
-		for (Critter j : enemies){
-			if (this.isSpecial == false){
-				j.setHealth((int) (j.getHealth() - this.power));
+		game.getWave().removeDead();
+		
+		targetsInRange(game.getWave().getCritterBank());
+		
+		if(inRange!=null){
+			if(activeBullet&&inRange.size()!=0) bullet.moveBullet(inRange);
+			else{ 
+				bullet = new Bullet(this.position, game);
+				bulletReached = false;
+				activeBullet = true;
 			}
-			else {
-				j.setSpeed(j.getSpeed() * specialmod);
-			}
-		}	
+		}
 	}
+
+	public void targetsInRange(ArrayList<Critter> critters){
+		OUTER: for(int i = 0; i < critters.size(); i++){
+				if(distance(position.getX(), position.getY(), critters.get(i).getX(), critters.get(i).getY())<range){
+					if(inRange!=null){
+						for(int j = 0; j <inRange.size(); j++) if(critters.get(i).getRef()==inRange.get(j).getRef()) continue OUTER;
+					}
+					inRange.add(critters.get(i));
+				}
+		}
+	}
+	
+	public void targetLowestHealth(){
+		lowestHealth = true;
+		highestHealth = false;
+		closest = false;
+		farthest = false;
+	}
+	
+	public void targetHighestHealth(){
+		this.lowestHealth = false;
+		this.highestHealth = true;
+		this.closest = false;
+		this.farthest = false;
+	}
+	
+	public void targetClosest(){
+		this.lowestHealth = false;
+		this.highestHealth = false;
+		this.closest = true;
+		this.farthest = false;
+	}
+	
+	public void targetFarthest(){
+		this.lowestHealth = true;
+		this.highestHealth = false;
+		this.closest = false;
+		this.farthest = true;
+	}
+	
 	public String toString(){
 		return("Tower at (" + position.getX() + ", " + position.getY() + ")");
 	}
@@ -184,5 +198,32 @@ public class Tower extends Subject{
 
 	public Point getPosition() {
 		return position;
+	}
+	
+	public ImageIcon getBulletIcon(){
+		return null;
+	}
+	
+	public Image getBulletImage(){
+		ImageIcon i;
+		i = new ImageIcon("lib/images/projectiles/obj_snowball_15x15.png");
+		Image i2 = i.getImage();
+		return i2;
+	}
+	
+	public Bullet getBullet(){
+		return bullet;
+	}
+	
+	public boolean hasActiveBullet(){
+		return activeBullet;
+	}
+	
+	public Game getGame(){
+		return game;
+	}
+	
+	public double distance(double x1, double y1, double x2, double y2){
+		return Math.sqrt(Math.pow((y2-y1), 2)+Math.pow((x2-x1), 2));
 	}
 }

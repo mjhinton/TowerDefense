@@ -65,6 +65,7 @@ public class Wave{
 		Thread x;
 		for (int i =0; i<critterBank.size(); i++){
 			c=critterBank.get(i);
+			c.setRef(i);
 			try {
 				c.setDown();
 			} catch (InterruptedException e) {
@@ -84,7 +85,6 @@ public class Wave{
 			c.drawCritter(g);
 			//System.out.println("test print critters");
 		}
-		
 	}
 	
 	public boolean waveInProgress(){
@@ -105,4 +105,13 @@ public class Wave{
 			critterBank.get(i).updatePosition();
 		}
 	}
+	
+	public void removeDead(){
+		for(int i = 0; i < critterBank.size(); i++) if(critterBank.get(i).getHealth()<0) critterBank.remove(i);
+	}
+	
+	public ArrayList<Critter> getCritterBank(){
+		return critterBank;
+	}
+	
 }

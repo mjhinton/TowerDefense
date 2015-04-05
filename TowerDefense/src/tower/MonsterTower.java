@@ -1,9 +1,10 @@
 package tower;
 
 /*
-* ECSE 321 Introduction to Software Engineering
+* ECSE 321 Programming Assignment 1
 * Winter 2015
-* Group 12
+* Jenna Mar
+* 260590119
 *
 * This class creates a large, heavy area of effect Tower.
 */
@@ -19,6 +20,8 @@ import model.Game;
 public class MonsterTower extends Tower{
 	
 	Image image;
+	Image bulletImage;
+	protected char type = 'm';
 
 	public MonsterTower(Point c, Game game){
 		super(c, game);
@@ -61,5 +64,16 @@ public class MonsterTower extends Tower{
 	public Image getImage() {
 		image = getIcon().getImage();
 		return image;
+	}
+	
+	public ImageIcon getBulletIcon(){
+		ImageIcon i;
+		i = new ImageIcon("lib/images/projectile/obj_poisonball_16x15.png");
+		return i;
+	}
+	
+	public Image getBulletImage(){
+		bulletImage = getBulletIcon().getImage();
+		return bulletImage;
 	}
 }
