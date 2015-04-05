@@ -117,7 +117,7 @@ public class Board {
 							(towers[i][j].getIcon().getIconHeight() - 40)), null);
 					
 					if(towers[i][j].getBullet()!=null){
-						g.drawImage(towers[i][j].getBulletImage(), towers[i][j].getBullet().getX(), towers[i][j].getBullet().getY(), null);
+						towers[i][j].getBullet().drawBullet(g);
 					}
 				}
 			}

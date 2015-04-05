@@ -20,7 +20,9 @@ import model.Game;
 import common.*;
 
 public class Tower extends Subject{
-	//protected LinkedList<Tower> towers;
+	
+	public int MAX_FIRE_INDEX=100;
+	
 	protected Game game;
 	protected Point position;
 	protected int size;
@@ -41,6 +43,7 @@ public class Tower extends Subject{
 	protected boolean highestHealth;
 	protected boolean closest;
 	protected boolean farthest;
+	protected int currFireIndex;
 	
 	public Tower(Point c, Game game){
 		this.position = c;
@@ -61,6 +64,7 @@ public class Tower extends Subject{
 		fireRate = 1; //rate of fire
 		isSpecial = false; //if tower has special effects
 		specialmod = 1;	 //special effect value	
+		currFireIndex=0;
 	}
 
 	//increase the level of the tower
@@ -93,18 +97,24 @@ public class Tower extends Subject{
 	public void fire(){
 		if(inRange==null && !activeBullet) bullet = null;
 		
-		game.getWave().removeDead();
+		if (currFireIndex>=MAX_FIRE_INDEX){
+			targetsInRange(game.getWave().getCritterBank());
 		
-		targetsInRange(game.getWave().getCritterBank());
-		
-		if(inRange!=null){
-			if(activeBullet&&inRange.size()!=0) bullet.moveBullet(inRange);
-			else{ 
-				bullet = new Bullet(this.position, game);
-				bulletReached = false;
-				activeBullet = true;
-			}
+			if(inRange!=null){
+				if(activeBullet&&inRange.size()!=0) bullet.moveBullet(inRange);
+				else{ 
+					bullet = new Bullet(this.position, game);
+					bulletReached = false;
+					activeBullet = true;
+				}
 		}
+			
+			currFireIndex=0;
+		}else{
+			currFireIndex=(int)(currFireIndex+fireRate*5);
+		}
+		
+		
 	}
 
 	public void targetsInRange(ArrayList<Critter> critters){
@@ -225,5 +235,8 @@ public class Tower extends Subject{
 	
 	public double distance(double x1, double y1, double x2, double y2){
 		return Math.sqrt(Math.pow((y2-y1), 2)+Math.pow((x2-x1), 2));
+	}
+	public double distanceSquared(double x1, double y1, double x2, double y2){
+		return Math.pow((y2-y1), 2)+Math.pow((x2-x1), 2);
 	}
 }

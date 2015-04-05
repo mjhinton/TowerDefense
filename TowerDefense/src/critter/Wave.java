@@ -20,6 +20,7 @@ public class Wave{
 	private double difficulty;
 	private boolean waveInProgress;
 	private Game game;
+	private boolean paused;
 	
 	public Wave(int n, Game game){
 		this.game=game;
@@ -112,6 +113,14 @@ public class Wave{
 	
 	public ArrayList<Critter> getCritterBank(){
 		return critterBank;
+	}
+	
+	public void togglePaused(){
+		paused = !paused;
+	}
+	
+	public boolean getPaused(){
+		return paused;
 	}
 	
 }

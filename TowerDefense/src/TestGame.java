@@ -1,8 +1,6 @@
 
 
 
-import common.ReadWriteTxtFile;
-import critter.Critter;
 import map.Map;
 import model.Game;
 import presentation.View;

@@ -25,12 +25,11 @@ public class Bullet extends Tower{
 	
 	protected Image image;
 	protected int pointer;
-	protected int tileSize = game.getBoard().getMap().CELL_PIXEL_SIZE;
 	
 	public Bullet(Point c, Game game){
 		super(c, game);
-		this.bullet_X = super.position.getX()*tileSize;
-		this.bullet_Y = super.position.getY()*tileSize;
+		this.bullet_X = Map.getCenterX(super.position.x);
+		this.bullet_Y = Map.getCenterY(super.position.y);
 		velocity = 0.5; //TODO: decide on an appropriate velocity
 		//TODO: implement making sprite display
 	}
@@ -41,17 +40,18 @@ public class Bullet extends Tower{
 		activeBullet = true;
 		
 		if(enemies.get(pointer)==null){
-			bullet_X = super.position.getX()*tileSize;
-			bullet_Y = super.position.getY()*tileSize;
+			bullet_X = super.position.getX();
+			bullet_Y = super.position.getY();
 			bulletReached = true;
 			activeBullet = false;
 		}// TODO: attempt to reset if creep dies on the way; incomplete
 		
-			closest_X = enemies.get(pointer).getX()*tileSize;
-			closest_Y = enemies.get(pointer).getY()*tileSize;
-			theta = Math.atan2(closest_Y-bullet_Y, closest_X-bullet_X);
-			velocity_X = velocity * Math.cos(theta);
-			velocity_Y = velocity * Math.sin(theta);
+			closest_X = enemies.get(pointer).getX();
+			closest_Y = enemies.get(pointer).getY();
+			double dx=closest_X-bullet_X;
+			double dy=closest_Y-bullet_Y;
+			velocity_X = velocity * dx/Math.sqrt(dx*dx+dy*dy);
+			velocity_Y = velocity * dy/Math.sqrt(dx*dx+dy*dy);
 		
 		if(!bulletReached&&activeBullet){
 			bullet_X += velocity_X;
@@ -65,8 +65,8 @@ public class Bullet extends Tower{
 				
 				inRange.clear();
 				
-				bullet_X = super.position.getX()*tileSize;
-				bullet_Y = super.position.getY()*tileSize;
+				bullet_X = super.position.getX();
+				bullet_Y = super.position.getY();
 				
 				activeBullet = bulletReached = false;
 		}
@@ -99,21 +99,21 @@ public class Bullet extends Tower{
 	}
 	
 	public void drawBullet(Graphics g) {
-			g.drawImage(image, (int) bullet_X,
-				(int) bullet_Y, null);
+			g.drawImage(image, (int) bullet_X*Map.CELL_PIXEL_SIZE,
+				(int) bullet_Y*Map.CELL_PIXEL_SIZE, null);
 	}
 	
-	public int getX(){
-		return (int) bullet_X;
+	public double getX(){
+		return bullet_X;
 	}
 	
-	public int getY(){
-		return (int) bullet_Y;
+	public double getY(){
+		return  bullet_Y;
 	}
 	
 	public int lowestHealth(ArrayList<Critter> input){
 		int pointer = 0;
-		int lowestHealth = (int) Math.pow(10, 9);
+		int lowestHealth = 100000;
 		for(int i = 0; i < input.size(); i++){
 			if(input.get(i).getHealth()<lowestHealth){
 				lowestHealth = input.get(i).getHealth();
@@ -137,10 +137,12 @@ public class Bullet extends Tower{
 	
 	public int closest(ArrayList<Critter> input){
 		int pointer = 0;
-		double closestDistance = Math.pow(10, 9);
+		double closestDistanceSquared = 1000000;
+		double currDistanceSquared;
 		for(int i = 0; i < input.size(); i++){
-			if(distance(position.getX(), position.getY(), input.get(i).getX(), input.get(i).getY())<closestDistance){
-				closestDistance = distance(position.getX(), position.getY(), input.get(i).getX(), input.get(i).getY());
+			currDistanceSquared=distanceSquared(position.getX(), position.getY(), input.get(i).getX(), input.get(i).getY());
+			if(currDistanceSquared<closestDistanceSquared){
+				closestDistanceSquared = currDistanceSquared;
 				pointer = i;
 			}
 		}
@@ -149,10 +151,12 @@ public class Bullet extends Tower{
 	
 	public int farthest(ArrayList<Critter> input){
 		int pointer = 0;
-		double farthestDistance = 0;
+		double farthestDistanceSquared = 0;
+		double currDistanceSquared;
 		for(int i = 0; i < input.size(); i++){
-			if(distance(position.getX(), position.getY(), input.get(i).getX(), input.get(i).getY())>farthestDistance){
-				farthestDistance = distance(position.getX(), position.getY(), input.get(i).getX(), input.get(i).getY());
+			currDistanceSquared=distanceSquared(position.getX(), position.getY(), input.get(i).getX(), input.get(i).getY());
+			if(currDistanceSquared>farthestDistanceSquared){
+				farthestDistanceSquared = currDistanceSquared;
 				pointer = i;
 			}
 		}
