@@ -19,6 +19,7 @@ abstract public class Critter {
 	public final static double STANDARD_SPEED=1.0*((double)View.TIMEOUT)/1000.0;
 
 	// private Board gameBoard;
+	int critterRef;
 	private Path gamePath;
 	private Board gameBoard;
 	private int currPathIndex;
@@ -53,6 +54,7 @@ abstract public class Critter {
 		this.gamePath = gameBoard.getPath();
 		this.reachedGoal = false;
 		this.pathLength = gamePath.length();
+		this.nextPathCoord = gamePath.getCoord(0);
 	}
 
 	// (each critter should look different)
@@ -87,10 +89,10 @@ abstract public class Critter {
 	}
 
 	public double getX() {
-		return x;
+		return nextPathCoord.getX();
 	}
 	public double getY(){
-		return y;
+		return nextPathCoord.getY();
 	}
 	public boolean onPath(){
 		return onPath;
@@ -102,7 +104,6 @@ abstract public class Critter {
 			health=0;
 			onPath=false;
 			game.changeCoins(reward);
-			System.out.println("Critter dead");
 		}	
 	}
 
@@ -168,7 +169,14 @@ abstract public class Critter {
 
 			}
 		}
-
+	}
+	
+	public void setRef(int i){
+		critterRef = i;
+	}
+	
+	public int getRef(){
+		return critterRef;
 	}
 
 	public abstract boolean getShield();

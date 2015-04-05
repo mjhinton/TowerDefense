@@ -123,6 +123,8 @@ public class Game {
 
 	public void updateGame(){
 		
+		for(int i = 0; i < towers.size(); i++) towers.get(i).fire();
+		
 		if(wave!=null){
 			wave.updateCritterPositions();
 		}
