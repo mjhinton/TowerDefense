@@ -66,7 +66,7 @@ public class FreezingTower extends Tower{
 	
 	public ImageIcon getBulletIcon(){
 		ImageIcon i;
-		i = new ImageIcon("lib/images/projectiles/obj_snowball_15x15.png");
+		i = new ImageIcon("lib/images/projectile/obj_snowball_15x15.png");
 		return i;
 	}
 	

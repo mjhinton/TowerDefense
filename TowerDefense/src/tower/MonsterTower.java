@@ -68,7 +68,7 @@ public class MonsterTower extends Tower{
 	
 	public ImageIcon getBulletIcon(){
 		ImageIcon i;
-		i = new ImageIcon("lib/images/projectiles/obj_poisonball_16x15.png");
+		i = new ImageIcon("lib/images/projectile/obj_poisonball_16x15.png");
 		return i;
 	}
 	
