@@ -123,11 +123,15 @@ public class Game {
 
 	public void updateGame(){
 		
-		for(int i = 0; i < towers.size(); i++) towers.get(i).fire();
+		
+		
 		
 		if(wave!=null){
+			this.getWave().removeDead();
 			wave.updateCritterPositions();
 		}
+		
+		for(int i = 0; i < towers.size(); i++) towers.get(i).fire();
 	}
 	public void paintGame(Graphics g) {
 		board.paintBoard(g);

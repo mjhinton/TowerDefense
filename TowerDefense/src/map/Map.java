@@ -474,4 +474,10 @@ public class Map extends Subject {
 			e.printStackTrace();
 		}
 	}
+	public static double getCenterX(int x){
+		return x+0.5;
+	}
+	public static double getCenterY(int y){
+		return y+0.5;
+	}
 }
