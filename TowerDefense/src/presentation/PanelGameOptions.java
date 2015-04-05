@@ -141,6 +141,13 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 			}
 		});
 		
+		bResumePause.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event){
+				goView.getController().getGame().getWave().togglePaused();
+			}
+		});
+		
 		//the slider is too long. adjust dimension
 		sSound.setPreferredSize(new Dimension(160, 30));
 		//make labels
