@@ -56,24 +56,30 @@ public class Wave{
 		}
 		
 		releaseBank=new ArrayList<Critter>();
+		System.out.println("new releaseBank created");
 		for(int j = 0; j < critterBank.size(); j++){
 			critterBank.get(j).increaseDifficulty(1+difficulty/15); //can be modified to change difficulty of waves
 		
 			releaseBank.add(critterBank.get(j));
 		}
+		System.out.println("critters added to releaseBank");
 		
 	}
 	
-	//method for testing purposes
+	//methods for testing purposes
 	public void addCritterToBank(Critter c){
 		critterBank.add(c);
 	}
+	public void addCritterToReleaseBank(Critter c){
+		releaseBank.add(c);
+	}
+	////
+	
 	
 	public void generateCritters(String type, int quantity, Game game){
 		for(int i = 0; i < quantity; i++){
 			Critter critter = CritterFactory.spawn(type, game);
 			critterBank.add(critter);
-			System.out.println(1 + " " + type + "critter added to the critterbank");
 		}
 	}
 	
@@ -85,11 +91,12 @@ public class Wave{
 		if(releasingTimingIndex>=DEFAULT_DELAY/(0.5*difficulty*View.TIMEOUT)){
 			releasingTimingIndex=0;
 			c.setDown();
+			//System.out.println(releaseBank.size()-releasingIndex + " critters left.");
 		//	System.out.println(c.toString()+ " has been set down");
 		//	System.out.println("releaseBank size: "+releaseBank.size());
 			if (releasingIndex>=releaseBank.size()-1){
 				this.finishedRelease=true;
-		//		System.out.println("Finished releasing critters.");
+				System.out.println("Finished releasing critters.");
 			}else{
 				releasingIndex+=1;
 			}

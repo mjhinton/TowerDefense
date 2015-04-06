@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import common.ReadWriteTxtFile;
-
 import tower.Bullet;
 import tower.Tower;
 import map.Map;
@@ -24,6 +23,7 @@ public class Game {
 	private LinkedList<Tower> towers;
 	private int gameSpeedMultiplier;
 	private ArrayList<Bullet> bullets;
+	private boolean maxLevel;
 
 	public Game(Map map) {
 		this.board = new Board(map);
@@ -114,12 +114,13 @@ public class Game {
 
 	public boolean upgradeTower(Tower tower) {
 		boolean worked;
-		if (tower.getLevel() < 5 && this.changeCoins(-1 * tower.getCost())) {
+		if (tower.getLevel()==5){
+			System.out.println("Maximum level reached. Further upgrade not possible.");
+			maxLevel = true;
+		}
+		else if (tower.getLevel() < 5 && this.changeCoins(-1 * tower.getCost())) {
 			worked = board.upgradeTower(tower);
 			return worked;
-		} else {
-			System.out
-					.println("Maximum level reached. Further upgrade not possible.");
 		}
 		return false;
 	}
@@ -175,11 +176,12 @@ public class Game {
 		}
 		if (flag) {
 			wave = new Wave(currentWaveNumber, this);
-			System.out.println("Aww yeah, wave generated");
+			System.out.println("Wave " + currentWaveNumber + " begun.");
 			wave.setUpBank();
 			currentWaveNumber++;
+			System.out.println("This wave contains " + wave.getReleaseBank().size() + " critters.");
 		} else
-			System.out.println("Wave in progress, can't play.");
+			System.out.println("A wave is already in progress.");
 	}
 
 	public Wave getWave() throws NullPointerException {
@@ -216,6 +218,12 @@ public class Game {
 		bullets.remove(bullet);
 	}
 
+	//Method for testing purposes
+	public void addCritter(Critter critter){
+		this.wave.addCritterToBank(critter);
+	}
+	////
+	
 	public void removeCritter(Critter critter) {
 		this.wave.removeCritter(critter);
 

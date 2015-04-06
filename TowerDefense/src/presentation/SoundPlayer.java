@@ -37,7 +37,7 @@ public class SoundPlayer implements MetaEventListener {
 		    sequencer.open();
 		    sequencer.getTransmitter().setReceiver(synthesizer.getReceiver());
 		    sequencer.addMetaEventListener(this);
-		    loadSoundBank("lib/music/GoldenSun.sf2");
+		    //loadSoundBank("lib/music/GoldenSun.sf2");
 	    } catch (MidiUnavailableException ex) {
 	    	sequencer = null;
 	    }
@@ -75,7 +75,6 @@ public class SoundPlayer implements MetaEventListener {
 	        sequencer.setSequence(sequence);
 	        sequencer.start();
 	        this.loop = loop;
-	        setVolume(0.5d);
 	      } catch (InvalidMidiDataException ex) {
 	        ex.printStackTrace();
 	      }

@@ -165,7 +165,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	    	    				"<b>Level: </b>" + tower.getLevel() + " <b>(MAX)" +
 	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value +  			
 	    		    			"<br><b>Range: </b>" + tower.getRange() +
-	    		    			"<br><b>Damage: </b>" + (int) (100*Math.round(100*(tower.getPower()))) +  
+	    		    			"<br><b>Damage: </b>" + (int) Math.round(100*(tower.getPower())) +  
 	    		    			"</html>"		
 	    						);
 		    			}	
@@ -230,6 +230,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	public void paint(Graphics g){
 		//Model.getMap().paint(g);
 		//testGame.paintGame(g);
+		g.fillRect(0,0,Map.CELL_PIXEL_SIZE*Map.MAX_WIDTH,Map.CELL_PIXEL_SIZE*Map.MAX_HEIGHT);
 		view.getController().paintComponent(g);
 
 	}

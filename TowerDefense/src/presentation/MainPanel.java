@@ -78,6 +78,7 @@ public class MainPanel extends JPanel {
 
 	
 	public void switchMusic(){
+		
 		if (bgsound.isPlaying()){
 			bgsound.setPaused(true);
 		}
@@ -103,6 +104,7 @@ public class MainPanel extends JPanel {
 			else if (randomnum < 0.9){
 				sequence = bgsound.getSequence("lib/music/song050.mid");				
 			}
+			bgsound.loadSoundBank("lib/music/GoldenSun.sf2");
 			bgsound.play(sequence, true);
 		}
 	}

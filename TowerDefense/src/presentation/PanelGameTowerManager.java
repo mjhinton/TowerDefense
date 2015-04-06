@@ -19,7 +19,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 	private PanelGameBoard mainboard;
 	
 	private static JLabel PF = new JLabel("Current funds: " + Character.toString((char) 8353) + 1000);
-	private static JLabel WaveNo = new JLabel("Wave: 1");
+	private static JLabel WaveNo = new JLabel("Wave: 0");
 	private static JLabel PHealth = new JLabel("Health: 0");
 
 	public PanelGameTowerManager(View iview){
@@ -196,7 +196,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 				+ view.getController().getGame().getHealth() + "</font></html>");
 		}
 		else if (view.getController().getGame().getHealth() <= 50){
-			PHealth.setText("<html>Health: <font color=#FFFF00>" 
+			PHealth.setText("<html>Health: <font color=#FFD700>" 
 					+ view.getController().getGame().getHealth() + "</font></html>");
 		}
 		else {

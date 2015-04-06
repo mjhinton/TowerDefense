@@ -36,11 +36,12 @@ public class TowerTest {
 		testController = testView.getController();
 
 		testController.startGame(testMap);
+		
 		testGame = testView.getModel().getGame();
 		testBoard = testGame.getBoard();
 		testWave = testGame.getWave();
 		
-		testTower1 = new NormalTower(new Point(0,0), testGame);
+		testTower1 = new NormalTower(new Point(2,2), testGame);
 		testTower2 = new FreezingTower(new Point(1,4), testGame);
 		testTower3 = new MonsterTower(new Point(12,12), testGame);
 	}
@@ -95,9 +96,16 @@ public class TowerTest {
 	//Also tests targetsInRange(ArrayList<Critter>), getTarget(ArrayList<Critter>), and ShootBullet(Critter)
 	@Test
 	public void testFire() throws InterruptedException {
-		testController.playGame(testMap);
-		fail("Not yet implemented");
 		
+		testController.getGame().addTower(testTower1);
+		testController.getGame().addTower(testTower2);
+		testController.getGame().addTower(testTower3);
+		
+		testController.playGame(testMap);
+		
+		//fails("Not yet done implementing");
+	
+	
 	}
 
 	
