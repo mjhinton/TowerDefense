@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 //import javax.swing.SwingUtilities;
 
-
-
 import tower.*;
 import map.Map;
 import model.Game;
@@ -151,7 +149,26 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 				 double value = 100;
 		    	if(upgradeMode && tower != null){
 		    		if (tower.getLevel() == 5){
-		    			this.setToolTipText("You can't upgrade this any further.");
+		    			if (tower.getIcon().getIconHeight() == 62){
+		    				this.setToolTipText(
+	    						"<html>" +
+	    	    				"<b>Level: </b>" + tower.getLevel() + " <b>(MAX)" +
+	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value +  			
+	    		    			"<br><b>Range: </b>" + tower.getRange() +
+	    		    			"<br><b>Slowing Power: </b>" + Math.round(100*(tower.getSpecialmod()))/value + 
+	    		    			"</html>"		
+	    						);
+		    			}
+		    			else{
+		    				this.setToolTipText(
+	    						"<html>" +
+	    	    				"<b>Level: </b>" + tower.getLevel() + " <b>(MAX)" +
+	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value +  			
+	    		    			"<br><b>Range: </b>" + tower.getRange() +
+	    		    			"<br><b>Damage: </b>" + Math.round(100*(tower.getPower())) +  
+	    		    			"</html>"		
+	    						);
+		    			}	
 		    		}
 		    		else{
 		    			if (tower.getIcon().getIconHeight() == 62){
@@ -166,6 +183,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 				    			"</html>"				
 		    		    	);
 		    			}
+		    			//needs to be adjusted if the upgrade attributes are any different!!
 		    			else{
 				    		this.setToolTipText(
 			    				"<html><b>Upgrade Cost: </b>" + sc + tower.getCost() +
