@@ -26,7 +26,7 @@ public class Board {
 	public boolean addTower(Tower tower) {
 		Point c = tower.getPosition();
 		try {
-			if (towers[c.x][c.y] == null) {
+			if (towers[c.x][c.y] == null) {	
 				if (map.getCell(c) instanceof SceneryCell) {
 					towers[c.x][c.y] = tower;
 					// tower.getImage().setToolTipText("Next level cost: " +

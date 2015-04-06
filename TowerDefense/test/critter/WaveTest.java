@@ -107,6 +107,7 @@ public class WaveTest {
 	//releasing timing index is 0 at first, releasing is not finished.
 	testWave.releaseCritters();
 	assertFalse(testWave.finishedRelease());
+	
 	//artificially increase releasing timing index to a high value
 	int index = (int)(testWave.DEFAULT_DELAY)/(int)(0.5*testWave.getDifficulty()*View.TIMEOUT)+1;
 	testWave.setReleasingTimingIndex(index);
