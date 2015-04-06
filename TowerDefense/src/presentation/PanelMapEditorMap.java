@@ -59,6 +59,7 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 	
 	public void paint(Graphics g){
 		//view.model.getEditor().paintMapEditor(g);
+		g.fillRect(0,0,Map.CELL_PIXEL_SIZE*Map.MAX_WIDTH,Map.CELL_PIXEL_SIZE*Map.MAX_HEIGHT);
 		view.getController().paintComponent(g);
 
 		//testMap.paintMap(g);
@@ -82,10 +83,12 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 	}
 	
 	public boolean tryInitiatingPath(){
-		if (mapBeingEdited.initPath())
-			return true;
-		else
-			return false;
+		try{
+			if (mapBeingEdited.initPath())
+				return true;
+		} catch (NullPointerException e){
+		}
+		return false;
 	}
 
 	@Override

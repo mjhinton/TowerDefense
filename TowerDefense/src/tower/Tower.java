@@ -140,7 +140,7 @@ public class Tower extends Subject{
 	}
 	public Critter lowestHealth(ArrayList<Critter> input){
 		int pointer = 0;
-		int lowestHealth = 100000;
+		double lowestHealth = 100000;
 		for(int i = 0; i < input.size(); i++){
 			if(input.get(i).getHealth()<lowestHealth){
 				lowestHealth = input.get(i).getHealth();
@@ -152,7 +152,7 @@ public class Tower extends Subject{
 	
 	public Critter highestHealth(ArrayList<Critter> input){
 		int pointer = 0;
-		int highestHealth = 0;
+		double highestHealth = 0;
 		for(int i = 0; i < input.size(); i++){
 			if(input.get(i).getHealth()>highestHealth){
 				highestHealth = input.get(i).getHealth();

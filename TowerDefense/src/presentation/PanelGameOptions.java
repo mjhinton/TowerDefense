@@ -61,8 +61,8 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		bMenu=new JButton("Main Menu");
 		String [] speedOptions={"Speed X1","Speed X2","Speed X4","Speed X6","Speed X10"};
 		cbSpeed=new JComboBox(speedOptions);
-		sSound=new JSlider(-20, 6);
-		sSound.setValue(0);
+		sSound=new JSlider(0, 10);
+		sSound.setValue(5);
 		
 		//add them to the panel
 		pnSound=new JPanel();
@@ -165,7 +165,8 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		bSave.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event){
-				goView.getController().getGame().saveGame();
+				System.out.println("This functionality has not yet been added.");
+				//goView.getController().getGame().saveGame();
 			}
 		});
 		
@@ -173,8 +174,8 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		sSound.setPreferredSize(new Dimension(160, 30));
 		//make labels
 		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-		labelTable.put( new Integer(-19), new JLabel("-") );
-		labelTable.put( new Integer(5), new JLabel("+") );
+		labelTable.put( new Integer(0), new JLabel("-") );
+		labelTable.put( new Integer(10), new JLabel("+") );
 		sSound.setLabelTable( labelTable );
 		sSound.setPaintLabels(true);
 		
@@ -189,9 +190,9 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 	public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider)e.getSource();
         if (!source.getValueIsAdjusting()) {
-            int vol = (int)source.getValue();
-            float z = (float) vol;
-            //SoundPlayer.setVolume(z);
+            int vol = source.getValue()/10;
+            double z = vol;
+            SoundPlayer.setVolume(z);
         }
     }
 }

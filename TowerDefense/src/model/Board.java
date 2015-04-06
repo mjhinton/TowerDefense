@@ -75,7 +75,11 @@ public class Board {
 	}
 
 	public Tower getTower(Point c) {
-		return towers[c.x][c.y];
+		try{
+			return towers[c.x][c.y];
+		}catch (Exception e){
+			return null;
+		}
 	}
 
 	public boolean upgradeTower(Tower tower) {

@@ -80,7 +80,7 @@ public class Bullet {
 				} 
 			}
 		} catch (NullPointerException e) {
-			System.out.println("No critters left for bullet to hit.");
+			//System.out.println("No critters left for bullet to hit.");
 		}
 		if (bullet_X > max_X || bullet_X < min_X
 				|| bullet_Y > max_Y || bullet_Y < min_Y) {
@@ -97,9 +97,11 @@ public class Bullet {
 	
 	public void hit(Critter critter){
 		if (tower.getIsSpecial()){
-			critter.reduceSpeed(tower.specialmod);
+			if (critter.getSpeed() > critter.STANDARD_SPEED*tower.specialmod){
+				critter.reduceSpeed(tower.specialmod);
+			}
 		}else{
-			critter.getsHit((int) tower.getPower());
+			critter.getsHit(tower.getPower());
 		}
 	}
 

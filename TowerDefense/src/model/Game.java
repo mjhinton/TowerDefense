@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import common.ReadWriteTxtFile;
-
 import tower.Bullet;
 import tower.Tower;
 import map.Map;
@@ -30,7 +29,7 @@ public class Game {
 		this.currentWaveNumber = 1;
 		this.wave = null;
 		// Start with many coins just for testing purposes
-		this.playerCoins = 10000;
+		this.playerCoins = 2000;
 		this.gameOver = false;
 		towers = new LinkedList<Tower>();
 		this.playerHealth = 250;
@@ -46,6 +45,7 @@ public class Game {
 	// from the map editor.
 	public void setUpBoardFromEditor(Map map) {
 		board.setMap(map);
+		board.getMap().initPath();
 	}
 
 	public int getCoins() {
@@ -117,8 +117,7 @@ public class Game {
 			worked = board.upgradeTower(tower);
 			return worked;
 		} else {
-			System.out
-					.println("Maximum level reached. Further upgrade not possible.");
+			System.out.println("Maximum level reached. Further upgrade not possible.");
 		}
 		return false;
 	}
@@ -174,11 +173,12 @@ public class Game {
 		}
 		if (flag) {
 			wave = new Wave(currentWaveNumber, this);
-			System.out.println("Aww yeah, wave generated");
+			System.out.println("Wave " + currentWaveNumber + " begun.");
 			wave.setUpBank();
 			currentWaveNumber++;
+			System.out.println("This wave contains " + wave.getReleaseBank().size() + " critters.");
 		} else
-			System.out.println("Wave in progress, can't play.");
+			System.out.println("A wave is already in progress.");
 	}
 
 	public Wave getWave() throws NullPointerException {

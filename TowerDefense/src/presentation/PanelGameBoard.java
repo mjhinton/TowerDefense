@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 //import javax.swing.SwingUtilities;
 
-
-
 import tower.*;
 import map.Map;
 import model.Game;
@@ -143,60 +141,87 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	public void mouseMoved(MouseEvent e){
 		//System.out.println(e.getX() + "," + e.getY());
 		Game game=view.getController().getGame();
-	    Tower tower=game.getBoard().getTower
-	    		(new Point(e.getX()/Map.CELL_PIXEL_SIZE, e.getY()/Map.CELL_PIXEL_SIZE));
-	    String sc = Character.toString((char) 8353);
-	    double value = 100;
-	    	if(upgradeMode && tower != null){
-	    		if (tower.getLevel() == 5){
-	    			this.setToolTipText("You can't upgrade this any further.");
-	    		}
-	    		else{
-	    			if (tower.getIcon().getIconHeight() == 62){
-	    				this.setToolTipText(
-    						"<html><b>Upgrade Cost: </b>" + sc + tower.getCost() +
-		    				"<br><b>Level: </b>" + tower.getLevel() + "--><b>" + (tower.getLevel() + 1) +
-		    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value + 
-		    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +		    			
-			    			"<br>Range: </b>" + tower.getRange() + "--><b>" + (tower.getRange() + 1) +
-			    			"<br>Slowing Power: </b>" + Math.round(100*(tower.getSpecialmod()))/value + 
-			    			"--><b>" + Math.round(100*(tower.getSpecialmod() - 0.05))/value +
-			    			"</html>"				
-	    		    	);
-	    			}
-	    			else{
+	    if(e.getX()/Map.CELL_PIXEL_SIZE<view.getModel().getGame().getBoard().getMap().getWidth()&&e.getY()/Map.CELL_PIXEL_SIZE<view.getModel().getGame().getBoard().getMap().getHeight()){
+			try{
+				Tower tower=game.getBoard().getTower(new Point(e.getX()/Map.CELL_PIXEL_SIZE, e.getY()/Map.CELL_PIXEL_SIZE));
+
+				 String sc = Character.toString((char) 8353);
+				 double value = 100;
+		    	if(upgradeMode && tower != null){
+		    		if (tower.getLevel() == 5){
+		    			if (tower.getIcon().getIconHeight() == 62){
+		    				this.setToolTipText(
+	    						"<html>" +
+	    	    				"<b>Level: </b>" + tower.getLevel() + " <b>(MAX)" +
+	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value +  			
+	    		    			"<br><b>Range: </b>" + tower.getRange() +
+	    		    			"<br><b>Slowing Power: </b>" + (int) Math.round(100*(tower.getSpecialmod()))/value + 
+	    		    			"</html>"		
+	    						);
+		    			}
+		    			else{
+		    				this.setToolTipText(
+	    						"<html>" +
+	    	    				"<b>Level: </b>" + tower.getLevel() + " <b>(MAX)" +
+	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value +  			
+	    		    			"<br><b>Range: </b>" + tower.getRange() +
+	    		    			"<br><b>Damage: </b>" + (int) Math.round(100*(tower.getPower())) +  
+	    		    			"</html>"		
+	    						);
+		    			}	
+		    		}
+		    		else{
+		    			if (tower.getIcon().getIconHeight() == 62){
+		    				this.setToolTipText(
+	    						"<html><b>Upgrade Cost: </b>" + sc + tower.getCost() +
+			    				"<br><b>Level: </b>" + tower.getLevel() + "--><b>" + (tower.getLevel() + 1) +
+			    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value + 
+			    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +		    			
+				    			"<br>Range: </b>" + tower.getRange() + "--><b>" + (tower.getRange() + 1) +
+				    			"<br>Slowing Power: </b>" + Math.round(100*(tower.getSpecialmod()))/value + 
+				    			"--><b>" + (int) Math.round(100*(tower.getSpecialmod() - 0.05))/value +
+				    			"</html>"				
+		    		    	);
+		    			}
+		    			//needs to be adjusted if the upgrade attributes are any different!!
+		    			else{
+				    		this.setToolTipText(
+			    				"<html><b>Upgrade Cost: </b>" + sc + tower.getCost() +
+	    	    				"<br><b>Level: </b>" + tower.getLevel() + "--><b>" + (tower.getLevel() + 1) +
+	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value + 
+	    	    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +
+	    	    				"<br>Damage: </b>" + Math.round(100*(tower.getPower())) + 
+	    	    				"--><b>" + (int) (int) (100*Math.round(100*(tower.getPower()*1.5))/value) +
+	    		    			"</html>"
+		    		    	);			    				
+		    			}
+		    		}
+		    	}	    
+			    else if (tower != null){
+			    	if (tower.getLevel() == 5){
 			    		this.setToolTipText(
-		    				"<html><b>Upgrade Cost: </b>" + sc + tower.getCost() +
-    	    				"<br><b>Level: </b>" + tower.getLevel() + "--><b>" + (tower.getLevel() + 1) +
-    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value + 
-    	    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +
-    	    				"<br>Damage: </b>" + Math.round(100*(tower.getPower())) + 
-    	    				"--><b>" + Math.round(100*(tower.getPower()*1.5))/value +
-    		    			"</html>"
-	    		    	);			    				
-	    			}
-	    		}
-	    	}	    
-		    else if (tower != null){
-		    	if (tower.getLevel() == 5){
-		    		this.setToolTipText(
-		    			"<html><b>Level: </b>" + tower.getLevel() + 
-		    			"<br><b>Selling Value: </b>" + sc + tower.getValue() +
-		    			"</html>"
-		    			);
-		    	}
-		    	else{
-			    	this.setToolTipText(
-		    			"<html><b>Level: </b>" + tower.getLevel() + 
-		    			"<br><b>Upgrade Cost: </b>" + sc + tower.getCost() +
-		    			"<br><b>Selling Value: </b>" + sc + tower.getValue() +
-		    			"</html>"
-		    			);
-		    	}
-		    }
-		    else{
-		    	this.setToolTipText("");
-		    }
+			    			"<html><b>Level: </b>" + tower.getLevel() + 
+			    			"<br><b>Selling Value: </b>" + sc + tower.getValue() +
+			    			"</html>"
+			    			);
+			    	}
+			    	else{
+				    	this.setToolTipText(
+			    			"<html><b>Level: </b>" + tower.getLevel() + 
+			    			"<br><b>Upgrade Cost: </b>" + sc + tower.getCost() +
+			    			"<br><b>Selling Value: </b>" + sc + tower.getValue() +
+			    			"</html>"
+			    			);
+			    	}
+			    }
+			    else{
+			    	this.setToolTipText("");
+			    }
+			}catch (NullPointerException err){
+				
+			}
+		   
+	    }
 	}
 	
 	public void mouseDragged(MouseEvent e){
@@ -205,6 +230,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	public void paint(Graphics g){
 		//Model.getMap().paint(g);
 		//testGame.paintGame(g);
+		g.fillRect(0,0,Map.CELL_PIXEL_SIZE*Map.MAX_WIDTH,Map.CELL_PIXEL_SIZE*Map.MAX_HEIGHT);
 		view.getController().paintComponent(g);
 
 	}

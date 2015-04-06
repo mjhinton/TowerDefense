@@ -78,11 +78,13 @@ public class MainPanel extends JPanel {
 
 	
 	public void switchMusic(){
+		
 		if (bgsound.isPlaying()){
 			bgsound.setPaused(true);
 		}
 		if (currentPanel.equals("PanelMenu")){
 			Sequence sequence = bgsound.getSequence("lib/music/GS_Title.mid");
+			bgsound.loadSoundBank("lib/music/GoldenSun.sf2");
 			bgsound.play(sequence, true);
 		}
 		if (currentPanel.equals("PanelMapEditor")){
@@ -102,6 +104,7 @@ public class MainPanel extends JPanel {
 			else if (randomnum < 0.9){
 				sequence = bgsound.getSequence("lib/music/song050.mid");				
 			}
+			bgsound.loadSoundBank("lib/music/GoldenSun.sf2");
 			bgsound.play(sequence, true);
 		}
 	}

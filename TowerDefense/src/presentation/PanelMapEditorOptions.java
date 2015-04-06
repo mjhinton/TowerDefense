@@ -25,7 +25,7 @@ public class PanelMapEditorOptions extends JPanel {
 	
 	private View meView;
 	
-	private JButton bSaveMap, bPlayMap, bMainMenu, bOpenMap, bMapSettings;
+	private JButton bSaveMap, bPlayMap, bMainMenu, bLoadMap, bMapSettings, bResetMap;
 
 	public PanelMapEditorOptions(final View view){
 
@@ -43,14 +43,16 @@ public class PanelMapEditorOptions extends JPanel {
 		bSaveMap = new JButton ("Save Map");
 		bPlayMap = new JButton("Play Map");
 		bMainMenu = new JButton("Main Menu");
-		bOpenMap = new JButton("Open Saved Map");
+		bLoadMap = new JButton("Load Saved Map");
+		bResetMap = new JButton("Reset Map");
 		
-		JPanel pnButtonsContainer = new JPanel(new GridLayout(5,1));
+		JPanel pnButtonsContainer = new JPanel(new GridLayout(6,1));
 		
 		pnButtonsContainer.add(bMapSettings);
 		pnButtonsContainer.add(bSaveMap);
-		pnButtonsContainer.add(bOpenMap);
+		pnButtonsContainer.add(bLoadMap);
 		pnButtonsContainer.add(bPlayMap);
+		pnButtonsContainer.add(bResetMap);
 		pnButtonsContainer.add(bMainMenu);
 		
 		//creates pop-up for bMapOptions
@@ -77,7 +79,12 @@ public class PanelMapEditorOptions extends JPanel {
         				else if(newName.getText().equals("")) System.out.println("Please enter a valid name.");	
         				else if(newX.getText().equals("")||newY.getText().equals("")) System.out.println("Please enter a valid number from 1-15");
         			}
-        			else meView.createEditableMap(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
+        			else {
+        				Map newMap = new Map(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
+        				//meView.createEditableMap(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
+        				meView.mp.pnlMapEd.pnMap.setMapEdited(newMap);
+        				meView.model.getEditor().setMap(newMap);
+        			}
         		}
         		meView.switchPanel("PanelMapEditor");
             }
@@ -92,7 +99,6 @@ public class PanelMapEditorOptions extends JPanel {
                if(flag){
             	   Map.saveMap(map);
                }
-               
             }
         });
         
@@ -103,14 +109,13 @@ public class PanelMapEditorOptions extends JPanel {
             	
             	PanelMapEditorMap currentMapEditor = meView.mp.pnlMapEd.pnMap;
             
-            	if (currentMapEditor.tryInitiatingPath()==true)
-            	{ 
-            	//set up board from the editor
-            	meView.model.getGame().setUpBoardFromEditor(currentMapEditor.getMapEdited());
-            	//initiate the path
-            	meView.model.getGame().getBoard().getMap().initPath();
-            	//switch panel
-            	meView.switchPanel("PanelGame");
+            	if (currentMapEditor.tryInitiatingPath()==true){ 
+	            	//set up board from the editor
+	            	meView.getController().startGame(currentMapEditor.getMapEdited());
+	            	//initiate the path
+	            	//meView.model.getGame().getBoard().getMap().initPath();
+	            	//switch panel
+	            	meView.switchPanel("PanelGame");
             	}
             	else
             		System.out.println("Cannot play this map, invalid path");
@@ -123,12 +128,13 @@ public class PanelMapEditorOptions extends JPanel {
                 meView.switchPanel("PanelMenu");
             }
         });	
-        bOpenMap.addActionListener(new ActionListener() {
+        
+        bLoadMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 //open panel of saved maps
             	//for now, it just opens the test map 
-            	File savedMaps = new File("lib/maps");
+            	File savedMaps = new File("lib/maps/custom_maps");
         		
             	JFileChooser chooser = new JFileChooser();
             	chooser.setCurrentDirectory(savedMaps);
@@ -138,11 +144,20 @@ public class PanelMapEditorOptions extends JPanel {
         	    if(returnVal == JFileChooser.APPROVE_OPTION){
         	    	String[] testArrayMap = ReadWriteTxtFile.readTxtFileAsStringArray(chooser.getSelectedFile().getAbsolutePath());
                 	Map loadedMap = new Map("testMap", 15, testArrayMap);
+                	meView.mp.pnlMapEd.pnMap.setMapEdited(loadedMap);
                 	meView.model.getEditor().setMap(loadedMap);
         	    }
-            	
             }
         });	
+        
+        bResetMap.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+            	Map newMap = new Map();
+            	meView.mp.pnlMapEd.pnMap.setMapEdited(newMap);
+				meView.model.getEditor().setMap(newMap);
+            }
+        });
         
         this.add(pnButtonsContainer, BorderLayout.EAST);
 		
