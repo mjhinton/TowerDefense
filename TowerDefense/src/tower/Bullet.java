@@ -63,7 +63,12 @@ public class Bullet {
 			for (int i = 0; i < critters.size(); i++) {
 				Critter c = critters.get(i);
 				if (detectCollision(c)) {
-					c.getsHit((int) tower.getPower());
+					if (tower.getBlastRadius()>0){
+						blast(critters);
+					}else{
+						c.getsHit((int) tower.getPower());
+					}
+					
 					game.removeBullet(this);
 				} else if (bullet_X > max_X || bullet_X < min_X
 						|| bullet_Y > max_Y || bullet_Y < min_Y) {
@@ -88,66 +93,17 @@ public class Bullet {
 
 	}
 
-	// //TODO: make move bullet refresh the position of the critter between
-	// every call
-	// public void moveBullet(ArrayList<Critter> enemies){ //defines potential
-	// movement directions of bullet
-	// implementTargetPattern(enemies);
-	// activeBullet = true;
-	//
-	// if(enemies.get(pointer)==null){
-	// bullet_X = super.position.getX();
-	// bullet_Y = super.position.getY();
-	// bulletReached = true;
-	// activeBullet = false;
-	// }// TODO: attempt to reset if creep dies on the way; incomplete
-	//
-	// target_X = enemies.get(pointer).getX();
-	// target_Y = enemies.get(pointer).getY();
-	// double dx=target_X-bullet_X;
-	// double dy=target_Y-bullet_Y;
-	// velocity_X = velocity * dx/Math.sqrt(dx*dx+dy*dy);
-	// velocity_Y = velocity * dy/Math.sqrt(dx*dx+dy*dy);
-	//
-	// if(!bulletReached&&activeBullet){
-	// bullet_X += velocity_X;
-	// bullet_Y += velocity_Y;
-	// if(bullet_X + velocity_X > target_X || bullet_Y + velocity_Y > target_Y)
-	// bulletReached = true;
-	// }
-	//
-	// if(bulletReached){
-	// System.out.println("dealt damage: " + super.toString());
-	// damageEnemies(enemies);
-	//
-	// inRange.clear();
-	//
-	// bullet_X = super.position.getX();
-	// bullet_Y = super.position.getY();
-	//
-	// activeBullet = bulletReached = false;
-	// }
-	// }
 
-	// public void damageEnemies(ArrayList<Critter> enemies){
-	// for(int i = 0; i < enemies.size(); i++){
-	// Critter j = enemies.get(i);
-	// if(j == null) break;
-	//
-	// if(i==0){
-	// if(super.isSpecial) j.setSpeed(j.getSpeed() * super.specialmod);
-	// else j.getsHit((int) super.power);
-	// }
-	//
-	// if(i>0){
-	// if(distance(enemies.get(0).getX(), enemies.get(0).getY(), j.getX(),
-	// j.getY())<range){
-	// if(super.isSpecial) j.setSpeed(j.getSpeed() * super.specialmod);
-	// else j.getsHit((int) super.power);
-	// }
-	// }
-	// }
-	// }
+	public void blast(ArrayList<Critter> critters){
+		double blastRadius=tower.getBlastRadius();
+		for(int i = 0; i < critters.size(); i++){
+			Critter c=critters.get(i);
+			boolean flag=Tower.distanceSquared(bullet_X, bullet_Y, Map.getCenterX(c.getX()), Map.getCenterY(c.getY()))<blastRadius*blastRadius;
+			if(flag && critters.get(i).onPath()){
+				c.getsHit((int) tower.getPower());
+			}
+		}
+	}
 
 	public void drawBullet(Graphics g) {
 		g.drawImage(image, (int) (bullet_X * Map.CELL_PIXEL_SIZE)

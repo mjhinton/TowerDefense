@@ -31,7 +31,7 @@ public class Tower extends Subject{
 	protected int level;
 	protected int value;
 	protected int range;
-	protected int bulletRange;
+	protected double bulletRange;
 	protected double power;
 	protected double fireRate;
 	protected boolean isSpecial;
@@ -60,8 +60,8 @@ public class Tower extends Subject{
 		level = 1; //upgrade level
 		value = (int) (cost * level * 0.6); //selling value
 		range = 3; //range of tower
-		bulletRange = 1; //range of bullet explosion
-		power = 5; //power of bullets
+		bulletRange = 0; //range of bullet explosion
+		power = 2; //power of bullets
 		fireRate = 1; //rate of fire
 		isSpecial = false; //if tower has special effects
 		specialmod = 1;	 //special effect value	
@@ -125,8 +125,7 @@ public class Tower extends Subject{
 		for(int i = 0; i < critters.size(); i++){
 			boolean flag=distanceSquared(Map.getCenterX(position.x), Map.getCenterY(position.y), Map.getCenterX(critters.get(i).getX()), Map.getCenterY(critters.get(i).getY()))<range*range;
 			if(flag && critters.get(i).onPath()){
-				inRange.add(critters.get(i));
-				
+				inRange.add(critters.get(i));	
 			}
 		}
 	return inRange;
@@ -264,7 +263,6 @@ public class Tower extends Subject{
 	}
 	
 	public Image getImage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -283,14 +281,6 @@ public class Tower extends Subject{
 		return i2;
 	}
 	
-//	public Bullet getBullet(){
-//		return bullet;
-//	}
-	
-//	public boolean hasActiveBullet(){
-//		return activeBullet;
-//	}
-	
 	public Game getGame(){
 		return game;
 	}
@@ -300,5 +290,9 @@ public class Tower extends Subject{
 	}
 	public static double distanceSquared(double x1, double y1, double x2, double y2){
 		return Math.pow((y2-y1), 2)+Math.pow((x2-x1), 2);
+	}
+
+	public double getBlastRadius() {
+		return bulletRange;
 	}
 }
