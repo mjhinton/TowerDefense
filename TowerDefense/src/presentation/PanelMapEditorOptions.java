@@ -77,7 +77,12 @@ public class PanelMapEditorOptions extends JPanel {
         				else if(newName.getText().equals("")) System.out.println("Please enter a valid name.");	
         				else if(newX.getText().equals("")||newY.getText().equals("")) System.out.println("Please enter a valid number from 1-15");
         			}
-        			else meView.createEditableMap(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
+        			else {
+        				Map newMap = new Map(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
+        				//meView.createEditableMap(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
+        				meView.mp.pnlMapEd.pnMap.setMapEdited(newMap);
+        				meView.model.getEditor().setMap(newMap);
+        			}
         		}
         		meView.switchPanel("PanelMapEditor");
             }
@@ -103,14 +108,13 @@ public class PanelMapEditorOptions extends JPanel {
             	
             	PanelMapEditorMap currentMapEditor = meView.mp.pnlMapEd.pnMap;
             
-            	if (currentMapEditor.tryInitiatingPath()==true)
-            	{ 
-            	//set up board from the editor
-            	meView.model.getGame().setUpBoardFromEditor(currentMapEditor.getMapEdited());
-            	//initiate the path
-            	meView.model.getGame().getBoard().getMap().initPath();
-            	//switch panel
-            	meView.switchPanel("PanelGame");
+            	if (currentMapEditor.tryInitiatingPath()==true){ 
+	            	//set up board from the editor
+	            	meView.model.getGame().setUpBoardFromEditor(currentMapEditor.getMapEdited());
+	            	//initiate the path
+	            	//meView.model.getGame().getBoard().getMap().initPath();
+	            	//switch panel
+	            	meView.switchPanel("PanelGame");
             	}
             	else
             		System.out.println("Cannot play this map, invalid path");
@@ -138,6 +142,7 @@ public class PanelMapEditorOptions extends JPanel {
         	    if(returnVal == JFileChooser.APPROVE_OPTION){
         	    	String[] testArrayMap = ReadWriteTxtFile.readTxtFileAsStringArray(chooser.getSelectedFile().getAbsolutePath());
                 	Map loadedMap = new Map("testMap", 15, testArrayMap);
+                	meView.mp.pnlMapEd.pnMap.setMapEdited(loadedMap);
                 	meView.model.getEditor().setMap(loadedMap);
         	    }
             	

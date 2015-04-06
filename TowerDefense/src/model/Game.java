@@ -46,6 +46,7 @@ public class Game {
 	// from the map editor.
 	public void setUpBoardFromEditor(Map map) {
 		board.setMap(map);
+		board.getMap().initPath();
 	}
 
 	public int getCoins() {
