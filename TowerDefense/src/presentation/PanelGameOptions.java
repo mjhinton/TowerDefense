@@ -27,7 +27,7 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 	private JButton bResumePause;
 	private JButton bSave;
 	private JButton bRestart;
-	private JButton bExit;
+	private JButton bMenu;
 	private JComboBox cbSpeed;
 	private JSlider sSound;
 	
@@ -55,7 +55,7 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		bResumePause=new JButton("Pause");
 		bSave=new JButton("Save");
 		bRestart=new JButton("Restart");
-		bExit=new JButton("Exit");
+		bMenu=new JButton("Main Menu");
 		String [] speedOptions={"Speed X1","Speed X2","Speed X4","Speed X6","Speed X10"};
 		cbSpeed=new JComboBox(speedOptions);
 		sSound=new JSlider(-20, 6);
@@ -72,15 +72,18 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		pnButtonsContainer.add(cbSpeed);
 		pnButtonsContainer.add(pnSound);
 		pnButtonsContainer.add(bRestart);
-		pnButtonsContainer.add(bExit);
+		pnButtonsContainer.add(bMenu);
 		
 		this.add(pnButtonsContainer, BorderLayout.CENTER);
 		this.add(bPlayWave,BorderLayout.WEST);
 		
-		bExit.addActionListener(new ActionListener(){
+		bMenu.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent event) {
-                System.exit(0);
+            	int dialogChosen = JOptionPane.showConfirmDialog(null, "Return to main menu? Remember to save before exiting.");
+				if(dialogChosen==JOptionPane.YES_OPTION){
+	            	goView.switchPanel("PanelMenu");
+				}
             }
         });	
 		
