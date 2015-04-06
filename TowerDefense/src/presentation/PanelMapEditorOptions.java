@@ -103,14 +103,13 @@ public class PanelMapEditorOptions extends JPanel {
             	
             	PanelMapEditorMap currentMapEditor = meView.mp.pnlMapEd.pnMap;
             
-            	if (currentMapEditor.tryInitiatingPath()==true)
-            	{ 
-            	//set up board from the editor
-            	meView.model.getGame().setUpBoardFromEditor(currentMapEditor.getMapEdited());
-            	//initiate the path
-            	meView.model.getGame().getBoard().getMap().initPath();
-            	//switch panel
-            	meView.switchPanel("PanelGame");
+            	if (currentMapEditor.tryInitiatingPath()==true){ 
+	            	//set up board from the editor
+	            	meView.model.getGame().setUpBoardFromEditor(currentMapEditor.getMapEdited());
+	            	//initiate the path
+	            	//meView.model.getGame().getBoard().getMap().initPath();
+	            	//switch panel
+	            	meView.switchPanel("PanelGame");
             	}
             	else
             		System.out.println("Cannot play this map, invalid path");
@@ -138,6 +137,7 @@ public class PanelMapEditorOptions extends JPanel {
         	    if(returnVal == JFileChooser.APPROVE_OPTION){
         	    	String[] testArrayMap = ReadWriteTxtFile.readTxtFileAsStringArray(chooser.getSelectedFile().getAbsolutePath());
                 	Map loadedMap = new Map("testMap", 15, testArrayMap);
+                	meView.mp.pnlMapEd.pnMap.setMapEdited(loadedMap);
                 	meView.model.getEditor().setMap(loadedMap);
         	    }
             	
