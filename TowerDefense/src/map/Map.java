@@ -101,7 +101,7 @@ public class Map extends Subject {
 		int randNum = 1000 + (int) (Math.random() * 999);
 		this.mapName = "map" + randNum;
 
-		
+	
 		this.init();
 	}
 

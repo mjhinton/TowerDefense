@@ -141,7 +141,6 @@ public class PanelMapEditorOptions extends JPanel {
                 	meView.model.getEditor().setMap(loadedMap);
         	    }
             	
-            	
             }
         });	
         
