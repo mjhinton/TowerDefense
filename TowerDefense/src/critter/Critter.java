@@ -192,6 +192,7 @@ abstract public class Critter {
 	public int getRef(){
 		return critterRef;
 	}
+	
 
 	public abstract boolean getShield();
 

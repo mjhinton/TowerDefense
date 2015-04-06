@@ -75,7 +75,7 @@ public class Bullet{
 	public boolean detectCollision(Critter critter){
 		double cX=Map.getCenterX(critter.getX());
 		double cY=Map.getCenterY(critter.getY());
-		if(Tower.distanceSquared(cX,cY,bullet_X,bullet_Y)<COLLISION_DISTANCE){
+		if(Tower.distanceSquared(cX,cY,bullet_X,bullet_Y)<COLLISION_DISTANCE && critter.onPath()){
 			return true;
 		}else{
 			return false;

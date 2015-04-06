@@ -82,7 +82,7 @@ public class Wave{
 			releasingTimingIndex=0;
 			c.setDown();
 			System.out.println(c.toString()+ " has been set down");
-			System.out.println("releaseBank size: "+releaseBank.size());
+			//System.out.println("releaseBank size: "+releaseBank.size());
 			if (releasingIndex>=releaseBank.size()-1){
 				this.finishedRelease=true;
 				System.out.println("Finished releasing critters.");

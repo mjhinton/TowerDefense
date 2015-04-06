@@ -129,7 +129,8 @@ public class Tower extends Subject{
 	public ArrayList<Critter> targetsInRange(ArrayList<Critter> critters){
 		ArrayList<Critter> inRange=new ArrayList<Critter>();
 		for(int i = 0; i < critters.size(); i++){
-			if(distanceSquared(Map.getCenterX(position.x), Map.getCenterY(position.y), Map.getCenterX(critters.get(i).getX()), Map.getCenterY(critters.get(i).getY()))<range*range){
+			boolean flag=distanceSquared(Map.getCenterX(position.x), Map.getCenterY(position.y), Map.getCenterX(critters.get(i).getX()), Map.getCenterY(critters.get(i).getY()))<range*range;
+			if(flag && critters.get(i).onPath()){
 				inRange.add(critters.get(i));
 				
 			}
