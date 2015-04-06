@@ -230,6 +230,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	public void paint(Graphics g){
 		//Model.getMap().paint(g);
 		//testGame.paintGame(g);
+		g.fillRect(0,0,Map.CELL_PIXEL_SIZE*Map.MAX_WIDTH,Map.CELL_PIXEL_SIZE*Map.MAX_HEIGHT);
 		view.getController().paintComponent(g);
 
 	}
