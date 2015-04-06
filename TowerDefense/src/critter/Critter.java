@@ -18,7 +18,7 @@ abstract public class Critter {
 	
 	public final static double STANDARD_SPEED=1.0*((double)View.TIMEOUT)/1000.0;
 
-	// private Board gameBoard;
+
 	int critterRef;
 	private Path gamePath;
 	private Board gameBoard;
@@ -26,9 +26,7 @@ abstract public class Critter {
 	private Point currPathCoord;
 	private Point nextPathCoord;
 	private boolean onPath;
-	private int pathLength; // path length will depend upon
-												// the difficulty of the map.
-												// (the shorter the easier)
+	private int pathLength; 
 
 	private Image appearance;
 	private double speed;
@@ -57,14 +55,14 @@ abstract public class Critter {
 		this.nextPathCoord = gamePath.getCoord(0);
 	}
 
-	// (each critter should look different)
+
 	public void drawCritter(Graphics g) {
 		if (this.onPath==true && this.health > 0 && this.reachedGoal == false) {
 			int xScreen=(int) (this.x * Map.CELL_PIXEL_SIZE);
 			int yScreen=(int) (this.y * Map.CELL_PIXEL_SIZE);
 			g.drawImage(appearance, xScreen+this.getPixelOffset().x,
 				yScreen+this.getPixelOffset().y, null);
-			//System.out.println(""+xScreen+","+yScreen);
+
 		}
 	}
 
@@ -91,11 +89,11 @@ abstract public class Critter {
 	public int getDamage() {
 		return damage;
 	}
-	//getter method for testing
+	//Getter method for testing
 	public Point getCurrPathCoord(){
 		return currPathCoord;
 	}
-	//getter method for testing purposes.
+	//Getter method for testing purposes.
 	public boolean getWhetherOnPath(){
 		return onPath;
 	}
@@ -144,10 +142,20 @@ abstract public class Critter {
 		//System.out.println(currPathCoord);
 	}
 	
-	//added for testing purposes
-	public void setCurrPathIndex(int newIndex){
-		currPathIndex = newIndex;
+	//Added for testing purposes
+	public void setDownAtChosenIndex(int index){
+		currPathIndex = index;
+		currPathCoord = gamePath.getCoord(index);
+		System.out.println(currPathCoord);
+		x = (double)currPathCoord.x;
+		y = (double)currPathCoord.y;
+		//System.out.println("index" + index + " currPathCoord" + currPathCoord);
+		onPath = true;
 	}
+	public void setCurrPathIndex(int index){
+		currPathIndex = index;
+	}
+	////
 
 	public void updatePosition() {
 		if (this.onPath==true && this.health > 0 && this.reachedGoal == false) {
@@ -187,6 +195,13 @@ abstract public class Critter {
 
 			}
 		}
+	}
+	
+	//Added getter method for testing purposes
+	public Point getCritterPosition(){
+		Point c = new Point();
+		c.setLocation(this.x, this.y);
+		return c;
 	}
 	
 	public void setRef(int i){

@@ -42,6 +42,8 @@ public class Tower extends Subject{
 	protected boolean farthest;
 	protected int currFireIndex;
 	protected double bulletSpeedMultiplier;
+	//Added variable for testing purposes
+	protected Bullet testBullet;
 	
 	public Tower(Point c, Game game){
 		this.position = c;
@@ -102,7 +104,6 @@ public class Tower extends Subject{
 
 			inRange=targetsInRange(game.getWave().getCritterBank());
 		
-			
 			if(inRange.size()!=0){
 					target=getTarget(inRange);
 					shootBullet(target);
@@ -112,9 +113,11 @@ public class Tower extends Subject{
 			currFireIndex=(int)(currFireIndex+fireRate*5);
 		}	
 	}
+	
 	public void shootBullet(Critter critter){
 		Bullet bullet=new  Bullet(game, this, Map.getCenterX(critter.getX()), Map.getCenterY(critter.getY()), bulletSpeedMultiplier);
-		
+		//extra variable for testing purposes
+		testBullet = bullet;
 	}
 
 	public ArrayList<Critter> targetsInRange(ArrayList<Critter> critters){

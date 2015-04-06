@@ -89,6 +89,12 @@ public class Bullet {
 
 	}
 	
+	//Method for testing purposes
+	public void setBulletPosition(double x, double y){
+		this.bullet_X = x;
+		this.bullet_Y = y;
+	}
+	
 	public void hit(Critter critter){
 		if (tower.getIsSpecial()){
 			critter.reduceSpeed(tower.specialmod);
@@ -112,10 +118,15 @@ public class Bullet {
 
 	public void blast(ArrayList<Critter> critters){
 		double blastRadius=tower.getBlastRadius();
+		//System.out.println("blast radius is: "+blastRadius);
 		for(int i = 0; i < critters.size(); i++){
 			Critter c=critters.get(i);
 			boolean flag=Tower.distanceSquared(bullet_X, bullet_Y, Map.getCenterX(c.getX()), Map.getCenterY(c.getY()))<blastRadius*blastRadius;
+			//System.out.println("distance squared is: "+Tower.distanceSquared(bullet_X, bullet_Y, Map.getCenterX(c.getX()), Map.getCenterY(c.getY()))); 
+			//System.out.println(flag);
+			//System.out.println("critters on path" + critters.get(i).onPath());
 			if(flag && critters.get(i).onPath()){
+				System.out.println("within blast radius!");
 				hit(c);
 			}
 		}

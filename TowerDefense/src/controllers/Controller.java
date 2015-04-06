@@ -27,6 +27,7 @@ public class Controller implements ActionListener {
 	protected Wave currWave;
 	protected Game currGame;
 	private Timer timer;
+	
 	//temp
 	private boolean gameAlreadyStarted;
 	
@@ -61,7 +62,6 @@ public class Controller implements ActionListener {
 		
 		
 	}
-	
 	
 	public void draw(){
 		

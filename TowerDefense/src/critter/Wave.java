@@ -56,18 +56,25 @@ public class Wave{
 		}
 		
 		releaseBank=new ArrayList<Critter>();
+		System.out.println("new releaseBank created");
 		for(int j = 0; j < critterBank.size(); j++){
 			critterBank.get(j).increaseDifficulty(1+difficulty/15); //can be modified to change difficulty of waves
 		
 			releaseBank.add(critterBank.get(j));
 		}
+		System.out.println("critters added to releaseBank");
 		
 	}
 	
-	//method for testing purposes
+	//methods for testing purposes
 	public void addCritterToBank(Critter c){
 		critterBank.add(c);
 	}
+	public void addCritterToReleaseBank(Critter c){
+		releaseBank.add(c);
+	}
+	////
+	
 	
 	public void generateCritters(String type, int quantity, Game game){
 		for(int i = 0; i < quantity; i++){

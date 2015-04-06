@@ -27,9 +27,13 @@ public class CritterTest {
 		//initiate the path on the map before every test
 		testMap.initPath();
 		//instantiate a new wave and add the test critters to the bank
-		testWave = new Wave(1, testGame);
-
-		//set the critter down on the path before every test.
+		testGame.generateWave();
+		testWave = testGame.getWave();
+		//add additional test critters to the bank
+		testWave.addCritterToReleaseBank(testCritter);
+		testWave.addCritterToReleaseBank(testCritter2);
+		//testWave.releaseCritters();
+		//set these additional critter down on the path before every test.
 		try {
 			testCritter.setDown();
 			testCritter2.setDown();
@@ -54,9 +58,8 @@ public class CritterTest {
 		testCritter.getsHit(1);
 		assertEquals("Critter health must become lower", 4, testCritter.getHealth(), 0 );
 		assertTrue(testCritter.onPath());
-	
-		//TODO:The below doesn't pass right now
 		
+		//need to test whether the critter gets removed from board and taken off the path.
 		testCritter.getsHit(5);
 		assertEquals("Critter health must become zero", 0, testCritter.getHealth(), 0);
 		assertFalse(testCritter.getWhetherOnPath());
