@@ -127,6 +127,7 @@ public class Tower extends Subject{
 		}
 	return inRange;
 	}
+	
 	public Critter getTarget(ArrayList<Critter> critters){
 		if(lowestHealth) return lowestHealth(critters);
 		else if(highestHealth) return highestHealth(critters);
@@ -191,6 +192,7 @@ public class Tower extends Subject{
 		highestHealth = false;
 		closest = false;
 		farthest = false;
+		System.out.println("Targetting type change to lowest health.");
 	}
 	
 	public void targetHighestHealth(){
@@ -198,6 +200,7 @@ public class Tower extends Subject{
 		this.highestHealth = true;
 		this.closest = false;
 		this.farthest = false;
+		System.out.println("Targetting type change to highest health.");
 	}
 	
 	public void targetClosest(){
@@ -205,6 +208,7 @@ public class Tower extends Subject{
 		this.highestHealth = false;
 		this.closest = true;
 		this.farthest = false;
+		System.out.println("Targetting type change to closest.");
 	}
 	
 	public void targetFarthest(){
@@ -212,6 +216,7 @@ public class Tower extends Subject{
 		this.highestHealth = false;
 		this.closest = false;
 		this.farthest = true;
+		System.out.println("Targetting type change to farthest.");
 	}
 	
 	public String toString(){

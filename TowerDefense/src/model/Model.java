@@ -11,6 +11,12 @@ public class Model {
 			this.mapeditor = new MapEditor(new Map());
 		}
 		
+		public void setMap(String name, int x, int y){
+			Map map = new Map(name, x, y);
+			this.game = new Game(map);
+			this.mapeditor = new MapEditor(map);
+		}
+		
 		public Game getGame(){
 			return game;
 		}

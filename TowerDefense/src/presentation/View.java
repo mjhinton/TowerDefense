@@ -39,6 +39,11 @@ public class View extends JFrame {
 		this.setVisible(true);
 	}
 	
+	public void createEditableMap(String name, int x, int y){
+		model.setMap(name, x, y);
+		init();
+	}
+	
 	public void switchPanel(String cardName){
 		mp.switchPanel(cardName);
 	}
