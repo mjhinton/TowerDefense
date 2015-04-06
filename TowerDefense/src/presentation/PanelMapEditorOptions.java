@@ -25,7 +25,7 @@ public class PanelMapEditorOptions extends JPanel {
 	
 	private View meView;
 	
-	private JButton bSaveMap, bPlayMap, bMainMenu, bLoadMap, bMapSettings;
+	private JButton bSaveMap, bPlayMap, bMainMenu, bLoadMap, bMapSettings, bResetMap;
 
 	public PanelMapEditorOptions(final View view){
 
@@ -44,13 +44,15 @@ public class PanelMapEditorOptions extends JPanel {
 		bPlayMap = new JButton("Play Map");
 		bMainMenu = new JButton("Main Menu");
 		bLoadMap = new JButton("Load Saved Map");
+		bResetMap = new JButton("Reset Map");
 		
-		JPanel pnButtonsContainer = new JPanel(new GridLayout(5,1));
+		JPanel pnButtonsContainer = new JPanel(new GridLayout(6,1));
 		
 		pnButtonsContainer.add(bMapSettings);
 		pnButtonsContainer.add(bSaveMap);
 		pnButtonsContainer.add(bLoadMap);
 		pnButtonsContainer.add(bPlayMap);
+		pnButtonsContainer.add(bResetMap);
 		pnButtonsContainer.add(bMainMenu);
 		
 		//creates pop-up for bMapOptions
@@ -97,7 +99,6 @@ public class PanelMapEditorOptions extends JPanel {
                if(flag){
             	   Map.saveMap(map);
                }
-               
             }
         });
         
@@ -127,6 +128,7 @@ public class PanelMapEditorOptions extends JPanel {
                 meView.switchPanel("PanelMenu");
             }
         });	
+        
         bLoadMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -145,9 +147,17 @@ public class PanelMapEditorOptions extends JPanel {
                 	meView.mp.pnlMapEd.pnMap.setMapEdited(loadedMap);
                 	meView.model.getEditor().setMap(loadedMap);
         	    }
-            	
             }
         });	
+        
+        bResetMap.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+            	Map newMap = new Map();
+            	meView.mp.pnlMapEd.pnMap.setMapEdited(newMap);
+				meView.model.getEditor().setMap(newMap);
+            }
+        });
         
         this.add(pnButtonsContainer, BorderLayout.EAST);
 		
