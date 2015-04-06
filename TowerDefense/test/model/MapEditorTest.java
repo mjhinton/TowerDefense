@@ -8,22 +8,20 @@ import org.junit.Test;
 
 public class MapEditorTest {
 
+	
 	@Before
 	public void setUp() throws Exception {
+	
 	}
 
 	@After
 	public void tearDown() throws Exception {
+	
 	}
 
 	@Test
 	public void testEditMap() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetMap() {
-		fail("Not yet implemented");
+		
 	}
 
 }

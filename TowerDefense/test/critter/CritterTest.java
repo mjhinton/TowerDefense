@@ -57,7 +57,7 @@ public class CritterTest {
 	
 		//TODO:The below doesn't pass right now
 		
-		testCritter2.getsHit(5);
+		testCritter.getsHit(5);
 		assertEquals("Critter health must become zero", 0, testCritter.getHealth(), 0);
 		assertFalse(testCritter.getWhetherOnPath());
 		//need to test whether the game changes coins. 
