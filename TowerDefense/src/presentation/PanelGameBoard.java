@@ -39,6 +39,10 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 	public boolean buyF = false;
 	public boolean buyM = false;
 	public boolean upgradeMode = false;
+	public boolean lowest = false;
+	public boolean highest = false;
+	public boolean closest = false;
+	public boolean farthest = false;
 
 	public PanelGameBoard(View view){
 
@@ -80,16 +84,20 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 		    	PanelGameTowerManager.updatePF();
 		    	repaint();
 		    }
-		    if (buyF){
+		    else if (buyF){
 		    	game.addTower(new FreezingTower(c, game));
 		    	PanelGameTowerManager.updatePF();
 		    	repaint();
 		    }
-		    if(buyM){
+		    else if(buyM){
 		    	game.addTower(new MonsterTower(c, game));
 		    	PanelGameTowerManager.updatePF();
 		    	repaint();
 		    }
+		    else if (lowest) tower.targetLowestHealth();
+		    else if (highest) tower.targetHighestHealth();
+		    else if (closest) tower.targetClosest();
+		    else if (farthest) tower.targetFarthest();
 		    else {
 		    	return;
 		    }
