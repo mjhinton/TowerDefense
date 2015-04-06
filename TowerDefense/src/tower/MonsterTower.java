@@ -19,10 +19,10 @@ import model.Game;
 
 public class MonsterTower extends Tower{
 	
-	public static int DAMAGE=5;
+	public static int DAMAGE=3;
 	public static double RANGE=7;
-	public static double BLAST_RADIUS=2;
-	public static double FIRE_RATE=3;
+	public static double BLAST_RADIUS=1.5;
+	public static double FIRE_RATE=1;
 	public static double SPECIAL_MOD=1;
 	public static boolean IS_SPECIAL=false;
 	public static int COST=500;

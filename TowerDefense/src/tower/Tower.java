@@ -48,26 +48,27 @@ public class Tower extends Subject{
 	
 	public Tower(Point c, Game game){
 		this.position = c;
-		this.initAttr();
+		currFireIndex=0;
+		bulletSpeedMultiplier=1;
+		//this.initAttr();
 		this.game=game;
-		this.targetLowestHealth();
+		this.targetClosest();
 	}
 
 	//initialize default attributes
-	public void initAttr(){
-		size = 1; //number of coord blocks tower takes up
-		cost = 100; //buying cost
-		level = 1; //upgrade level
-		value = (int) (cost * level * 0.6); //selling value
-		range = 3; //range of tower
-		bulletRange = 0; //range of bullet explosion
-		power = 2; //power of bullets
-		fireRate = 1; //rate of fire
-		isSpecial = false; //if tower has special effects
-		specialmod = 1;	 //special effect value	
-		currFireIndex=0;
-		bulletSpeedMultiplier=1;
-	}
+//	public void initAttr(){
+//		size = 1; //number of coord blocks tower takes up
+//		cost = 100; //buying cost
+//		level = 1; //upgrade level
+//		value = (int) (cost * level * 0.6); //selling value
+//		range = 3; //range of tower
+//		bulletRange = 0; //range of bullet explosion
+//		power = 2; //power of bullets
+//		fireRate = 1; //rate of fire
+//		isSpecial = false; //if tower has special effects
+//		specialmod = 1;	 //special effect value	
+//
+//	}
 
 	//increase the level of the tower
 	public void increaseLevel(){
@@ -97,8 +98,7 @@ public class Tower extends Subject{
 	}
 	
 	public void fire(){
-		//if(inRange==null && !activeBullet) bullet = null;
-		
+
 		ArrayList<Critter> inRange;
 		Critter target;
 		if (currFireIndex>=MAX_FIRE_INDEX && game.getWave()!=null){
@@ -108,7 +108,7 @@ public class Tower extends Subject{
 			
 			if(inRange.size()!=0){
 					target=getTarget(inRange);
-					shootBullet(target);	
+					shootBullet(target);
 			}
 			currFireIndex=0;
 		}else{

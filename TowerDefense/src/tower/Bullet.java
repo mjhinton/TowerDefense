@@ -66,7 +66,7 @@ public class Bullet {
 					if (tower.getBlastRadius()>0){
 						blast(critters);
 					}else{
-						c.getsHit((int) tower.getPower());
+						hit(c);
 					}
 					
 					game.removeBullet(this);
@@ -79,6 +79,14 @@ public class Bullet {
 			System.out.println("No critters left for bullet to hit.");
 		}
 
+	}
+	
+	public void hit(Critter critter){
+		if (tower.getIsSpecial()){
+			critter.reduceSpeed(tower.specialmod);
+		}else{
+			critter.getsHit((int) tower.getPower());
+		}
 	}
 
 	public boolean detectCollision(Critter critter) {
@@ -100,7 +108,7 @@ public class Bullet {
 			Critter c=critters.get(i);
 			boolean flag=Tower.distanceSquared(bullet_X, bullet_Y, Map.getCenterX(c.getX()), Map.getCenterY(c.getY()))<blastRadius*blastRadius;
 			if(flag && critters.get(i).onPath()){
-				c.getsHit((int) tower.getPower());
+				hit(c);
 			}
 		}
 	}
