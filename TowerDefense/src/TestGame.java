@@ -24,7 +24,6 @@ public class TestGame {
 		app.getController().startGame(testMap);
 		testGame=app.getController().getGame();
 		
-		
 		try {
 			app.getController().getGame().generateWave();
 		} catch (InterruptedException e) {

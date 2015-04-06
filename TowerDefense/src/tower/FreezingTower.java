@@ -27,12 +27,12 @@ public class FreezingTower extends Tower{
 	}
 
 	public void initAttr(){
-		size = 4; //size of tower
+		size = 1; //size of tower
 		cost = 150; //buying cost
 		level = 1; //upgrade level
 		value = (int) (cost * level * 0.6); //selling value
 		range = 5; //range of tower
-		bulletRange = 5; //range of bullet explosion
+		bulletRange = 3; //range of bullet explosion
 		power = 1; //power of bullets
 		fireRate = 1; //rate of fire
 		isSpecial = true; //if tower has special effects
