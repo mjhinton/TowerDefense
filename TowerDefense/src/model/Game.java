@@ -2,8 +2,11 @@ package model;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import common.ReadWriteTxtFile;
 
 import tower.Bullet;
 import tower.Tower;
@@ -220,6 +223,24 @@ public class Game {
 	public void removeCritter(Critter critter) {
 		this.wave.removeCritter( critter);
 		
+	}
+	
+	public void saveGame(){
+		Map map=this.board.getMap();
+		String mapString=map.print();
+		String gameString=this.playerCoins+"\n"
+							+this.playerHealth+"\n"
+							+(this.currentWaveNumber-1)+"\n"
+							+mapString;
+		try {
+			if (ReadWriteTxtFile.writeTxtFileFromStringArray(gameString)){
+				System.out.println("Game saved.");
+			}
+			
+		} catch (IOException e) {
+			System.out.println("Unable to save game.");
+			e.printStackTrace();
+		}
 	}
 	
 }
