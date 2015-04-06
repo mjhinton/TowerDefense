@@ -196,7 +196,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 				+ view.getController().getGame().getHealth() + "</font></html>");
 		}
 		else if (view.getController().getGame().getHealth() <= 50){
-			PHealth.setText("<html>Health: <font color=yellow>" 
+			PHealth.setText("<html>Health: <font color=#FFFF00>" 
 					+ view.getController().getGame().getHealth() + "</font></html>");
 		}
 		else {

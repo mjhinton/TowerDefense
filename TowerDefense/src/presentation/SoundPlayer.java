@@ -136,11 +136,11 @@ public class SoundPlayer implements MetaEventListener {
             sequencer.getTransmitter().setReceiver(synthesizer.getReceiver());
             //System.out.println(". Loaded "+ (sb.getName())+" soundbank" );
         } catch (InvalidMidiDataException e) {            
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (IOException e) {            
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (MidiUnavailableException e) {            
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         instruments = synthesizer.getLoadedInstruments();       
     }
@@ -153,5 +153,4 @@ public class SoundPlayer implements MetaEventListener {
 	        channels[i].controlChange(7, (int) (gain * 127.0));
 	     }
 	}
-	//TODO fix loop points
 }
