@@ -27,8 +27,8 @@ public class Map extends Subject {
 	private boolean getOffMapExitWasCalled;
 	// //
 
-	final static private int MAX_WIDTH = 15;
-	final static private int MAX_HEIGHT = 15;
+	final static public int MAX_WIDTH = 15;
+	final static public int MAX_HEIGHT = 15;
 	final public static int CELL_PIXEL_SIZE = 40;
 
 	public Map(String inpMapName, int inpWidth, int inpHeight) {
@@ -46,11 +46,17 @@ public class Map extends Subject {
 		// Gives ability to create map from String array
 		// If start and / or end path given, assumes only one of each is given
 		// Note: this constructor automatically tries initiate the path
-		if (inpWidth > MAX_WIDTH) {
+		this.width = inpMap[0].length();
+		this.height = inpMap.length;
+		if (width > MAX_WIDTH ) {
+			width=MAX_WIDTH;
+			if( height>MAX_HEIGHT){
+				height=MAX_HEIGHT;
+			}
 			throw new IllegalArgumentException("Size too big.");
 		}
-		this.width = inpWidth;
-		this.height = inpMap.length;
+		
+		
 		this.mapName = inpMapName;
 
 		this.init();
