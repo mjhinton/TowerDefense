@@ -18,15 +18,15 @@ import model.Game;
 
 public class FreezingTower extends Tower{
 	
-	public static int DAMAGE=1;
-	public static double RANGE=3;
-	public static double BLAST_RADIUS=1;
-	public static double FIRE_RATE=0.3;
-	public static double SPECIAL_MOD=0.8;
-	public static boolean IS_SPECIAL=true;
-	public static int COST=150;
-	public static int SIZE=1;
-	public static int VALUE=(int) (COST * 0.6);
+	public final static int DAMAGE=1;
+	public final static double RANGE=3;
+	public final static double BLAST_RADIUS=1;
+	public final static double FIRE_RATE=0.3;
+	public final static double SPECIAL_MOD=0.8;
+	public final static boolean IS_SPECIAL=true;
+	public final static int COST=150;
+	public final static int SIZE=1;
+	public final static int VALUE=(int) (COST * 0.6);
 	
 	Image image;
 	Image bulletImage;
