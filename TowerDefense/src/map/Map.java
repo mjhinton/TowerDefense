@@ -11,7 +11,7 @@ import common.Subject;
 /**
  * This class allows the creation and manipulation of a Map object.
  * 
- * @author Michael Hinton
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna MAr
  */
 public class Map extends Subject {
 	
@@ -425,6 +425,7 @@ public class Map extends Subject {
 		}
 	}
 
+	
 	public void paintMap(Graphics g) {
 
 		for (int i = 0; i < width; i++) {
@@ -435,6 +436,14 @@ public class Map extends Subject {
 		}
 	}
 
+	/**
+	 * Toggles a cell between the various types of map cells.
+	 * 
+	 * @param x
+	 *            	x coordinate of the cell to be toggled
+	 * @param y
+	 * 				y coordinate of the cell to be toggled
+	 */
 	public void toggle(int x, int y) {
 		Point c = new Point();
 
@@ -465,6 +474,11 @@ public class Map extends Subject {
 		}
 	}
 
+	/**
+	 * Returns the theoretical off of the Map at the exit.
+	 * 
+	 * @return Point of off-map exit
+	 */
 	public Point getOffMapExit() {
 		// flag to test whether the method was called
 		getOffMapExitWasCalled = true;
@@ -496,15 +510,27 @@ public class Map extends Subject {
 		return getOffMapExitWasCalled;
 	}
 
+	/**
+	 * Returns a prepackaged map in the project directory.
+	 * 
+	 * @param mapName
+	 *            		name of prepackaged map
+	 * @return Map from default map folder
+	 */
 	public static Map getPackagedMap(String mapName) {
 		String path = "lib/maps/default_maps/" + mapName + ".txt";
 		String[] mapString = ReadWriteTxtFile.readTxtFileAsStringArray(path);
 		return new Map(mapName, 15, mapString);
 	}
 
+	/**
+	 * Saves the given map to file.
+	 * 
+	 * @param map
+	 *            		Map to be saved.
+	 */
 	public static void saveMap(Map map) {
 		String mapString = map.print();
-		// String path="lib/maps/"+map.getName()+".txt";
 		try {
 			if (ReadWriteTxtFile.writeTxtFileFromStringArray(mapString)) {
 				System.out.println("Map saved.");
