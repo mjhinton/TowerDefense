@@ -32,7 +32,7 @@ abstract public class Critter {
 
 	private Image appearance;
 	private double speed;
-	private int health;
+	private double health;
 	private int reward;
 	private int damage;
 	public boolean reachedGoal;
@@ -41,7 +41,7 @@ abstract public class Critter {
 	public double x;
 	public double y;
 
-	public Critter(double speedMultiplier, int health, int reward, int damage,
+	public Critter(double speedMultiplier, double health, int reward, int damage,
 			ImageIcon appearance, Game game) {
 		this.game=game;
 		this.gameBoard = game.getBoard();
@@ -80,7 +80,7 @@ abstract public class Critter {
 		speed=speed*reduction;
 	}
 
-	public int getHealth() {
+	public double getHealth() {
 		return health;
 	}
 
@@ -110,7 +110,7 @@ abstract public class Critter {
 		return onPath;
 	}
 
-	public void getsHit(int hitDamage) {
+	public void getsHit(double hitDamage) {
 		health=health-hitDamage;
 		if (health <= 0) {
 			health=0;

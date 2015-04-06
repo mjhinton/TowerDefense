@@ -93,7 +93,7 @@ public class Bullet {
 		if (tower.getIsSpecial()){
 			critter.reduceSpeed(tower.specialmod);
 		}else{
-			critter.getsHit((int) tower.getPower());
+			critter.getsHit(tower.getPower());
 		}
 	}
 
