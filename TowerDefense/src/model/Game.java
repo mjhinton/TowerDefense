@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import common.ReadWriteTxtFile;
-
 import tower.Bullet;
 import tower.Tower;
 import map.Map;

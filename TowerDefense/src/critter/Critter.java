@@ -77,7 +77,7 @@ abstract public class Critter {
 	}
 	
 	public void reduceSpeed(double reduction){
-		speed=speed*reduction;
+		speed*=reduction;
 	}
 
 	public double getHealth() {
