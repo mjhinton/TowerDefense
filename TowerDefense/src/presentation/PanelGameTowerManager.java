@@ -111,14 +111,14 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         
         buytower.setLayout(new FlowLayout(FlowLayout.LEFT));
         buytower.add(norm);
-        buytower.add(initPadding(60));
+        buytower.add(initPadding(30));
         //will need to adjust this if tower costs fluctuate at all
         buytower.add(initCL(100));
         buytower.add(ice);
-        buytower.add(initPadding(65));
+        buytower.add(initPadding(35));
         buytower.add(initCL(150));
         buytower.add(magic);
-        buytower.add(initPadding(50));
+        buytower.add(initPadding(20));
         buytower.add(initCL(500));
         
         basictower.addActionListener(this);
