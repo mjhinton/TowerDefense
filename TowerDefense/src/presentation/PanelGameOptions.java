@@ -165,7 +165,8 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		bSave.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event){
-				goView.getController().getGame().saveGame();
+				System.out.println("This functionality has not yet been added.");
+				//goView.getController().getGame().saveGame();
 			}
 		});
 		
