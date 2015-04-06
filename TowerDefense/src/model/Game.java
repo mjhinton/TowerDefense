@@ -144,21 +144,20 @@ public class Game {
 
 			for (int i = 0; i < towers.size(); i++)
 				towers.get(i).fire();
-			
-		}
-		for (int j = 0; j < bullets.size(); j++)
+			for (int j = 0; j < bullets.size(); j++)
 				bullets.get(j).updateBullet();
+		}
+
 	}
 
 	public void paintGame(Graphics g) {
 		board.paintMap(g);
 		if (wave != null) {
 			wave.paintCritters(g);
-			
+			for (int j = 0; j < bullets.size(); j++)
+				bullets.get(j).drawBullet(g);
 		}
 		board.paintTowers(g);
-		for (int j = 0; j < bullets.size(); j++)
-			bullets.get(j).drawBullet(g);
 	}
 
 	// The player will only be able to call this method if a wave is not already
@@ -220,6 +219,11 @@ public class Game {
 		this.wave.removeCritter(critter);
 
 	}
+	
+	//Getter method added for testing.
+	public ArrayList<Bullet> getBullets(){
+		return bullets;
+	}
 
 	public void saveGame() {
 		Map map = this.board.getMap();
@@ -243,6 +247,11 @@ public class Game {
 	
 	public int getHealth(){
 		return playerHealth;
+	}
+	
+	//Setter method for testing purposes
+	public void setPlayerCoins(int value){
+		playerCoins =value;
 	}
 
 }
