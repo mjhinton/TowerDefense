@@ -2,7 +2,6 @@
 
 
 import map.Map;
-import model.Game;
 import presentation.View;
 
 
