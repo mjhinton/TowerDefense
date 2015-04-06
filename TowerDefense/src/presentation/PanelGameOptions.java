@@ -191,7 +191,7 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
         if (!source.getValueIsAdjusting()) {
             int vol = (int)source.getValue();
             float z = (float) vol;
-            SoundPlayer.setVolume(z);
+            //SoundPlayer.setVolume(z);
         }
     }
 }

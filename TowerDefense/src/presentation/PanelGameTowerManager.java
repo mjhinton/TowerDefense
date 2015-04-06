@@ -33,9 +33,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		this.setMaximumSize(dim);
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
-			
-		this.add(new JLabel ("Tower Manager"));
-				
+									
 		//add the player funds panel
 		JPanel datacontainer = new JPanel();
 		JPanel Playerfunds = new JPanel();
@@ -45,11 +43,11 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		datacontainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		datacontainer.setPreferredSize(new Dimension(350,30));
 		datacontainer.add(WaveNo);
-		//datacontainer.add(initPadding(30));
 		datacontainer.add(PHealth);
-		//datacontainer.add(initPadding(30));
 		datacontainer.add(Playerfunds);
 		this.add(datacontainer);
+		
+		this.add(new JLabel ("Tower Manager"));
 		
 		//add a tabbed pane
         JTabbedPane tabs = new JTabbedPane();
@@ -62,25 +60,26 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         
         //titles for the panes
         JLabel buytowerpane = new JLabel("Available Towers");
-        buytowerpane.setPreferredSize(new Dimension(180,20));
+        buytowerpane.setPreferredSize(new Dimension(200, 15));
         JLabel buydesc = new JLabel("Hover for more information");
+        buydesc.setPreferredSize(new Dimension(200, 10));
         buydesc.setForeground(Color.GRAY);
         JLabel uptowerpane = new JLabel("Select to Sell/Upgrade Towers");
         uptowerpane.setPreferredSize(new Dimension(250,25));
         JLabel targetpane = new JLabel("Choose and click a tower");
         
         //add the panes to the tabs
-        buytower.add(initPadding(110));
         buytower.add(buytowerpane);
         buytower.add(buydesc);
-        buytower.add(initPadding(100));
-        selltower.add(initPadding(80));
+
+        //buytower.add(initPadding(100));
+        //selltower.add(initPadding(80));
         selltower.add(uptowerpane, BorderLayout.CENTER);
         target.add(targetpane);
         tabs.setPreferredSize(new Dimension(350, 335));
         
         //add panes to the overall tab pane
-        tabs.addTab("Buy Towers", buytower);
+        tabs.add("Buy Towers", buytower);
         tabs.addTab("Sell/Upgrade Towers", selltower);
         tabs.addTab("Targeting", target);
 		
@@ -118,14 +117,11 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         
         buytower.setLayout(new FlowLayout(FlowLayout.LEFT));
         buytower.add(norm);
-        buytower.add(initPadding(30));
         //will need to adjust this if tower costs fluctuate at all
         buytower.add(initCL(100));
         buytower.add(ice);
-        buytower.add(initPadding(35));
         buytower.add(initCL(150));
         buytower.add(magic);
-        buytower.add(initPadding(20));
         buytower.add(initCL(500));
         
         basictower.addActionListener(this);
@@ -139,9 +135,12 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         group.add(sell);
         group.add(upgrade);
                 
-        selltower.add(sell);
-        selltower.add(upgrade);
-        
+        JPanel buttons = new JPanel();
+        buttons.setPreferredSize(new Dimension(350, 50));
+        buttons.add(sell);
+        buttons.add(upgrade);        
+        selltower.add(buttons);   
+               
         norm.setToolTipText("<html><b>Damage:</b> 5"
         		+ "<br><b>Range:</b> 3"
         		+ "<br><b>Splash Radius:</b> 1"
@@ -197,14 +196,16 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		PHealth.setText("Health: " + view.getController().getGame().getHealth());
 	}
 	
+	/*
 	//fake 'padding'
-	public static JLabel initPadding(int i){
-		JLabel padding = new JLabel();
+	public static JLabel initPadding(){
+		JLabel padding = new JLabel("<html><br></html>");
 		//padding.setOpaque(true);
 		//padding.setBackground(Color.white);
-		padding.setPreferredSize(new Dimension(i,15));
+		//padding.setPreferredSize(new Dimension(i,15));
 		return padding;
 	}
+	*/
 	
 	public static JLabel initCL(int i){
 		JLabel label = new JLabel("Cost: " + Character.toString((char) 8353) + i);

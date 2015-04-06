@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
 import javax.swing.JPanel;
 
 public class MainPanel extends JPanel {
@@ -21,7 +23,7 @@ public class MainPanel extends JPanel {
 	
 	private View view;
 	
-	private SoundPlayer bgsound = new SoundPlayer("nc83843.wav");
+	private SoundPlayer bgsound = new SoundPlayer();
 
 	public View getView() {
 		return view;
@@ -59,7 +61,7 @@ public class MainPanel extends JPanel {
 	public void switchPanel(String cardName){
 		cards.show(this, cardName);
 		currentPanel=cardName;
-		//switchMusic();
+		switchMusic();
 	}
 	
 	public String getCurrentPanel(){
@@ -76,19 +78,31 @@ public class MainPanel extends JPanel {
 
 	
 	public void switchMusic(){
-		if (bgsound.isPlaying){
-			bgsound.stop();
+		if (bgsound.isPlaying()){
+			bgsound.setPaused(true);
 		}
 		if (currentPanel.equals("PanelMenu")){
-			bgsound = new SoundPlayer("nc83854.wav");
+			Sequence sequence = bgsound.getSequence("lib/music/GS_Title.mid");
+			bgsound.play(sequence, true);
 		}
 		if (currentPanel.equals("PanelMapEditor")){
-			bgsound = new SoundPlayer("nc83853.wav");
+			Sequence sequence = bgsound.getSequence("lib/music/MineralTown.mid");
+			bgsound.loadSoundBank("lib/music/fomt.sf2");
+			bgsound.play(sequence,true);
 		}
 		if (currentPanel.equals("PanelGame")){
-			bgsound = new SoundPlayer("nc83843.wav");
+			double randomnum = Math.random();
+			Sequence sequence = bgsound.getSequence("lib/music/song022.mid");
+			if(randomnum < 0.3 ){
+				sequence = bgsound.getSequence("lib/music/song030.mid");
+			}
+			else if (randomnum < 0.6){
+				sequence = bgsound.getSequence("lib/music/song041.mid");
+			}
+			else if (randomnum < 0.9){
+				sequence = bgsound.getSequence("lib/music/song050.mid");				
+			}
+			bgsound.play(sequence, true);
 		}
-		bgsound.play();
-		bgsound.loop();
 	}
 }
