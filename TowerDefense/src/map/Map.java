@@ -14,7 +14,8 @@ import common.Subject;
  * @author Michael Hinton
  */
 public class Map extends Subject {
-
+	//for testing purposes
+	
 	private int width;
 	private int height;
 	private MapCell[][] cells;
@@ -194,6 +195,7 @@ public class Map extends Subject {
 		try {
 			Point c = new Point(x, y);
 			if (y == 0 || y == height - 1 || x == 0 || x == width - 1) {
+				
 				for (int i = 0; i < width; i++) {
 					for (int j = 0; j < height; j++) {
 						if (cells[i][j] instanceof PathStartCell) {
@@ -201,14 +203,17 @@ public class Map extends Subject {
 						}
 					}
 				}
+				
 				if (c.equals(pathEndCoord)) {
 					pathEndCoord = null;
 				}
+				
 				this.cells[x][y] = new PathStartCell();
 				this.pathStartCoord = c;
 				path = null;
 				this.notifyObservers();
 				return true;
+				
 			} else {
 				System.err
 						.println("Starting Path Cell must be placed on the edge of the map.");
@@ -296,6 +301,16 @@ public class Map extends Subject {
 		}
 	}
 
+	/*
+	 * Getters for testing
+	 */
+	public Point getPathStartCoord(){
+		return pathStartCoord;
+	}
+	public Point getPathEndCoord(){
+		return pathEndCoord;
+	}
+	
 	/**
 	 * Attempts to build the path. Verifies if path is valid.
 	 * 
