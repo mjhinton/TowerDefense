@@ -128,7 +128,7 @@ public class Bullet {
 			//System.out.println(flag);
 			//System.out.println("critters on path" + critters.get(i).onPath());
 			if(flag && critters.get(i).onPath()){
-				System.out.println("within blast radius!");
+				//System.out.println("within blast radius!");
 				hit(c);
 			}
 		}

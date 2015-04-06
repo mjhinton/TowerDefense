@@ -51,7 +51,7 @@ public class Tower extends Subject{
 		bulletSpeedMultiplier=1;
 		//this.initAttr();
 		this.game=game;
-		this.targetClosest();
+		this.targetLowestHealth();
 	}
 
 	//initialize default attributes
@@ -195,7 +195,7 @@ public class Tower extends Subject{
 		highestHealth = false;
 		closest = false;
 		farthest = false;
-		System.out.println("Targetting type change to lowest health.");
+		System.out.println("Targeting type set to lowest health.");
 	}
 	
 	public void targetHighestHealth(){
@@ -203,7 +203,7 @@ public class Tower extends Subject{
 		this.highestHealth = true;
 		this.closest = false;
 		this.farthest = false;
-		System.out.println("Targetting type change to highest health.");
+		System.out.println("Targeting type set to highest health.");
 	}
 	
 	public void targetClosest(){
@@ -211,7 +211,7 @@ public class Tower extends Subject{
 		this.highestHealth = false;
 		this.closest = true;
 		this.farthest = false;
-		System.out.println("Targetting type change to closest.");
+		System.out.println("Targeting type set to closest.");
 	}
 	
 	public void targetFarthest(){
@@ -219,7 +219,7 @@ public class Tower extends Subject{
 		this.highestHealth = false;
 		this.closest = false;
 		this.farthest = true;
-		System.out.println("Targetting type change to farthest.");
+		System.out.println("Targeting type set to farthest.");
 	}
 	
 	public String toString(){
