@@ -77,7 +77,12 @@ public class PanelMapEditorOptions extends JPanel {
         				else if(newName.getText().equals("")) System.out.println("Please enter a valid name.");	
         				else if(newX.getText().equals("")||newY.getText().equals("")) System.out.println("Please enter a valid number from 1-15");
         			}
-        			else meView.createEditableMap(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
+        			else {
+        				Map newMap = new Map(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
+        				//meView.createEditableMap(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
+        				meView.mp.pnlMapEd.pnMap.setMapEdited(newMap);
+        				meView.model.getEditor().setMap(newMap);
+        			}
         		}
         		meView.switchPanel("PanelMapEditor");
             }

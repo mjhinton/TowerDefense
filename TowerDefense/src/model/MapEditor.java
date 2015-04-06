@@ -45,7 +45,8 @@ public class MapEditor{
 		if (y%size ==0){
 			cellY = (int) y/size -1;
 		}
-		map.toggle(cellX, cellY);	
+		if(cellX>=map.getWidth()||cellY>=map.getHeight()){}
+		else map.toggle(cellX, cellY);	
 	}
 	
 	public void setMap(Map map){
