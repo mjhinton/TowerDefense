@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import presentation.View;
 import model.Game;
 
 /*A Wave is a Group of critters. Depending on how many waves the player has played, the waves will consist of more and more difficult critters
@@ -77,7 +78,8 @@ public class Wave{
 		Critter c;
 		//Thread x;
 		c=releaseBank.get(releasingIndex);
-		if(releasingTimingIndex>=DEFAULT_DELAY/(0.5*difficulty*game.getGameSpeed())){
+		if(releasingTimingIndex>=DEFAULT_DELAY/(0.5*difficulty*View.TIMEOUT)){
+			releasingTimingIndex=0;
 			c.setDown();
 			System.out.println(c.toString()+ " has been set down");
 			System.out.println("releaseBank size: "+releaseBank.size());

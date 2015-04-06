@@ -136,15 +136,16 @@ public class Game {
 				wave=null;
 			}else{
 				wave.updateCritterPositions();
-			}
-			if (wave.finishedRelease()==false){
+				if (wave.finishedRelease()==false){
 				try {
 					wave.releaseCritters();
-					System.out.println("release is good");
+					//System.out.println("release is good");
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
+			}
+			
 			
 			for(int i = 0; i < towers.size(); i++) towers.get(i).fire();
 			for(int j=0;j<bullets.size();j++) bullets.get(j).updateBullet();
