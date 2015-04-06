@@ -167,9 +167,13 @@ abstract public class Critter {
 				y = y + (dy / Math.abs(dy)) * speed;
 
 			}
-
-			if (Math.abs(x-nextPathCoord.x)<=speed
-					&& Math.abs(y-nextPathCoord.y)<=speed) {
+			
+			double dxc=Math.abs(x-currPathCoord.x);
+			double dyc=Math.abs(y-currPathCoord.y);
+			
+			boolean flag=(dxc>1 || dyc>1);
+	
+			if (flag) {
 				if (currPathIndex == pathLength - 1) {
 					reachedGoal = true;
 					health=0;
