@@ -56,6 +56,9 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         //add the respective panels
         JPanel buytower = new JPanel();
         JPanel selltower = new JPanel();
+        JPanel target = new JPanel();
+        target.setLayout(new GridLayout(4,1));
+        selltower.setLayout(new GridLayout(0,2));
         
         //titles for the panes
         JLabel buytowerpane = new JLabel("Available Towers");
@@ -64,6 +67,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         buydesc.setForeground(Color.GRAY);
         JLabel uptowerpane = new JLabel("Select to Sell/Upgrade Towers");
         uptowerpane.setPreferredSize(new Dimension(250,25));
+        JLabel targetpane = new JLabel("Choose and click a tower");
         
         //add the panes to the tabs
         buytower.add(initPadding(110));
@@ -72,10 +76,13 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         buytower.add(initPadding(100));
         selltower.add(initPadding(80));
         selltower.add(uptowerpane, BorderLayout.CENTER);
+        target.add(targetpane);
         tabs.setPreferredSize(new Dimension(350, 335));
+        
         //add panes to the overall tab pane
         tabs.addTab("Buy Towers", buytower);
         tabs.addTab("Sell/Upgrade Towers", selltower);
+        tabs.addTab("Targeting", target);
 		
 		add(tabs);
 		tabs.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -151,6 +158,28 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         
         sell.addActionListener(this);
         upgrade.addActionListener(this);
+        
+      //targeting behavior panel
+        JToggleButton lowest = new JToggleButton("Lowest health critter");
+        JToggleButton highest = new JToggleButton("Highest health critter");
+        JToggleButton closest = new JToggleButton("Closest critter");
+        JToggleButton farthest = new JToggleButton("Farthest critter");
+        
+        group.add(lowest);
+        group.add(highest);
+        group.add(closest);
+        group.add(farthest);
+        
+        target.add(Box.createRigidArea(new Dimension(0, 5)));
+        target.add(lowest);
+        target.add(highest);
+        target.add(closest);
+        target.add(farthest);
+        
+        lowest.addActionListener(this);
+        highest.addActionListener(this);
+        closest.addActionListener(this);
+        farthest.addActionListener(this);;
 	}
 
 	//initializes the funds panel
@@ -190,6 +219,10 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 			mainboard.buyB = false;
 			mainboard.buyF = false;
 			mainboard.buyM = false;
+			mainboard.lowest = false;
+			mainboard.highest = false;
+			mainboard.closest = false;
+			mainboard.farthest = false;
 		}
 		if (e.getActionCommand().equals("Upgrade Tower")){
 			mainboard.upgradeMode = true;
@@ -197,6 +230,10 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 			mainboard.buyB = false;
 			mainboard.buyF = false;
 			mainboard.buyM = false;
+			mainboard.lowest = false;
+			mainboard.highest = false;
+			mainboard.closest = false;
+			mainboard.farthest = false;
 		}
 		if(e.getActionCommand().equals("Fire Tower")){
 			mainboard.buyB = true;
@@ -204,6 +241,10 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 			mainboard.upgradeMode = false;
 			mainboard.buyF = false;
 			mainboard.buyM = false;
+			mainboard.lowest = false;
+			mainboard.highest = false;
+			mainboard.closest = false;
+			mainboard.farthest = false;
 		}
 		if(e.getActionCommand().equals("Ice Tower")){
 			mainboard.buyF = true;
@@ -211,6 +252,10 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 			mainboard.upgradeMode = false;
 			mainboard.buyB = false;
 			mainboard.buyM = false;
+			mainboard.lowest = false;
+			mainboard.highest = false;
+			mainboard.closest = false;
+			mainboard.farthest = false;
 		}
 		if(e.getActionCommand().equals("Magic Tower")){
 			mainboard.buyM = true;
@@ -218,6 +263,54 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 			mainboard.upgradeMode = false;
 			mainboard.buyB = false;
 			mainboard.buyF = false;
+			mainboard.lowest = false;
+			mainboard.highest = false;
+			mainboard.closest = false;
+			mainboard.farthest = false;
+		}
+		if(e.getActionCommand().equals("Lowest health critter")){
+			mainboard.buyM = false;
+			mainboard.sellMode = false;
+			mainboard.upgradeMode = false;
+			mainboard.buyB = false;
+			mainboard.buyF = false;
+			mainboard.lowest = true;
+			mainboard.highest = false;
+			mainboard.closest = false;
+			mainboard.farthest = false;
+		}
+		if(e.getActionCommand().equals("Highest health critter")){
+			mainboard.buyM = false;
+			mainboard.sellMode = false;
+			mainboard.upgradeMode = false;
+			mainboard.buyB = false;
+			mainboard.buyF = false;
+			mainboard.lowest = false;
+			mainboard.highest = true;
+			mainboard.closest = false;
+			mainboard.farthest = false;
+		}
+		if(e.getActionCommand().equals("Closest critter")){
+			mainboard.buyM = false;
+			mainboard.sellMode = false;
+			mainboard.upgradeMode = false;
+			mainboard.buyB = false;
+			mainboard.buyF = false;
+			mainboard.lowest = false;
+			mainboard.highest = false;
+			mainboard.closest = true;
+			mainboard.farthest = false;
+		}
+		if(e.getActionCommand().equals("Farthest critter")){
+			mainboard.buyM = false;
+			mainboard.sellMode = false;
+			mainboard.upgradeMode = false;
+			mainboard.buyB = false;
+			mainboard.buyF = false;
+			mainboard.lowest = false;
+			mainboard.highest = false;
+			mainboard.closest = false;
+			mainboard.farthest = true;
 		}
 	}
 

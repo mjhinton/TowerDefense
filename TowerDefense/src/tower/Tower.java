@@ -22,7 +22,7 @@ import map.Map;
 
 public class Tower extends Subject{
 	
-	public int MAX_FIRE_INDEX=100;
+	public static final int MAX_FIRE_INDEX=100;
 	
 	protected Game game;
 	protected Point position;
@@ -36,9 +36,6 @@ public class Tower extends Subject{
 	protected double fireRate;
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
-	//protected Bullet bullet;
-	//protected boolean activeBullet;
-	//protected boolean bulletReached;
 	protected boolean lowestHealth;
 	protected boolean highestHealth;
 	protected boolean closest;
@@ -130,6 +127,7 @@ public class Tower extends Subject{
 		}
 	return inRange;
 	}
+	
 	public Critter getTarget(ArrayList<Critter> critters){
 		if(lowestHealth) return lowestHealth(critters);
 		else if(highestHealth) return highestHealth(critters);
@@ -194,6 +192,7 @@ public class Tower extends Subject{
 		highestHealth = false;
 		closest = false;
 		farthest = false;
+		System.out.println("Targetting type change to lowest health.");
 	}
 	
 	public void targetHighestHealth(){
@@ -201,6 +200,7 @@ public class Tower extends Subject{
 		this.highestHealth = true;
 		this.closest = false;
 		this.farthest = false;
+		System.out.println("Targetting type change to highest health.");
 	}
 	
 	public void targetClosest(){
@@ -208,6 +208,7 @@ public class Tower extends Subject{
 		this.highestHealth = false;
 		this.closest = true;
 		this.farthest = false;
+		System.out.println("Targetting type change to closest.");
 	}
 	
 	public void targetFarthest(){
@@ -215,6 +216,7 @@ public class Tower extends Subject{
 		this.highestHealth = false;
 		this.closest = false;
 		this.farthest = true;
+		System.out.println("Targetting type change to farthest.");
 	}
 	
 	public String toString(){

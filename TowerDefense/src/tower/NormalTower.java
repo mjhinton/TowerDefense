@@ -16,15 +16,15 @@ import model.Game;
 
 public class NormalTower extends Tower{
 	
-	public static int DAMAGE=1;
-	public static double RANGE=5;
-	public static double BLAST_RADIUS=0;
-	public static double FIRE_RATE=1.5;
-	public static double SPECIAL_MOD=1;
-	public static boolean IS_SPECIAL=false;
-	public static int COST=100;
-	public static int SIZE=2;
-	public static int VALUE=(int) (COST * 0.6);
+	public final static int DAMAGE=1;
+	public final static double RANGE=5;
+	public final static double BLAST_RADIUS=0;
+	public final static double FIRE_RATE=1.5;
+	public final static double SPECIAL_MOD=1;
+	public final static boolean IS_SPECIAL=false;
+	public final static int COST=100;
+	public final static int SIZE=2;
+	public final static int VALUE=(int) (COST * 0.6);
 	
 	Image image;
 	Image bulletImage;
