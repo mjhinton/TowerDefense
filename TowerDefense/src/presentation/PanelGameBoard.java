@@ -155,7 +155,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	    	    				"<b>Level: </b>" + tower.getLevel() + " <b>(MAX)" +
 	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value +  			
 	    		    			"<br><b>Range: </b>" + tower.getRange() +
-	    		    			"<br><b>Slowing Power: </b>" + Math.round(100*(tower.getSpecialmod()))/value + 
+	    		    			"<br><b>Slowing Power: </b>" + (int) Math.round(100*(tower.getSpecialmod()))/value + 
 	    		    			"</html>"		
 	    						);
 		    			}
@@ -165,7 +165,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	    	    				"<b>Level: </b>" + tower.getLevel() + " <b>(MAX)" +
 	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value +  			
 	    		    			"<br><b>Range: </b>" + tower.getRange() +
-	    		    			"<br><b>Damage: </b>" + Math.round(100*(tower.getPower())) +  
+	    		    			"<br><b>Damage: </b>" + (int) (100*Math.round(100*(tower.getPower()))) +  
 	    		    			"</html>"		
 	    						);
 		    			}	
@@ -179,7 +179,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 			    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +		    			
 				    			"<br>Range: </b>" + tower.getRange() + "--><b>" + (tower.getRange() + 1) +
 				    			"<br>Slowing Power: </b>" + Math.round(100*(tower.getSpecialmod()))/value + 
-				    			"--><b>" + Math.round(100*(tower.getSpecialmod() - 0.05))/value +
+				    			"--><b>" + (int) Math.round(100*(tower.getSpecialmod() - 0.05))/value +
 				    			"</html>"				
 		    		    	);
 		    			}
@@ -191,7 +191,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value + 
 	    	    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +
 	    	    				"<br>Damage: </b>" + Math.round(100*(tower.getPower())) + 
-	    	    				"--><b>" + Math.round(100*(tower.getPower()*1.5))/value +
+	    	    				"--><b>" + (int) (int) (100*Math.round(100*(tower.getPower()*1.5))/value) +
 	    		    			"</html>"
 		    		    	);			    				
 		    			}
