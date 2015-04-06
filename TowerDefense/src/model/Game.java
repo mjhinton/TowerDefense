@@ -144,20 +144,21 @@ public class Game {
 
 			for (int i = 0; i < towers.size(); i++)
 				towers.get(i).fire();
-			for (int j = 0; j < bullets.size(); j++)
-				bullets.get(j).updateBullet();
+			
 		}
-
+		for (int j = 0; j < bullets.size(); j++)
+				bullets.get(j).updateBullet();
 	}
 
 	public void paintGame(Graphics g) {
 		board.paintMap(g);
 		if (wave != null) {
 			wave.paintCritters(g);
-			for (int j = 0; j < bullets.size(); j++)
-				bullets.get(j).drawBullet(g);
+			
 		}
 		board.paintTowers(g);
+		for (int j = 0; j < bullets.size(); j++)
+			bullets.get(j).drawBullet(g);
 	}
 
 	// The player will only be able to call this method if a wave is not already

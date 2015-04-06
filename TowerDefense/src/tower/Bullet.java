@@ -40,7 +40,7 @@ public class Bullet {
 		this.velocity = velocityMultiplier * STANDARD_BULLET_SPEED;
 		this.tower = tower;
 		this.game = game;
-		game.addBullet(this);
+		
 		this.max_X = game.getBoard().getMap().getWidth();
 		this.max_Y = game.getBoard().getMap().getHeight();
 		this.min_X = 0;
@@ -49,8 +49,15 @@ public class Bullet {
 
 		double dx = target_X - bullet_X;
 		double dy = target_Y - bullet_Y;
-		this.velocity_X = velocity * dx / Math.sqrt(dx * dx + dy * dy);
-		this.velocity_Y = velocity * dy / Math.sqrt(dx * dx + dy * dy);
+		
+		if(dx==0 && dy==0){
+			//don't add the bullet to the game
+		}else{
+			game.addBullet(this);
+			this.velocity_X = velocity * dx / Math.sqrt(dx * dx + dy * dy);
+			this.velocity_Y = velocity * dy / Math.sqrt(dx * dx + dy * dy);
+		}
+		
 
 		// TODO: implement making sprite display
 	}
@@ -70,13 +77,14 @@ public class Bullet {
 					}
 					
 					game.removeBullet(this);
-				} else if (bullet_X > max_X || bullet_X < min_X
-						|| bullet_Y > max_Y || bullet_Y < min_Y) {
-					game.removeBullet(this);
-				}
+				} 
 			}
 		} catch (NullPointerException e) {
 			System.out.println("No critters left for bullet to hit.");
+		}
+		if (bullet_X > max_X || bullet_X < min_X
+				|| bullet_Y > max_Y || bullet_Y < min_Y) {
+			game.removeBullet(this);
 		}
 
 	}
