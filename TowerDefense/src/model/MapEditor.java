@@ -36,16 +36,14 @@ public class MapEditor{
 	public void editMap(int x, int y){
 		int cellX = x/size;
 		int cellY = y/size;
-		Point c = new Point(cellX, cellY);
-		c.setLocation(cellX, cellY);
 		
-		if (x%size ==0){
+		if (x%size == 0){
 			cellX = x/size-1;
 		}
 		if (y%size ==0){
 			cellY = (int) y/size -1;
 		}
-		map.toggle(cellX, cellY);	
+		if(cellX < map.getWidth() && cellY < map.getHeight()) map.toggle(cellX, cellY);	
 	}
 	
 	public void setMap(Map map){

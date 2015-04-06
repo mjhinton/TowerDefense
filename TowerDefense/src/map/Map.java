@@ -33,11 +33,15 @@ public class Map extends Subject {
 
 	public Map(String inpMapName, int inpWidth, int inpHeight) {
 		if (inpWidth > MAX_WIDTH || inpHeight > MAX_HEIGHT) {
-			throw new IllegalArgumentException("Size too big.");
+			System.out.println("Size too big. Maximum size of 15x15 used.");
+			this.width = MAX_WIDTH;
+			this.height = MAX_HEIGHT;
 		}
-		this.width = inpWidth;
-		this.height = inpHeight;
-		this.mapName = inpMapName;
+		else{
+			this.width = inpWidth;
+			this.height = inpHeight;
+			this.mapName = inpMapName;
+		}
 
 		this.init();
 	}
