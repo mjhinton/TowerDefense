@@ -12,7 +12,7 @@ public class TestGame {
 
 		System.out.println("print");
 		System.out.println("print");
-//
+
 		View app=new View();
 		app.switchPanel("PanelGame");
 
