@@ -8,6 +8,7 @@ import java.awt.event.*;
 //import javax.swing.JLabel;
 //import javax.swing.JPanel;
 import javax.swing.*;
+import tower.*;
 
 public class PanelGameTowerManager extends JPanel implements ActionListener{
 
@@ -56,7 +57,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         JPanel selltower = new JPanel();
         JPanel target = new JPanel();
         target.setLayout(new GridLayout(4,1));
-        selltower.setLayout(new GridLayout(0,2));
+        //selltower.setLayout(new GridLayout(0,2));
         
         //titles for the panes
         JLabel buytowerpane = new JLabel("Available Towers");
@@ -65,15 +66,12 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         buydesc.setPreferredSize(new Dimension(200, 10));
         buydesc.setForeground(Color.GRAY);
         JLabel uptowerpane = new JLabel("Select to Sell/Upgrade Towers");
-        uptowerpane.setPreferredSize(new Dimension(250,25));
         JLabel targetpane = new JLabel("Choose and click a tower");
         
         //add the panes to the tabs
         buytower.add(buytowerpane);
         buytower.add(buydesc);
-
-        //buytower.add(initPadding(100));
-        //selltower.add(initPadding(80));
+        
         selltower.add(uptowerpane, BorderLayout.CENTER);
         target.add(targetpane);
         tabs.setPreferredSize(new Dimension(350, 335));
@@ -118,11 +116,11 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         buytower.setLayout(new FlowLayout(FlowLayout.LEFT));
         buytower.add(norm);
         //will need to adjust this if tower costs fluctuate at all
-        buytower.add(initCL(100));
+        buytower.add(initCL(NormalTower.COST));
         buytower.add(ice);
-        buytower.add(initCL(150));
+        buytower.add(initCL(FreezingTower.COST));
         buytower.add(magic);
-        buytower.add(initCL(500));
+        buytower.add(initCL(MonsterTower.COST));
         
         basictower.addActionListener(this);
         freezingtower.addActionListener(this);
@@ -141,19 +139,19 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         buttons.add(upgrade);        
         selltower.add(buttons);   
                
-        norm.setToolTipText("<html><b>Damage:</b> 5"
-        		+ "<br><b>Range:</b> 3"
-        		+ "<br><b>Splash Radius:</b> 1"
-        		+ "<br><b>Fire Rate: </b>1</html>");
-        ice.setToolTipText("<html><b>Damage:</b> 1"
-        		+ "<br><b>Range:</b> 5"
-        		+ "<br><b>Splash Radius:</b> 3"
-        		+ "<br><b>Fire Rate: </b>1"
-        		+ "<br><b>Rate of Slowing: </b>80%</html>");
-        magic.setToolTipText("<html><b>Damage:</b> 5"
-        		+ "<br><b>Range:</b> 7"
-        		+ "<br><b>Splash Radius:</b> 5"
-        		+ "<br><b>Fire Rate: </b>3</html>");
+        norm.setToolTipText("<html><b>Damage: </b>" + NormalTower.DAMAGE
+        		+ "<br><b>Range:</b> " + NormalTower.RANGE
+        		+ "<br><b>Splash Radius:</b> " + NormalTower.BLAST_RADIUS
+        		+ "<br><b>Fire Rate: </b>" + NormalTower.FIRE_RATE + "</html>");
+        ice.setToolTipText("<html><b>Damage:</b> " + FreezingTower.DAMAGE
+        		+ "<br><b>Range:</b> " + FreezingTower.RANGE 
+        		+ "<br><b>Splash Radius:</b> "+ FreezingTower.BLAST_RADIUS
+        		+ "<br><b>Fire Rate: </b>1" + FreezingTower.FIRE_RATE
+        		+ "<br><b>Rate of Slowing: </b>" + 100*FreezingTower.SPECIAL_MOD + "%</html>");
+        magic.setToolTipText("<html><b>Damage:</b> " + MonsterTower.DAMAGE
+        		+ "<br><b>Range:</b> " + MonsterTower.RANGE
+        		+ "<br><b>Splash Radius:</b> " + MonsterTower.BLAST_RADIUS
+        		+ "<br><b>Fire Rate: </b>" + MonsterTower.FIRE_RATE + "</html>");
         
         sell.addActionListener(this);
         upgrade.addActionListener(this);
@@ -193,7 +191,18 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 	public void updatePF(){
 		PF.setText("Current funds: " + Character.toString((char) 8353) + view.getController().getGame().getCoins());
 		WaveNo.setText("Current Wave: " + view.getController().getGame().getWaveNo());
-		PHealth.setText("Health: " + view.getController().getGame().getHealth());
+		if (view.getController().getGame().getHealth() <= 20){
+			PHealth.setText("<html>Health: <font color=red>" 
+				+ view.getController().getGame().getHealth() + "</font></html>");
+		}
+		else if (view.getController().getGame().getHealth() <= 50){
+			PHealth.setText("<html>Health: <font color=#FFFF00>" 
+					+ view.getController().getGame().getHealth() + "</font></html>");
+		}
+		else {
+			PHealth.setText("<html>Health: <font color=green>" + 
+				view.getController().getGame().getHealth() + "</font></html>");
+		}
 	}
 	
 	/*

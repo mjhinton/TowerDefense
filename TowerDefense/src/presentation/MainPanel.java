@@ -83,6 +83,7 @@ public class MainPanel extends JPanel {
 		}
 		if (currentPanel.equals("PanelMenu")){
 			Sequence sequence = bgsound.getSequence("lib/music/GS_Title.mid");
+			bgsound.loadSoundBank("lib/music/GoldenSun.sf2");
 			bgsound.play(sequence, true);
 		}
 		if (currentPanel.equals("PanelMapEditor")){

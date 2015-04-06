@@ -16,12 +16,13 @@ import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.midi.Soundbank;
 import javax.sound.midi.Synthesizer;
+import javax.sound.midi.MidiChannel;
 
 public class SoundPlayer implements MetaEventListener {
 	
 	public static final int END_OF_TRACK_MESSAGE = 47;
 	private Sequencer sequencer;
-	private Synthesizer synthesizer;
+	private static Synthesizer synthesizer;
 	private boolean loop;
 	private boolean isPlaying;
 	private Instrument[] instruments;
@@ -74,6 +75,7 @@ public class SoundPlayer implements MetaEventListener {
 	        sequencer.setSequence(sequence);
 	        sequencer.start();
 	        this.loop = loop;
+	        setVolume(0.5d);
 	      } catch (InvalidMidiDataException ex) {
 	        ex.printStackTrace();
 	      }
@@ -91,13 +93,18 @@ public class SoundPlayer implements MetaEventListener {
 	
 	public void close() {
 	    if (sequencer != null && sequencer.isOpen()) {
-	      sequencer.close();
+	    	synthesizer.close();
+	    	sequencer.close();
 	    }
 	  }
 	
 	public Sequencer getSequencer() {
 	    return sequencer;
 	  }
+	
+	public Synthesizer getSynthesizer() {
+		return synthesizer;
+	}
 	
 	public void setPaused(boolean paused) {
 	    if (this.isPlaying == paused && sequencer != null && sequencer.isOpen()) {
@@ -128,30 +135,22 @@ public class SoundPlayer implements MetaEventListener {
             }
             sequencer.getTransmitter().setReceiver(synthesizer.getReceiver());
             //System.out.println(". Loaded "+ (sb.getName())+" soundbank" );
-        } catch (InvalidMidiDataException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (MidiUnavailableException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (InvalidMidiDataException e) {            
+            //e.printStackTrace();
+        } catch (IOException e) {            
+            //e.printStackTrace();
+        } catch (MidiUnavailableException e) {            
+            //e.printStackTrace();
         }
         instruments = synthesizer.getLoadedInstruments();       
     }
 	
-	/*public static void setVolume(float gainAmount){
-		if (isPlaying){
-			volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			BooleanControl muteControl = (BooleanControl) clip.getControl(BooleanControl.Type.MUTE);
-			if (gainAmount == -20){
-				muteControl.setValue(true);
-			}
-			else{
-				muteControl.setValue(false);
-				volume.setValue(gainAmount);
-			}
-		}
-	}*/
+	//this only silences some channels. doesn't work well if not using the hardware soundbank.
+	public static  void setVolume(double gain){
+		//double gain = 0.9D;
+		MidiChannel[] channels = synthesizer.getChannels();  
+		for (int i = 0; i < channels.length; i++) {
+	        channels[i].controlChange(7, (int) (gain * 127.0));
+	     }
+	}
 }
