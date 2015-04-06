@@ -1,81 +1,147 @@
 package presentation;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.File;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.BooleanControl;
-import javax.sound.sampled.LineUnavailableException;
+import javax.sound.midi.Instrument;
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MetaEventListener;
+import javax.sound.midi.MetaMessage;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
+import javax.sound.midi.Soundbank;
+import javax.sound.midi.Synthesizer;
 
-import common.BigClip;
-
-public class SoundPlayer {
+public class SoundPlayer implements MetaEventListener {
 	
-	private static Clip clip;
-	public static boolean isPlaying = false;
-	private String name;
-	private static FloatControl volume;
+	public static final int END_OF_TRACK_MESSAGE = 47;
+	private Sequencer sequencer;
+	private Synthesizer synthesizer;
+	private boolean loop;
+	private boolean isPlaying;
+	private Instrument[] instruments;
 	
-	public SoundPlayer(){
-		//empty constructor
+	public SoundPlayer(){		
+				
+	    try {
+	    	synthesizer = MidiSystem.getSynthesizer();
+	    	synthesizer.open();
+	    	instruments = synthesizer.getAvailableInstruments();
+	    	sequencer = MidiSystem.getSequencer();
+		    sequencer.open();
+		    sequencer.getTransmitter().setReceiver(synthesizer.getReceiver());
+		    sequencer.addMetaEventListener(this);
+		    loadSoundBank("lib/music/GoldenSun.sf2");
+	    } catch (MidiUnavailableException ex) {
+	    	sequencer = null;
+	    }
 	}
 	
-	public SoundPlayer(String input){		
-		try {
-			//clip = new BigClip();
-			name = input;
-			clip = AudioSystem.getClip();
-	        File file = new File("lib/music/" + name);
-	        AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
-	        clip.open(inputStream);
-	        //if the buffer size is too large, catch and try the BigClip solution...
-	        //but it works pretty strangely...
-	      } catch (LineUnavailableException e){
-				try{
-					BigClip clip = new BigClip();
-					File file = new File("lib/music/" + name);
-					AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
-			        clip.open(inputStream);
-				}
-				catch (Exception e2){
-					e2.printStackTrace();
-				}
+	public Sequence getSequence(String filename) {
+	    try {
+	      return getSequence(new FileInputStream(filename));
+	    } catch (IOException ex) {
+	      ex.printStackTrace();
+	      return null;
+	    }
+	  }
+		
+	public Sequence getSequence(InputStream is) {
+	    try {
+	      if (!is.markSupported()) {
+	        is = new BufferedInputStream(is);
 	      }
-			catch (Exception e) {
-	        e.printStackTrace();
-	      } 
-	}
+	      Sequence s = MidiSystem.getSequence(is);
+	      is.close();
+	      return s;
+	    } catch (InvalidMidiDataException ex) {
+	      ex.printStackTrace();
+	      return null;
+	    } catch (IOException ex) {
+	      ex.printStackTrace();
+	      return null;
+	    }
+	  }
 	
-	public void play(){
-        clip.setFramePosition(0);
-        clip.start();
-        isPlaying = true;
+	public void play(Sequence sequence, boolean loop) {
+	    if (sequencer != null && sequence != null && sequencer.isOpen()) {
+	      try {
+	        sequencer.setSequence(sequence);
+	        sequencer.start();
+	        this.loop = loop;
+	      } catch (InvalidMidiDataException ex) {
+	        ex.printStackTrace();
+	      }
+	    }
+	  }
+	
+	public void meta(MetaMessage event) {
+	    if (event.getType() == END_OF_TRACK_MESSAGE) {
+	      if (sequencer != null && sequencer.isOpen() && loop) {
+	    	  sequencer.setMicrosecondPosition(0);
+	    	  sequencer.start();
+	      }
+	    }
+	  }
+	
+	public void close() {
+	    if (sequencer != null && sequencer.isOpen()) {
+	      sequencer.close();
+	    }
+	  }
+	
+	public Sequencer getSequencer() {
+	    return sequencer;
+	  }
+	
+	public void setPaused(boolean paused) {
+	    if (this.isPlaying == paused && sequencer != null && sequencer.isOpen()) {
+	      this.isPlaying = (!paused);
+	      if (!paused) {
+	        sequencer.stop();
+	      } else {
+	        sequencer.start();
+	      }
+	    }
+	  }
+	
+	public boolean isPlaying() {
+	    return isPlaying;
+	  }
+	
+	public void loadSoundBank(String path) {
+        try {
+            File f = new File(path);
+            Soundbank sb = MidiSystem.getSoundbank(f);
+            if (synthesizer.isSoundbankSupported(sb)){
+                // unload all instruments
+                for (Instrument i: instruments){
+                    synthesizer.unloadInstrument(i);
+                }
+                synthesizer.loadAllInstruments(sb);
+                instruments = synthesizer.getLoadedInstruments();
+            }
+            sequencer.getTransmitter().setReceiver(synthesizer.getReceiver());
+            //System.out.println(". Loaded "+ (sb.getName())+" soundbank" );
+        } catch (InvalidMidiDataException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (MidiUnavailableException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        instruments = synthesizer.getLoadedInstruments();       
     }
 	
-	public void stop(){
-		clip.stop();
-		isPlaying = false;
-    }
-	
-	public void loop(){
-        if (name.equals("nc83853.wav")){
-        	clip.setLoopPoints(0, 5304034);
-        	//53040134
-        	//clip.setMicrosecondPosition(120200000);
-        	//System.out.println(clip.getFrameLength());
-        }
-        if (name.equals("nc83843.wav")){
-        	clip.setLoopPoints(1122833, 6102088);
-        }
-        if (name.equals("nc83854.wav")){
-        	clip.setLoopPoints(0, 4860979);
-        }
-		clip.loop(Clip.LOOP_CONTINUOUSLY);
-    }
-	
-	public static void setVolume(float gainAmount){
+	/*public static void setVolume(float gainAmount){
 		if (isPlaying){
 			volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 			BooleanControl muteControl = (BooleanControl) clip.getControl(BooleanControl.Type.MUTE);
@@ -87,5 +153,5 @@ public class SoundPlayer {
 				volume.setValue(gainAmount);
 			}
 		}
-	}
+	}*/
 }
