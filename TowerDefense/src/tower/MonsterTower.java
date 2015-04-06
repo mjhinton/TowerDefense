@@ -29,7 +29,7 @@ public class MonsterTower extends Tower{
 	}
 
 	public void initAttr(){
-		size = 6; //size of tower
+		size = 2; //size of tower
 		cost = 500; //buying cost
 		level = 1; //upgrade level
 		value = (int) (cost * level * 0.6); //selling value

@@ -33,27 +33,42 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		this.setMaximumSize(dim);
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
-	
-		this.add(new JLabel("Tower Manager"));
-		
+			
+		this.add(new JLabel ("Tower Manager"));
+				
 		//add the player funds panel
-		addPFPanel();
+		JPanel fundscontainer = new JPanel();
+		JPanel Playerfunds = new JPanel();
+		Playerfunds.add(PF);
+		Playerfunds.setOpaque(true);
+		Playerfunds.setBackground(Color.white);
+		fundscontainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		fundscontainer.setPreferredSize(new Dimension(350,30));
+		fundscontainer.add(Playerfunds);
+		this.add(fundscontainer);
 		
 		//add a tabbed pane
         JTabbedPane tabs = new JTabbedPane();
         //add the respective panels
         JPanel buytower = new JPanel();
         JPanel selltower = new JPanel();
-        selltower.setLayout(new BoxLayout(selltower, BoxLayout.PAGE_AXIS));
-        //labels for the panes
-        JLabel buytowerpane = new JLabel();
-        buytowerpane.setText("Available Towers");
-        JLabel uptowerpane = new JLabel();
-        uptowerpane.setText("Sell Towers");
+        
+        //titles for the panes
+        JLabel buytowerpane = new JLabel("Available Towers");
+        buytowerpane.setPreferredSize(new Dimension(180,20));
+        JLabel buydesc = new JLabel("Hover for more information");
+        buydesc.setForeground(Color.GRAY);
+        JLabel uptowerpane = new JLabel("Select to Sell/Upgrade Towers");
+        uptowerpane.setPreferredSize(new Dimension(250,30));
+        
         //add the panes to the tabs
+        buytower.add(initPadding(110));
         buytower.add(buytowerpane);
-        selltower.add(uptowerpane);
-        tabs.setPreferredSize(new Dimension(350, 300));
+        buytower.add(buydesc);
+        buytower.add(initPadding(100));
+        selltower.add(initPadding(80));
+        selltower.add(uptowerpane, BorderLayout.CENTER);
+        tabs.setPreferredSize(new Dimension(350, 335));
         //add panes to the overall tab pane
         tabs.addTab("Buy Towers", buytower);
         tabs.addTab("Sell/Upgrade Towers", selltower);
@@ -77,13 +92,30 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         group.add(basictower);
         group.add(freezingtower);
         group.add(monstertower);
-                
-        buytower.add(basictower);
-        buytower.add(basetower);
-        buytower.add(freezingtower);
-        buytower.add(freezetower);
-        buytower.add(monstertower);
-        buytower.add(monstower);
+        
+        //new panels for hoverboxes
+        JPanel norm = new JPanel();
+        JPanel ice = new JPanel();
+        JPanel magic = new JPanel();
+        
+        norm.add(basictower);
+        norm.add(basetower);
+        ice.add(freezingtower);
+        ice.add(freezetower);
+        magic.add(monstertower);
+        magic.add(monstower);
+        
+        buytower.setLayout(new FlowLayout(FlowLayout.LEFT));
+        buytower.add(norm);
+        buytower.add(initPadding(60));
+        //will need to adjust this if tower costs fluctuate at all
+        buytower.add(initCL(100));
+        buytower.add(ice);
+        buytower.add(initPadding(65));
+        buytower.add(initCL(150));
+        buytower.add(magic);
+        buytower.add(initPadding(50));
+        buytower.add(initCL(500));
         
         basictower.addActionListener(this);
         freezingtower.addActionListener(this);
@@ -99,11 +131,26 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         selltower.add(sell);
         selltower.add(upgrade);
         
+        norm.setToolTipText("<html><b>Damage:</b> 5"
+        		+ "<br><b>Range:</b> 3"
+        		+ "<br><b>Splash Radius:</b> 1"
+        		+ "<br><b>Fire Rate: </b>1</html>");
+        ice.setToolTipText("<html><b>Damage:</b> 1"
+        		+ "<br><b>Range:</b> 5"
+        		+ "<br><b>Splash Radius:</b> 3"
+        		+ "<br><b>Fire Rate: </b>1"
+        		+ "<br><b>Rate of Slowing: </b>80%</html>");
+        magic.setToolTipText("<html><b>Damage:</b> 5"
+        		+ "<br><b>Range:</b> 7"
+        		+ "<br><b>Splash Radius:</b> 5"
+        		+ "<br><b>Fire Rate: </b>3</html>");
+        
         sell.addActionListener(this);
         upgrade.addActionListener(this);
 	}
 	
 	
+
 	//initializes the funds panel
 	public void addPFPanel(){	
 		//initPF();
@@ -114,6 +161,21 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 	
 	public void updatePF(){
 		PF.setText("Current funds: " + Character.toString((char) 8353) + view.getController().getGame().getCoins());
+	}
+	
+	//fake 'padding'
+	public static JLabel initPadding(int i){
+		JLabel padding = new JLabel();
+		//padding.setOpaque(true);
+		//padding.setBackground(Color.white);
+		padding.setPreferredSize(new Dimension(i,15));
+		return padding;
+	}
+	
+	public static JLabel initCL(int i){
+		JLabel label = new JLabel("Cost: " + Character.toString((char) 8353) + i);
+		label.setPreferredSize(new Dimension(100,30));
+		return label;
 	}
 	
 	public void actionPerformed(ActionEvent e){

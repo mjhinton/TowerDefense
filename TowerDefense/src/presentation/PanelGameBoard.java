@@ -3,12 +3,19 @@ package presentation;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+//import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+//import javax.swing.SwingUtilities;
+
+
+
+
 
 import tower.*;
 import map.Map;
@@ -19,7 +26,7 @@ import model.Game;
 //import model.Game;
 //import common.ReadWriteTxtFile;
 
-public class PanelGameBoard extends JPanel implements MouseListener{
+public class PanelGameBoard extends JPanel implements MouseListener, MouseMotionListener{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -53,6 +60,12 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 		this.setFocusable(true);
 
 		addMouseListener(this);
+		addMouseMotionListener(this);
+		
+		/*Point c = new Point((MouseInfo.getPointerInfo().getLocation().x - 
+				this.getLocationOnScreen().x), (MouseInfo.getPointerInfo().getLocation().y 
+				- this.getLocationOnScreen().y));
+		*/
 	}
 	
 	public void mouseClicked(MouseEvent e){
@@ -95,6 +108,7 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 		    }
 	    }
 	    catch (NullPointerException exc){
+	    	
 	    	System.err.print("There's nothing here");
 	    	if(sellMode){
 	    		System.err.println(" to sell.");
@@ -113,11 +127,73 @@ public class PanelGameBoard extends JPanel implements MouseListener{
 	
 	public void mouseReleased(MouseEvent e) {
 	}
-
+	
 	public void mouseEntered(MouseEvent e) {
 	}
 
 	public void mouseExited(MouseEvent e) {
+	}
+	
+	public void mouseMoved(MouseEvent e){
+		//System.out.println(e.getX() + "," + e.getY());
+		Game game=view.getController().getGame();
+	    Tower tower=game.getBoard().getTower
+	    		(new Point(e.getX()/Map.CELL_PIXEL_SIZE, e.getY()/Map.CELL_PIXEL_SIZE));
+	    String sc = Character.toString((char) 8353);
+	    double value = 100;
+	    	if(upgradeMode && tower != null){
+	    		if (tower.getLevel() == 5){
+	    			this.setToolTipText("You can't upgrade this any further.");
+	    		}
+	    		else{
+	    			if (tower.getIcon().getIconHeight() == 62){
+	    				this.setToolTipText(
+    						"<html><b>Upgrade Cost: </b>" + sc + tower.getCost() +
+		    				"<br><b>Level: </b>" + tower.getLevel() + "--><b>" + (tower.getLevel() + 1) +
+		    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value + 
+		    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +		    			
+			    			"<br>Range: </b>" + tower.getRange() + "--><b>" + (tower.getRange() + 1) +
+			    			"<br>Slowing Power: </b>" + Math.round(100*(tower.getSpecialmod()))/value + 
+			    			"--><b>" + Math.round(100*(tower.getSpecialmod() - 0.05))/value +
+			    			"</html>"				
+	    		    	);
+	    			}
+	    			else{
+			    		this.setToolTipText(
+		    				"<html><b>Upgrade Cost: </b>" + sc + tower.getCost() +
+    	    				"<br><b>Level: </b>" + tower.getLevel() + "--><b>" + (tower.getLevel() + 1) +
+    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value + 
+    	    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +
+    	    				"<br>Damage: </b>" + Math.round(100*(tower.getPower())) + 
+    	    				"--><b>" + Math.round(100*(tower.getPower()*1.5))/value +
+    		    			"</html>"
+	    		    	);			    				
+	    			}
+	    		}
+	    	}	    
+		    else if (tower != null){
+		    	if (tower.getLevel() == 5){
+		    		this.setToolTipText(
+		    			"<html><b>Level: </b>" + tower.getLevel() + 
+		    			"<br><b>Selling Value: </b>" + sc + tower.getValue() +
+		    			"</html>"
+		    			);
+		    	}
+		    	else{
+			    	this.setToolTipText(
+		    			"<html><b>Level: </b>" + tower.getLevel() + 
+		    			"<br><b>Upgrade Cost: </b>" + sc + tower.getCost() +
+		    			"<br><b>Selling Value: </b>" + sc + tower.getValue() +
+		    			"</html>"
+		    			);
+		    	}
+		    }
+		    else{
+		    	this.setToolTipText("");
+		    }
+	}
+	
+	public void mouseDragged(MouseEvent e){
 	}
 	
 	public void paint(Graphics g){

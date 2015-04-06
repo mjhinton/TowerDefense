@@ -16,14 +16,11 @@ public class TestGame {
 
 		View app=new View();
 		app.switchPanel("PanelGame");
-		
-		Game testGame;
+
 		
 		Map testMap=Map.getPackagedMap("15x15map");
 		
 		app.getController().startGame(testMap);
-		testGame=app.getController().getGame();
-		
 		
 
 		

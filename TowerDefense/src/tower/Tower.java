@@ -55,7 +55,7 @@ public class Tower extends Subject{
 
 	//initialize default attributes
 	public void initAttr(){
-		size = 4; //number of coord blocks tower takes up
+		size = 1; //number of coord blocks tower takes up
 		cost = 100; //buying cost
 		level = 1; //upgrade level
 		value = (int) (cost * level * 0.6); //selling value
@@ -77,7 +77,7 @@ public class Tower extends Subject{
 			fireRate *= 1.1;
 			if (this.isSpecial == true){
 				range++;
-				specialmod += 0.1;
+				specialmod -= 0.05;
 			}
 			else {
 				power *= 1.5; //increase power, etc.
