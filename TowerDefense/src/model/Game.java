@@ -117,8 +117,7 @@ public class Game {
 			worked = board.upgradeTower(tower);
 			return worked;
 		} else {
-			System.out
-					.println("Maximum level reached. Further upgrade not possible.");
+			System.out.println("Maximum level reached. Further upgrade not possible.");
 		}
 		return false;
 	}
@@ -174,11 +173,12 @@ public class Game {
 		}
 		if (flag) {
 			wave = new Wave(currentWaveNumber, this);
-			System.out.println("Aww yeah, wave generated");
+			System.out.println("Wave " + currentWaveNumber + " begun.");
 			wave.setUpBank();
 			currentWaveNumber++;
+			System.out.println("This wave contains " + wave.getReleaseBank().size() + " critters.");
 		} else
-			System.out.println("Wave in progress, can't play.");
+			System.out.println("A wave is already in progress.");
 	}
 
 	public Wave getWave() throws NullPointerException {

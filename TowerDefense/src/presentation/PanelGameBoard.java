@@ -165,7 +165,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	    	    				"<b>Level: </b>" + tower.getLevel() + " <b>(MAX)" +
 	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value +  			
 	    		    			"<br><b>Range: </b>" + tower.getRange() +
-	    		    			"<br><b>Damage: </b>" + (int) (100*Math.round(100*(tower.getPower()))) +  
+	    		    			"<br><b>Damage: </b>" + (int) Math.round(100*(tower.getPower())) +  
 	    		    			"</html>"		
 	    						);
 		    			}	

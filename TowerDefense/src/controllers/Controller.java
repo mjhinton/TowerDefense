@@ -112,7 +112,7 @@ public class Controller implements ActionListener {
 	//temporary testing method
 	public void playGame(Map map){
 		if (gameAlreadyStarted==true){			
-			System.out.println("Game already started, so lets just generate a wave");
+			//System.out.println("Game already started, so lets just generate a wave");
 			try {
 				view.getController().getGame().generateWave();
 			} catch (InterruptedException e) {
@@ -122,7 +122,7 @@ public class Controller implements ActionListener {
 		}
 		else{
 			view.getController().startGame(map);
-			System.out.println("Game had not begun yet so let's start it and then generate a wave");
+			//System.out.println("Game had not begun yet so let's start it and then generate a wave");
 			try {
 				view.getController().getGame().generateWave();
 			} catch (InterruptedException e) {
