@@ -43,7 +43,7 @@ public class ReadWriteTxtFile {
 		
 		
 		JFileChooser chooser = new JFileChooser();
-	    chooser.setCurrentDirectory(new File("/home/me/Documents"));
+	    chooser.setCurrentDirectory(new File("lib/maps"));
 	    int retrival = chooser.showSaveDialog(null);
 	    if (retrival == JFileChooser.APPROVE_OPTION) {
 	        try {
