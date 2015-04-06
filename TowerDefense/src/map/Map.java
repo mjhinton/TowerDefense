@@ -14,7 +14,7 @@ import common.Subject;
  * @author Michael Hinton
  */
 public class Map extends Subject {
-	//for testing purposes
+	
 	
 	private int width;
 	private int height;
@@ -25,7 +25,7 @@ public class Map extends Subject {
 	private Path path;
 	// for testing purposes
 	private boolean getOffMapExitWasCalled;
-	// //
+	
 
 	final static public int MAX_WIDTH = 15;
 	final static public int MAX_HEIGHT = 15;

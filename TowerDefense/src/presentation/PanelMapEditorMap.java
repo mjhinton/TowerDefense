@@ -23,22 +23,14 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	
-	//for testing
-	private Map testMap, mapBeingEdited;
-	private MapEditor mapEditor;
-	private String[] testArrayMap;
-	private int cellX, cellY;
-	private int size = Map.CELL_PIXEL_SIZE;
 	
 	private View view;
+	private Map mapBeingEdited;
 
 	public PanelMapEditorMap(View view){
 
 		Dimension dim=new Dimension(View.SCREEN_HEIGHT, View.SCREEN_HEIGHT);
 		this.view=view;
-		//testing
-		//this.mapEditor = view.model.getEditor();
-		this.testMap = null;
 		
 		
 		this.setBackground(Color.WHITE);
@@ -48,24 +40,14 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
 		
-		//the following code is temporary for testing
-		/*testArrayMap = ReadWriteTxtFile
-				.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
-		testMap = new Map("testMap", 15, testArrayMap);
-		///////*/
 		addMouseListener(this);
 		
 	}
 	
 	public void paint(Graphics g){
-		//view.model.getEditor().paintMapEditor(g);
 		g.fillRect(0,0,Map.CELL_PIXEL_SIZE*Map.MAX_WIDTH,Map.CELL_PIXEL_SIZE*Map.MAX_HEIGHT);
 		view.getController().paintComponent(g);
 
-		//testMap.paintMap(g);
-	/*	for (int i=0; i<testArrayMap.length; i++){
-			System.out.println(testArrayMap[i]);
-		}*/
 		
 	}
 
@@ -76,7 +58,7 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 	public Map getMapEdited(){
 		return mapBeingEdited;
 	}
-	//possibly temp
+
 	public Map setMapEdited(Map map){
 		mapBeingEdited = map;
 		return mapBeingEdited;
