@@ -6,14 +6,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import map.Map;
 import model.MapEditor;
@@ -25,7 +20,7 @@ public class PanelMapEditorOptions extends JPanel {
 	
 	private View meView;
 	
-	private JButton bSaveMap, bPlayMap, bMainMenu, bOpenMap, bMapSettings;
+	private JButton bSaveMap, bPlayMap, bMainMenu, bOpenMap;
 
 	public PanelMapEditorOptions(final View view){
 
@@ -39,7 +34,6 @@ public class PanelMapEditorOptions extends JPanel {
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
 		
-		bMapSettings = new JButton ("Map Editor Settings");
 		bSaveMap = new JButton ("Save Map");
 		bPlayMap = new JButton("Play Map");
 		bMainMenu = new JButton("Main Menu");
@@ -47,41 +41,11 @@ public class PanelMapEditorOptions extends JPanel {
 		
 		JPanel pnButtonsContainer = new JPanel(new GridLayout(5,1));
 		
-		pnButtonsContainer.add(bMapSettings);
 		pnButtonsContainer.add(bSaveMap);
 		pnButtonsContainer.add(bOpenMap);
 		pnButtonsContainer.add(bPlayMap);
 		pnButtonsContainer.add(bMainMenu);
 		
-		//creates pop-up for bMapOptions
-		
-		bMapSettings.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-            	JTextField newName = new JTextField(20);
-            	JTextField newX = new JTextField(2);
-            	JTextField newY = new JTextField(2);
-            	
-            	JPanel popup = new JPanel();
-        		popup.add(new JLabel("Map name: "));
-        		popup.add(newName);
-        		popup.add(new JLabel(" Map width: "));
-        		popup.add(newX);
-        		popup.add(new JLabel(" Map height: "));
-        		popup.add(newY);
-        		
-        		int result = JOptionPane.showConfirmDialog(null, popup, "Please enter new map settings", JOptionPane.OK_CANCEL_OPTION);
-        		if(result == JOptionPane.OK_OPTION){
-        			if(newName.getText().equals("")||newX.getText().equals("")||newY.equals("")){
-        				if(newName.getText().equals("")&&(newX.getText().equals("")||newY.getText().equals(""))) System.out.println("Please enter a valid name and number(s).");
-        				else if(newName.getText().equals("")) System.out.println("Please enter a valid name.");	
-        				else if(newX.getText().equals("")||newY.getText().equals("")) System.out.println("Please enter a valid number from 1-15");
-        			}
-        			else meView.createEditableMap(newName.getText(), Integer.parseInt(newX.getText()), Integer.parseInt(newY.getText()));
-        		}
-        		meView.switchPanel("PanelMapEditor");
-            }
-        });
 		
         bSaveMap.addActionListener(new ActionListener() {
             @Override
@@ -128,18 +92,10 @@ public class PanelMapEditorOptions extends JPanel {
             public void actionPerformed(ActionEvent event) {
                 //open panel of saved maps
             	//for now, it just opens the test map 
-            	File savedMaps = new File("lib/maps");
-        		
-            	JFileChooser chooser = new JFileChooser();
-            	chooser.setCurrentDirectory(savedMaps);
-        		
-        	    int returnVal = chooser.showOpenDialog(meView.getMainPanel());
-        	    
-        	    if(returnVal == JFileChooser.APPROVE_OPTION){
-        	    	String[] testArrayMap = ReadWriteTxtFile.readTxtFileAsStringArray(chooser.getSelectedFile().getAbsolutePath());
-                	Map loadedMap = new Map("testMap", 15, testArrayMap);
-                	meView.model.getEditor().setMap(loadedMap);
-        	    }
+            	String[] testArrayMap = ReadWriteTxtFile
+            			.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
+            	Map testMap = new Map("testMap", 15, testArrayMap);
+
             	
             }
         });	

@@ -2,12 +2,8 @@ package map;
 
 import java.awt.Graphics;
 import java.awt.Point;
+
 import java.io.IOException;
-<<<<<<< HEAD
-import java.nio.file.Files;
-import java.nio.file.Paths;
-=======
->>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
 
 import common.ReadWriteTxtFile;
 import common.Subject;
@@ -37,15 +33,11 @@ public class Map extends Subject {
 
 	public Map(String inpMapName, int inpWidth, int inpHeight) {
 		if (inpWidth > MAX_WIDTH || inpHeight > MAX_HEIGHT) {
-			System.out.println("Size too big. Maximum size of 15x15 used.");
-			this.width = MAX_WIDTH;
-			this.height = MAX_HEIGHT;
+			throw new IllegalArgumentException("Size too big.");
 		}
-		else{
-			this.width = inpWidth;
-			this.height = inpHeight;
-			this.mapName = inpMapName;
-		}
+		this.width = inpWidth;
+		this.height = inpHeight;
+		this.mapName = inpMapName;
 
 		this.init();
 	}
@@ -105,10 +97,6 @@ public class Map extends Subject {
 		int randNum = 1000 + (int) (Math.random() * 999);
 		this.mapName = "map" + randNum;
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
 		this.init();
 	}
 
@@ -521,15 +509,9 @@ public class Map extends Subject {
 			e.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-	
-	public static double getCenterX(int x){
-		return x+0.5;
-=======
 
 	public static double getCenterX(int x) {
 		return x + 0.5;
->>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
 	}
 
 	public static double getCenterY(int y) {

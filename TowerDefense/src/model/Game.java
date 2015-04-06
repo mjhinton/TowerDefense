@@ -132,15 +132,6 @@ public class Game {
 				wave = null;
 			} else {
 				wave.updateCritterPositions();
-<<<<<<< HEAD
-			}
-			if (wave.finishedRelease()==false){
-				try {
-					wave.releaseCritters();
-					//System.out.println("release is good");
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-=======
 				if (wave.finishedRelease() == false) {
 					try {
 						wave.releaseCritters();
@@ -148,19 +139,12 @@ public class Game {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
->>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
 				}
 			}
-<<<<<<< HEAD
-			
-			for(int i = 0; i < towers.size(); i++) towers.get(i).fire();
-			for(int j=0;j<bullets.size();j++) bullets.get(j).updateBullet();
-=======
 
 			for (int i = 0; i < towers.size(); i++)
 				towers.get(i).fire();
 			
->>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
 		}
 		for (int j = 0; j < bullets.size(); j++)
 				bullets.get(j).updateBullet();
@@ -198,14 +182,6 @@ public class Game {
 			System.out.println("Wave in progress, can't play.");
 	}
 
-	public void targetting(String s){
-		s = s.toLowerCase();
-		if(s.equals("lowest")) for(int i = 0; i < towers.size(); i++) towers.get(i).targetLowestHealth();
-		else if(s.equals("highest")) for(int i = 0; i < towers.size(); i++) towers.get(i).targetHighestHealth();
-		else if(s.equals("closest")) for(int i = 0; i < towers.size(); i++) towers.get(i).targetClosest();
-		else if(s.equals("farthest")) for(int i = 0; i < towers.size(); i++) towers.get(i).targetFarthest();
-	}
-	
 	public Wave getWave() throws NullPointerException {
 		return wave;
 	}
@@ -241,9 +217,6 @@ public class Game {
 	}
 
 	public void removeCritter(Critter critter) {
-<<<<<<< HEAD
-		this.wave.removeCritter( critter);
-=======
 		this.wave.removeCritter(critter);
 
 	}
@@ -262,7 +235,6 @@ public class Game {
 			System.out.println("Unable to save game.");
 			e.printStackTrace();
 		}
->>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
 	}
 	
 	public int getWaveNo(){

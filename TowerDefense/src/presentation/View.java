@@ -16,7 +16,7 @@ public class View extends JFrame {
 	public static final String APP_NAME = "TowerDefense";
 	
 	protected Controller controller;
-	protected Model model = new Model();
+	protected Model model;
 	protected MainPanel mp;
 	
 	public View(){
@@ -26,6 +26,7 @@ public class View extends JFrame {
 	private void init(){
 		
 		mp=new MainPanel(this);
+		model=new Model();
 		controller = new Controller(this, model);
 		this.setSize(SCREEN_WIDTH,SCREEN_HEIGHT+25);
 		this.setResizable(false);
@@ -36,11 +37,6 @@ public class View extends JFrame {
 		this.setLayout(new BorderLayout());
 		this.add(mp,BorderLayout.CENTER);
 		this.setVisible(true);
-	}
-	
-	public void createEditableMap(String name, int x, int y){
-		model.setMap(name, x, y);
-		init();
 	}
 	
 	public void switchPanel(String cardName){
