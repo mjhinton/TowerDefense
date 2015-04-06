@@ -144,10 +144,11 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 		//System.out.println(e.getX() + "," + e.getY());
 		Game game=view.getController().getGame();
 	    if(e.getX()/Map.CELL_PIXEL_SIZE<view.getModel().getGame().getBoard().getMap().getWidth()&&e.getY()/Map.CELL_PIXEL_SIZE<view.getModel().getGame().getBoard().getMap().getHeight()){
-			Tower tower=game.getBoard().getTower
-		    		(new Point(e.getX()/Map.CELL_PIXEL_SIZE, e.getY()/Map.CELL_PIXEL_SIZE));
-		    String sc = Character.toString((char) 8353);
-		    double value = 100;
+			try{
+				Tower tower=game.getBoard().getTower(new Point(e.getX()/Map.CELL_PIXEL_SIZE, e.getY()/Map.CELL_PIXEL_SIZE));
+
+				 String sc = Character.toString((char) 8353);
+				 double value = 100;
 		    	if(upgradeMode && tower != null){
 		    		if (tower.getLevel() == 5){
 		    			this.setToolTipText("You can't upgrade this any further.");
@@ -198,6 +199,10 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 			    else{
 			    	this.setToolTipText("");
 			    }
+			}catch (NullPointerException err){
+				
+			}
+		   
 	    }
 	}
 	

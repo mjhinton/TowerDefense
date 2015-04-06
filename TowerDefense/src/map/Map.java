@@ -491,7 +491,7 @@ public class Map extends Subject {
 	}
 
 	public static Map getPackagedMap(String mapName) {
-		String path = "lib/maps/" + mapName + ".txt";
+		String path = "lib/maps/default_maps/" + mapName + ".txt";
 		String[] mapString = ReadWriteTxtFile.readTxtFileAsStringArray(path);
 		return new Map(mapName, 15, mapString);
 	}
