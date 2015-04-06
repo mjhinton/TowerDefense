@@ -6,8 +6,10 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -126,10 +128,19 @@ public class PanelMapEditorOptions extends JPanel {
             public void actionPerformed(ActionEvent event) {
                 //open panel of saved maps
             	//for now, it just opens the test map 
-            	String[] testArrayMap = ReadWriteTxtFile
-            			.readTxtFileAsStringArray("lib/testMaps/15x15map.txt");
-            	Map testMap = new Map("testMap", 15, testArrayMap);
-
+            	File savedMaps = new File("lib/maps");
+        		
+            	JFileChooser chooser = new JFileChooser();
+            	chooser.setCurrentDirectory(savedMaps);
+        		
+        	    int returnVal = chooser.showOpenDialog(meView.getMainPanel());
+        	    
+        	    if(returnVal == JFileChooser.APPROVE_OPTION){
+        	    	String[] testArrayMap = ReadWriteTxtFile.readTxtFileAsStringArray(chooser.getSelectedFile().getAbsolutePath());
+                	Map loadedMap = new Map("testMap", 15, testArrayMap);
+                	meView.model.getEditor().setMap(loadedMap);
+        	    }
+            	
             	
             }
         });	

@@ -2,9 +2,9 @@ package map;
 
 import java.awt.Graphics;
 import java.awt.Point;
-
 import java.io.IOException;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import common.ReadWriteTxtFile;
 import common.Subject;
@@ -491,6 +491,7 @@ public class Map extends Subject {
 			e.printStackTrace();
 		}
 	}
+	
 	public static double getCenterX(int x){
 		return x+0.5;
 	}
