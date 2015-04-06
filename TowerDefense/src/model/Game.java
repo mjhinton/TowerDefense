@@ -30,7 +30,7 @@ public class Game {
 		this.currentWaveNumber = 1;
 		this.wave = null;
 		// Start with many coins just for testing purposes
-		this.playerCoins = 1000;
+		this.playerCoins = 200;
 		this.gameOver = false;
 		towers = new LinkedList<Tower>();
 		this.playerHealth = 250;
@@ -174,9 +174,8 @@ public class Game {
 		}
 		if (flag) {
 			wave = new Wave(currentWaveNumber, this);
-			System.out.println("Aww y, wave generated");
+			System.out.println("Aww yeah, wave generated");
 			wave.setUpBank();
-			// System.out.println("Critters all released");
 			currentWaveNumber++;
 		} else
 			System.out.println("Wave in progress, can't play.");

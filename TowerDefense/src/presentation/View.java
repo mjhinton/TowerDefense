@@ -56,4 +56,8 @@ public class View extends JFrame {
 	public Model getModel() {
 		return this.model;
 	}
+	
+	public void update(){
+		mp.update();
+	}
 }

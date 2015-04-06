@@ -25,12 +25,7 @@ public class TestGame {
 		testGame=app.getController().getGame();
 		
 		
-		try {
-			app.getController().getGame().generateWave();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 	}
 }

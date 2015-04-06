@@ -9,7 +9,7 @@ import model.Game;
 //Monster critter is just a super fast, super strong critter.
 public class MonsterCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("lib/images/critter/ufo.png");
-	private final static Point PIXEL_OFFSET=new Point (-5,5);
+	private final static Point PIXEL_OFFSET=new Point (-20,-20);
 	public MonsterCritter(Game game){
 		super(0.8,30,30,30, ii, game);
 	}

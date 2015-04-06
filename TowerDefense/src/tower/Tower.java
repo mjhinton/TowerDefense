@@ -101,20 +101,14 @@ public class Tower extends Subject{
 		
 		ArrayList<Critter> inRange;
 		Critter target;
-		if (currFireIndex>=MAX_FIRE_INDEX){
+		if (currFireIndex>=MAX_FIRE_INDEX && game.getWave()!=null){
+
 			inRange=targetsInRange(game.getWave().getCritterBank());
 		
 			
 			if(inRange.size()!=0){
 					target=getTarget(inRange);
-					
-					shootBullet(target);
-					
-					//bullet.moveBullet(inRange);
-			}else{ 
-//					bullet = new Bullet(this.position, game);
-//					bulletReached = false;
-//					activeBullet = true;
+					shootBullet(target);	
 			}
 			currFireIndex=0;
 		}else{

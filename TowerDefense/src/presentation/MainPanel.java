@@ -66,6 +66,14 @@ public class MainPanel extends JPanel {
 		return currentPanel;
 	}
 
+	public PanelGame getPanelGame() {
+		return pnlGame;
+	}
+
+	public void update() {
+		pnlGame.update();
+	}
+
 	
 	/*public void switchMusic(){
 		if (bgsound.isPlaying){

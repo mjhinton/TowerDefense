@@ -70,6 +70,7 @@ public class Controller implements ActionListener {
 	
 	public void update(){
 		currentPanel=view.getMainPanel().getCurrentPanel();
+		view.update();
 		
 		if (currentPanel.equals("PanelMain")){
 			

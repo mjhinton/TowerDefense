@@ -35,7 +35,7 @@ public class PanelGame extends JPanel {
 		pnSide= new JPanel(new BorderLayout());
 
 		pnBoard=new PanelGameBoard(view);
-		pnTM=new PanelGameTowerManager(view, pnBoard);
+		pnTM=new PanelGameTowerManager(view);
 		pnOptions=new PanelGameOptions(view);
 		
 		//add tower manager and options panels to a side container
@@ -53,5 +53,15 @@ public class PanelGame extends JPanel {
 
 	public View getView() {
 		return view;
+	}
+
+	public PanelGameBoard getPanelGameBoard() {
+		// TODO Auto-generated method stub
+		return pnBoard;
+	}
+
+	public void update() {
+		pnTM.update();
+		
 	}
 }
