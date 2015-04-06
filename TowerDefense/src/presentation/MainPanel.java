@@ -21,7 +21,7 @@ public class MainPanel extends JPanel {
 	
 	private View view;
 	
-	//private SoundPlayer bgsound = new SoundPlayer("nc83843.wav");
+	private SoundPlayer bgsound = new SoundPlayer("nc83843.wav");
 
 	public View getView() {
 		return view;
@@ -66,8 +66,16 @@ public class MainPanel extends JPanel {
 		return currentPanel;
 	}
 
+	public PanelGame getPanelGame() {
+		return pnlGame;
+	}
+
+	public void update() {
+		pnlGame.update();
+	}
+
 	
-	/*public void switchMusic(){
+	public void switchMusic(){
 		if (bgsound.isPlaying){
 			bgsound.stop();
 		}
@@ -82,5 +90,5 @@ public class MainPanel extends JPanel {
 		}
 		bgsound.play();
 		bgsound.loop();
-	}*/
+	}
 }

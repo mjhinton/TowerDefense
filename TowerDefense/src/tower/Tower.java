@@ -22,7 +22,7 @@ import map.Map;
 
 public class Tower extends Subject{
 	
-	public int MAX_FIRE_INDEX=100;
+	public static final int MAX_FIRE_INDEX=100;
 	
 	protected Game game;
 	protected Point position;
@@ -30,15 +30,12 @@ public class Tower extends Subject{
 	protected int cost;
 	protected int level;
 	protected int value;
-	protected int range;
-	protected int bulletRange;
+	protected double range;
+	protected double bulletRange;
 	protected double power;
 	protected double fireRate;
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
-	//protected Bullet bullet;
-	//protected boolean activeBullet;
-	//protected boolean bulletReached;
 	protected boolean lowestHealth;
 	protected boolean highestHealth;
 	protected boolean closest;
@@ -48,26 +45,27 @@ public class Tower extends Subject{
 	
 	public Tower(Point c, Game game){
 		this.position = c;
-		this.initAttr();
+		currFireIndex=0;
+		bulletSpeedMultiplier=1;
+		//this.initAttr();
 		this.game=game;
-		this.targetLowestHealth();
+		this.targetClosest();
 	}
 
 	//initialize default attributes
-	public void initAttr(){
-		size = 4; //number of coord blocks tower takes up
-		cost = 100; //buying cost
-		level = 1; //upgrade level
-		value = (int) (cost * level * 0.6); //selling value
-		range = 3; //range of tower
-		bulletRange = 1; //range of bullet explosion
-		power = 5; //power of bullets
-		fireRate = 1; //rate of fire
-		isSpecial = false; //if tower has special effects
-		specialmod = 1;	 //special effect value	
-		currFireIndex=0;
-		bulletSpeedMultiplier=1;
-	}
+//	public void initAttr(){
+//		size = 1; //number of coord blocks tower takes up
+//		cost = 100; //buying cost
+//		level = 1; //upgrade level
+//		value = (int) (cost * level * 0.6); //selling value
+//		range = 3; //range of tower
+//		bulletRange = 0; //range of bullet explosion
+//		power = 2; //power of bullets
+//		fireRate = 1; //rate of fire
+//		isSpecial = false; //if tower has special effects
+//		specialmod = 1;	 //special effect value	
+//
+//	}
 
 	//increase the level of the tower
 	public void increaseLevel(){
@@ -77,7 +75,7 @@ public class Tower extends Subject{
 			fireRate *= 1.1;
 			if (this.isSpecial == true){
 				range++;
-				specialmod += 0.1;
+				specialmod -= 0.05;
 			}
 			else {
 				power *= 1.5; //increase power, etc.
@@ -97,24 +95,17 @@ public class Tower extends Subject{
 	}
 	
 	public void fire(){
-		//if(inRange==null && !activeBullet) bullet = null;
-		
+
 		ArrayList<Critter> inRange;
 		Critter target;
-		if (currFireIndex>=MAX_FIRE_INDEX){
+		if (currFireIndex>=MAX_FIRE_INDEX && game.getWave()!=null){
+
 			inRange=targetsInRange(game.getWave().getCritterBank());
 		
 			
 			if(inRange.size()!=0){
 					target=getTarget(inRange);
-					
 					shootBullet(target);
-					
-					//bullet.moveBullet(inRange);
-			}else{ 
-//					bullet = new Bullet(this.position, game);
-//					bulletReached = false;
-//					activeBullet = true;
 			}
 			currFireIndex=0;
 		}else{
@@ -129,9 +120,9 @@ public class Tower extends Subject{
 	public ArrayList<Critter> targetsInRange(ArrayList<Critter> critters){
 		ArrayList<Critter> inRange=new ArrayList<Critter>();
 		for(int i = 0; i < critters.size(); i++){
-			if(distanceSquared(Map.getCenterX(position.x), Map.getCenterY(position.y), Map.getCenterX(critters.get(i).getX()), Map.getCenterY(critters.get(i).getY()))<range*range){
-				inRange.add(critters.get(i));
-				
+			boolean flag=distanceSquared(Map.getCenterX(position.x), Map.getCenterY(position.y), Map.getCenterX(critters.get(i).getX()), Map.getCenterY(critters.get(i).getY()))<range*range;
+			if(flag && critters.get(i).onPath()){
+				inRange.add(critters.get(i));	
 			}
 		}
 	return inRange;
@@ -239,7 +230,7 @@ public class Tower extends Subject{
 		return this.level;
 	}
 	
-	public int getRange(){
+	public double getRange(){
 		return this.range;
 	}
 	
@@ -269,7 +260,6 @@ public class Tower extends Subject{
 	}
 	
 	public Image getImage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -288,14 +278,6 @@ public class Tower extends Subject{
 		return i2;
 	}
 	
-//	public Bullet getBullet(){
-//		return bullet;
-//	}
-	
-//	public boolean hasActiveBullet(){
-//		return activeBullet;
-//	}
-	
 	public Game getGame(){
 		return game;
 	}
@@ -305,5 +287,9 @@ public class Tower extends Subject{
 	}
 	public static double distanceSquared(double x1, double y1, double x2, double y2){
 		return Math.pow((y2-y1), 2)+Math.pow((x2-x1), 2);
+	}
+
+	public double getBlastRadius() {
+		return bulletRange;
 	}
 }

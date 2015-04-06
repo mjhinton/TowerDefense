@@ -19,6 +19,16 @@ import model.Game;
 
 public class MonsterTower extends Tower{
 	
+	public final static int DAMAGE=1;
+	public final static double RANGE=7;
+	public final static double BLAST_RADIUS=1;
+	public final static double FIRE_RATE=0.5;
+	public final static double SPECIAL_MOD=1;
+	public final static boolean IS_SPECIAL=false;
+	public final static int COST=1000;
+	public final static int SIZE=2;
+	public final static int VALUE=(int) (COST * 0.6);
+	
 	Image image;
 	Image bulletImage;
 	protected char type = 'm';
@@ -29,16 +39,16 @@ public class MonsterTower extends Tower{
 	}
 
 	public void initAttr(){
-		size = 6; //size of tower
-		cost = 500; //buying cost
+		size = SIZE; //size of tower
+		cost = COST; //buying cost
 		level = 1; //upgrade level
-		value = (int) (cost * level * 0.6); //selling value
-		range = 7; //range of tower
-		bulletRange = 5; //range of bullet explosion
-		power = 5; //power of bullets
-		fireRate = 3; //rate of fire
-		isSpecial = false; //if tower has special effects
-		specialmod = 1;	
+		value = VALUE; //selling value
+		range = RANGE; //range of tower
+		bulletRange = BLAST_RADIUS; //range of bullet explosion
+		power = DAMAGE; //power of bullets
+		fireRate = FIRE_RATE; //rate of fire
+		specialmod = SPECIAL_MOD;	
+		isSpecial = IS_SPECIAL; //if tower has special effects
 	}
 	
 	public ImageIcon getIcon() {

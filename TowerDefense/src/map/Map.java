@@ -3,8 +3,11 @@ package map;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.nio.file.Files;
 import java.nio.file.Paths;
+=======
+>>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
 
 import common.ReadWriteTxtFile;
 import common.Subject;
@@ -15,7 +18,8 @@ import common.Subject;
  * @author Michael Hinton
  */
 public class Map extends Subject {
-
+	//for testing purposes
+	
 	private int width;
 	private int height;
 	private MapCell[][] cells;
@@ -23,9 +27,9 @@ public class Map extends Subject {
 	private Point pathStartCoord;
 	private Point pathEndCoord;
 	private Path path;
-	//for testing purposes
+	// for testing purposes
 	private boolean getOffMapExitWasCalled;
-	////
+	// //
 
 	final static private int MAX_WIDTH = 15;
 	final static private int MAX_HEIGHT = 15;
@@ -49,7 +53,7 @@ public class Map extends Subject {
 	public Map(String inpMapName, int inpWidth, String[] inpMap) {
 		// Gives ability to create map from String array
 		// If start and / or end path given, assumes only one of each is given
-		//Note: this constructor automatically tries initiate the path
+		// Note: this constructor automatically tries initiate the path
 		if (inpWidth > MAX_WIDTH) {
 			throw new IllegalArgumentException("Size too big.");
 		}
@@ -101,7 +105,10 @@ public class Map extends Subject {
 		int randNum = 1000 + (int) (Math.random() * 999);
 		this.mapName = "map" + randNum;
 
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
 		this.init();
 	}
 
@@ -119,7 +126,7 @@ public class Map extends Subject {
 				cells[i][j] = new SceneryCell();
 			}
 		}
-		//for testing purposes
+		// for testing purposes
 		getOffMapExitWasCalled = false;
 	}
 
@@ -163,12 +170,11 @@ public class Map extends Subject {
 	 */
 	public boolean makePathCell(int x, int y) {
 		try {
-			
+
 			Point c = new Point(x, y);
-			
-			
+
 			this.cells[x][y] = new PathCell();
-			
+
 			if (c.equals(pathStartCoord)) {
 				pathStartCoord = null;
 			}
@@ -179,7 +185,8 @@ public class Map extends Subject {
 			this.notifyObservers();
 			return true;
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): "
+					+ e.getMessage());
 			return false;
 		}
 	}
@@ -200,6 +207,7 @@ public class Map extends Subject {
 		try {
 			Point c = new Point(x, y);
 			if (y == 0 || y == height - 1 || x == 0 || x == width - 1) {
+				
 				for (int i = 0; i < width; i++) {
 					for (int j = 0; j < height; j++) {
 						if (cells[i][j] instanceof PathStartCell) {
@@ -207,21 +215,25 @@ public class Map extends Subject {
 						}
 					}
 				}
+				
 				if (c.equals(pathEndCoord)) {
 					pathEndCoord = null;
 				}
+				
 				this.cells[x][y] = new PathStartCell();
 				this.pathStartCoord = c;
 				path = null;
 				this.notifyObservers();
 				return true;
+				
 			} else {
 				System.err
 						.println("Starting Path Cell must be placed on the edge of the map.");
 				return false;
 			}
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): "
+					+ e.getMessage());
 			return false;
 		}
 
@@ -265,7 +277,8 @@ public class Map extends Subject {
 				return false;
 			}
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): "
+					+ e.getMessage());
 			return false;
 		}
 
@@ -294,11 +307,22 @@ public class Map extends Subject {
 			this.notifyObservers();
 			return true;
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): "
+					+ e.getMessage());
 			return false;
 		}
 	}
 
+	/*
+	 * Getters for testing
+	 */
+	public Point getPathStartCoord(){
+		return pathStartCoord;
+	}
+	public Point getPathEndCoord(){
+		return pathEndCoord;
+	}
+	
 	/**
 	 * Attempts to build the path. Verifies if path is valid.
 	 * 
@@ -401,7 +425,8 @@ public class Map extends Subject {
 		try {
 			return cells[c.x][c.y];
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("IndexOutOfBoundsException(MAP): " + e.getMessage());
+			System.err.println("IndexOutOfBoundsException(MAP): "
+					+ e.getMessage());
 			return null;
 		}
 	}
@@ -415,93 +440,107 @@ public class Map extends Subject {
 			}
 		}
 	}
-	
-	public void toggle(int x, int y){
+
+	public void toggle(int x, int y) {
 		Point c = new Point();
 
 		c.setLocation(x, y);
-		
-		if(getCell(c) instanceof SceneryCell){
-			makePathCell(x,y);
+
+		if (getCell(c) instanceof SceneryCell) {
+			makePathCell(x, y);
 		}
-		
-		else if(getCell(c) instanceof PathCell&&(x==0||y==0||x==width-1||y==height-1)&&!(getCell(c) instanceof PathStartCell)&&!(getCell(c) instanceof PathEndCell)){
-				makePathEndCell(x,y);
+
+		else if (getCell(c) instanceof PathCell
+				&& (x == 0 || y == 0 || x == width - 1 || y == height - 1)
+				&& !(getCell(c) instanceof PathStartCell)
+				&& !(getCell(c) instanceof PathEndCell)) {
+			makePathEndCell(x, y);
 		}
-		
-		else if(getCell(c) instanceof PathEndCell){
-			makePathStartCell(x,y);
+
+		else if (getCell(c) instanceof PathEndCell) {
+			makePathStartCell(x, y);
 		}
-		
-		else if(getCell(c) instanceof PathStartCell){
-			makeSceneryCell(x,y);
+
+		else if (getCell(c) instanceof PathStartCell) {
+			makeSceneryCell(x, y);
 		}
-		
-		else if(getCell(c) instanceof PathCell&&!(x==0||y==0||x==width-1||y==height-1)){
-			makeSceneryCell(x,y);
+
+		else if (getCell(c) instanceof PathCell
+				&& !(x == 0 || y == 0 || x == width - 1 || y == height - 1)) {
+			makeSceneryCell(x, y);
 		}
 	}
-	
-	public Point getOffMapExit(){
-		//flag to test whether the method was called
+
+	public Point getOffMapExit() {
+		// flag to test whether the method was called
 		getOffMapExitWasCalled = true;
-		
+
 		Point p;
 		Point e;
-		if (path!=null){
-			e=pathEndCoord;
-			if (e.x==0){
-				p=new Point(e.x-1,e.y);
-			}else if(e.x==width-1){
-				p=new Point(e.x+1,e.y);
-			}else if(e.y==0){
-				p=new Point(e.x,e.y-1);
-			}else if (e.y==height-1){
-				p= new Point(e.x,e.y+1);
-			}else{
-				p=null;
+		if (path != null) {
+			e = pathEndCoord;
+			if (e.x == 0) {
+				p = new Point(e.x - 1, e.y);
+			} else if (e.x == width - 1) {
+				p = new Point(e.x + 1, e.y);
+			} else if (e.y == 0) {
+				p = new Point(e.x, e.y - 1);
+			} else if (e.y == height - 1) {
+				p = new Point(e.x, e.y + 1);
+			} else {
+				p = null;
 			}
-		}else{
-			p=null;
+		} else {
+			p = null;
 		}
-		
+
 		return p;
 	}
-	//for testing purposes
-	public boolean getWhetherGetOffMapExitWasCalled(){
+
+	// for testing purposes
+	public boolean getWhetherGetOffMapExitWasCalled() {
 		return getOffMapExitWasCalled;
 	}
-	
-	public static Map getPackagedMap(String mapName){
-		String path="lib/maps/"+mapName+".txt";
-		String[] mapString = ReadWriteTxtFile
-				.readTxtFileAsStringArray(path);
+
+	public static Map getPackagedMap(String mapName) {
+		String path = "lib/maps/" + mapName + ".txt";
+		String[] mapString = ReadWriteTxtFile.readTxtFileAsStringArray(path);
 		return new Map(mapName, 15, mapString);
 	}
-	public static void saveMap(Map map){
-		String mapString=map.print();
-		//String path="lib/maps/"+map.getName()+".txt";
+
+	public static void saveMap(Map map) {
+		String mapString = map.print();
+		// String path="lib/maps/"+map.getName()+".txt";
 		try {
-			if (ReadWriteTxtFile.writeTxtFileFromStringArray(mapString)){
+			if (ReadWriteTxtFile.writeTxtFileFromStringArray(mapString)) {
 				System.out.println("Map saved.");
 			}
-			
+
 		} catch (IOException e) {
 			System.out.println("Unable to save map. Check map name.");
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 	
 	public static double getCenterX(int x){
 		return x+0.5;
+=======
+
+	public static double getCenterX(int x) {
+		return x + 0.5;
+>>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
 	}
-	public static double getCenterY(int y){
-		return y+0.5;
+
+	public static double getCenterY(int y) {
+		return y + 0.5;
 	}
-	public static double getCenterX(double x){
-		return x+0.5;
+
+	public static double getCenterX(double x) {
+		return x + 0.5;
 	}
-	public static double getCenterY(double y){
-		return y+0.5;
+
+	public static double getCenterY(double y) {
+		return y + 0.5;
 	}
 }

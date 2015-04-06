@@ -70,6 +70,7 @@ public class Controller implements ActionListener {
 	
 	public void update(){
 		currentPanel=view.getMainPanel().getCurrentPanel();
+		view.update();
 		
 		if (currentPanel.equals("PanelMain")){
 			
@@ -137,6 +138,14 @@ public class Controller implements ActionListener {
 	}
 	public int getGameSpeed(){
 		return this.gameSpeedMultiplier;
+	}
+	
+	public void pausePlay(){
+		if (timer.isRunning()){
+			timer.stop();
+		}else{
+			timer.restart();
+		}
 	}
 
 	//testing

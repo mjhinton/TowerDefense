@@ -75,6 +75,10 @@ abstract public class Critter {
 	public void setSpeed(int i) {
 		speed = i;
 	}
+	
+	public void reduceSpeed(double reduction){
+		speed=speed*reduction;
+	}
 
 	public int getHealth() {
 		return health;
@@ -192,6 +196,7 @@ abstract public class Critter {
 	public int getRef(){
 		return critterRef;
 	}
+	
 
 	public abstract boolean getShield();
 

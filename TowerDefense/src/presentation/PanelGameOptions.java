@@ -31,6 +31,8 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 	private JComboBox cbSpeed;
 	private JSlider sSound;
 	
+	private boolean isPaused;
+	
 	private JPanel pnButtonsContainer;
 	private JPanel pnSound;
 	//edited temporarily
@@ -49,6 +51,7 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		this.setMaximumSize(dim);
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
+		this.isPaused=false;
 		
 		//initiate buttons and such
 		bPlayWave=new JButton("Play Wave");
@@ -145,9 +148,24 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 		});
 		
 		bResumePause.addActionListener(new ActionListener(){
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent event){
-				goView.getController().getGame().getWave().togglePaused();
+				goView.getController().pausePlay();
+				if (isPaused){
+					isPaused=false;
+					bResumePause.setLabel("Pause");
+				}else{
+					isPaused=true;
+					bResumePause.setLabel("Resume");
+				}
+			}
+		});
+		
+		bSave.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event){
+				goView.getController().getGame().saveGame();
 			}
 		});
 		

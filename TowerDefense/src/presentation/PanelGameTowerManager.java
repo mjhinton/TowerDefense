@@ -13,37 +13,50 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	private static View view;
+	private View view;
 	
-	private PanelGameBoard mainboard = new PanelGameBoard(view);
+	private PanelGameBoard mainboard;
 	
-	private static JLabel PF = new JLabel("Current funds: " + 0);
+	private static JLabel PF = new JLabel("Current funds: " + Character.toString((char) 8353) + 1000);
+	private static JLabel WaveNo = new JLabel("Wave: 1");
+	private static JLabel PHealth = new JLabel("Health: 0");
 
-	public PanelGameTowerManager(View iview, PanelGameBoard input){
+	public PanelGameTowerManager(View iview){
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
 		
 		view=iview;
-
-		mainboard = input;
-		
+				
 		//this.setBackground(Color.RED);
 		this.setPreferredSize(dim);
 		this.setMinimumSize(dim);
 		this.setMaximumSize(dim);
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
-	
-		this.add(new JLabel("Tower Manager"));
-		
+			
+		this.add(new JLabel ("Tower Manager"));
+				
 		//add the player funds panel
-		addPFPanel();
+		JPanel datacontainer = new JPanel();
+		JPanel Playerfunds = new JPanel();
+		Playerfunds.add(PF);
+		Playerfunds.setOpaque(true);
+		Playerfunds.setBackground(Color.white);
+		datacontainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		datacontainer.setPreferredSize(new Dimension(350,30));
+		datacontainer.add(WaveNo);
+		//datacontainer.add(initPadding(30));
+		datacontainer.add(PHealth);
+		//datacontainer.add(initPadding(30));
+		datacontainer.add(Playerfunds);
+		this.add(datacontainer);
 		
 		//add a tabbed pane
         JTabbedPane tabs = new JTabbedPane();
         //add the respective panels
         JPanel buytower = new JPanel();
         JPanel selltower = new JPanel();
+<<<<<<< HEAD
         JPanel target = new JPanel();
         target.setLayout(new GridLayout(4,1));
         selltower.setLayout(new GridLayout(0,2));
@@ -55,13 +68,32 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         uptowerpane.setText("Sell and Upgrade Towers");
         JLabel targetpane = new JLabel();
         targetpane.setText("Choose and click a tower");
+=======
+        
+        //titles for the panes
+        JLabel buytowerpane = new JLabel("Available Towers");
+        buytowerpane.setPreferredSize(new Dimension(180,20));
+        JLabel buydesc = new JLabel("Hover for more information");
+        buydesc.setForeground(Color.GRAY);
+        JLabel uptowerpane = new JLabel("Select to Sell/Upgrade Towers");
+        uptowerpane.setPreferredSize(new Dimension(250,25));
+>>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
         
         //add the panes to the tabs
+        buytower.add(initPadding(110));
         buytower.add(buytowerpane);
+<<<<<<< HEAD
         selltower.add(uptowerpane);
         target.add(targetpane);
         tabs.setPreferredSize(new Dimension(350, 300));
         
+=======
+        buytower.add(buydesc);
+        buytower.add(initPadding(100));
+        selltower.add(initPadding(80));
+        selltower.add(uptowerpane, BorderLayout.CENTER);
+        tabs.setPreferredSize(new Dimension(350, 335));
+>>>>>>> branch 'master' of https://github.com/mjhinton/TowerDefense
         //add panes to the overall tab pane
         tabs.addTab("Buy Towers", buytower);
         tabs.addTab("Sell/Upgrade Towers", selltower);
@@ -86,13 +118,30 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         group.add(basictower);
         group.add(freezingtower);
         group.add(monstertower);
-                
-        buytower.add(basictower);
-        buytower.add(basetower);
-        buytower.add(freezingtower);
-        buytower.add(freezetower);
-        buytower.add(monstertower);
-        buytower.add(monstower);
+        
+        //new panels for hoverboxes
+        JPanel norm = new JPanel();
+        JPanel ice = new JPanel();
+        JPanel magic = new JPanel();
+        
+        norm.add(basictower);
+        norm.add(basetower);
+        ice.add(freezingtower);
+        ice.add(freezetower);
+        magic.add(monstertower);
+        magic.add(monstower);
+        
+        buytower.setLayout(new FlowLayout(FlowLayout.LEFT));
+        buytower.add(norm);
+        buytower.add(initPadding(30));
+        //will need to adjust this if tower costs fluctuate at all
+        buytower.add(initCL(100));
+        buytower.add(ice);
+        buytower.add(initPadding(35));
+        buytower.add(initCL(150));
+        buytower.add(magic);
+        buytower.add(initPadding(20));
+        buytower.add(initCL(500));
         
         basictower.addActionListener(this);
         freezingtower.addActionListener(this);
@@ -108,6 +157,20 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         selltower.add(Box.createRigidArea(new Dimension(0, 3)));
         selltower.add(sell);
         selltower.add(upgrade);
+        
+        norm.setToolTipText("<html><b>Damage:</b> 5"
+        		+ "<br><b>Range:</b> 3"
+        		+ "<br><b>Splash Radius:</b> 1"
+        		+ "<br><b>Fire Rate: </b>1</html>");
+        ice.setToolTipText("<html><b>Damage:</b> 1"
+        		+ "<br><b>Range:</b> 5"
+        		+ "<br><b>Splash Radius:</b> 3"
+        		+ "<br><b>Fire Rate: </b>1"
+        		+ "<br><b>Rate of Slowing: </b>80%</html>");
+        magic.setToolTipText("<html><b>Damage:</b> 5"
+        		+ "<br><b>Range:</b> 7"
+        		+ "<br><b>Splash Radius:</b> 5"
+        		+ "<br><b>Fire Rate: </b>3</html>");
         
         sell.addActionListener(this);
         upgrade.addActionListener(this);
@@ -134,22 +197,35 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         closest.addActionListener(this);
         farthest.addActionListener(this);;
 	}
-	
-	//because of the order things are initialized, this needs to start out as the coins the player starts out with.
-	public static void initPF(){
-		PF = new JLabel("Current funds: " + Character.toString((char) 8353) + 1000);
-	}
-	
+
 	//initializes the funds panel
 	public void addPFPanel(){	
-		initPF();
+		//initPF();
 		JPanel Playerfunds = new JPanel();
 		Playerfunds.add(PF);
 		this.add(Playerfunds);
 	}
+	//because of the order things are initialized, this needs to start out as the coins the player starts out with.
 	
-	public static void updatePF(){
+	public void updatePF(){
 		PF.setText("Current funds: " + Character.toString((char) 8353) + view.getController().getGame().getCoins());
+		WaveNo.setText("Current Wave: " + view.getController().getGame().getWaveNo());
+		PHealth.setText("Health: " + view.getController().getGame().getHealth());
+	}
+	
+	//fake 'padding'
+	public static JLabel initPadding(int i){
+		JLabel padding = new JLabel();
+		//padding.setOpaque(true);
+		//padding.setBackground(Color.white);
+		padding.setPreferredSize(new Dimension(i,15));
+		return padding;
+	}
+	
+	public static JLabel initCL(int i){
+		JLabel label = new JLabel("Cost: " + Character.toString((char) 8353) + i);
+		label.setPreferredSize(new Dimension(100,30));
+		return label;
 	}
 	
 	public void actionPerformed(ActionEvent e){
@@ -257,5 +333,13 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         JRadioButton highest = new JRadioButton("Highest health critter");
         JRadioButton closest = new JRadioButton("Closest critter");
         JRadioButton farthest = new JRadioButton("Farthest critter");
+	}
+
+	public void update() {
+
+		if (mainboard ==null){
+			mainboard = view.getMainPanel().getPanelGame().getPanelGameBoard();
+		}
+		this.updatePF();
 	}
 }

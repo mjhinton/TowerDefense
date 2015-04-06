@@ -16,11 +16,34 @@ import model.Game;
 
 public class NormalTower extends Tower{
 	
+	public final static int DAMAGE=1;
+	public final static double RANGE=5;
+	public final static double BLAST_RADIUS=0;
+	public final static double FIRE_RATE=1.5;
+	public final static double SPECIAL_MOD=1;
+	public final static boolean IS_SPECIAL=false;
+	public final static int COST=100;
+	public final static int SIZE=2;
+	public final static int VALUE=(int) (COST * 0.6);
+	
 	Image image;
 	Image bulletImage;
 
 	public NormalTower(Point c, Game game){
 		super(c, game);
+		initAttr();
+	}
+	public void initAttr(){
+		size = SIZE; //size of tower
+		cost = COST; //buying cost
+		level = 1; //upgrade level
+		value = VALUE; //selling value
+		range = RANGE; //range of tower
+		bulletRange = BLAST_RADIUS; //range of bullet explosion
+		power = DAMAGE; //power of bullets
+		fireRate = FIRE_RATE; //rate of fire
+		specialmod = SPECIAL_MOD;	
+		isSpecial = IS_SPECIAL; //if tower has special effects
 	}
 
 	
