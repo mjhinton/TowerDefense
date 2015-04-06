@@ -68,7 +68,7 @@ public class PanelMenuButtons extends JPanel {
         	    if(returnVal == JFileChooser.APPROVE_OPTION){
         	    	String[] testArrayMap = ReadWriteTxtFile.readTxtFileAsStringArray(chooser.getSelectedFile().getAbsolutePath());
                 	Map loadedMap = new Map("testMap", 15, testArrayMap);
-                	mbView.getController().getGame().setBoardMap(loadedMap);
+                	mbView.getController().startGame(loadedMap);
                 	mbView.switchPanel("PanelGame");
         	    }
             	
