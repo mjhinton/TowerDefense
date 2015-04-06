@@ -132,7 +132,7 @@ public class PanelMapEditorOptions extends JPanel {
             public void actionPerformed(ActionEvent event) {
                 //open panel of saved maps
             	//for now, it just opens the test map 
-            	File savedMaps = new File("lib/maps/Custom Maps");
+            	File savedMaps = new File("lib/maps/custom_maps");
         		
             	JFileChooser chooser = new JFileChooser();
             	chooser.setCurrentDirectory(savedMaps);
