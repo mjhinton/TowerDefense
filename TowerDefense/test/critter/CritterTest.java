@@ -54,9 +54,7 @@ public class CritterTest {
 		testCritter.getsHit(1);
 		assertEquals("Critter health must become lower", 4, testCritter.getHealth(), 0 );
 		assertTrue(testCritter.onPath());
-		//need to test whether on path becomes false when it dies, if it is removed from the critterBank, 
-		//and whether the health is set to 0 when damage is higher than critter health
-		
+	
 		//TODO:The below doesn't pass right now
 		
 		testCritter2.getsHit(5);
