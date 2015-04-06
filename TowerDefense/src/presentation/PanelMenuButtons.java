@@ -76,7 +76,7 @@ public class PanelMenuButtons extends JPanel {
         bLoadGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-            	File saves = new File("savedFileDatabase");
+            	File saves = new File("lib/savedFileDatabase");
         		saves.mkdir();
         		
             	JFileChooser chooser = new JFileChooser();
