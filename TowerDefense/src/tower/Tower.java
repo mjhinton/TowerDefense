@@ -30,7 +30,7 @@ public class Tower extends Subject{
 	protected int cost;
 	protected int level;
 	protected int value;
-	protected int range;
+	protected double range;
 	protected double bulletRange;
 	protected double power;
 	protected double fireRate;
@@ -233,7 +233,7 @@ public class Tower extends Subject{
 		return this.level;
 	}
 	
-	public int getRange(){
+	public double getRange(){
 		return this.range;
 	}
 	

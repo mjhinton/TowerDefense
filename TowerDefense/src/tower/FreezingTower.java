@@ -18,6 +18,16 @@ import model.Game;
 
 public class FreezingTower extends Tower{
 	
+	public static int DAMAGE=1;
+	public static double RANGE=5;
+	public static double BLAST_RADIUS=2;
+	public static double FIRE_RATE=1;
+	public static double SPECIAL_MOD=0.8;
+	public static boolean IS_SPECIAL=true;
+	public static int COST=150;
+	public static int SIZE=1;
+	public static int VALUE=(int) (COST * 0.6);
+	
 	Image image;
 	Image bulletImage;
 
@@ -27,16 +37,16 @@ public class FreezingTower extends Tower{
 	}
 
 	public void initAttr(){
-		size = 1; //size of tower
-		cost = 150; //buying cost
+		size = SIZE; //size of tower
+		cost = COST; //buying cost
 		level = 1; //upgrade level
-		value = (int) (cost * level * 0.6); //selling value
-		range = 5; //range of tower
-		bulletRange = 3; //range of bullet explosion
-		power = 1; //power of bullets
-		fireRate = 1; //rate of fire
-		isSpecial = true; //if tower has special effects
-		specialmod = 0.8;	
+		value = VALUE; //selling value
+		range = RANGE; //range of tower
+		bulletRange = BLAST_RADIUS; //range of bullet explosion
+		power = DAMAGE; //power of bullets
+		fireRate = FIRE_RATE; //rate of fire
+		specialmod = SPECIAL_MOD;	
+		isSpecial = IS_SPECIAL; //if tower has special effects
 	}
 	
 	public ImageIcon getIcon(){
