@@ -22,7 +22,7 @@ import map.Map;
 
 public class Tower extends Subject{
 	
-	public int MAX_FIRE_INDEX=100;
+	public static final int MAX_FIRE_INDEX=100;
 	
 	protected Game game;
 	protected Point position;
@@ -36,9 +36,6 @@ public class Tower extends Subject{
 	protected double fireRate;
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
-	//protected Bullet bullet;
-	//protected boolean activeBullet;
-	//protected boolean bulletReached;
 	protected boolean lowestHealth;
 	protected boolean highestHealth;
 	protected boolean closest;
