@@ -218,6 +218,12 @@ public class Game {
 		bullets.remove(bullet);
 	}
 
+	//Method for testing purposes
+	public void addCritter(Critter critter){
+		this.wave.addCritterToBank(critter);
+	}
+	////
+	
 	public void removeCritter(Critter critter) {
 		this.wave.removeCritter(critter);
 
