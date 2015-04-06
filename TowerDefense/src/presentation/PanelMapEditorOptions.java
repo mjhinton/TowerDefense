@@ -25,7 +25,7 @@ public class PanelMapEditorOptions extends JPanel {
 	
 	private View meView;
 	
-	private JButton bSaveMap, bPlayMap, bMainMenu, bOpenMap, bMapSettings;
+	private JButton bSaveMap, bPlayMap, bMainMenu, bLoadMap, bMapSettings;
 
 	public PanelMapEditorOptions(final View view){
 
@@ -43,13 +43,13 @@ public class PanelMapEditorOptions extends JPanel {
 		bSaveMap = new JButton ("Save Map");
 		bPlayMap = new JButton("Play Map");
 		bMainMenu = new JButton("Main Menu");
-		bOpenMap = new JButton("Open Saved Map");
+		bLoadMap = new JButton("Load Saved Map");
 		
 		JPanel pnButtonsContainer = new JPanel(new GridLayout(5,1));
 		
 		pnButtonsContainer.add(bMapSettings);
 		pnButtonsContainer.add(bSaveMap);
-		pnButtonsContainer.add(bOpenMap);
+		pnButtonsContainer.add(bLoadMap);
 		pnButtonsContainer.add(bPlayMap);
 		pnButtonsContainer.add(bMainMenu);
 		
@@ -127,12 +127,12 @@ public class PanelMapEditorOptions extends JPanel {
                 meView.switchPanel("PanelMenu");
             }
         });	
-        bOpenMap.addActionListener(new ActionListener() {
+        bLoadMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 //open panel of saved maps
             	//for now, it just opens the test map 
-            	File savedMaps = new File("lib/maps");
+            	File savedMaps = new File("lib/maps/Custom Maps");
         		
             	JFileChooser chooser = new JFileChooser();
             	chooser.setCurrentDirectory(savedMaps);
