@@ -235,5 +235,13 @@ public class Game {
 			e.printStackTrace();
 		}
 	}
+	
+	public int getWaveNo(){
+		return currentWaveNumber;
+	}
+	
+	public int getHealth(){
+		return playerHealth;
+	}
 
 }

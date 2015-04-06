@@ -15,8 +15,6 @@ import javax.swing.JPanel;
 
 
 
-
-
 import tower.*;
 import map.Map;
 import model.Game;

@@ -17,16 +17,16 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 	
 	private PanelGameBoard mainboard;
 	
-	private JLabel PF = new JLabel("Current funds: " + 0);
+	private static JLabel PF = new JLabel("Current funds: " + Character.toString((char) 8353) + 1000);
+	private static JLabel WaveNo = new JLabel("Wave: 1");
+	private static JLabel PHealth = new JLabel("Health: 0");
 
 	public PanelGameTowerManager(View iview){
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, PanelGame.GAME_SCREEN_TOWER_MANAGER_HEIGHT);
 		
 		view=iview;
-
-		
-		
+				
 		//this.setBackground(Color.RED);
 		this.setPreferredSize(dim);
 		this.setMinimumSize(dim);
@@ -37,15 +37,19 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		this.add(new JLabel ("Tower Manager"));
 				
 		//add the player funds panel
-		JPanel fundscontainer = new JPanel();
+		JPanel datacontainer = new JPanel();
 		JPanel Playerfunds = new JPanel();
 		Playerfunds.add(PF);
 		Playerfunds.setOpaque(true);
 		Playerfunds.setBackground(Color.white);
-		fundscontainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		fundscontainer.setPreferredSize(new Dimension(350,30));
-		fundscontainer.add(Playerfunds);
-		this.add(fundscontainer);
+		datacontainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		datacontainer.setPreferredSize(new Dimension(350,30));
+		datacontainer.add(WaveNo);
+		//datacontainer.add(initPadding(30));
+		datacontainer.add(PHealth);
+		//datacontainer.add(initPadding(30));
+		datacontainer.add(Playerfunds);
+		this.add(datacontainer);
 		
 		//add a tabbed pane
         JTabbedPane tabs = new JTabbedPane();
@@ -59,7 +63,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         JLabel buydesc = new JLabel("Hover for more information");
         buydesc.setForeground(Color.GRAY);
         JLabel uptowerpane = new JLabel("Select to Sell/Upgrade Towers");
-        uptowerpane.setPreferredSize(new Dimension(250,30));
+        uptowerpane.setPreferredSize(new Dimension(250,25));
         
         //add the panes to the tabs
         buytower.add(initPadding(110));
@@ -148,8 +152,6 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         sell.addActionListener(this);
         upgrade.addActionListener(this);
 	}
-	
-	
 
 	//initializes the funds panel
 	public void addPFPanel(){	
@@ -158,9 +160,12 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		Playerfunds.add(PF);
 		this.add(Playerfunds);
 	}
+	//because of the order things are initialized, this needs to start out as the coins the player starts out with.
 	
 	public void updatePF(){
 		PF.setText("Current funds: " + Character.toString((char) 8353) + view.getController().getGame().getCoins());
+		WaveNo.setText("Current Wave: " + view.getController().getGame().getWaveNo());
+		PHealth.setText("Health: " + view.getController().getGame().getHealth());
 	}
 	
 	//fake 'padding'
