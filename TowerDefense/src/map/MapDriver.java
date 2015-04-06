@@ -87,6 +87,7 @@ public class MapDriver {
 		System.out.println("Test initPath(), checkPath() and getPath().");
 		// Construct valid path along left side of map, print map and initialize
 		// path
+		
 		testMap1.makePathStartCell(0, 0);
 		for (int i = 1; i < 39; i++) {
 			testMap1.makePathCell(0, i);
