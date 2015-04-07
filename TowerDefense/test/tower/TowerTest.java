@@ -103,7 +103,7 @@ public class TowerTest {
 		
 		testController.playGame(testMap);
 		
-		//fails("Not yet done implementing");
+		fail("Not yet done implementing");
 	
 	
 	}

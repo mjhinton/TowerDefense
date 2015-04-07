@@ -20,7 +20,7 @@ public class FreezingTower extends Tower{
 	
 	public final static double DAMAGE=1;
 	public final static double RANGE=3;
-	public final static double BLAST_RADIUS=1;
+	public final static double BLAST_RADIUS=3;
 	public final static double FIRE_RATE=0.3;
 	public final static double SPECIAL_MOD=0.8;
 	public final static boolean IS_SPECIAL=true;

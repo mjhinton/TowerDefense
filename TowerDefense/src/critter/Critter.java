@@ -26,7 +26,8 @@ abstract public class Critter {
 	private Point currPathCoord;
 	private Point nextPathCoord;
 	private boolean onPath;
-	private int pathLength; 
+	private int pathLength;
+	private boolean isNearBullet;
 
 	private Image appearance;
 	private double speed;
@@ -132,14 +133,13 @@ abstract public class Critter {
 		this.reward *= 1.25;
 	}
 
-	// centercoordinate
+	//Center Coordinate
 	public void setDown() throws InterruptedException {
 		currPathIndex=0;
 		currPathCoord=gamePath.getCoord(0);
 		x=(double)currPathCoord.x;
 		y=(double)currPathCoord.y;
 		onPath=true;
-		//System.out.println(currPathCoord);
 	}
 	
 	//Added for testing purposes
@@ -149,7 +149,6 @@ abstract public class Critter {
 		System.out.println(currPathCoord);
 		x = (double)currPathCoord.x;
 		y = (double)currPathCoord.y;
-		//System.out.println("index" + index + " currPathCoord" + currPathCoord);
 		onPath = true;
 	}
 	public void setCurrPathIndex(int index){
@@ -159,47 +158,105 @@ abstract public class Critter {
 
 	public void updatePosition() {
 		if (this.onPath==true && this.health > 0 && this.reachedGoal == false) {
-			if (currPathIndex == pathLength - 1) {
-				nextPathCoord = gameBoard.getMap().getOffMapExit();
-			} else {
-				nextPathCoord = gamePath.getCoord(currPathIndex + 1);
-			}
-			double dx = (double) (nextPathCoord.x - currPathCoord.x);
-			double dy = (double) (nextPathCoord.y - currPathCoord.y);
-
-			// get new board position (double,double)
-			if (dx!=0){
-				x = x + (dx / Math.abs(dx)) * speed;
-			}
-			if (dy!=0){
-				y = y + (dy / Math.abs(dy)) * speed;
-
-			}
 			
-			double dxc=Math.abs(x-currPathCoord.x);
-			double dyc=Math.abs(y-currPathCoord.y);
-			
-			boolean flag=(dxc>1 || dyc>1);
-	
-			if (flag) {
-				if (currPathIndex == pathLength - 1) {
-					reachedGoal = true;
-					health=0;
-					onPath=false;
-					System.out.println(this.toString()
-							+ " has reached the endpoint");
-					System.out.println("Player lost " + damage + " health.");
-					game.changeHealth(-1*damage);
-					game.removeCritter(this);
-					
-				} else {
-					currPathCoord = nextPathCoord;
-					currPathIndex = currPathIndex + 1;
+			if (!(this instanceof SmartCritter)){
+				moveNormally();
+			}
+			else{ 
+				if (this.isNearBullet){
+					moveFaster();
 				}
-
+				else 
+					moveNormally();
 			}
 		}
 	}
+	
+	public void moveNormally(){
+		if (currPathIndex == pathLength - 1) {
+			nextPathCoord = gameBoard.getMap().getOffMapExit();
+		} else {
+			nextPathCoord = gamePath.getCoord(currPathIndex + 1);
+		}
+		double dx = (double) (nextPathCoord.x - currPathCoord.x);
+		double dy = (double) (nextPathCoord.y - currPathCoord.y);
+
+		// get new board position (double,double)
+		if (dx!=0){
+			x = x + (dx / Math.abs(dx)) * speed;
+		}
+		if (dy!=0){
+			y = y + (dy / Math.abs(dy)) * speed;
+
+		}
+	
+		double dxc=Math.abs(x-currPathCoord.x);
+		double dyc=Math.abs(y-currPathCoord.y);
+	
+		boolean flag=(dxc>1 || dyc>1);
+		
+		if (flag) {
+			if (currPathIndex == pathLength - 1) {
+			reachedGoal = true;
+			health=0;
+			onPath=false;
+			System.out.println(this.toString()
+					+ " has reached the endpoint");
+			System.out.println("Player lost " + damage + " health.");
+			game.changeHealth(-1*damage);
+			game.removeCritter(this);
+			
+		} else {
+			currPathCoord = nextPathCoord;
+			currPathIndex = currPathIndex + 1;
+		}
+
+	}
+	}
+	
+	public void moveFaster(){
+		if (currPathIndex == pathLength - 1) {
+			nextPathCoord = gameBoard.getMap().getOffMapExit();
+		} else {
+			nextPathCoord = gamePath.getCoord(currPathIndex + 1);
+		}
+		double dx = (double) (nextPathCoord.x - currPathCoord.x);
+		double dy = (double) (nextPathCoord.y - currPathCoord.y);
+
+		// get new board position (double,double)
+		if (dx!=0){
+			x = x + (dx / Math.abs(dx)) * (3*speed);
+		}
+		if (dy!=0){
+			y = y + (dy / Math.abs(dy)) * (3*speed);
+
+		}
+	
+		double dxc=Math.abs(x-currPathCoord.x);
+		double dyc=Math.abs(y-currPathCoord.y);
+	
+		boolean flag=(dxc>1 || dyc>1);
+		
+		if (flag) {
+			if (currPathIndex == pathLength - 1) {
+			reachedGoal = true;
+			health=0;
+			onPath=false;
+			System.out.println(this.toString()
+					+ " has reached the endpoint");
+			System.out.println("Player lost " + damage + " health.");
+			game.changeHealth(-1*damage);
+			game.removeCritter(this);
+			
+		} else {
+			currPathCoord = nextPathCoord;
+			currPathIndex = currPathIndex + 1;
+		}
+
+	}
+	}
+	
+	
 	
 	//Added getter method for testing purposes
 	public Point getCritterPosition(){
@@ -226,5 +283,10 @@ abstract public class Critter {
 	public abstract String toString();
 	
 	public abstract Point getPixelOffset();
+
+
+	public void setIsNearBullet(boolean b) {
+		isNearBullet = b;	
+	}
 
 }

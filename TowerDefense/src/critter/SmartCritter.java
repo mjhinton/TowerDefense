@@ -9,6 +9,7 @@ import model.Game;
 //The smart critter will reverse directions to avoid attacks from towers (if there are "bullets" nearby)
 //(this isn't entirely complete yet)
 public class SmartCritter extends Critter{
+	
 	private boolean direction;
 	private static ImageIcon ii = new ImageIcon("lib/images/critter/alien4.png");
 	private final static Point PIXEL_OFFSET=new Point (5,5);
@@ -17,9 +18,11 @@ public class SmartCritter extends Critter{
 			super(1.8,4,20,10, ii, game);
 			direction = true;
 		}
+		
 		public boolean getShield(){
 			return false;
 		}
+		
 		public boolean getDirection(){
 			//reverse with the direction if there are bullets nearby
 			return direction;
@@ -35,4 +38,6 @@ public class SmartCritter extends Critter{
 		public Point getPixelOffset() {
 			return PIXEL_OFFSET;
 		}
+		
+		
 }
