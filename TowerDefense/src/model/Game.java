@@ -79,7 +79,6 @@ public class Game {
 				return false;
 			} else {
 				playerHealth += health;
-				System.out.println(playerHealth);
 				return true;
 			}
 		}
