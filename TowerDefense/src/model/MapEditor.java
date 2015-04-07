@@ -23,6 +23,7 @@ public class MapEditor{
 			this.map = map;
 		else
 			this.map = new Map();
+		
 	}
 
 	public void paintMapEditor(Graphics g){

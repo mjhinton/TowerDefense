@@ -18,7 +18,7 @@ public class TestGame {
 		Map testMap=Map.getPackagedMap("15x15map");
 		
 		app.getController().startGame(testMap);
-		app.getController().playGame(testMap);
+		//app.getController().playGame(testMap);
 
 				
 	}

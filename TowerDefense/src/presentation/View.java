@@ -2,12 +2,14 @@ package presentation;
 
 import javax.swing.JFrame;
 
+import common.IObserver;
+
 import model.Model;
 import controllers.Controller;
 
 import java.awt.BorderLayout;
 
-public class View extends JFrame {
+public class View extends JFrame implements IObserver {
 
 	private static final long serialVersionUID = 1L;
 	public static final int SCREEN_WIDTH = 1000;
