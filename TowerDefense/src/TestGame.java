@@ -15,7 +15,7 @@ public class TestGame {
 		app.switchPanel("PanelGame");
 
 		
-		Map testMap=Map.getPackagedMap("15x15map");
+		Map testMap=Map.getPackagedMap("medium");
 		
 		app.getController().startGame(testMap);
 		//app.getController().playGame(testMap);
