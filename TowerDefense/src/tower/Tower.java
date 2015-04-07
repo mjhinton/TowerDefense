@@ -96,8 +96,10 @@ public class Tower extends Subject{
 		*/
 	}
 	
+	//checks all critters to see if they're in range of the tower
+	//puts all these critters in another list; fires on whichever meets the
+	//desired target strategy
 	public void fire(){
-
 		ArrayList<Critter> inRange;
 		Critter target;
 		if (currFireIndex>=MAX_FIRE_INDEX && game.getWave()!=null){
@@ -114,12 +116,15 @@ public class Tower extends Subject{
 		}	
 	}
 	
+	//shoots a new bullet at the target critter
 	public void shootBullet(Critter critter){
 		Bullet bullet=new  Bullet(game, this, Map.getCenterX(critter.getX()), Map.getCenterY(critter.getY()), bulletSpeedMultiplier);
 		//extra variable for testing purposes
 		testBullet = bullet;
 	}
-
+	
+	//finds which critters are in range of the tower
+	//stores in a new array list
 	public ArrayList<Critter> targetsInRange(ArrayList<Critter> critters){
 		ArrayList<Critter> inRange=new ArrayList<Critter>();
 		for(int i = 0; i < critters.size(); i++){
@@ -131,6 +136,7 @@ public class Tower extends Subject{
 	return inRange;
 	}
 	
+	//targets a critter based on the current target settings
 	public Critter getTarget(ArrayList<Critter> critters){
 		if(lowestHealth) return lowestHealth(critters);
 		else if(highestHealth) return highestHealth(critters);
@@ -138,6 +144,8 @@ public class Tower extends Subject{
 		else if(farthest) return lowestHealth(critters);
 		else return null;
 	}
+	
+	//targets the critter in range with the lowest health.
 	public Critter lowestHealth(ArrayList<Critter> input){
 		int pointer = 0;
 		double lowestHealth = 100000;
@@ -150,6 +158,7 @@ public class Tower extends Subject{
 		return input.get(pointer);
 	}
 	
+	//targets the critter in range with the highest health.
 	public Critter highestHealth(ArrayList<Critter> input){
 		int pointer = 0;
 		double highestHealth = 0;
@@ -162,6 +171,7 @@ public class Tower extends Subject{
 		return input.get(pointer);
 	}
 	
+	//targets the critter in range that is closest to the tower
 	public Critter closest(ArrayList<Critter> input){
 		int pointer = 0;
 		double closestDistanceSquared = 1000000;
@@ -176,6 +186,7 @@ public class Tower extends Subject{
 		return input.get(pointer);
 	}
 	
+	//targets the critter in range which is farthest from the tower.
 	public Critter farthest(ArrayList<Critter> input){
 		int pointer = 0;
 		double farthestDistanceSquared = 0;
@@ -190,6 +201,7 @@ public class Tower extends Subject{
 		return input.get(pointer);
 	}
 	
+	//gives message that the target method has been changed.
 	public void targetLowestHealth(){
 		lowestHealth = true;
 		highestHealth = false;
@@ -290,6 +302,7 @@ public class Tower extends Subject{
 		return game;
 	}
 	
+	//distance methods for ease of use
 	public static double distance(double x1, double y1, double x2, double y2){
 		return Math.sqrt(Math.pow((y2-y1), 2)+Math.pow((x2-x1), 2));
 	}
@@ -299,5 +312,21 @@ public class Tower extends Subject{
 
 	public double getBlastRadius() {
 		return bulletRange;
+	}
+	
+	public String getMode(){
+		if (lowestHealth){
+			return "Lowest Health";
+		}
+		if (highestHealth){
+			return "Highest Health";
+		}
+		if (closest){
+			return "Closest";
+		}
+		if (farthest){
+			return "Furthest";
+		}
+		return "unknown";
 	}
 }

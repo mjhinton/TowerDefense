@@ -1,9 +1,9 @@
 package tower;
 
 /*
-* ECSE 321 Programming Assignment 1
+* ECSE 321 Introduction to Software Engineering
 * Winter 2015
-* Jenna Mar
+* Group 12
 * 260590119
 *
 * This class creates a large, heavy area of effect Tower.

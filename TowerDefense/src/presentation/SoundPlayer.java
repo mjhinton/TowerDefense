@@ -18,6 +18,7 @@ import javax.sound.midi.Soundbank;
 import javax.sound.midi.Synthesizer;
 import javax.sound.midi.MidiChannel;
 
+//plays MIDI sound files, taking the required soundfont as the synthesizer.
 public class SoundPlayer implements MetaEventListener {
 	
 	public static final int END_OF_TRACK_MESSAGE = 47;
@@ -28,8 +29,7 @@ public class SoundPlayer implements MetaEventListener {
 	private Instrument[] instruments;
 	
 	public SoundPlayer(){		
-				
-	    try {
+		try {
 	    	synthesizer = MidiSystem.getSynthesizer();
 	    	synthesizer.open();
 	    	instruments = synthesizer.getAvailableInstruments();
@@ -43,6 +43,7 @@ public class SoundPlayer implements MetaEventListener {
 	    }
 	}
 	
+	//new sequence from file path
 	public Sequence getSequence(String filename) {
 	    try {
 	      return getSequence(new FileInputStream(filename));
@@ -51,7 +52,8 @@ public class SoundPlayer implements MetaEventListener {
 	      return null;
 	    }
 	  }
-		
+	
+	//new sequence from an inputstream
 	public Sequence getSequence(InputStream is) {
 	    try {
 	      if (!is.markSupported()) {
@@ -69,6 +71,7 @@ public class SoundPlayer implements MetaEventListener {
 	    }
 	  }
 	
+	//play the sequence.
 	public void play(Sequence sequence, boolean loop) {
 	    if (sequencer != null && sequence != null && sequencer.isOpen()) {
 	      try {
@@ -81,6 +84,7 @@ public class SoundPlayer implements MetaEventListener {
 	    }
 	  }
 	
+	//finds the end of the track, and loops if desired
 	public void meta(MetaMessage event) {
 	    if (event.getType() == END_OF_TRACK_MESSAGE) {
 	      if (sequencer != null && sequencer.isOpen() && loop) {
@@ -90,6 +94,7 @@ public class SoundPlayer implements MetaEventListener {
 	    }
 	  }
 	
+	//closes the music players
 	public void close() {
 	    if (sequencer != null && sequencer.isOpen()) {
 	    	synthesizer.close();
@@ -105,6 +110,7 @@ public class SoundPlayer implements MetaEventListener {
 		return synthesizer;
 	}
 	
+	//pauses the music player
 	public void setPaused(boolean paused) {
 	    if (this.isPlaying == paused && sequencer != null && sequencer.isOpen()) {
 	      this.isPlaying = (!paused);
@@ -120,6 +126,7 @@ public class SoundPlayer implements MetaEventListener {
 	    return isPlaying;
 	  }
 	
+	//gets instruments from a soundfont
 	public void loadSoundBank(String path) {
         try {
             File f = new File(path);
@@ -144,8 +151,10 @@ public class SoundPlayer implements MetaEventListener {
         instruments = synthesizer.getLoadedInstruments();       
     }
 	
-	//this only silences some channels. doesn't work well if not using the hardware soundbank.
-	public static  void setVolume(double gain){
+	//adjust volume...
+	//this only silences some channels. doesn't work well if not using the hardware soundbank
+	//(which we are not)
+	public static void setVolume(double gain){
 		//double gain = 0.9D;
 		MidiChannel[] channels = synthesizer.getChannels();  
 		for (int i = 0; i < channels.length; i++) {
