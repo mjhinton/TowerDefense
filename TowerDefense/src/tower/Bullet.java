@@ -69,6 +69,13 @@ public class Bullet {
 			ArrayList<Critter> critters = game.getWave().getCritterBank();
 			for (int i = 0; i < critters.size(); i++) {
 				Critter c = critters.get(i);
+				
+				if (bulletIsNear(c)){
+					c.setIsNearBullet(true);
+				}
+				else
+					c.setIsNearBullet(false);
+				
 				if (detectCollision(c)) {
 					if (tower.getBlastRadius()>0){
 						blast(critters);
@@ -78,6 +85,8 @@ public class Bullet {
 					
 					game.removeBullet(this);
 				} 
+				
+				
 			}
 		} catch (NullPointerException e) {
 			//System.out.println("No critters left for bullet to hit.");
@@ -117,6 +126,18 @@ public class Bullet {
 
 	}
 
+	public boolean bulletIsNear(Critter critter){
+		double cX = Map.getCenterX(critter.getX());
+		double cY = Map.getCenterY(critter.getY());
+		if (Tower.distanceSquared(cX, cY, bullet_X, bullet_Y) < (10*COLLISION_DISTANCE)
+				&& critter.onPath()){
+			return true;
+			}
+			else{
+				return false;
+			}
+		
+	}
 
 	public void blast(ArrayList<Critter> critters){
 		double blastRadius=tower.getBlastRadius();
