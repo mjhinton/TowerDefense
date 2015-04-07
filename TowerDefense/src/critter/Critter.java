@@ -133,14 +133,13 @@ abstract public class Critter {
 		this.reward *= 1.25;
 	}
 
-	// centercoordinate
+	//Center Coordinate
 	public void setDown() throws InterruptedException {
 		currPathIndex=0;
 		currPathCoord=gamePath.getCoord(0);
 		x=(double)currPathCoord.x;
 		y=(double)currPathCoord.y;
 		onPath=true;
-		//System.out.println(currPathCoord);
 	}
 	
 	//Added for testing purposes
@@ -150,7 +149,6 @@ abstract public class Critter {
 		System.out.println(currPathCoord);
 		x = (double)currPathCoord.x;
 		y = (double)currPathCoord.y;
-		//System.out.println("index" + index + " currPathCoord" + currPathCoord);
 		onPath = true;
 	}
 	public void setCurrPathIndex(int index){
@@ -165,7 +163,7 @@ abstract public class Critter {
 				moveNormally();
 			}
 			else{ 
-				if (this.isNearBullet){ //while bullet is nearby
+				if (this.isNearBullet){
 					moveFaster();
 				}
 				else 
@@ -288,7 +286,6 @@ abstract public class Critter {
 
 
 	public void setIsNearBullet(boolean b) {
-		// TODO Auto-generated method stub
 		isNearBullet = b;	
 	}
 

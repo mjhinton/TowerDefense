@@ -44,12 +44,13 @@ public class Wave{
 		
 		if (x>EASY){
 			generateCritters("heavy", x/2, game);
-			generateCritters("smart", x/3, game);
+			generateCritters("shielded", x/3, game);
+			generateCritters("smart", x/6, game);
 		}
 		if (x>MEDIUM){
 			generateCritters("ghost", x/3, game);
 			generateCritters("shielded", x/3, game);
-			generateCritters("smart", x/3, game);
+			generateCritters("smart", x/4, game);
 		}
 		if (x>HARD){
 			generateCritters("monster", x/2, game);
