@@ -13,6 +13,11 @@ import critter.Critter;
 import critter.Wave;
 
 
+/**
+ * This class contains everything necessary to play a game.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
 public class Game {
 
 	private Board board;
@@ -24,7 +29,6 @@ public class Game {
 	private LinkedList<Tower> towers;
 	private int gameSpeedMultiplier;
 	private ArrayList<Bullet> bullets;
-	private boolean maxLevel;
 
 	public Game(Map map) {
 		this.board = new Board(map);
@@ -54,6 +58,13 @@ public class Game {
 		return this.playerCoins;
 	}
 
+	/**
+	 * Attempts to change the coins of the game/player.
+	 * 
+	 * @param coins
+	 *            coins to added or subtracted
+	 * @return true if sufficient funds
+	 */
 	public boolean changeCoins(int coins) {
 		if (coins >= 0) {
 			playerCoins += coins;
@@ -84,6 +95,13 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Attempts to add a tower to the board.
+	 * 
+	 * @param tower
+	 *            tower to be placed on board
+	 * @return true if valid change and change was made
+	 */
 	public boolean addTower(Tower tower) {
 		boolean worked;
 		if (this.changeCoins(-1 * tower.getCost())) {
@@ -100,6 +118,13 @@ public class Game {
 		return false;
 	}
 
+	/**
+	 * Attempts to remove a tower from the board.
+	 * 
+	 * @param tower
+	 *            tower to be removed from board
+	 * @return true if valid change and change was made
+	 */
 	public boolean removeTower(Tower tower) {
 		boolean worked;
 		if (this.changeCoins(tower.getValue())) {
@@ -114,12 +139,18 @@ public class Game {
 		return false;
 	}
 
+	/**
+	 * Attempts to upgrade a tower on the board.
+	 * 
+	 * @param tower
+	 *            tower to be upgraded on board
+	 * @return true if valid change and change was made
+	 */
 	public boolean upgradeTower(Tower tower) {
 		boolean worked;
 		if (tower.getLevel() == 5) {
 			System.out
 					.println("Maximum level reached. Further upgrade not possible.");
-			maxLevel = true;
 		} else if (tower.getLevel() < 5
 				&& this.changeCoins(-1 * tower.getCost())) {
 			worked = board.upgradeTower(tower);
@@ -128,6 +159,10 @@ public class Game {
 		return false;
 	}
 
+	/**
+	 * Updates the various components of the games.
+	 * 
+	 */
 	public void updateGame() {
 
 		if (wave != null) {
@@ -165,10 +200,10 @@ public class Game {
 		board.paintTowers(g);
 	}
 
-	// The player will only be able to call this method if a wave is not already
-	// in progress.
-	// (A wave is in progress while there are still critters alive and on the
-	// map)
+	/**
+	 * Attempts to generate a wave of critters.
+	 * 
+	 */
 	public void generateWave() throws InterruptedException {
 
 		boolean flag;
@@ -214,10 +249,12 @@ public class Game {
 		this.board.getMap().initPath();
 	}
 
+	//Adds a bullet to bullet list
 	public void addBullet(Bullet bullet) {
 		bullets.add(bullet);
 	}
 
+	//Remove a bullet from bullet list
 	public void removeBullet(Bullet bullet) {
 		bullets.remove(bullet);
 	}
@@ -227,8 +264,7 @@ public class Game {
 		this.wave.addCritterToBank(critter);
 	}
 
-	// //
-
+	// Method for testing purposes
 	public void removeCritter(Critter critter) {
 		this.wave.removeCritter(critter);
 
@@ -239,6 +275,10 @@ public class Game {
 		return bullets;
 	}
 
+	/**
+	 * Saves the game as a text file.
+	 * 
+	 */
 	public void saveGame() {
 		Map map = this.board.getMap();
 		String mapString = map.print();
