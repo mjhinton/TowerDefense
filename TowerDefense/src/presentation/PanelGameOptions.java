@@ -21,7 +21,7 @@ import model.Game;
 
 /**
  * This is the options panel while a game is being played. allows for pausing,
- * restarting, adjustment of sound, exiting--anything unrelated to the core game
+ * restarting, adjustment of sound, exiting-anything unrelated to the core game
  * playing.
  * 
  * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
