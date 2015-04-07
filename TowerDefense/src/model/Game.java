@@ -12,6 +12,7 @@ import map.Map;
 import critter.Critter;
 import critter.Wave;
 
+
 public class Game {
 
 	private Board board;

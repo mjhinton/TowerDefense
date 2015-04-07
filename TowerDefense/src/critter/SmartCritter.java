@@ -35,9 +35,11 @@ public class SmartCritter extends Critter{
 		public boolean getVisibility(){ 
 			return true;
 		}
+		
 		public String toString(){
 			return "SmartCritter";
 		}
+		
 		@Override
 		public Point getPixelOffset() {
 			return PIXEL_OFFSET;
