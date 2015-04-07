@@ -124,7 +124,7 @@ abstract public class Critter {
 													// the smart critter move
 													// normally (as seen below)
 				moveNormally();
-			} else { // SmartCritters move 3x faster when it is near a bullet.
+			} else { // SmartCritters move 5x faster when it is near a bullet.
 				if (this.isNearBullet) {
 					moveFaster();
 				} else
@@ -179,7 +179,7 @@ abstract public class Critter {
 	}
 
 	/**
-	 * This method moves a critter along the path at 3x its normal speed.
+	 * This method moves a critter along the path at 5x its normal speed.
 	 */
 	public void moveFaster() {
 		if (currPathIndex == pathLength - 1) {
@@ -191,10 +191,10 @@ abstract public class Critter {
 		double dy = (double) (nextPathCoord.y - currPathCoord.y);
 
 		if (dx != 0) {
-			x = x + (dx / Math.abs(dx)) * (3 * speed);
+			x = x + (dx / Math.abs(dx)) * (5 * speed);
 		}
 		if (dy != 0) {
-			y = y + (dy / Math.abs(dy)) * (3 * speed);
+			y = y + (dy / Math.abs(dy)) * (5 * speed);
 
 		}
 
