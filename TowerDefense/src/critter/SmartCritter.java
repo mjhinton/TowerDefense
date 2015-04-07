@@ -14,7 +14,7 @@ public class SmartCritter extends Critter{
 	private final static Point PIXEL_OFFSET=new Point (5,5);
 	
 		public SmartCritter(Game game){
-			super(2,5,15,10, ii, game);
+			super(1.8,4,20,10, ii, game);
 			direction = true;
 		}
 		public boolean getShield(){

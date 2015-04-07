@@ -129,7 +129,7 @@ abstract public class Critter {
 	public void increaseDifficulty(double multiplier) { // health and reward
 														// increase whenever												// multiplier is applied
 		this.health *= multiplier;
-		this.reward *= 1.05;
+		this.reward *= 1.25;
 	}
 
 	// centercoordinate

@@ -11,7 +11,7 @@ public class NormalCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("lib/images/critter/alien6.png");
 	private final static Point PIXEL_OFFSET=new Point (5,5);
 		public NormalCritter(Game game){
-			super(1,5,5,5, ii, game);
+			super(1,5,10,5, ii, game);
 		}
 		public boolean getShield(){
 			return false;
