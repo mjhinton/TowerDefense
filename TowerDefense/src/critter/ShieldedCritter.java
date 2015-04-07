@@ -36,10 +36,13 @@ public class ShieldedCritter extends Critter{
 			return "ShieldedCritter";
 		}
 
+		/*
+		 * This method knocks the shield off of the ShieldedCritter and allows it to move faster.
+		 */
 		public void knockOffShield(){
-			//once the shield gets knocked off, the critter is faster.
 			setSpeed(4);
 		}
+		
 		@Override
 		public Point getPixelOffset() {
 			return PIXEL_OFFSET;

@@ -6,7 +6,12 @@ import java.awt.Point;
 import tower.Tower;
 import map.*;
 
-//the board panel above the map. displays tower graphics.
+/**
+ * The Board contains a map as a base layer and allows placement of towers on
+ * top of it.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
 public class Board {
 
 	private Map map;
@@ -24,10 +29,17 @@ public class Board {
 
 	}
 
+	/**
+	 * Attempts to add a tower to the board.
+	 * 
+	 * @param tower
+	 *            tower to be placed on board
+	 * @return true if valid change and change was made
+	 */
 	public boolean addTower(Tower tower) {
 		Point c = tower.getPosition();
 		try {
-			if (towers[c.x][c.y] == null) {	
+			if (towers[c.x][c.y] == null) {
 				if (map.getCell(c) instanceof SceneryCell) {
 					towers[c.x][c.y] = tower;
 					// tower.getImage().setToolTipText("Next level cost: " +
@@ -47,7 +59,13 @@ public class Board {
 		}
 	}
 
-	// TODO FIX COORDINATES
+	/**
+	 * Attempts to remove a tower from the board.
+	 * 
+	 * @param tower
+	 *            tower to be removed from board
+	 * @return true if valid change and change was made
+	 */
 	public boolean removeTower(Tower tower) {
 		Point c = tower.getPosition();
 		try {
@@ -76,13 +94,20 @@ public class Board {
 	}
 
 	public Tower getTower(Point c) {
-		try{
+		try {
 			return towers[c.x][c.y];
-		}catch (Exception e){
+		} catch (Exception e) {
 			return null;
 		}
 	}
 
+	/**
+	 * Attempts to upgrade a tower on the board.
+	 * 
+	 * @param tower
+	 *            tower to be upgraded on board
+	 * @return true if valid change and change was made
+	 */
 	public boolean upgradeTower(Tower tower) {
 		Point c = tower.getPosition();
 		try {
@@ -117,10 +142,12 @@ public class Board {
 		path = newpath;
 	}
 
+	//calls paint map
 	public void paintMap(Graphics g) {
 		map.paintMap(g);
 	}
 
+	//paints all towers on board
 	public void paintTowers(Graphics g) {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
@@ -134,6 +161,7 @@ public class Board {
 		}
 	}
 
+	//paints board
 	public void paintBoard(Graphics g) {
 		this.paintMap(g);
 		this.paintTowers(g);

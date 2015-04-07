@@ -7,7 +7,12 @@ import javax.swing.ImageIcon;
 
 import model.Game;
 
-//Ghost critters blink in and out of visibility; the towers will be able to see them only half of the time.
+/**
+ * This class represents a sub-type of Critter, the Ghost Critter.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class GhostCritter extends Critter{
 	private boolean visible;
 	private static ImageIcon ii = new ImageIcon("lib/images/critter/jellyfish.png");
