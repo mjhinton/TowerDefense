@@ -3,7 +3,7 @@ package common;
 /**
  * This interface describes the expected methods of an observer class.
  * 
- * @author Michael Hinton
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
  */
 public interface IObserver {
 
