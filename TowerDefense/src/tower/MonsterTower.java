@@ -1,13 +1,10 @@
 package tower;
 
-/*
-* ECSE 321 Introduction to Software Engineering
-* Winter 2015
-* Group 12
-* 260590119
-*
-* This class creates a large, heavy area of effect Tower.
-*/
+/**
+ * this class creates a large, heavy, area of effect tower.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
 
 import java.awt.Image;
 import java.awt.Point;

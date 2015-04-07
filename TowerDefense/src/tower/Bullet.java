@@ -8,8 +8,13 @@ import map.Map;
 import model.Game;
 import critter.Critter;
 
-//This class fires Bullets at Critters that have been targeted by Towers.
-//Allows for the visual movement of bullet images.
+/**
+ * This class fires Bullets at Critters that have been targeted by Towers.
+ * It allows for the visual movement of bullet images.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class Bullet {
 
 	public final double STANDARD_BULLET_SPEED = 0.3;
@@ -42,7 +47,7 @@ public class Bullet {
 		this.velocity = velocityMultiplier * STANDARD_BULLET_SPEED;
 		this.tower = tower;
 		this.game = game;
-		
+
 		this.max_X = game.getBoard().getMap().getWidth();
 		this.max_Y = game.getBoard().getMap().getHeight();
 		this.min_X = 0;
@@ -51,15 +56,14 @@ public class Bullet {
 
 		double dx = target_X - bullet_X;
 		double dy = target_Y - bullet_Y;
-		
-		if(dx==0 && dy==0){
-			//don't add the bullet to the game
-		}else{
+
+		if (dx == 0 && dy == 0) {
+			// don't add the bullet to the game
+		} else {
 			game.addBullet(this);
 			this.velocity_X = velocity * dx / Math.sqrt(dx * dx + dy * dy);
 			this.velocity_Y = velocity * dy / Math.sqrt(dx * dx + dy * dy);
 		}
-		
 
 		// TODO: implement making sprite display
 	}
@@ -71,47 +75,45 @@ public class Bullet {
 			ArrayList<Critter> critters = game.getWave().getCritterBank();
 			for (int i = 0; i < critters.size(); i++) {
 				Critter c = critters.get(i);
-				
-				if (bulletIsNear(c)){
+
+				if (bulletIsNear(c)) {
 					c.setIsNearBullet(true);
-				}
-				else
+				} else
 					c.setIsNearBullet(false);
-				
+
 				if (detectCollision(c)) {
-					if (tower.getBlastRadius()>0){
+					if (tower.getBlastRadius() > 0) {
 						blast(critters);
-					}else{
+					} else {
 						hit(c);
 					}
-					
+
 					game.removeBullet(this);
-				} 
-				
-				
+				}
+
 			}
 		} catch (NullPointerException e) {
-			//System.out.println("No critters left for bullet to hit.");
+			// System.out.println("No critters left for bullet to hit.");
 		}
-		if (bullet_X > max_X || bullet_X < min_X
-				|| bullet_Y > max_Y || bullet_Y < min_Y) {
+		if (bullet_X > max_X || bullet_X < min_X || bullet_Y > max_Y
+				|| bullet_Y < min_Y) {
 			game.removeBullet(this);
 		}
 
 	}
-	
-	//Method for testing purposes
-	public void setBulletPosition(double x, double y){
+
+	// Method for testing purposes
+	public void setBulletPosition(double x, double y) {
 		this.bullet_X = x;
 		this.bullet_Y = y;
 	}
-	
-	public void hit(Critter critter){
-		if (tower.getIsSpecial()){
-			if (critter.getSpeed() > critter.STANDARD_SPEED*tower.specialmod){
+
+	public void hit(Critter critter) {
+		if (tower.getIsSpecial()) {
+			if (critter.getSpeed() > critter.STANDARD_SPEED * tower.specialmod) {
 				critter.reduceSpeed(tower.specialmod);
 			}
-		}else{
+		} else {
 			critter.getsHit(tower.getPower());
 		}
 	}
@@ -128,30 +130,33 @@ public class Bullet {
 
 	}
 
-	public boolean bulletIsNear(Critter critter){
+	public boolean bulletIsNear(Critter critter) {
 		double cX = Map.getCenterX(critter.getX());
 		double cY = Map.getCenterY(critter.getY());
-		if (Tower.distanceSquared(cX, cY, bullet_X, bullet_Y) < (10*COLLISION_DISTANCE)
-				&& critter.onPath()){
+		if (Tower.distanceSquared(cX, cY, bullet_X, bullet_Y) < (10 * COLLISION_DISTANCE)
+				&& critter.onPath()) {
 			return true;
-			}
-			else{
-				return false;
-			}
-		
+		} else {
+			return false;
+		}
+
 	}
 
-	public void blast(ArrayList<Critter> critters){
-		double blastRadius=tower.getBlastRadius();
-		//System.out.println("blast radius is: "+blastRadius);
-		for(int i = 0; i < critters.size(); i++){
-			Critter c=critters.get(i);
-			boolean flag=Tower.distanceSquared(bullet_X, bullet_Y, Map.getCenterX(c.getX()), Map.getCenterY(c.getY()))<blastRadius*blastRadius;
-			//System.out.println("distance squared is: "+Tower.distanceSquared(bullet_X, bullet_Y, Map.getCenterX(c.getX()), Map.getCenterY(c.getY()))); 
-			//System.out.println(flag);
-			//System.out.println("critters on path" + critters.get(i).onPath());
-			if(flag && critters.get(i).onPath()){
-				//System.out.println("within blast radius!");
+	public void blast(ArrayList<Critter> critters) {
+		double blastRadius = tower.getBlastRadius();
+		// System.out.println("blast radius is: "+blastRadius);
+		for (int i = 0; i < critters.size(); i++) {
+			Critter c = critters.get(i);
+			boolean flag = Tower.distanceSquared(bullet_X, bullet_Y,
+					Map.getCenterX(c.getX()), Map.getCenterY(c.getY())) < blastRadius
+					* blastRadius;
+			// System.out.println("distance squared is: "+Tower.distanceSquared(bullet_X,
+			// bullet_Y, Map.getCenterX(c.getX()), Map.getCenterY(c.getY())));
+			// System.out.println(flag);
+			// System.out.println("critters on path" +
+			// critters.get(i).onPath());
+			if (flag && critters.get(i).onPath()) {
+				// System.out.println("within blast radius!");
 				hit(c);
 			}
 		}

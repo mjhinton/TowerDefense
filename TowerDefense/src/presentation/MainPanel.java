@@ -8,24 +8,26 @@ import javax.sound.midi.Sequence;
 //import javax.sound.midi.Sequencer;
 import javax.swing.JPanel;
 
-//displays whichever panel is active.
-//holds all other panels: map, game, and title menu.
-//also initializes the music.
-public class MainPanel extends JPanel {
+/**
+ * This class displays the active panel. It holds all the other panels: map,
+ * game, and title menu. It also initializes the music.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
 
+public class MainPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	private CardLayout cards;
 	private PanelGame pnlGame;
 	private PanelMenu pnlMenu;
-	//protected for now
+	// protected for now
 	protected PanelMapEditor pnlMapEd;
 	private String currentPanel;
-	
+
 	private View view;
-	
+
 	private SoundPlayer bgsound = new SoundPlayer();
 
 	public View getView() {
@@ -34,9 +36,9 @@ public class MainPanel extends JPanel {
 
 	public MainPanel(View view) {
 
-		Dimension dim=new Dimension(View.SCREEN_WIDTH, View.SCREEN_HEIGHT);
-		this.view=view;
-		
+		Dimension dim = new Dimension(View.SCREEN_WIDTH, View.SCREEN_HEIGHT);
+		this.view = view;
+
 		this.setBackground(Color.BLACK);
 		this.setPreferredSize(dim);
 		this.setMaximumSize(dim);
@@ -46,8 +48,8 @@ public class MainPanel extends JPanel {
 		this.setEnabled(true);
 		this.setFocusable(false);
 		this.requestFocus();
-		
-		cards=new CardLayout();
+
+		cards = new CardLayout();
 		this.setLayout(cards);
 
 		pnlMenu = new PanelMenu(view);
@@ -56,18 +58,18 @@ public class MainPanel extends JPanel {
 		this.add(pnlMenu, "PanelMenu");
 		this.add(pnlGame, "PanelGame");
 		this.add(pnlMapEd, "PanelMapEditor");
-		
-		currentPanel="PanelMenu";
+
+		currentPanel = "PanelMenu";
 
 	}
-	
-	public void switchPanel(String cardName){
+
+	public void switchPanel(String cardName) {
 		cards.show(this, cardName);
-		currentPanel=cardName;
+		currentPanel = cardName;
 		switchMusic();
 	}
-	
-	public String getCurrentPanel(){
+
+	public String getCurrentPanel() {
 		return currentPanel;
 	}
 
@@ -79,33 +81,31 @@ public class MainPanel extends JPanel {
 		pnlGame.update();
 	}
 
-	
-	public void switchMusic(){
-		
-		if (bgsound.isPlaying()){
+	public void switchMusic() {
+
+		if (bgsound.isPlaying()) {
 			bgsound.setPaused(true);
 		}
-		if (currentPanel.equals("PanelMenu")){
+		if (currentPanel.equals("PanelMenu")) {
 			Sequence sequence = bgsound.getSequence("lib/music/GS_Title.mid");
 			bgsound.loadSoundBank("lib/music/GoldenSun.sf2");
 			bgsound.play(sequence, true);
 		}
-		if (currentPanel.equals("PanelMapEditor")){
-			Sequence sequence = bgsound.getSequence("lib/music/MineralTown.mid");
+		if (currentPanel.equals("PanelMapEditor")) {
+			Sequence sequence = bgsound
+					.getSequence("lib/music/MineralTown.mid");
 			bgsound.loadSoundBank("lib/music/fomt.sf2");
-			bgsound.play(sequence,true);
+			bgsound.play(sequence, true);
 		}
-		if (currentPanel.equals("PanelGame")){
+		if (currentPanel.equals("PanelGame")) {
 			double randomnum = Math.random();
 			Sequence sequence = bgsound.getSequence("lib/music/song022.mid");
-			if(randomnum < 0.3 ){
+			if (randomnum < 0.3) {
 				sequence = bgsound.getSequence("lib/music/song030.mid");
-			}
-			else if (randomnum < 0.6){
+			} else if (randomnum < 0.6) {
 				sequence = bgsound.getSequence("lib/music/song041.mid");
-			}
-			else if (randomnum < 0.9){
-				sequence = bgsound.getSequence("lib/music/song050.mid");				
+			} else if (randomnum < 0.9) {
+				sequence = bgsound.getSequence("lib/music/song050.mid");
 			}
 			bgsound.loadSoundBank("lib/music/GoldenSun.sf2");
 			bgsound.play(sequence, true);
