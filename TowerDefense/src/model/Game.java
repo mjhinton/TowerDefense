@@ -12,6 +12,7 @@ import map.Map;
 import critter.Critter;
 import critter.Wave;
 
+
 /**
  * This class contains everything necessary to play a game.
  * 

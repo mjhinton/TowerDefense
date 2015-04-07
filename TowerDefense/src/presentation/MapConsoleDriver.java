@@ -8,10 +8,11 @@ import map.Map;
  * 
  * @author Michael Hinton
  */
+
 public class MapConsoleDriver {
 
 	public static void main(String[] args) {
-		Map m1 = new Map("Map1",20,10);
+		Map m1 = new Map("Map1", 20, 10);
 		MapConsole mc1 = new MapConsole(m1);
 		m1.addObserver(mc1);
 

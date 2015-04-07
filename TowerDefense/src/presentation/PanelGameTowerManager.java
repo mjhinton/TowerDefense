@@ -10,7 +10,12 @@ import java.awt.event.*;
 import javax.swing.*;
 import tower.*;
 
-//this is the panel which holds the Tower Manager (and its respective panels and buttons)
+/**
+ * this class is the panel which holds the Tower Manager (and its respective
+ * panels and buttons)
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
 
 public class PanelGameTowerManager extends JPanel implements ActionListener {
 
@@ -147,20 +152,22 @@ public class PanelGameTowerManager extends JPanel implements ActionListener {
 		selltower.add(buttons);
 
 		// set hoverboxes for more info (uses HTML)
-		norm.setToolTipText("<html><b>Damage: </b>" + (int)(100*NormalTower.DAMAGE)
-				+ "<br><b>Range:</b> " + NormalTower.RANGE
-				+ "<br><b>Splash Radius:</b> " + NormalTower.BLAST_RADIUS
-				+ "<br><b>Fire Rate: </b>" + NormalTower.FIRE_RATE + "</html>");
-		ice.setToolTipText("<html><b>Damage:</b> " + (int)(100*FreezingTower.DAMAGE)
-				+ "<br><b>Range:</b> " + FreezingTower.RANGE
-				+ "<br><b>Splash Radius:</b> " + FreezingTower.BLAST_RADIUS
-				+ "<br><b>Fire Rate: </b>1" + FreezingTower.FIRE_RATE
-				+ "<br><b>Rate of Slowing: </b>" + 100
-				* FreezingTower.SPECIAL_MOD + "%</html>");
-		magic.setToolTipText("<html><b>Damage:</b> " + (int)(100*MonsterTower.DAMAGE)
-				+ "<br><b>Range:</b> " + MonsterTower.RANGE
-				+ "<br><b>Splash Radius:</b> " + MonsterTower.BLAST_RADIUS
-				+ "<br><b>Fire Rate: </b>" + MonsterTower.FIRE_RATE + "</html>");
+		norm.setToolTipText("<html><b>Damage: </b>"
+				+ (int) (100 * NormalTower.DAMAGE) + "<br><b>Range:</b> "
+				+ NormalTower.RANGE + "<br><b>Splash Radius:</b> "
+				+ NormalTower.BLAST_RADIUS + "<br><b>Fire Rate: </b>"
+				+ NormalTower.FIRE_RATE + "</html>");
+		ice.setToolTipText("<html><b>Damage:</b> "
+				+ (int) (100 * FreezingTower.DAMAGE) + "<br><b>Range:</b> "
+				+ FreezingTower.RANGE + "<br><b>Splash Radius:</b> "
+				+ FreezingTower.BLAST_RADIUS + "<br><b>Fire Rate: </b>1"
+				+ FreezingTower.FIRE_RATE + "<br><b>Rate of Slowing: </b>"
+				+ 100 * FreezingTower.SPECIAL_MOD + "%</html>");
+		magic.setToolTipText("<html><b>Damage:</b> "
+				+ (int) (100 * MonsterTower.DAMAGE) + "<br><b>Range:</b> "
+				+ MonsterTower.RANGE + "<br><b>Splash Radius:</b> "
+				+ MonsterTower.BLAST_RADIUS + "<br><b>Fire Rate: </b>"
+				+ MonsterTower.FIRE_RATE + "</html>");
 
 		sell.addActionListener(this);
 		upgrade.addActionListener(this);
