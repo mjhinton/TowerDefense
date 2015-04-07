@@ -17,7 +17,11 @@ import map.SceneryCell;
 import model.MapEditor;
 import model.Model;
 
-//import model.*;
+/**
+ * This class contains the map for MapEditor
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
 
 public class PanelMapEditorMap extends JPanel implements MouseListener {
 
@@ -44,10 +48,10 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 		
 	}
 	
+	//paints the map; a black fills up the remainder of the map if dimensions are reduced
 	public void paint(Graphics g){
 		g.fillRect(0,0,Map.CELL_PIXEL_SIZE*Map.MAX_WIDTH,Map.CELL_PIXEL_SIZE*Map.MAX_HEIGHT);
 		view.getController().paintComponent(g);
-
 		
 	}
 
@@ -73,6 +77,7 @@ public class PanelMapEditorMap extends JPanel implements MouseListener {
 		return false;
 	}
 
+	//toggles the tiles of the Map when they are clicked
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		mapBeingEdited = view.model.getEditor().getMap();

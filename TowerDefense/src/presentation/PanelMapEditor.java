@@ -7,6 +7,12 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * This class is the final display for MapEditor, containing both the Map display and the Options toolbar
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class PanelMapEditor extends JPanel {
 
 	private static final long serialVersionUID = 1L;

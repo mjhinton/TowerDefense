@@ -11,7 +11,7 @@ import common.Subject;
 /**
  * This class allows the creation and manipulation of a Map object.
  * 
- * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna MAr
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
  */
 public class Map extends Subject {
 	

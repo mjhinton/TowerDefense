@@ -19,6 +19,12 @@ import map.Map;
 import model.MapEditor;
 import common.ReadWriteTxtFile;
 
+/**
+ * This class contains buttons for the modification of MapEditor, as well as their behaviors
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class PanelMapEditorOptions extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -26,7 +32,7 @@ public class PanelMapEditorOptions extends JPanel {
 	private View meView;
 	
 	private JButton bSaveMap, bPlayMap, bMainMenu, bLoadMap, bMapSettings, bResetMap;
-
+	
 	public PanelMapEditorOptions(final View view){
 
 		Dimension dim=new Dimension(View.SCREEN_WIDTH-View.SCREEN_HEIGHT, View.SCREEN_HEIGHT);
@@ -39,6 +45,7 @@ public class PanelMapEditorOptions extends JPanel {
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
 		
+		//creates buttons for a panel at the right of the MapEditor
 		bMapSettings = new JButton ("Map Editor Settings");
 		bSaveMap = new JButton ("Save Map");
 		bPlayMap = new JButton("Play Map");
@@ -46,8 +53,10 @@ public class PanelMapEditorOptions extends JPanel {
 		bLoadMap = new JButton("Load Saved Map");
 		bResetMap = new JButton("Reset Map");
 		
+		//creates the panel
 		JPanel pnButtonsContainer = new JPanel(new GridLayout(6,1));
 		
+		//adds the buttons to the panel
 		pnButtonsContainer.add(bMapSettings);
 		pnButtonsContainer.add(bSaveMap);
 		pnButtonsContainer.add(bLoadMap);
@@ -57,6 +66,7 @@ public class PanelMapEditorOptions extends JPanel {
 		
 		//creates pop-up for bMapOptions
 		
+		//brings up a pop-up that inut of the mapName, width, and height for the map being edited
 		bMapSettings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -90,6 +100,7 @@ public class PanelMapEditorOptions extends JPanel {
             }
         });
 		
+		//allows saving of a map with a pop-up
         bSaveMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -102,6 +113,7 @@ public class PanelMapEditorOptions extends JPanel {
             }
         });
         
+        //allows selection of a map from the maps folder using a selection window
         bPlayMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -122,6 +134,7 @@ public class PanelMapEditorOptions extends JPanel {
             }
         });
         
+        //returns to the main menu
         bMainMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -129,6 +142,7 @@ public class PanelMapEditorOptions extends JPanel {
             }
         });	
         
+        //loads a saved map from the custom_maps folder using a selection window
         bLoadMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -150,7 +164,8 @@ public class PanelMapEditorOptions extends JPanel {
             }
         });	
         
-        bResetMap.addActionListener(new ActionListener() {
+        //sets the MapEditor's map to a blank 15x15 map when reset is clicked
+        bResetMap.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent event) {
             	Map newMap = new Map();
