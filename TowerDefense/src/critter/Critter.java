@@ -11,9 +11,13 @@ import model.Board;
 import model.Game;
 import presentation.View;
 
-/*There are six kinds of critters so far; normal, shielded, smart, heavy, ghost, and monster.
- * We will later add more kinds of critters. All the values are subject to change.
+/**
+ * This class allows the creation and manipulation of six different kinds of critters;
+ *  NormalCritters, ShieldedCritters, HeavyCritters, GhostCritters, and MonsterCritters
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
  */
+
 abstract public class Critter {
 	
 	public final static double STANDARD_SPEED=1.0*((double)View.TIMEOUT)/1000.0;
@@ -90,11 +94,11 @@ abstract public class Critter {
 	public int getDamage() {
 		return damage;
 	}
-	//Getter method for testing
+	//Getter method for testing.
 	public Point getCurrPathCoord(){
 		return currPathCoord;
 	}
-	//Getter method for testing purposes.
+	//Getter method for testing.
 	public boolean getWhetherOnPath(){
 		return onPath;
 	}
@@ -108,7 +112,8 @@ abstract public class Critter {
 	public boolean onPath(){
 		return onPath;
 	}
-
+	
+	//Deals a certain amount of damage to a critter hit by a bullet
 	public void getsHit(double hitDamage) {
 		health=health-hitDamage;
 		if (health <= 0) {
@@ -128,12 +133,13 @@ abstract public class Critter {
 	}
 
 	public void increaseDifficulty(double multiplier) { // health and reward
-														// increase whenever												// multiplier is applied
+														// increase whenever the difficulty of the critter is increased
 		this.health *= multiplier;
 		this.reward *= 1.25;
 	}
-
-	//Center Coordinate
+	
+	//Sets a critter down at the beginning of the path
+	//(Center Coordinate)
 	public void setDown() throws InterruptedException {
 		currPathIndex=0;
 		currPathCoord=gamePath.getCoord(0);
@@ -142,7 +148,7 @@ abstract public class Critter {
 		onPath=true;
 	}
 	
-	//Added for testing purposes
+	//Setter method for testing purposes
 	public void setDownAtChosenIndex(int index){
 		currPathIndex = index;
 		currPathCoord = gamePath.getCoord(index);
@@ -151,18 +157,20 @@ abstract public class Critter {
 		y = (double)currPathCoord.y;
 		onPath = true;
 	}
+	
+	//Setter method for testing purposes
 	public void setCurrPathIndex(int index){
 		currPathIndex = index;
 	}
-	////
 
+	//Moves critter along the path with the Controller timer
 	public void updatePosition() {
 		if (this.onPath==true && this.health > 0 && this.reachedGoal == false) {
 			
-			if (!(this instanceof SmartCritter)){
+			if (!(this instanceof SmartCritter)){ //All critters other than the smart critter move normally (as seen below)
 				moveNormally();
 			}
-			else{ 
+			else{  //SmartCritters move 3x faster when it is near a bullet.
 				if (this.isNearBullet){
 					moveFaster();
 				}
@@ -172,6 +180,7 @@ abstract public class Critter {
 		}
 	}
 	
+	//Moves the critters along the path at their designated speed.
 	public void moveNormally(){
 		if (currPathIndex == pathLength - 1) {
 			nextPathCoord = gameBoard.getMap().getOffMapExit();
@@ -214,6 +223,7 @@ abstract public class Critter {
 	}
 	}
 	
+	//Moves the critter along the path 3x faster than their normal speed.
 	public void moveFaster(){
 		if (currPathIndex == pathLength - 1) {
 			nextPathCoord = gameBoard.getMap().getOffMapExit();

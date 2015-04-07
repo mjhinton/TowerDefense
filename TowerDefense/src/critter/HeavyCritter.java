@@ -4,8 +4,13 @@ import java.awt.Point;
 
 import javax.swing.ImageIcon;
 import model.Game;
+/**
+ * This class represents a sub-type of Critter, the HeavyCritter, which is slow, has a lot of health points, and has a high reward
+ * relative to the Normal Critter.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
 
-//The heavy critter is stronger and harder to kill than the normal ones.
 public class HeavyCritter extends Critter {
 	
 	private static ImageIcon ii = new ImageIcon("lib/images/critter/squid.png");

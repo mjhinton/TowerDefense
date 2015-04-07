@@ -141,18 +141,17 @@ public class Controller implements ActionListener {
 	public void playGame(Map map) {
 		if (gameAlreadyStarted == true) {
 			try {
-				view.getController().getGame().generateWave();
+				getGame().generateWave();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
 			view.getController().startGame(map);
 			// System.out.println("Game had not begun yet so let's start it and then generate a wave");
+			startGame(map);
 			try {
-				view.getController().getGame().generateWave();
+				getGame().generateWave();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -179,6 +178,5 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	// testing
 
 }

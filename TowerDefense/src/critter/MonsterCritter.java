@@ -5,8 +5,11 @@ import java.awt.Point;
 import javax.swing.ImageIcon;
 
 import model.Game;
-
-//Monster critter is just a super fast, super strong critter.
+/**
+ * This class represents a sub-type of Critter, MonsterCritter, which has the highest amount of health, damage, and reward.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
 public class MonsterCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("lib/images/critter/ufo.png");
 	private final static Point PIXEL_OFFSET=new Point (-20,-20);

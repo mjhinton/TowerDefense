@@ -6,8 +6,13 @@ import javax.swing.ImageIcon;
 
 import model.Game;
 
-//The shielded critter is slightly slower than the normal critter, and more difficult to kill. Towers must have stronger attacks to damage 
-//these critters.
+/**
+ * This class represents the ShieldedCritter, a sub-type of critter that is protected by a shield.
+ * Once the shield is knocked off after being hit by enough bullets, the critter is able to move faster.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class ShieldedCritter extends Critter{
 	private boolean shield;
 	private static ImageIcon ii = new ImageIcon("lib/images/critter/crab.png");

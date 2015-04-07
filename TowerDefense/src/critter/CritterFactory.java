@@ -2,6 +2,12 @@ package critter;
 
 import model.Game;
 
+/**
+ * This class is responsible for instantiating the Critters.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class CritterFactory {
 	public static Critter spawn(String id, Game game){
 		id = id.toLowerCase();
