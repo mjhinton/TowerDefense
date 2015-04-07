@@ -5,8 +5,12 @@ import java.awt.Point;
 import javax.swing.ImageIcon;
 
 import model.Game;
+/**
+ * This class represents the NormalCritter, the default critter that has the lowest reward.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
 
-//The normal critter is the default critter, smallest reward, easiest to kill.
 public class NormalCritter extends Critter{
 	private static ImageIcon ii = new ImageIcon("lib/images/critter/alien6.png");
 	private final static Point PIXEL_OFFSET=new Point (5,5);

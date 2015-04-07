@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 import model.Game;
 
-//Ghost critters blink in and out of visibility; the towers will bee able to see them only half of the time.
+//Ghost critters blink in and out of visibility; the towers will be able to see them only half of the time.
 public class GhostCritter extends Critter{
 	private boolean visible;
 	private static ImageIcon ii = new ImageIcon("lib/images/critter/jellyfish.png");
@@ -25,7 +25,7 @@ public class GhostCritter extends Critter{
 	public boolean getShield(){
 		return false;
 	}
-	//every time visibility is called, it switches between being visible and not. Again, subject to change
+
 	public boolean getVisibility(){
 		visible = !visible;
 		return visible;
