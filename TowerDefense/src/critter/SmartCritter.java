@@ -6,8 +6,12 @@ import javax.swing.ImageIcon;
 
 import model.Game;
 
-//The smart critter will reverse directions to avoid attacks from towers (if there are "bullets" nearby)
-//(this isn't entirely complete yet)
+/**
+ * The SmartCritter is a sub-type of Critter that moves towards the end point 3x faster when it senses that there is a bullet near it.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class SmartCritter extends Critter{
 	
 	private boolean direction;
