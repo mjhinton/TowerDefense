@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 //import javax.swing.SwingUtilities;
 
@@ -22,6 +21,8 @@ import model.Game;
 //import model.Game;
 //import common.ReadWriteTxtFile;
 
+//This is the main panel that holds the game board(grid) and its components:
+//Towers, Critters, and the Map.
 public class PanelGameBoard extends JPanel implements MouseListener, MouseMotionListener{
 
 	private static final long serialVersionUID = 1L;

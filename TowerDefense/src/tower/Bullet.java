@@ -8,6 +8,8 @@ import map.Map;
 import model.Game;
 import critter.Critter;
 
+//This class fires Bullets at Critters that have been targeted by Towers.
+//Allows for the visual movement of bullet images.
 public class Bullet {
 
 	public final double STANDARD_BULLET_SPEED = 0.3;

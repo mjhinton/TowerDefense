@@ -9,6 +9,7 @@ import controllers.Controller;
 
 import java.awt.BorderLayout;
 
+//main view, holds controller and is the window containing all other panels
 public class View extends JFrame implements IObserver {
 
 	private static final long serialVersionUID = 1L;

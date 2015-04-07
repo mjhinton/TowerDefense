@@ -15,6 +15,7 @@ import common.ReadWriteTxtFile;
 
 import map.Map;
 
+//initializes buttons for the title menu
 public class PanelMenuButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;

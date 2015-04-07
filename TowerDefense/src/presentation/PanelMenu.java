@@ -9,8 +9,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JLabel;
 
+//this is the title screen panel
 public class PanelMenu extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -34,6 +34,7 @@ public class PanelMenu extends JPanel {
 		this.setFocusable(true);
 		this.setLayout(new BorderLayout());
 		
+		//initialize buttons
 		pnSide = new JPanel (new BorderLayout());
 		pnMenuButtons = new PanelMenuButtons(view);
 		

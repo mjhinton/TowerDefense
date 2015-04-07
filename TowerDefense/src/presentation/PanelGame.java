@@ -7,6 +7,9 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+//This panel appears when a game is being played and
+//holds all components for playing a game:
+//tower manager, game board (map), and options panel
 public class PanelGame extends JPanel {
 
 	private static final long serialVersionUID = 1L;

@@ -19,6 +19,9 @@ import javax.swing.event.ChangeEvent;
 import map.Map;
 import model.Game;
 
+//This is the options panel while a game is being played.
+//allows for pausing, restarting, adjustment of sound, exiting--anything unrelated to 
+//the core game playing.
 public class PanelGameOptions extends JPanel implements ChangeListener{
 
 	private static final long serialVersionUID = 1L;

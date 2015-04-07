@@ -5,9 +5,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.sound.midi.Sequence;
-import javax.sound.midi.Sequencer;
+//import javax.sound.midi.Sequencer;
 import javax.swing.JPanel;
 
+//displays whichever panel is active.
+//holds all other panels: map, game, and title menu.
+//also initializes the music.
 public class MainPanel extends JPanel {
 
 

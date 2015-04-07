@@ -6,6 +6,7 @@ import java.awt.Point;
 import tower.Tower;
 import map.*;
 
+//the board panel above the map. displays tower graphics.
 public class Board {
 
 	private Map map;
