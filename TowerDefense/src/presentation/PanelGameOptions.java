@@ -190,9 +190,15 @@ public class PanelGameOptions extends JPanel implements ChangeListener{
 	public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider)e.getSource();
         if (!source.getValueIsAdjusting()) {
-            int vol = source.getValue()/10;
+            int vol = source.getValue();
             double z = vol;
-            SoundPlayer.setVolume(z);
+            if (vol == 0){
+            	SoundPlayer.setPaused(true);
+            }
+            else{
+            	SoundPlayer.setPaused(false);
+            	SoundPlayer.setVolume(z);
+            }            
         }
     }
 }

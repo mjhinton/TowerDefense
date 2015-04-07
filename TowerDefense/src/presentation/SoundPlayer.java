@@ -22,10 +22,10 @@ import javax.sound.midi.MidiChannel;
 public class SoundPlayer implements MetaEventListener {
 	
 	public static final int END_OF_TRACK_MESSAGE = 47;
-	private Sequencer sequencer;
+	private static Sequencer sequencer;
 	private static Synthesizer synthesizer;
 	private boolean loop;
-	private boolean isPlaying;
+	private static boolean isPlaying;
 	private Instrument[] instruments;
 	
 	public SoundPlayer(){		
@@ -111,11 +111,11 @@ public class SoundPlayer implements MetaEventListener {
 	}
 	
 	//pauses the music player
-	public void setPaused(boolean paused) {
-	    if (this.isPlaying == paused && sequencer != null && sequencer.isOpen()) {
-	      this.isPlaying = (!paused);
-	      if (!paused) {
-	        sequencer.stop();
+	public static void setPaused(boolean paused) {
+	    if (isPlaying == paused && sequencer != null && sequencer.isOpen()) {
+	      isPlaying = (!paused);
+	      if (paused) {	    	  
+	    	  sequencer.stop();
 	      } else {
 	        sequencer.start();
 	      }
@@ -156,6 +156,7 @@ public class SoundPlayer implements MetaEventListener {
 	//(which we are not)
 	public static void setVolume(double gain){
 		//double gain = 0.9D;
+		gain /=10;
 		MidiChannel[] channels = synthesizer.getChannels();  
 		for (int i = 0; i < channels.length; i++) {
 	        channels[i].controlChange(7, (int) (gain * 127.0));
