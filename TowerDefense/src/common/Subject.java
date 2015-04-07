@@ -7,7 +7,7 @@ import java.util.List;
  * This abstract class donates methods to observable subject classes that make
  * it observable.
  * 
- * @author Michael Hinton
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
  */
 public abstract class Subject {
 

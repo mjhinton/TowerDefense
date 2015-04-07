@@ -12,6 +12,13 @@ import javax.swing.JFileChooser;
  */
 public class ReadWriteTxtFile {
 
+	/**
+	 * Reads a text file and converts it to a string array.
+	 * 
+	 * @param txtFileName
+	 *            Path of file to be read.
+	 * @return String[] containing the text of the file.
+	 */
 	public static String[] readTxtFileAsStringArray(String txtFileName) {
 		String[] s = new String[1000];
 		int length = 0;
@@ -38,6 +45,13 @@ public class ReadWriteTxtFile {
 		return r;
 	}
 
+	/**
+	 * Saves a String into a text file.
+	 * 
+	 * @param s
+	 *            String of text to be saved to text file.
+	 * @return true if successful.
+	 */
 	public static boolean writeTxtFileFromStringArray(
 			String s) throws IOException{
 		
