@@ -42,7 +42,7 @@ public class PanelMenu extends JPanel {
 		pnSide.setBackground(Color.WHITE);
 		pnSide.setOpaque(true);
 		
-		ImageIcon i= new ImageIcon("lib/images/ui/test_menu_background.png");
+		ImageIcon i= new ImageIcon("lib/images/ui/test_menu_background_title.png");
 		imageBackground=i.getImage();
 		
 	}
