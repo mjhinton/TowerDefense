@@ -179,7 +179,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 			    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value + 
 			    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +		    			
 				    			"<br>Range: </b>" + tower.getRange() + "--><b>" + (tower.getRange() + 1) +
-				    			"<br>Slowing Power: </b>" + Math.round(100*(tower.getSpecialmod()))/value + 
+				    			"<br>Slowing Power: </b>" + (int) Math.round(100*(tower.getSpecialmod()))/value + 
 				    			"--><b>" + (int) Math.round(100*(tower.getSpecialmod() - 0.05))/value +
 				    			"</html>"				
 		    		    	);
@@ -191,8 +191,8 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 	    	    				"<br><b>Level: </b>" + tower.getLevel() + "--><b>" + (tower.getLevel() + 1) +
 	    	    				"<br>Fire Rate: </b>" + Math.round(100*(tower.getFireRate()))/value + 
 	    	    				"--><b>" + Math.round(100*(tower.getFireRate()*1.1))/value +
-	    	    				"<br>Damage: </b>" + Math.round(100*(tower.getPower())) + 
-	    	    				"--><b>" + (int) (int) (100*Math.round(100*(tower.getPower()*1.5))/value) +
+	    	    				"<br>Damage: </b>" + (int) Math.round(100*(tower.getPower())) + 
+	    	    				"--><b>" + (int) (100*Math.round(100*(tower.getPower()*1.5))/value) +
 	    		    			"</html>"
 		    		    	);			    				
 		    			}

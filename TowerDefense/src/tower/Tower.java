@@ -208,7 +208,7 @@ public class Tower extends Subject{
 		highestHealth = false;
 		closest = false;
 		farthest = false;
-	}
+	} 
 	
 	public void targetHighestHealth(){
 		this.lowestHealth = false;
