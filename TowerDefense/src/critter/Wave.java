@@ -71,7 +71,7 @@ public class Wave {
 		releaseBank = new ArrayList<Critter>();
 
 		for (int j = 0; j < critterBank.size(); j++) {
-			critterBank.get(j).increaseDifficulty(1+difficulty/3.5);
+			critterBank.get(j).increaseDifficulty(difficulty);
 			releaseBank.add(critterBank.get(j));
 		}
 
