@@ -11,12 +11,12 @@ import map.MapCell;
 
 public class MapEditor{
 
-	int size = Map.CELL_PIXEL_SIZE;
+	private int size = Map.CELL_PIXEL_SIZE;
 	private Map map;
-	Point cell;
-	int cellX;
-	int cellY;
-	MapCell selectedCell;
+	private Point cell;
+	private int cellX;
+	private int cellY;
+	private MapCell selectedCell;
 	
 	public MapEditor(Map map){
 		if(map!=null)
