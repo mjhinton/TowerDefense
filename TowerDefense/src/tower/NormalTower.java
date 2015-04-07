@@ -14,6 +14,12 @@ import javax.swing.ImageIcon;
 
 import model.Game;
 
+/**
+ * this class creates an ordinary tower.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class NormalTower extends Tower{
 	
 	public final static double DAMAGE=0.8;

@@ -9,6 +9,7 @@ import map.*;
  * 
  * @author Michael Hinton
  */
+
 public class MapConsole implements IObserver {
 
 	private Map map;

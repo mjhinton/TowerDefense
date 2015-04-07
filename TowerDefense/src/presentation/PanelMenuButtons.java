@@ -15,6 +15,12 @@ import common.ReadWriteTxtFile;
 
 import map.Map;
 
+/**
+ * This class initializes buttons for the title menu.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class PanelMenuButtons extends JPanel {
 
 	private static final long serialVersionUID = 1L;

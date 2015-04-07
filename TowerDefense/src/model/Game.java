@@ -93,8 +93,7 @@ public class Game {
 				towers.add(tower);
 				System.out.println("New tower bought.");
 				return true;
-			}
-			else{
+			} else {
 				this.changeCoins(tower.getCost());
 				return false;
 			}
@@ -118,11 +117,12 @@ public class Game {
 
 	public boolean upgradeTower(Tower tower) {
 		boolean worked;
-		if (tower.getLevel()==5){
-			System.out.println("Maximum level reached. Further upgrade not possible.");
+		if (tower.getLevel() == 5) {
+			System.out
+					.println("Maximum level reached. Further upgrade not possible.");
 			maxLevel = true;
-		}
-		else if (tower.getLevel() < 5 && this.changeCoins(-1 * tower.getCost())) {
+		} else if (tower.getLevel() < 5
+				&& this.changeCoins(-1 * tower.getCost())) {
 			worked = board.upgradeTower(tower);
 			return worked;
 		}
@@ -183,7 +183,8 @@ public class Game {
 			System.out.println("Wave " + currentWaveNumber + " begun.");
 			wave.setUpBank();
 			currentWaveNumber++;
-			System.out.println("This wave contains " + wave.getReleaseBank().size() + " critters.");
+			System.out.println("This wave contains "
+					+ wave.getReleaseBank().size() + " critters.");
 		} else
 			System.out.println("A wave is already in progress.");
 	}
@@ -222,19 +223,20 @@ public class Game {
 		bullets.remove(bullet);
 	}
 
-	//Method for testing purposes
-	public void addCritter(Critter critter){
+	// Method for testing purposes
+	public void addCritter(Critter critter) {
 		this.wave.addCritterToBank(critter);
 	}
-	////
-	
+
+	// //
+
 	public void removeCritter(Critter critter) {
 		this.wave.removeCritter(critter);
 
 	}
-	
-	//Getter method added for testing.
-	public ArrayList<Bullet> getBullets(){
+
+	// Getter method added for testing.
+	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
 
@@ -253,18 +255,18 @@ public class Game {
 			e.printStackTrace();
 		}
 	}
-	
-	public int getWaveNo(){
+
+	public int getWaveNo() {
 		return currentWaveNumber;
 	}
-	
-	public int getHealth(){
+
+	public int getHealth() {
 		return playerHealth;
 	}
-	
-	//Setter method for testing purposes
-	public void setPlayerCoins(int value){
-		playerCoins =value;
+
+	// Setter method for testing purposes
+	public void setPlayerCoins(int value) {
+		playerCoins = value;
 	}
 
 }

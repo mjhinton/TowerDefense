@@ -18,7 +18,12 @@ import javax.sound.midi.Soundbank;
 import javax.sound.midi.Synthesizer;
 import javax.sound.midi.MidiChannel;
 
-//plays MIDI sound files, taking the required soundfont as the synthesizer.
+/**
+ * this class plays MIDI sound files, taking the required soundfont as the synthesizer.
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class SoundPlayer implements MetaEventListener {
 	
 	public static final int END_OF_TRACK_MESSAGE = 47;

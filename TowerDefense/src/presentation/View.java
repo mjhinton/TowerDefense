@@ -9,6 +9,13 @@ import controllers.Controller;
 
 import java.awt.BorderLayout;
 
+/**
+ * this class is the main view. it holds controller and is the window containing
+ * all other panels
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class View extends JFrame implements IObserver {
 
 	private static final long serialVersionUID = 1L;
@@ -16,37 +23,37 @@ public class View extends JFrame implements IObserver {
 	public static final int SCREEN_HEIGHT = 600;
 	public static final int TIMEOUT = 30;
 	public static final String APP_NAME = "TDOne";
-	
+
 	protected Controller controller;
 	protected Model model;
 	protected MainPanel mp;
-	
-	public View(){
+
+	public View() {
 		this.init();
 	}
-	
-	private void init(){
-		
-		mp=new MainPanel(this);
-		model=new Model();
+
+	private void init() {
+
+		mp = new MainPanel(this);
+		model = new Model();
 		controller = new Controller(this, model);
-		this.setSize(SCREEN_WIDTH,SCREEN_HEIGHT+25);
+		this.setSize(SCREEN_WIDTH, SCREEN_HEIGHT + 25);
 		this.setResizable(false);
 		this.setTitle(APP_NAME);
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);					
+
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
-		this.add(mp,BorderLayout.CENTER);
+		this.add(mp, BorderLayout.CENTER);
 		this.setVisible(true);
 	}
-	
-	/*public void createEditableMap(String name, int x, int y){
-		model.setMap(name, x, y);
-		init();
-	}*/
-	
-	public void switchPanel(String cardName){
+
+	/*
+	 * public void createEditableMap(String name, int x, int y){
+	 * model.setMap(name, x, y); init(); }
+	 */
+
+	public void switchPanel(String cardName) {
 		mp.switchPanel(cardName);
 	}
 
@@ -57,14 +64,14 @@ public class View extends JFrame implements IObserver {
 
 	public Controller getController() {
 		return controller;
-		
+
 	}
 
 	public Model getModel() {
 		return this.model;
 	}
-	
-	public void update(){
+
+	public void update() {
 		mp.update();
 	}
 }
