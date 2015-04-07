@@ -9,6 +9,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class PanelMenu extends JPanel {
 
@@ -24,6 +25,7 @@ public class PanelMenu extends JPanel {
 		
 		Dimension dim = new Dimension(View.SCREEN_WIDTH, View.SCREEN_HEIGHT);
 		this.view=view;
+		this.setOpaque(true);
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(dim);
 		this.setMinimumSize(dim);
@@ -35,9 +37,9 @@ public class PanelMenu extends JPanel {
 		pnSide = new JPanel (new BorderLayout());
 		pnMenuButtons = new PanelMenuButtons(view);
 		
-		pnSide.add(pnMenuButtons, BorderLayout.CENTER);
-		
-		this.add(pnSide,BorderLayout.EAST);
+		pnSide.add(pnMenuButtons);
+		this.add(pnSide,BorderLayout.WEST);
+		pnSide.setBackground(Color.WHITE);
 		pnSide.setOpaque(true);
 		
 		ImageIcon i= new ImageIcon("lib/images/ui/test_menu_background.png");
