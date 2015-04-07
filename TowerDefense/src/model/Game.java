@@ -93,7 +93,10 @@ public class Game {
 				System.out.println("New tower bought.");
 				return true;
 			}
-			return false;
+			else{
+				this.changeCoins(tower.getCost());
+				return false;
+			}
 		}
 		return false;
 	}

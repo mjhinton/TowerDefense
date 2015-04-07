@@ -202,6 +202,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 			    		this.setToolTipText(
 			    			"<html><b>Level: </b>" + tower.getLevel() + 
 			    			"<br><b>Selling Value: </b>" + sc + tower.getValue() +
+			    			"<br><b>Targeting Mode: </b>" + tower.getMode() +
 			    			"</html>"
 			    			);
 			    	}
@@ -210,6 +211,7 @@ public class PanelGameBoard extends JPanel implements MouseListener, MouseMotion
 			    			"<html><b>Level: </b>" + tower.getLevel() + 
 			    			"<br><b>Upgrade Cost: </b>" + sc + tower.getCost() +
 			    			"<br><b>Selling Value: </b>" + sc + tower.getValue() +
+			    			"<br><b>Targeting Mode: </b>" + tower.getMode() +
 			    			"</html>"
 			    			);
 			    	}

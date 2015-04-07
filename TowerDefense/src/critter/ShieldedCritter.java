@@ -14,7 +14,7 @@ public class ShieldedCritter extends Critter{
 	private final static Point PIXEL_OFFSET=new Point (5,5);
 	
 		public ShieldedCritter(Game game){
-			super(0.7,5,10,7, ii, game);
+			super(0.7,5,15,7, ii, game);
 			shield = true;
 		}
 		public boolean getShield(){

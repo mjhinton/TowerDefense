@@ -10,6 +10,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import tower.*;
 
+//this is the panel which holds the Tower Manager (and its respective panels and buttons)
+
 public class PanelGameTowerManager extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -113,9 +115,9 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         magic.add(monstertower);
         magic.add(monstower);
         
+        //add display panels (radio buttons) and their cost panels
         buytower.setLayout(new FlowLayout(FlowLayout.LEFT));
         buytower.add(norm);
-        //will need to adjust this if tower costs fluctuate at all
         buytower.add(initCL(NormalTower.COST));
         buytower.add(ice);
         buytower.add(initCL(FreezingTower.COST));
@@ -139,6 +141,7 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
         buttons.add(upgrade);        
         selltower.add(buttons);   
                
+        //set hoverboxes for more info (uses HTML)
         norm.setToolTipText("<html><b>Damage: </b>" + NormalTower.DAMAGE
         		+ "<br><b>Range:</b> " + NormalTower.RANGE
         		+ "<br><b>Splash Radius:</b> " + NormalTower.BLAST_RADIUS
@@ -186,8 +189,8 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 		Playerfunds.add(PF);
 		this.add(Playerfunds);
 	}
-	//because of the order things are initialized, this needs to start out as the coins the player starts out with.
 	
+	//gets and updates with the values of funds, health, and wave.
 	public void updatePF(){
 		PF.setText("Current funds: " + Character.toString((char) 8353) + view.getController().getGame().getCoins());
 		WaveNo.setText("Current Wave: " + view.getController().getGame().getWaveNo());
@@ -216,12 +219,14 @@ public class PanelGameTowerManager extends JPanel implements ActionListener{
 	}
 	*/
 	
+	//creates cost panels
 	public static JLabel initCL(int i){
 		JLabel label = new JLabel("Cost: " + Character.toString((char) 8353) + i);
 		label.setPreferredSize(new Dimension(100,30));
 		return label;
 	}
 	
+	//finds which button is activated
 	public void actionPerformed(ActionEvent e){
 		if (e.getActionCommand().equals("Sell Tower")){
 			mainboard.sellMode = true;

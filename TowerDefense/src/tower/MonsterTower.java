@@ -1,9 +1,9 @@
 package tower;
 
 /*
-* ECSE 321 Programming Assignment 1
+* ECSE 321 Introduction to Software Engineering
 * Winter 2015
-* Jenna Mar
+* Group 12
 * 260590119
 *
 * This class creates a large, heavy area of effect Tower.
@@ -22,7 +22,7 @@ public class MonsterTower extends Tower{
 	public final static double DAMAGE=1;
 	public final static double RANGE=7;
 	public final static double BLAST_RADIUS=1.5;
-	public final static double FIRE_RATE=0.5;
+	public final static double FIRE_RATE=1;
 	public final static double SPECIAL_MOD=1;
 	public final static boolean IS_SPECIAL=false;
 	public final static int COST=2000;

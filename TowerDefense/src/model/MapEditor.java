@@ -9,14 +9,20 @@ import java.awt.event.MouseListener;
 import map.Map;
 import map.MapCell;
 
+/**
+ * This class is a model for the MapEditor and contains the map to be displayed in PanelMapEditor
+ * 
+ * @authors Saahil Hamayun, Michael Hinton, Solvie Lee, Jenna Mar
+ */
+
 public class MapEditor{
 
-	int size = Map.CELL_PIXEL_SIZE;
+	private int size = Map.CELL_PIXEL_SIZE;
 	private Map map;
-	Point cell;
-	int cellX;
-	int cellY;
-	MapCell selectedCell;
+	private Point cell;
+	private int cellX;
+	private int cellY;
+	private MapCell selectedCell;
 	
 	public MapEditor(Map map){
 		if(map!=null)
@@ -34,6 +40,7 @@ public class MapEditor{
 		return map;
 	}
 	
+	//adjusts a tile when clicked on: switches between tiles using Map's toggle method
 	public void editMap(int x, int y){
 		int cellX = x/size;
 		int cellY = y/size;

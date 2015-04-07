@@ -36,10 +36,10 @@ public class Tower extends Subject{
 	protected double fireRate;
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
-	protected boolean lowestHealth;
-	protected boolean highestHealth;
-	protected boolean closest;
-	protected boolean farthest;
+	protected boolean lowestHealth = false;
+	protected boolean highestHealth = false;
+	protected boolean closest = false;
+	protected boolean farthest = false;
 	protected int currFireIndex;
 	protected double bulletSpeedMultiplier;
 	//Added variable for testing purposes
@@ -51,7 +51,7 @@ public class Tower extends Subject{
 		bulletSpeedMultiplier=1;
 		//this.initAttr();
 		this.game=game;
-		this.targetClosest();
+		this.targetLowestHealth();
 	}
 
 	//initialize default attributes
@@ -96,8 +96,10 @@ public class Tower extends Subject{
 		*/
 	}
 	
+	//checks all critters to see if they're in range of the tower
+	//puts all these critters in another list; fires on whichever meets the
+	//desired target strategy
 	public void fire(){
-
 		ArrayList<Critter> inRange;
 		Critter target;
 		if (currFireIndex>=MAX_FIRE_INDEX && game.getWave()!=null){
@@ -114,12 +116,15 @@ public class Tower extends Subject{
 		}	
 	}
 	
+	//shoots a new bullet at the target critter
 	public void shootBullet(Critter critter){
 		Bullet bullet=new  Bullet(game, this, Map.getCenterX(critter.getX()), Map.getCenterY(critter.getY()), bulletSpeedMultiplier);
 		//extra variable for testing purposes
 		testBullet = bullet;
 	}
-
+	
+	//finds which critters are in range of the tower
+	//stores in a new array list
 	public ArrayList<Critter> targetsInRange(ArrayList<Critter> critters){
 		ArrayList<Critter> inRange=new ArrayList<Critter>();
 		for(int i = 0; i < critters.size(); i++){
@@ -131,6 +136,7 @@ public class Tower extends Subject{
 	return inRange;
 	}
 	
+	//targets a critter based on the current target settings
 	public Critter getTarget(ArrayList<Critter> critters){
 		if(lowestHealth) return lowestHealth(critters);
 		else if(highestHealth) return highestHealth(critters);
@@ -138,6 +144,8 @@ public class Tower extends Subject{
 		else if(farthest) return lowestHealth(critters);
 		else return null;
 	}
+	
+	//targets the critter in range with the lowest health.
 	public Critter lowestHealth(ArrayList<Critter> input){
 		int pointer = 0;
 		double lowestHealth = 100000;
@@ -150,6 +158,7 @@ public class Tower extends Subject{
 		return input.get(pointer);
 	}
 	
+	//targets the critter in range with the highest health.
 	public Critter highestHealth(ArrayList<Critter> input){
 		int pointer = 0;
 		double highestHealth = 0;
@@ -162,6 +171,7 @@ public class Tower extends Subject{
 		return input.get(pointer);
 	}
 	
+	//targets the critter in range that is closest to the tower
 	public Critter closest(ArrayList<Critter> input){
 		int pointer = 0;
 		double closestDistanceSquared = 1000000;
@@ -176,6 +186,7 @@ public class Tower extends Subject{
 		return input.get(pointer);
 	}
 	
+	//targets the critter in range which is farthest from the tower.
 	public Critter farthest(ArrayList<Critter> input){
 		int pointer = 0;
 		double farthestDistanceSquared = 0;
@@ -190,12 +201,13 @@ public class Tower extends Subject{
 		return input.get(pointer);
 	}
 	
+	//changes target scheme and gives message
 	public void targetLowestHealth(){
+		if(lowestHealth||highestHealth||closest||farthest) System.out.println("Targeting type set to lowest health.");
 		lowestHealth = true;
 		highestHealth = false;
 		closest = false;
 		farthest = false;
-		System.out.println("Targetting type change to lowest health.");
 	}
 	
 	public void targetHighestHealth(){
@@ -203,7 +215,7 @@ public class Tower extends Subject{
 		this.highestHealth = true;
 		this.closest = false;
 		this.farthest = false;
-		System.out.println("Targetting type change to highest health.");
+		System.out.println("Targeting type set to highest health.");
 	}
 	
 	public void targetClosest(){
@@ -211,7 +223,7 @@ public class Tower extends Subject{
 		this.highestHealth = false;
 		this.closest = true;
 		this.farthest = false;
-		System.out.println("Targetting type change to closest.");
+		System.out.println("Targeting type set to closest.");
 	}
 	
 	public void targetFarthest(){
@@ -219,7 +231,7 @@ public class Tower extends Subject{
 		this.highestHealth = false;
 		this.closest = false;
 		this.farthest = true;
-		System.out.println("Targetting type change to farthest.");
+		System.out.println("Targeting type set to farthest.");
 	}
 	
 	public String toString(){
@@ -290,6 +302,7 @@ public class Tower extends Subject{
 		return game;
 	}
 	
+	//distance methods for ease of use
 	public static double distance(double x1, double y1, double x2, double y2){
 		return Math.sqrt(Math.pow((y2-y1), 2)+Math.pow((x2-x1), 2));
 	}
@@ -299,5 +312,21 @@ public class Tower extends Subject{
 
 	public double getBlastRadius() {
 		return bulletRange;
+	}
+	
+	public String getMode(){
+		if (lowestHealth){
+			return "Lowest Health";
+		}
+		if (highestHealth){
+			return "Highest Health";
+		}
+		if (closest){
+			return "Closest";
+		}
+		if (farthest){
+			return "Furthest";
+		}
+		return "unknown";
 	}
 }
