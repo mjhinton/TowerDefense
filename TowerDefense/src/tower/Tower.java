@@ -36,10 +36,10 @@ public class Tower extends Subject{
 	protected double fireRate;
 	protected boolean isSpecial;
 	protected double specialmod; //value determining amount of enemy attribute modification via special effects
-	protected boolean lowestHealth;
-	protected boolean highestHealth;
-	protected boolean closest;
-	protected boolean farthest;
+	protected boolean lowestHealth = false;
+	protected boolean highestHealth = false;
+	protected boolean closest = false;
+	protected boolean farthest = false;
 	protected int currFireIndex;
 	protected double bulletSpeedMultiplier;
 	//Added variable for testing purposes
@@ -201,13 +201,13 @@ public class Tower extends Subject{
 		return input.get(pointer);
 	}
 	
-	//gives message that the target method has been changed.
+	//changes target scheme and gives message
 	public void targetLowestHealth(){
+		if(lowestHealth||highestHealth||closest||farthest) System.out.println("Targeting type set to lowest health.");
 		lowestHealth = true;
 		highestHealth = false;
 		closest = false;
 		farthest = false;
-		System.out.println("Targeting type set to lowest health.");
 	}
 	
 	public void targetHighestHealth(){

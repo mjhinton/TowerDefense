@@ -14,7 +14,7 @@ public class GhostCritter extends Critter{
 	private final static Point PIXEL_OFFSET=new Point (5,5);
 	
 	public GhostCritter(Game game){
-		super(1,5,25,10,ii, game);
+		super(1,5,15,10,ii, game);
 		visible = true;
 	}
 	
